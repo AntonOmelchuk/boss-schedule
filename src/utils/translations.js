@@ -1,8 +1,8 @@
 export default {
   uk: {
-    title: "EPIC BOSS RESPawn",
+    title: "TheThirdSide",
     subtitle: "Оновлюється в реальному часі",
-    nearest: "Найближчий бос",
+    nearest: "Найближча подія",
     searching: "Шукаємо...",
     allAlive: "Всі боси живі!",
     allEvents: "Всі події",
@@ -18,9 +18,9 @@ export default {
     langToggle: "EN",
   },
   en: {
-    title: "EPIC BOSS RESPawn",
+    title: "TheThirdSide",
     subtitle: "Updated in real-time",
-    nearest: "Nearest Boss",
+    nearest: "Nearest Event",
     searching: "Searching...",
     allAlive: "All bosses are alive!",
     allEvents: "All Events",
