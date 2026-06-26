@@ -30,7 +30,6 @@ export default function App() {
 
     const unsubscribe = onValue(regroupsRef, (snapshot) => {
       const data = snapshot.val() || {};
-
       const eventsData = data.events || {};
 
       if (data.updatedAt) {

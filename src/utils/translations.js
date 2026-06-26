@@ -1,6 +1,6 @@
 export default {
   uk: {
-    title: "TheThirdSide",
+    title: "The 3rd Side",
     subtitle: "Оновлюється в реальному часі",
     nearest: "Найближча подія",
     searching: "Шукаємо...",
@@ -18,7 +18,7 @@ export default {
     langToggle: "EN",
   },
   en: {
-    title: "TheThirdSide",
+    title: "The 3rd Side",
     subtitle: "Updated in real-time",
     nearest: "Nearest Event",
     searching: "Searching...",
