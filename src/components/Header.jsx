@@ -1,8 +1,8 @@
 import logo from "../assets/logo.png";
 
-const Header = ({ setLang, lang, t, lastSync }) => {
+const Header = ({ setLang, lang, t }) => {
   return (
-    <header className="text-center mb-8 relative">
+    <header className="text-center mb-8 relative flex justify-center">
       <img
         src={logo}
         alt="Iron Gates"
@@ -24,16 +24,11 @@ const Header = ({ setLang, lang, t, lastSync }) => {
         </div>
       </div>
 
-      <div className="min-h-12">
+      <div className="min-h-16 max-w-">
         <h1 className="hidden min-[444px]:block text-2xl md:text-3xl lg:text-4xl font-bold text-transparent [-webkit-text-stroke:1px_#94a3b8] tracking-widest px-4 text-center drop-shadow-md">
           {t.title}
         </h1>
       </div>
-      <p className="text-slate-400 text-sm mt-2">
-        {lastSync
-          ? `${t.sync} ${new Date(lastSync).toLocaleTimeString(lang === "uk" ? "uk-UA" : "en-US")}`
-          : t.waitSync}
-      </p>
     </header>
   );
 };

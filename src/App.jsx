@@ -20,7 +20,6 @@ const db = getDatabase(app);
 export default function App() {
   const [lang, setLang] = useState("uk");
   const [events, setEvents] = useState([]);
-  const [lastSync, setLastSync] = useState(null);
   const [now, setNow] = useState(() => Date.now());
 
   const t = translations[lang];
@@ -31,10 +30,6 @@ export default function App() {
     const unsubscribe = onValue(regroupsRef, (snapshot) => {
       const data = snapshot.val() || {};
       const eventsData = data.events || {};
-
-      if (data.updatedAt) {
-        setLastSync(data.updatedAt);
-      }
 
       const parsedEvents = Object.values(eventsData)
         .filter((e) => e && e.respawnTimestamp)
@@ -80,7 +75,7 @@ export default function App() {
       }}
     >
       <div className="max-w-4xl mx-auto">
-        <Header t={t} setLang={setLang} lang={lang} lastSync={lastSync} />
+        <Header t={t} setLang={setLang} lang={lang} />
         <MainBlock t={t} nearestEvent={nearestEvent} now={now} />
         <AllEvents events={events} t={t} lang={lang} now={now} />
       </div>
