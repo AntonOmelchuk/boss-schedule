@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-import translations from "./utils/translations";
 import Header from "./components/Header";
 import MainBlock from "./components/MainBlock";
-import { categorize, getEmojiIcon } from "./utils/general";
 import AllBosses from "./components/AllBosses";
+import { categorize, getEmojiIcon } from "./utils/general";
+import translations from "./utils/translations";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -16,9 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// ==========================================
-// 4. ГОЛОВНИЙ КОМПОНЕНТ РЕАКТ
-// ==========================================
 export default function App() {
   const [lang, setLang] = useState("uk");
   const [events, setEvents] = useState([]);
@@ -74,15 +71,10 @@ export default function App() {
   const nearestBoss = futureBosses.length > 0 ? futureBosses[0] : null;
 
   return (
-    <div className="min-h-screen p-4 md:p-8 bg-slate-900 text-slate-200 font-sans">
+    <div className="min-h-screen p-4 md:p-8 bg-slate text-slate-200 font-sans">
       <div className="max-w-4xl mx-auto">
-        {/* Хедер та перемикач мов */}
         <Header t={t} setLang={setLang} lang={lang} lastSync={lastSync} />
-
-        {/* Головна панель (Найближчий епік) */}
         <MainBlock t={t} nearestBoss={nearestBoss} now={now} />
-
-        {/* Сітка всіх босів */}
         <AllBosses bosses={bosses} t={t} lang={lang} now={now} />
       </div>
     </div>

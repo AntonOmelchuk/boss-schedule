@@ -1,7 +1,13 @@
+import logo from "../assets/logo.png";
+
 const Header = ({ setLang, lang, t, lastSync }) => {
   return (
     <header className="text-center mb-8 relative">
-      {/* Світч для перемикання мови */}
+      <img
+        src={logo}
+        alt="Iron Gates"
+        className="absolute left-0 top-0 h-16 w-16 md:h-20 md:w-20 object-contain border border-slate-600/50 rounded-full shadow-xl"
+      />
       <div className="absolute top-0 right-0 flex items-center justify-end">
         <label className="flex items-center cursor-pointer select-none">
           <span
