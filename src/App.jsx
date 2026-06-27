@@ -74,28 +74,28 @@ export default function App() {
     const fbNames = new Set(firebaseEvents.map((e) => e.name.toLowerCase()));
 
     // 1. Додаємо локальних босів, якщо їх немає у Firebase
-    BOSSES.forEach((boss) => {
-      if (!fbNames.has(boss.name.toLowerCase())) {
-        const cat = categorize(boss.name);
+    BOSSES.forEach(({ name, date, time }) => {
+      if (!fbNames.has(name.toLowerCase())) {
+        const cat = categorize(name);
         combined.push({
-          id: boss.name,
-          name: boss.name,
-          ts: parseBossTimeToUTC(boss.date, boss.time),
+          id: name,
+          name: name,
+          ts: parseBossTimeToUTC(date, time),
           category: cat,
-          icon: getEmojiIcon(boss.name, cat),
+          icon: getEmojiIcon(name, cat),
         });
       }
     });
 
     // 2. Додаємо PvP івенти (завжди динамічно вираховуємо найближчий)
-    PVP_EVENTS.forEach((pvp) => {
-      if (!fbNames.has(pvp.name.toLowerCase())) {
+    PVP_EVENTS.forEach(({ name, time, type }) => {
+      if (!fbNames.has(name.toLowerCase())) {
         combined.push({
-          id: pvp.name,
-          name: pvp.name,
-          ts: getNextPvPTimestamp(pvp.time),
+          id: name,
+          name: name,
+          ts: getNextPvPTimestamp(time),
           category: "pvp",
-          icon: "⚔️", // Можна замінити на виклик getEmojiIcon, якщо додасте туди обробку PVP
+          icon: getEmojiIcon(name, "pvp", type),
         });
       }
     });
