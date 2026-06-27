@@ -1,6 +1,6 @@
 export const BOSSES = [
   { name: "queen ant", date: "28.06.2026", time: "06:07" },
-  { name: "orfen", date: "28.06.2026", time: "06:07" },
+  { name: "orfen", date: "28.06.2026", time: "18:55" },
   { name: "frintezza", date: "28.06.2026", time: "12:08" },
   { name: "core", date: "28.06.2026", time: "00:00" },
   { name: "zaken", date: "29.06.2026", time: "11:58" },
