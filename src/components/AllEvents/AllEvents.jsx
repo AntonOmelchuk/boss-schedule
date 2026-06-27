@@ -1,10 +1,27 @@
-import { formatRemaining } from "../utils/general";
+import { formatRemaining } from "../../utils/general";
+import AllEventsItem from "./AllEventsItem";
 
-const AllEvents = ({ events, t, lang, now }) => {
+const AllEvents = ({ events, t, lang, now, showPvP, setShowPvP }) => {
   return (
     <>
       <div className="mb-4 flex justify-between items-end border-b border-slate-700 pb-2">
         <h3 className="text-xl font-bold text-slate-200">{t.allEvents}</h3>
+
+        <div
+          className="flex items-center gap-2 cursor-pointer text-lg"
+          onClick={setShowPvP}
+        >
+          <span className={showPvP ? "text-amber-500" : "text-slate-500"}>
+            {t.pvpEvents}
+          </span>
+          <div
+            className={`w-8 h-4 rounded-full transition-colors ${showPvP ? "bg-amber-600" : "bg-slate-700"}`}
+          >
+            <div
+              className={`w-4 h-4 bg-white rounded-full transition-transform ${showPvP ? "translate-x-4" : "translate-x-0"}`}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -26,21 +43,15 @@ const AllEvents = ({ events, t, lang, now }) => {
               },
             );
 
+            const { id, icon, name } = event;
+
             return (
-              <div
-                key={event.id}
-                className="bg-slate-800 rounded-lg p-4 border border-slate-700 flex items-center shadow-lg hover:border-slate-500 transition-colors"
-              >
-                <div className="text-4xl mr-4 bg-slate-900 p-2 rounded">
-                  {event.icon}
-                </div>
-                <div className="flex-1 overflow-hidden">
-                  <div className="font-bold text-lg text-slate-100 truncate">
-                    {event.name}
-                  </div>
-                  <div className="text-xs text-slate-400 mb-1">{spawnDate}</div>
-                </div>
-              </div>
+              <AllEventsItem
+                key={id}
+                icon={icon}
+                name={name}
+                spawnDate={spawnDate}
+              />
             );
           })
         )}

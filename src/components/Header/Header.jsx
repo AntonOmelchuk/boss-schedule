@@ -1,4 +1,5 @@
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
+import Switch from "../UI/Switch";
 
 const Header = ({ setLang, lang, t }) => {
   return (
@@ -8,21 +9,12 @@ const Header = ({ setLang, lang, t }) => {
         alt="Iron Gates"
         className="absolute left-0 top-0 h-16 w-16 md:h-20 md:w-20 object-contain border border-slate-600/50 rounded-full shadow-xl"
       />
-      <div
-        className="absolute top-0 right-0 bg-slate-800/80 backdrop-blur rounded-lg p-1 border border-slate-700 flex items-center cursor-pointer shadow-inner"
+      <Switch
         onClick={() => setLang(lang === "uk" ? "en" : "uk")}
-      >
-        <div
-          className={`px-3 py-1 rounded-lg text-xs font-bold transition-all duration-300 ${lang === "uk" ? "bg-zinc-600 text-white shadow-md" : "text-slate-400 hover:text-slate-200"}`}
-        >
-          УКР
-        </div>
-        <div
-          className={`px-3 py-1 rounded-lg text-xs font-bold transition-all duration-300 ${lang === "en" ? "bg-zinc-700 text-white shadow-md" : "text-slate-400 hover:text-slate-200"}`}
-        >
-          ENG
-        </div>
-      </div>
+        firstItem="Укр"
+        secondItem="EN"
+        isActive={lang === "uk"}
+      />
 
       <div className="min-h-16 max-w-">
         <h1 className="hidden min-[444px]:block text-2xl md:text-3xl lg:text-4xl font-bold text-transparent [-webkit-text-stroke:1px_#94a3b8] tracking-widest px-4 text-center drop-shadow-md">

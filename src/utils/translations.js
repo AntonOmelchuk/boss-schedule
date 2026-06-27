@@ -16,6 +16,7 @@ export default {
     m: "ХВ",
     s: "С",
     langToggle: "EN",
+    pvpEvents: "PVP Івенти",
   },
   en: {
     title: "The 3rd Side",
@@ -34,5 +35,6 @@ export default {
     m: "M",
     s: "S",
     langToggle: "УКР",
+    pvpEvents: "PVP Events",
   },
 };
