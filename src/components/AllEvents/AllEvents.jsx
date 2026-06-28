@@ -1,3 +1,4 @@
+import { LANGUAGES } from "../../utils/constants";
 import AllEventsItem from "./AllEventsItem";
 
 const AllEvents = ({ events, t, lang, showPvP, setShowPvP }) => {
@@ -32,7 +33,7 @@ const AllEvents = ({ events, t, lang, showPvP, setShowPvP }) => {
         ) : (
           events.map((event) => {
             const spawnDate = new Date(event.ts).toLocaleString(
-              lang === "uk" ? "uk-UA" : "en-US",
+              lang === LANGUAGES.UA ? "uk-UA" : "en-US",
               {
                 month: "short",
                 day: "numeric",
