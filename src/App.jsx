@@ -102,10 +102,11 @@ export default function App() {
 
     return combined
       .filter((e) => showPvP || e.category !== "pvp")
+      .filter((e) => e.ts > now)
       .sort((a, b) => a.ts - b.ts);
 
     // Перераховуємо, коли приходять дані, АБО кожну хвилину (щоб PvP івенти перемикалися на наступний час)
-  }, [firebaseEvents, showPvP, Math.floor(now / 60000)]);
+  }, [firebaseEvents, showPvP, now]);
 
   const futureEvents = events.filter((e) => e.ts > now);
   const nearestEvent = futureEvents.length > 0 ? futureEvents[0] : null;
