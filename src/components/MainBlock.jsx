@@ -13,7 +13,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
         <div className="text-4xl mb-2 drop-shadow-lg">
           {nearestEvent ? nearestEvent.icon : "⚔️"}
         </div>
-        <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2 text-center drop-shadow-md">
+        <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2 text-center drop-shadow-md capitalize">
           {nearestEvent?.name}
         </div>
 
