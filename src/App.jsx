@@ -1,9 +1,13 @@
-import { useState, useEffect, useMemo } from "react";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { useEffect, useMemo, useState } from "react";
+
+import bgImg from "./assets/image.png";
+import AllEvents from "./components/AllEvents/AllEvents";
 import Header from "./components/Header/Header";
 import MainBlock from "./components/MainBlock";
-import AllEvents from "./components/AllEvents/AllEvents";
+import { BOSSES, PVP_EVENTS } from "./data";
+import { LANGUAGES } from "./utils/constants";
 import {
   categorize,
   getEmojiIcon,
@@ -11,9 +15,6 @@ import {
   parseBossTimeToUTC,
 } from "./utils/general";
 import translations from "./utils/translations";
-import { LANGUAGES } from "./utils/constants";
-import { BOSSES, PVP_EVENTS } from "./data";
-import bgImg from "./assets/image.png";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -57,7 +58,7 @@ export default function App() {
         .map((e) => {
           const cat = categorize(e.event);
           return {
-            id: e.event, // Використовуємо ім'я як ключ (в ідеалі треба унікальний ID)
+            id: e.event,
             name: e.event,
             ts: e.respawnTimestamp * 1000,
             category: cat,
@@ -118,8 +119,6 @@ export default function App() {
       .filter((e) => showPvP || e.category !== "pvp")
       .filter((e) => e.ts > now)
       .sort((a, b) => a.ts - b.ts);
-
-    // Перераховуємо, коли приходять дані, АБО кожну хвилину (щоб PvP івенти перемикалися на наступний час)
   }, [firebaseEvents, showPvP, now]);
 
   const futureEvents = events.filter((e) => e.ts > now);
@@ -142,7 +141,6 @@ export default function App() {
         <MainBlock t={t} nearestEvent={nearestEvent} now={now} />
         <AllEvents
           t={t}
-          now={now}
           lang={lang}
           events={events}
           showPvP={showPvP}

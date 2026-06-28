@@ -1,7 +1,6 @@
-import { formatRemaining } from "../../utils/general";
 import AllEventsItem from "./AllEventsItem";
 
-const AllEvents = ({ events, t, lang, now, showPvP, setShowPvP }) => {
+const AllEvents = ({ events, t, lang, showPvP, setShowPvP }) => {
   return (
     <>
       <div className="mb-4 flex justify-between items-end border-b border-slate-700 pb-2">
@@ -18,7 +17,8 @@ const AllEvents = ({ events, t, lang, now, showPvP, setShowPvP }) => {
             className={`w-8 h-4 rounded-full transition-colors ${showPvP ? "bg-amber-600" : "bg-slate-700"}`}
           >
             <div
-              className={`w-4 h-4 bg-white rounded-full transition-transform ${showPvP ? "translate-x-4" : "translate-x-0"}`}
+              className={`w-4 h-4 bg-white rounded-full transition-transform
+                ${showPvP ? "translate-x-4" : "translate-x-0"}`}
             />
           </div>
         </div>
@@ -31,8 +31,6 @@ const AllEvents = ({ events, t, lang, now, showPvP, setShowPvP }) => {
           </div>
         ) : (
           events.map((event) => {
-            const diff = event.ts - now;
-            const isSpawned = diff <= 0;
             const spawnDate = new Date(event.ts).toLocaleString(
               lang === "uk" ? "uk-UA" : "en-US",
               {

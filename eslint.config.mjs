@@ -1,18 +1,31 @@
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
-import globals from "globals";
 
-export default defineConfig([
+const eslintConfig = defineConfig([
   {
-    files: ["**/*.{js,mjs,cjs}"],
+    ignores: ["node_modules/**", "build/**", ".react-router/**", "dist/**"],
+  },
+  {
+    files: ["**/*.{js,jsx}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        React: "readonly",
+        console: "readonly",
+      },
+    },
     plugins: {
-      js,
       "simple-import-sort": simpleImportSort,
     },
-    extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
     rules: {
+      ...js.configs.recommended.rules,
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "eol-last": ["error", "always"],
@@ -23,3 +36,5 @@ export default defineConfig([
     },
   },
 ]);
+
+export default eslintConfig;
