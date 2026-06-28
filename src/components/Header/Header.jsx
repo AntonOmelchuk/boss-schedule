@@ -1,5 +1,6 @@
 import logo from "../../assets/logo.png";
 import Switch from "../UI/Switch";
+import { LANGUAGES } from "../../utils/constants";
 
 const Header = ({ setLang, lang, t }) => {
   return (
@@ -10,10 +11,12 @@ const Header = ({ setLang, lang, t }) => {
         className="absolute left-0 top-0 h-16 w-16 md:h-20 md:w-20 object-contain border border-slate-600/50 rounded-full shadow-xl"
       />
       <Switch
-        onClick={() => setLang(lang === "uk" ? "en" : "uk")}
-        firstItem="Укр"
+        onClick={() =>
+          setLang(lang === LANGUAGES.UA ? LANGUAGES.EN : LANGUAGES.UA)
+        }
+        firstItem="UA"
         secondItem="EN"
-        isActive={lang === "uk"}
+        isActive={lang === LANGUAGES.UA}
       />
 
       <div className="min-h-16 max-w-">

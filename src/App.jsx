@@ -11,6 +11,7 @@ import {
   parseBossTimeToUTC,
 } from "./utils/general";
 import translations from "./utils/translations";
+import { LANGUAGES } from "./utils/constants";
 import { BOSSES, PVP_EVENTS } from "./data";
 import bgImg from "./assets/image.png";
 
@@ -24,10 +25,23 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 export default function App() {
-  const [lang, setLang] = useState("uk");
+  const [lang, setLang] = useState(
+    () => localStorage.getItem("lang") || LANGUAGES.EN,
+  );
   const [firebaseEvents, setFirebaseEvents] = useState([]);
   const [now, setNow] = useState(() => Date.now());
-  const [showPvP, setShowPvP] = useState(true);
+  const [showPvP, setShowPvP] = useState(() => {
+    const saved = localStorage.getItem("showPvP");
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
+
+  useEffect(() => {
+    localStorage.setItem("showPvP", JSON.stringify(showPvP));
+  }, [showPvP]);
 
   const t = translations[lang];
 

@@ -1,5 +1,7 @@
+import { LANGUAGES } from "./constants";
+
 export default {
-  uk: {
+  [LANGUAGES.UA]: {
     title: "The 3rd Side",
     subtitle: "Оновлюється в реальному часі",
     nearest: "Найближча подія",
@@ -18,7 +20,7 @@ export default {
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
   },
-  en: {
+  [LANGUAGES.EN]: {
     title: "The 3rd Side",
     subtitle: "Updated in real-time",
     nearest: "Nearest Event",
