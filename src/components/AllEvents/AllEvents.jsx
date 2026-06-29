@@ -42,13 +42,16 @@ const AllEvents = ({ events, t, lang, showPvP, setShowPvP }) => {
               },
             );
 
-            const { id, icon, name } = event;
+            const { id, icon, name, enemy, owner, relation } = event;
 
             return (
               <AllEventsItem
                 key={id}
                 icon={icon}
                 name={name}
+                enemy={enemy}
+                owner={owner}
+                relation={relation}
                 spawnDate={spawnDate}
               />
             );

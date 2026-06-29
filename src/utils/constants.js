@@ -42,3 +42,8 @@ export const EMOJI_MAP = {
   [EVENT_TYPES.Siege]: "🏰",
   [EVENT_TYPES.CH]: "🏠",
 };
+
+export const RELATION = {
+  Enemy: "enemy",
+  Alliance: "alliance",
+};

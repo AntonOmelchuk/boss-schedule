@@ -50,14 +50,15 @@ export default function App() {
 
       const parsedEvents = Object.values(eventsData)
         .filter((e) => e && e.respawnTimestamp)
-        .map((e) => {
+        .map(({ event, respawnTimestamp, type, owner, relation }) => {
           return {
-            id: e.event,
-            name: e.event,
-            ts: e.respawnTimestamp * 1000,
-            type: e.type,
-            owner: e.owner || null,
-            icon: getEmojiIcon(e.type),
+            id: event,
+            name: event,
+            relation,
+            ts: respawnTimestamp * 1000,
+            type,
+            owner: owner || null,
+            icon: getEmojiIcon(type),
           };
         })
         .sort((a, b) => a.ts - b.ts);
