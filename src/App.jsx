@@ -6,14 +6,9 @@ import bgImg from "./assets/image.png";
 import AllEvents from "./components/AllEvents/AllEvents";
 import Header from "./components/Header/Header";
 import MainBlock from "./components/MainBlock";
-import { BOSSES, PVP_EVENTS } from "./data";
+import { PVP_EVENTS } from "./data";
 import { LANGUAGES } from "./utils/constants";
-import {
-  categorize,
-  getEmojiIcon,
-  getNextPvPTimestamp,
-  parseBossTimeToUTC,
-} from "./utils/general";
+import { getEmojiIcon, getNextPvPTimestamp } from "./utils/general";
 import translations from "./utils/translations";
 
 const firebaseConfig = {
@@ -36,6 +31,8 @@ export default function App() {
     return saved !== null ? JSON.parse(saved) : true;
   });
 
+  const t = translations[lang];
+
   useEffect(() => {
     localStorage.setItem("lang", lang);
   }, [lang]);
@@ -43,8 +40,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("showPvP", JSON.stringify(showPvP));
   }, [showPvP]);
-
-  const t = translations[lang];
 
   useEffect(() => {
     const regroupsRef = ref(db, "regroups");
@@ -56,13 +51,13 @@ export default function App() {
       const parsedEvents = Object.values(eventsData)
         .filter((e) => e && e.respawnTimestamp)
         .map((e) => {
-          const cat = categorize(e.event);
           return {
             id: e.event,
             name: e.event,
             ts: e.respawnTimestamp * 1000,
-            category: cat,
-            icon: getEmojiIcon(e.event, cat),
+            type: e.type,
+            owner: e.owner || null,
+            icon: getEmojiIcon(e.type),
           };
         })
         .sort((a, b) => a.ts - b.ts);
@@ -70,11 +65,10 @@ export default function App() {
       setFirebaseEvents(parsedEvents);
     });
 
-    // Очищення підписки при видаленні компонента
+    // Очищення підписки при розмонтуванні компонента
     return () => unsubscribe();
   }, []);
 
-  // Головний ігровий цикл (Tick)
   useEffect(() => {
     const interval = setInterval(() => {
       setNow(Date.now());
@@ -82,51 +76,36 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // МЕРДЖ ДАНИХ: Firebase + Локальні (Оновлюється тільки коли приходять нові дані з бази або раз на хвилину для PvP)
   const events = useMemo(() => {
     const combined = [...firebaseEvents];
-    // Створюємо Set з імен Firebase-івентів для швидкого пошуку дублікатів
     const fbNames = new Set(firebaseEvents.map((e) => e.name.toLowerCase()));
 
-    // 1. Додаємо локальних босів, якщо їх немає у Firebase
-    BOSSES.forEach(({ name, date, time }) => {
-      if (!fbNames.has(name.toLowerCase())) {
-        const cat = categorize(name);
-        combined.push({
-          id: name,
-          name: name,
-          ts: parseBossTimeToUTC(date, time),
-          category: cat,
-          icon: getEmojiIcon(name, cat),
-        });
-      }
-    });
-
-    // 2. Додаємо PvP івенти (завжди динамічно вираховуємо найближчий)
+    // Додаємо локальні PvP івенти, якщо їх немає в базі під тими ж іменами
     PVP_EVENTS.forEach(({ name, time, type }) => {
       if (!fbNames.has(name.toLowerCase())) {
         combined.push({
           id: name,
-          name: name,
+          name,
           ts: getNextPvPTimestamp(time),
           category: "pvp",
-          icon: getEmojiIcon(name, "pvp", type),
+          type: type,
+          icon: getEmojiIcon(type),
         });
       }
     });
 
+    // Фільтруємо за налаштуваннями PvP, прибираємо минулі події та сортуємо
     return combined
       .filter((e) => showPvP || e.category !== "pvp")
       .filter((e) => e.ts > now)
       .sort((a, b) => a.ts - b.ts);
   }, [firebaseEvents, showPvP, now]);
 
-  const futureEvents = events.filter((e) => e.ts > now);
-  const nearestEvent = futureEvents.length > 0 ? futureEvents[0] : null;
+  const nearestEvent = events.length > 0 ? events[0] : null;
 
   return (
     <div
-      className="min-h-screen p-4 md:p-8 bg-slate text-slate-200 font-sans"
+      className="min-h-screen p-4 md:p-8 text-slate-200 font-sans"
       style={{
         backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
         backgroundSize: "cover",

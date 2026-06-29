@@ -1,30 +1,13 @@
-export const categorize = (name) => {
-  const n = name.toLowerCase();
-  if (n.startsWith("ch -") || n.startsWith("ch-") || n.includes("clan hall"))
-    return "clanhall";
-  if (n.startsWith("siege")) return "siege";
-  return "boss";
-};
+import { EMOJI_MAP } from "./constants";
 
-export const getEmojiIcon = (name, category, type) => {
-  const n = name.toLowerCase();
-  // Перевірка PvP івентів за їх типом (або назвою)
-  if (type === "mtb" || n.includes("multi team")) return "⚔️";
-  if (type === "ctp" || n.includes("capture")) return "🚩";
-  if (type === "ebc" || n.includes("epic boss")) return "🏆";
-  if (type === "dm" || n.includes("death match")) return "💀";
+export const getEmojiIcon = (type) => {
+  const cleanType = type.toLowerCase();
 
-  // Старі перевірки босів
-  if (n.includes("valakas")) return "🔥";
-  if (n.includes("antharas")) return "🐉";
-  if (n.includes("baium")) return "👑";
-  if (n.includes("ant queen") || n.includes("queen ant")) return "🐜";
-  if (n.includes("orfen")) return "🕸️";
-  if (n.includes("zaken")) return "🏴‍☠️";
-  if (n.includes("core")) return "⚙️";
-  if (n.includes("frintezza")) return "🎻";
-  if (category === "siege") return "🏰";
-  if (category === "clanhall") return "🏠";
+  // 1. Спробуємо знайти іконку в нашому словнику за типом
+  if (EMOJI_MAP[cleanType]) {
+    return EMOJI_MAP[cleanType];
+  }
+
   return "⚔️";
 };
 
@@ -52,15 +35,10 @@ export const formatRemaining = (msDiff, detailed, t) => {
   }
 };
 
-// 1. Конвертує дату і час (UTC-0) боса в Timestamp (мілісекунди)
-export function parseBossTimeToUTC(dateStr, timeStr) {
-  const [day, month, year] = dateStr.split(".");
-  const [hours, minutes] = timeStr.split(":");
-  // Date.UTC приймає місяці від 0 до 11 (тому month - 1)
-  return Date.UTC(year, month - 1, day, hours, minutes, 0);
-}
-
-// 2. Визначає найближчий майбутній час для щоденних PvP івентів (UTC-0)
+/**
+ * Розраховує найближчий Timestamp для щоденних PvP подій
+ * @param {string[]} times - Масив годин (наприклад, ["02:00", "10:00"])
+ */
 export function getNextPvPTimestamp(timeArray) {
   const now = new Date();
   // Поточний час у хвилинах від початку доби за UTC
