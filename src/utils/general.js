@@ -1,4 +1,4 @@
-import { EMOJI_MAP } from "./constants";
+import { EMOJI_MAP, RELATION } from "./constants";
 
 export const getEmojiIcon = (type) => EMOJI_MAP[type] || "⚔️";
 
@@ -59,3 +59,47 @@ export function getNextPvPTimestamp(timeArray) {
 
   return nextDate.getTime();
 }
+
+// Функція конфігурації дипломатичних стилів для кожної окремої картки в сітці
+export const getDiplomacyConfig = (rel) => {
+  if (rel === RELATION.Enemy) {
+    return {
+      gradientStyle:
+        "conic-gradient(from 90deg at 50% 50%, #0f172a 0%, #ef4444 50%, #7f1d1d 75%, #0f172a 100%)",
+      titleClass: "text-slate-100 drop-shadow-[0_2px_8px_rgba(239,68,68,0.35)]",
+      badgeIcon: "💀",
+      badgeClass: "bg-red-500/10 text-red-400 border-red-500/20",
+      iconBorder: "border-red-500/30 text-red-400 bg-red-950/20",
+      glowClass:
+        "shadow-[0_0_15px_rgba(239,68,68,0.08)] hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] hover:border-red-500/20",
+    };
+  }
+
+  if (rel === RELATION.Alliance) {
+    return {
+      gradientStyle:
+        "conic-gradient(from 90deg at 50% 50%, #0f172a 0%, #10b981 50%, #064e3b 75%, #0f172a 100%)",
+      titleClass:
+        "text-slate-100 drop-shadow-[0_2px_8px_rgba(16,185,129,0.35)]",
+      badgeIcon: "🛡️",
+      badgeClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+      iconBorder: "border-emerald-500/30 text-emerald-400 bg-emerald-950/20",
+      glowClass:
+        "shadow-[0_0_15px_rgba(16,185,129,0.08)] hover:shadow-[0_0_25px_rgba(16,185,129,0.2)]" +
+        "hover:border-emerald-500/20",
+    };
+  }
+
+  // Дефолтний / Нейтральний статус (Золотий)
+  return {
+    gradientStyle:
+      "conic-gradient(from 90deg at 50% 50%, #0f172a 0%, #f59e0b 50%, #78350f 75%, #0f172a 100%)",
+    titleClass: "text-slate-100 drop-shadow-[0_2px_8px_rgba(245,158,11,0.35)]",
+    badgeIcon: "👑",
+    badgeClass: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    iconBorder: "border-amber-500/30 text-amber-400 bg-amber-950/20",
+    glowClass:
+      "shadow-[0_0_15px_rgba(245,158,11,0.08)] hover:shadow-[0_0_25px_rgba(245,158,11,0.2)]" +
+      "hover:border-amber-500/20",
+  };
+};

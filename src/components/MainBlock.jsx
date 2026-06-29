@@ -41,9 +41,12 @@ const MainBlock = ({ t, nearestEvent, now }) => {
     };
   };
 
-  // Отримуємо статус події (status або relation)
-  const status = nearestEvent?.status || nearestEvent?.relation || "neutral";
+  // Отримуємо relation події
+  const status = nearestEvent?.relation || "neutral";
   const config = getDiplomacyConfig(status);
+
+  const { gradientStyle, timerClass, titleClass, badgeClass, badgeIcon } =
+    config;
 
   return (
     <div className="relative mb-10 rounded-xl p-0.5 overflow-hidden shadow-2xl">
@@ -51,7 +54,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
       <div
         className="absolute inset-[-150%] animate-spin"
         style={{
-          backgroundImage: config.gradientStyle,
+          backgroundImage: gradientStyle,
           animationDuration: "4s",
         }}
       />
@@ -62,7 +65,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
         items-center justify-center w-full h-full"
       >
         <h2 className="text-slate-400 uppercase tracking-widest text-xs font-bold mb-3 text-center drop-shadow">
-          {t?.nearestEvent || "Найближча подія"}
+          {t.nearestEvent}
         </h2>
 
         {/* Велика іконка івенту */}
@@ -72,7 +75,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
 
         {/* Назва івенту */}
         <div
-          className={`text-3xl md:text-4xl font-black mb-1 text-center capitalize ${config.titleClass}`}
+          className={`text-3xl md:text-4xl font-black mb-1 text-center capitalize ${titleClass}`}
         >
           {nearestEvent?.name || "⚔️"}
         </div>
@@ -82,16 +85,16 @@ const MainBlock = ({ t, nearestEvent, now }) => {
           <div className="mb-4">
             <span
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase
-              tracking-wider border shadow-md animate-pulse ${config.badgeClass}`}
+              tracking-wider border shadow-md animate-pulse ${badgeClass}`}
             >
-              {config.badgeIcon} {nearestEvent.owner}
+              {badgeIcon} {nearestEvent.owner}
             </span>
           </div>
         )}
 
         {/* Таймер зворотного відліку */}
         <div
-          className={`text-5xl md:text-6xl font-mono tracking-widest font-black ${config.timerClass}`}
+          className={`text-5xl md:text-6xl font-mono tracking-widest font-black ${timerClass}`}
         >
           {nearestEvent
             ? formatRemaining(nearestEvent.ts - now, false, t)

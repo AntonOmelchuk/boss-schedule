@@ -79,20 +79,17 @@ export default function App() {
 
   const events = useMemo(() => {
     const combined = [...firebaseEvents];
-    const fbNames = new Set(firebaseEvents.map((e) => e.name.toLowerCase()));
 
     // Додаємо локальні PvP івенти, якщо їх немає в базі під тими ж іменами
     PVP_EVENTS.forEach(({ name, time, type }) => {
-      if (!fbNames.has(name.toLowerCase())) {
-        combined.push({
-          id: name,
-          name,
-          ts: getNextPvPTimestamp(time),
-          category: "pvp",
-          type: type,
-          icon: getEmojiIcon(type),
-        });
-      }
+      combined.push({
+        id: name,
+        name,
+        ts: getNextPvPTimestamp(time),
+        category: "pvp",
+        type: type,
+        icon: getEmojiIcon(type),
+      });
     });
 
     // Фільтруємо за налаштуваннями PvP, прибираємо минулі події та сортуємо

@@ -4,7 +4,7 @@ export default {
   [LANGUAGES.UA]: {
     title: "The 3rd Side",
     subtitle: "Оновлюється в реальному часі",
-    nearest: "Найближча подія",
+    nearestEvent: "Найближча подія",
     searching: "Шукаємо...",
     allAlive: "Всі боси живі!",
     allEvents: "Всі події",
@@ -23,7 +23,7 @@ export default {
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
     subtitle: "Updated in real-time",
-    nearest: "Nearest Event",
+    nearestEvent: "Nearest Event",
     searching: "Searching...",
     allAlive: "All bosses are alive!",
     allEvents: "All Events",
