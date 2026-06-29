@@ -1,15 +1,6 @@
 import { EMOJI_MAP } from "./constants";
 
-export const getEmojiIcon = (type) => {
-  const cleanType = type.toLowerCase();
-
-  // 1. Спробуємо знайти іконку в нашому словнику за типом
-  if (EMOJI_MAP[cleanType]) {
-    return EMOJI_MAP[cleanType];
-  }
-
-  return "⚔️";
-};
+export const getEmojiIcon = (type) => EMOJI_MAP[type] || "⚔️";
 
 // Форматування часу адаптовано під активну мову
 export const formatRemaining = (msDiff, detailed, t) => {
