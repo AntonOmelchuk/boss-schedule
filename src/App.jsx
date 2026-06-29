@@ -7,8 +7,12 @@ import AllEvents from "./components/AllEvents/AllEvents";
 import Header from "./components/Header/Header";
 import MainBlock from "./components/MainBlock";
 import { PVP_EVENTS } from "./data";
-import { LANGUAGES } from "./utils/constants";
-import { getEmojiIcon, getNextPvPTimestamp } from "./utils/general";
+import { EVENT_TYPES, LANGUAGES } from "./utils/constants";
+import {
+  getEmojiIcon,
+  getNextPvPTimestamp,
+  getNextWeeklyEvent,
+} from "./utils/general";
 import translations from "./utils/translations";
 
 const firebaseConfig = {
@@ -49,18 +53,30 @@ export default function App() {
       const eventsData = data.events || {};
 
       const parsedEvents = Object.values(eventsData)
-        .filter((e) => e && e.respawnTimestamp)
-        .map(({ event, respawnTimestamp, type, owner, relation }) => {
-          return {
-            id: event,
-            name: event,
-            relation,
-            ts: respawnTimestamp * 1000,
-            type,
-            owner: owner || null,
-            icon: getEmojiIcon(type),
-          };
-        })
+        .filter(
+          (e) =>
+            e &&
+            (e.respawnTimestamp ||
+              (e.type === EVENT_TYPES.CH && e.day !== undefined && e.time)),
+        )
+        .map(
+          ({ event, respawnTimestamp, type, owner, relation, day, time }) => {
+            const ts =
+              type === EVENT_TYPES.CH && day !== undefined && time
+                ? getNextWeeklyEvent(day, time)
+                : respawnTimestamp * 1000;
+
+            return {
+              id: event,
+              name: event,
+              relation: relation,
+              ts,
+              type,
+              owner: owner || null,
+              icon: getEmojiIcon(type),
+            };
+          },
+        )
         .sort((a, b) => a.ts - b.ts);
 
       setFirebaseEvents(parsedEvents);

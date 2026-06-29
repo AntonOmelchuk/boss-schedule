@@ -103,3 +103,20 @@ export const getDiplomacyConfig = (rel) => {
       "hover:border-amber-500/20",
   };
 };
+
+export const getNextWeeklyEvent = (dayOfWeek, timeStr) => {
+  const [h, m] = timeStr.split(":").map(Number);
+  const now = new Date();
+  const target = new Date();
+
+  target.setUTCHours(h, m, 0, 0);
+
+  let diff = dayOfWeek - now.getUTCDay();
+
+  if (diff < 0 || (diff === 0 && now.getTime() >= target.getTime())) {
+    diff += 7;
+  }
+
+  target.setUTCDate(target.getUTCDate() + diff);
+  return target.getTime();
+};

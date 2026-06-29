@@ -5,7 +5,7 @@ export const LANGUAGES = {
 
 export const EVENT_TYPES = {
   Siege: "siege",
-  CH: "clanhall",
+  CH: "ch",
   MTB: "mtb",
   CTB: "ctb",
   EBC: "EBC",
