@@ -5,7 +5,8 @@ const MainBlock = ({ t, nearestEvent, now }) => {
 
   const config = getDiplomacyConfig(relation);
 
-  const { gradientStyle, timerClass, titleClass, badgeClass } = config;
+  const { gradientStyle, timerClass, titleClass, badgeClass, badgeIcon } =
+    config;
 
   return (
     <div className="relative mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
@@ -50,8 +51,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
             )}
             {owner && (
               <p className="text-sm text-slate-400 mt-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
-                {t.owner}:{" "}
+                {badgeIcon}
                 <span className="font-bold text-slate-200">{owner}</span>
               </p>
             )}
