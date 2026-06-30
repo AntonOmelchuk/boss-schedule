@@ -9,6 +9,7 @@ import MainBlock from "./components/MainBlock";
 import { PVP_EVENTS } from "./data";
 import { EVENT_TYPES, LANGUAGES } from "./utils/constants";
 import {
+  checkIsSwat,
   getEmojiIcon,
   getNextPvPTimestamp,
   getNextWeeklyEvent,
@@ -60,7 +61,16 @@ export default function App() {
               (e.type === EVENT_TYPES.CH && e.day !== undefined && e.time)),
         )
         .map(
-          ({ event, respawnTimestamp, type, owner, relation, day, time }) => {
+          ({
+            event,
+            respawnTimestamp,
+            type,
+            owner,
+            relation,
+            day,
+            time,
+            category,
+          }) => {
             const ts =
               type === EVENT_TYPES.CH && day !== undefined && time
                 ? getNextWeeklyEvent(day, time)
@@ -74,6 +84,7 @@ export default function App() {
               type,
               owner: owner || null,
               icon: getEmojiIcon(type),
+              isSwat: category && checkIsSwat(category, ts),
             };
           },
         )
