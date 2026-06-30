@@ -3,6 +3,10 @@ export const LANGUAGES = {
   UA: "ua",
 };
 
+export const CATEGORIES = {
+  Epic: "epic",
+};
+
 export const EVENT_TYPES = {
   Siege: "siege",
   CH: "ch",

@@ -1,4 +1,4 @@
-import { EMOJI_MAP, RELATION } from "./constants";
+import { CATEGORIES, EMOJI_MAP, RELATION } from "./constants";
 
 export const getEmojiIcon = (type) => EMOJI_MAP[type] || "⚔️";
 
@@ -120,3 +120,10 @@ export const getNextWeeklyEvent = (dayOfWeek, timeStr) => {
   target.setUTCDate(target.getUTCDate() + diff);
   return target.getTime();
 };
+
+export const checkIsSwat = (category, ts) =>
+  category === CATEGORIES.Epic &&
+  (() => {
+    const hours = new Date(ts).getUTCHours();
+    return hours >= 1 && hours < 6;
+  })();
