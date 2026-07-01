@@ -1,20 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref } from "firebase/database";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 
 import bgImg from "./assets/image.png";
 import AllEvents from "./components/AllEvents/AllEvents";
 import Header from "./components/Header/Header";
 import MainBlock from "./components/MainBlock";
-import { PVP_EVENTS } from "./data";
-import { EVENT_TYPES, LANGUAGES } from "./utils/constants";
-import {
-  checkIsSwat,
-  getEmojiIcon,
-  getNextPvPTimestamp,
-  getNextWeeklyEvent,
-} from "./utils/general";
-import translations from "./utils/translations";
+import useAppStore from "./store/useAppStore";
+import { EVENT_TYPES } from "./utils/constants";
+import { checkIsSwat, getEmojiIcon, getNextWeeklyEvent } from "./utils/general";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -26,25 +20,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 export default function App() {
-  const [lang, setLang] = useState(
-    () => localStorage.getItem("lang") || LANGUAGES.EN,
-  );
-  const [firebaseEvents, setFirebaseEvents] = useState([]);
-  const [now, setNow] = useState(() => Date.now());
-  const [showPvP, setShowPvP] = useState(() => {
-    const saved = localStorage.getItem("showPvP");
-    return saved !== null ? JSON.parse(saved) : true;
-  });
-
-  const t = translations[lang];
-
-  useEffect(() => {
-    localStorage.setItem("lang", lang);
-  }, [lang]);
-
-  useEffect(() => {
-    localStorage.setItem("showPvP", JSON.stringify(showPvP));
-  }, [showPvP]);
+  const setEvents = useAppStore((state) => state.setEvents);
 
   useEffect(() => {
     const regroupsRef = ref(db, "regroups");
@@ -90,43 +66,11 @@ export default function App() {
         )
         .sort((a, b) => a.ts - b.ts);
 
-      setFirebaseEvents(parsedEvents);
+      setEvents(parsedEvents);
     });
 
-    // Очищення підписки при розмонтуванні компонента
     return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNow(Date.now());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const events = useMemo(() => {
-    const combined = [...firebaseEvents];
-
-    // Додаємо локальні PvP івенти, якщо їх немає в базі під тими ж іменами
-    PVP_EVENTS.forEach(({ name, time, type }) => {
-      combined.push({
-        id: name,
-        name,
-        ts: getNextPvPTimestamp(time),
-        category: "pvp",
-        type: type,
-        icon: getEmojiIcon(type),
-      });
-    });
-
-    // Фільтруємо за налаштуваннями PvP, прибираємо минулі події та сортуємо
-    return combined
-      .filter((e) => showPvP || e.category !== "pvp")
-      .filter((e) => e.ts > now)
-      .sort((a, b) => a.ts - b.ts);
-  }, [firebaseEvents, showPvP, now]);
-
-  const nearestEvent = events.length > 0 ? events[0] : null;
+  }, [setEvents]);
 
   return (
     <div
@@ -141,15 +85,9 @@ export default function App() {
       }}
     >
       <div className="max-w-4xl mx-auto">
-        <Header t={t} setLang={setLang} lang={lang} />
-        <MainBlock t={t} nearestEvent={nearestEvent} now={now} />
-        <AllEvents
-          t={t}
-          lang={lang}
-          events={events}
-          showPvP={showPvP}
-          setShowPvP={() => setShowPvP((prev) => !prev)}
-        />
+        <Header />
+        <MainBlock />
+        <AllEvents />
       </div>
     </div>
   );

@@ -1,12 +1,45 @@
+/**
+ * @file constants.js
+ * @description Global application constants including timing configurations, supported languages,
+ * UI filtering categories, in-game event types, emoji indicators, and alliance relationships.
+ */
+
+/**
+ * Standard frequency (in milliseconds) used for ticking UI timers and calculating countdowns.
+ * @type {number}
+ */
+export const UPDATE_INTERVAL_MS = 1000;
+
+/**
+ * Supported localization codes utilized by the translation engine.
+ * @type {Object}
+ * @property {string} EN - English language identifier.
+ * @property {string} UA - Ukrainian language identifier.
+ */
 export const LANGUAGES = {
   EN: "en",
   UA: "ua",
 };
 
+/**
+ * High-level grouping categories used for structuring and filtering active events on the dashboard.
+ * @type {Object}
+ * @property {string} Epic - Category token for epic boss occurrences.
+ * @property {string} PVP - Category token for global player-versus-player clashes.
+ * @property {string} CH - Category token for competitive clan hall capture zones.
+ * @property {string} Siege - Category token for massive castle sieges.
+ */
 export const CATEGORIES = {
   Epic: "epic",
+  PVP: "pvpEvents",
+  CH: "ch",
+  Siege: "siege",
 };
 
+/**
+ * System-wide identifiers classifying distinct types of milestones or events.
+ * @type {Object}
+ */
 export const EVENT_TYPES = {
   Siege: "siege",
   CH: "ch",
@@ -14,7 +47,7 @@ export const EVENT_TYPES = {
   CTB: "ctb",
   EBC: "EBC",
   DM: "DM",
-  //bosses
+  // Epic Bosses
   QA: "qa",
   Core: "core",
   Orfen: "orfen",
@@ -25,8 +58,12 @@ export const EVENT_TYPES = {
   Valakas: "valakas",
 };
 
+/**
+ * Graphic emoji map associating specific event types with illustrative icons on list items.
+ * @type {Object.<string, string>}
+ */
 export const EMOJI_MAP = {
-  // Епік боси
+  // Epic Bosses
   [EVENT_TYPES.QA]: "🐜",
   [EVENT_TYPES.Core]: "⚙️",
   [EVENT_TYPES.Orfen]: "🕸️",
@@ -36,17 +73,24 @@ export const EMOJI_MAP = {
   [EVENT_TYPES.Antharas]: "🐉",
   [EVENT_TYPES.Valakas]: "🔥",
 
-  // PvP івенти
+  // PvP Events
   [EVENT_TYPES.MTB]: "⚔️",
   [EVENT_TYPES.CTB]: "🚩",
   [EVENT_TYPES.EBC]: "🏆",
   [EVENT_TYPES.DM]: "💀",
 
-  // Облоги та Клан Холи
+  // Castles & Clan Halls
   [EVENT_TYPES.Siege]: "🏰",
   [EVENT_TYPES.CH]: "🏠",
 };
 
+/**
+ * Diplomatic alignment levels used to determine custom borders, neon glow highlights,
+ * and colored badges depending on clan ownership or political status.
+ * @type {Object}
+ * @property {string} Enemy - Standard state for declaring direct clan war opponents.
+ * @property {string} Alliance - Standard state for marking defensive alliance companions.
+ */
 export const RELATION = {
   Enemy: "enemy",
   Alliance: "alliance",

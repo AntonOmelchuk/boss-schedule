@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import globals from "globals";
 
 const eslintConfig = defineConfig([
   {
@@ -17,6 +18,7 @@ const eslintConfig = defineConfig([
         },
       },
       globals: {
+        ...globals.browser,
         React: "readonly",
         console: "readonly",
       },
@@ -32,7 +34,6 @@ const eslintConfig = defineConfig([
       "max-len": ["error", { code: 120 }],
       indent: ["error", 2],
       semi: ["error", "always"],
-      "no-undef": "off",
     },
   },
 ]);

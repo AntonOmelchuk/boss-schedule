@@ -1,10 +1,19 @@
+import useCurrentTime from "../hooks/useCurrentTime";
+import useFilterEvents from "../hooks/useFilterEvents";
+import useTranslation from "../hooks/useTranslation";
 import { formatRemaining, getDiplomacyConfig } from "../utils/general";
 
-const MainBlock = ({ t, nearestEvent, now }) => {
+const MainBlock = () => {
+  const { t } = useTranslation();
+  const now = useCurrentTime();
+
+  // Directly pull filtered events, nearest is the first item
+  const { filteredEvents } = useFilterEvents();
+
+  const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
+
   const { relation, name, owner, icon, isSwat } = nearestEvent || {};
-
   const config = getDiplomacyConfig(relation);
-
   const { gradientStyle, timerClass, titleClass, badgeClass, badgeIcon } =
     config;
 
@@ -27,7 +36,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
             className={`w-16 h-16 text-3xl rounded-2xl border flex items-center justify-center
               shrink-0 shadow-inner ${badgeClass}`}
           >
-            {icon}
+            {icon || "⏳"}
           </div>
           <div>
             <span
@@ -39,7 +48,7 @@ const MainBlock = ({ t, nearestEvent, now }) => {
             <h2
               className={`text-2xl md:text-3xl font-black tracking-wide text-slate-100 mt-2.5 capitalize ${titleClass}`}
             >
-              {name}
+              {name || "Loading..."}
             </h2>
             {isSwat && (
               <span
