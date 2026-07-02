@@ -1,23 +1,14 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { onValue, ref } from "firebase/database";
 import { useEffect } from "react";
 
-import bgImg from "./assets/image.png";
+import bgImg from "./assets/bg3.png";
 import AllEvents from "./components/AllEvents/AllEvents";
 import Header from "./components/Header/Header";
 import MainBlock from "./components/MainBlock";
+import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
 import { EVENT_TYPES } from "./utils/constants";
 import { checkIsSwat, getEmojiIcon, getNextWeeklyEvent } from "./utils/general";
-
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
 
 export default function App() {
   const setEvents = useAppStore((state) => state.setEvents);
