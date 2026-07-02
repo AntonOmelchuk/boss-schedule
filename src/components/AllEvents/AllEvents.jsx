@@ -41,9 +41,7 @@ const AllEvents = () => {
             </svg>
           </button>
 
-          {isDropdownOpen && (
-            <Dropdown Dropdown setIsDropdownOpen={setIsDropdownOpen} />
-          )}
+          {isDropdownOpen && <Dropdown setIsDropdownOpen={setIsDropdownOpen} />}
         </div>
 
         {/* Toggle PvP filter */}
