@@ -13,7 +13,8 @@ import translations from "../utils/translations";
  */
 const useTranslation = () => {
   // Retrieve the current language and action setter from the Zustand store
-  const { language, setLanguage } = useAppStore((state) => state);
+  const language = useAppStore((state) => state.language);
+  const setLanguage = useAppStore((state) => state.setLanguage);
 
   // Return translation dictionary (with safe fallback to English), active language, and setLanguage method
   return {
