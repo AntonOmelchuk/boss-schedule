@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { PVP_EVENTS } from "../data";
 import useAppStore from "../store/useAppStore";
-import { CATEGORIES } from "../utils/constants";
+import { CATEGORIES, TIME_FILTERS } from "../utils/constants";
 import { getEmojiIcon, getNextPvPTimestamp } from "../utils/general";
 import useCurrentTime from "./useCurrentTime";
 
@@ -15,7 +15,8 @@ import useCurrentTime from "./useCurrentTime";
  * - @property {Object} filters - Current status of active filter criteria.
  */
 const useFilterEvents = () => {
-  const { events, filters, toggleFilter } = useAppStore((state) => state);
+  const { events, filters, toggleFilter, timeFilter, setTimeFilter } =
+    useAppStore((state) => state);
   const { pvpEvents } = filters;
 
   // Single ticker interval representing active system clock state
@@ -40,19 +41,27 @@ const useFilterEvents = () => {
     return combined;
   }, [events]);
 
-  // Stage 2: Clean and trim expired event entries, applying layout filter checks.
+  // Stage 2: Clean and trim expired event entries, applying layout and timeframe filter checks.
   // This light filter runs on every tick, ensuring zero layout jank or blocking lag.
   const filteredEvents = useMemo(() => {
+    // End of the current calendar day under UTC+0 (00:00 UTC of the next day)
+    const todayEnd = new Date();
+    todayEnd.setUTCHours(24, 0, 0, 0);
+    const todayEndTs = todayEnd.getTime();
+
     return baseMergedEvents
       .filter((e) => pvpEvents || e.category !== CATEGORIES.PVP)
       .filter((e) => e.ts > now)
+      .filter((e) => timeFilter === TIME_FILTERS.AllTime || e.ts <= todayEndTs)
       .sort((a, b) => a.ts - b.ts);
-  }, [baseMergedEvents, pvpEvents, now]);
+  }, [baseMergedEvents, pvpEvents, now, timeFilter]);
 
   return {
     filteredEvents,
     toggleFilter,
     filters,
+    timeFilter,
+    setTimeFilter,
     now,
   };
 };
