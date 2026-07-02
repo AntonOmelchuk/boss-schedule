@@ -1,14 +1,12 @@
-import useCurrentTime from "../hooks/useCurrentTime";
 import useFilterEvents from "../hooks/useFilterEvents";
 import useTranslation from "../hooks/useTranslation";
 import { formatRemaining, getDiplomacyConfig } from "../utils/general";
 
 const MainBlock = () => {
   const { t } = useTranslation();
-  const now = useCurrentTime();
 
   // Directly pull filtered events, nearest is the first item
-  const { filteredEvents } = useFilterEvents();
+  const { filteredEvents, now } = useFilterEvents();
 
   const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
 

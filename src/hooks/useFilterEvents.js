@@ -15,19 +15,17 @@ import useCurrentTime from "./useCurrentTime";
  * - @property {Object} filters - Current status of active filter criteria.
  */
 const useFilterEvents = () => {
-  // Extract real-time server events, UI filter states, and the toggle action from Zustand store
   const { events, filters, toggleFilter } = useAppStore((state) => state);
   const { pvpEvents } = filters;
 
-  // Retrieve the ticking current timestamp to continuously evaluate remaining time
+  // Single ticker interval representing active system clock state
   const now = useCurrentTime();
 
-  // Memoize calculation to avoid performance drops and prevent potential React re-render loops
-  const filteredEvents = useMemo(() => {
-    // Clone the raw server events list to keep original state immutable
+  // Stage 1: Merge dynamic database entries with local static PvP schedules.
+  // This computationally heavy part ONLY recalculates when the raw db events modify.
+  const baseMergedEvents = useMemo(() => {
     const combined = [...events];
 
-    // 1. Merge static local PvP events with their calculated next active timestamps
     PVP_EVENTS.forEach(({ name, time, type, category }) => {
       combined.push({
         id: name,
@@ -39,22 +37,23 @@ const useFilterEvents = () => {
       });
     });
 
-    // 2. Filter out unwanted categories and stale events, then sort chronologically
-    return (
-      combined
-        // Hide PvP events dynamically if their specific display filter is turned off
-        .filter((e) => pvpEvents || e.category !== CATEGORIES.PVP)
-        // Exclude events that have already started (timestamp is in the past)
-        .filter((e) => e.ts > now)
-        // Sort upcoming events starting from the nearest to the furthest
-        .sort((a, b) => a.ts - b.ts)
-    );
-  }, [events, filters, now]);
+    return combined;
+  }, [events]);
+
+  // Stage 2: Clean and trim expired event entries, applying layout filter checks.
+  // This light filter runs on every tick, ensuring zero layout jank or blocking lag.
+  const filteredEvents = useMemo(() => {
+    return baseMergedEvents
+      .filter((e) => pvpEvents || e.category !== CATEGORIES.PVP)
+      .filter((e) => e.ts > now)
+      .sort((a, b) => a.ts - b.ts);
+  }, [baseMergedEvents, pvpEvents, now]);
 
   return {
     filteredEvents,
     toggleFilter,
     filters,
+    now,
   };
 };
 
