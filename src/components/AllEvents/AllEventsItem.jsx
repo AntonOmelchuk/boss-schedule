@@ -24,7 +24,7 @@ const AllEventsItem = ({
       className={`group relative rounded-xl p-px overflow-hidden transition-all duration-500 border
          border-slate-800/50 ${glowClass}`}
     >
-      {/* Динамічний неоновий градієнт, який прискорюється та стає яскравішим при наведенні */}
+      {/* Dynamic gradient */}
       <div
         className="absolute inset-[-180%] animate-spin pointer-events-none opacity-30 group-hover:opacity-100
           group-hover:scale-110 duration-700 transition-all"
@@ -34,12 +34,10 @@ const AllEventsItem = ({
         }}
       />
 
-      {/* Внутрішня підкладка картки */}
       <div
         className="bg-slate-900/95 backdrop-blur-xl rounded-xl p-4 relative z-10 flex
         items-center gap-4 w-full h-full text-left"
       >
-        {/* Іконка івенту з дипломатичною рамкою кольору статусу */}
         <div
           className={`w-12 h-12 rounded-lg border flex items-center justify-center text-3xl shrink-0
           shadow-inner group-hover:scale-105 duration-300 transition-transform ${iconBorder}`}
@@ -47,7 +45,6 @@ const AllEventsItem = ({
           {icon}
         </div>
 
-        {/* Текстовий блок події */}
         <div className="flex-1 overflow-hidden min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h4
@@ -56,7 +53,7 @@ const AllEventsItem = ({
               {name}
             </h4>
 
-            {/* Динамічний бейдж клану-власника */}
+            {/* Owner badge */}
             {owner && (
               <span
                 className={`inline-flex items-center gap-1 px-2 py-0.5
@@ -78,7 +75,7 @@ const AllEventsItem = ({
             </div>
           </div>
 
-          {/* Дата респауну події */}
+          {/* Respawn time */}
           <div className="text-xs font-medium text-slate-400 mt-1 flex items-center gap-1.5">
             {spawnDate}
           </div>

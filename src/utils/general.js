@@ -104,7 +104,7 @@ export const getDiplomacyConfig = (rel) => {
       badgeClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
       iconBorder: "border-emerald-500/30 text-emerald-400 bg-emerald-950/20",
       glowClass:
-        "shadow-[0_0_15px_rgba(16,185,129,0.08)] hover:shadow-[0_0_25px_rgba(16,185,129,0.2)]" +
+        "shadow-[0_0_15px_rgba(16,185,129,0.08)] hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] " +
         "hover:border-emerald-500/20",
     };
   }
