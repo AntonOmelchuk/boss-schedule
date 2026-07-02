@@ -21,6 +21,11 @@ export const LANGUAGES = {
   UA: "ua",
 };
 
+export const TIME_FILTERS = {
+  AllTime: "allTime",
+  Today: "today",
+};
+
 /**
  * High-level grouping categories used for structuring and filtering active events on the dashboard.
  * @type {Object}

@@ -1,13 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { CATEGORIES, LANGUAGES } from "../utils/constants";
+import { CATEGORIES, LANGUAGES, TIME_FILTERS } from "../utils/constants";
 
 const useAppStore = create(
   persist(
     (set) => ({
       // Initial state
       language: LANGUAGES.EN,
+      timeFilter: TIME_FILTERS.AllTime,
       filters: {
         [CATEGORIES.Epic]: true,
         [CATEGORIES.PVP]: true,
@@ -18,8 +19,8 @@ const useAppStore = create(
 
       // Actions
       setLanguage: (lang) => set({ language: lang }),
-
       setEvents: (events) => set({ events }),
+      setTimeFilter: (timeFilter) => set({ timeFilter }),
 
       // Event filter
       toggleFilter: (key) =>
@@ -44,6 +45,7 @@ const useAppStore = create(
       partialize: (state) => ({
         language: state.language,
         filters: state.filters,
+        timeFilter: state.timeFilter,
       }),
     },
   ),

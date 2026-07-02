@@ -20,6 +20,7 @@ export default {
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
     swatSkip: "SWAT Прайм (Скіп)",
+    todaysEventsOption: "Події на сьогодні",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -40,5 +41,6 @@ export default {
     langToggle: "УКР",
     pvpEvents: "PVP Events",
     swatSkip: "SWAT Prime (Skip)",
+    todaysEventsOption: "Today's Events",
   },
 };

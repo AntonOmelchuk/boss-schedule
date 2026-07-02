@@ -1,22 +1,53 @@
-import useFiltereEvents from "../../hooks/useFilterEvents";
+import { useState } from "react";
+
+import useFilterEvents from "../../hooks/useFilterEvents";
 import useTranslation from "../../hooks/useTranslation";
-import { LANGUAGES } from "../../utils/constants";
+import { CATEGORIES, LANGUAGES, TIME_FILTERS } from "../../utils/constants";
 import AllEventsItem from "./AllEventsItem";
+import Dropdown from "./Dropdown";
 
 const AllEvents = () => {
   const { t, language } = useTranslation();
 
-  const { filteredEvents, filters, toggleFilter } = useFiltereEvents();
+  const { filteredEvents, filters, toggleFilter, timeFilter } =
+    useFilterEvents();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
     <>
-      <div className="mb-4 flex justify-between items-end border-b border-slate-700 pb-2">
-        <h3 className="text-xl font-bold text-slate-200">{t.allEvents}</h3>
+      <div className="mb-4 flex justify-between items-end border-b border-slate-700 pb-2 relative z-20">
+        {/* Interactive Period Custom Dropdown Header */}
+        <div className="relative">
+          <button
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="text-xl font-bold text-slate-200 hover:text-amber-500 flex items-center gap-2 select-none
+              focus:outline-none transition-colors duration-200 uppercase"
+          >
+            {timeFilter === TIME_FILTERS.AllTime
+              ? t.allEvents
+              : t.todaysEventsOption}
+            <svg
+              className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2.5"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          {isDropdownOpen && <Dropdown setIsDropdownOpen={setIsDropdownOpen} />}
+        </div>
 
         {/* Toggle PvP filter */}
         <div
           className="flex items-center gap-2 cursor-pointer text-lg"
-          onClick={() => toggleFilter("pvpEvents")}
+          onClick={() => toggleFilter(CATEGORIES.PVP)}
         >
           <span
             className={filters.pvpEvents ? "text-amber-500" : "text-slate-500"}
@@ -35,12 +66,12 @@ const AllEvents = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredEvents?.length === 0 ? (
+        {filteredEvents.length === 0 ? (
           <div className="col-span-full text-center text-slate-500 py-8">
             {t.noBosses}
           </div>
         ) : (
-          filteredEvents?.map((event) => {
+          filteredEvents.map((event) => {
             const spawnDate = new Date(event.ts).toLocaleString(
               language === LANGUAGES.UA ? "uk-UA" : "en-US",
               {
