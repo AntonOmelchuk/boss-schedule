@@ -1,39 +1,48 @@
+import useFiltereEvents from "../../hooks/useFilterEvents";
+import useTranslation from "../../hooks/useTranslation";
 import { LANGUAGES } from "../../utils/constants";
 import AllEventsItem from "./AllEventsItem";
 
-const AllEvents = ({ events, t, lang, showPvP, setShowPvP }) => {
+const AllEvents = () => {
+  const { t, language } = useTranslation();
+
+  const { filteredEvents, filters, toggleFilter } = useFiltereEvents();
+
   return (
     <>
       <div className="mb-4 flex justify-between items-end border-b border-slate-700 pb-2">
         <h3 className="text-xl font-bold text-slate-200">{t.allEvents}</h3>
 
+        {/* Toggle PvP filter */}
         <div
           className="flex items-center gap-2 cursor-pointer text-lg"
-          onClick={setShowPvP}
+          onClick={() => toggleFilter("pvpEvents")}
         >
-          <span className={showPvP ? "text-amber-500" : "text-slate-500"}>
+          <span
+            className={filters.pvpEvents ? "text-amber-500" : "text-slate-500"}
+          >
             {t.pvpEvents}
           </span>
           <div
-            className={`w-8 h-4 rounded-full transition-colors ${showPvP ? "bg-amber-600" : "bg-slate-700"}`}
+            className={`w-8 h-4 rounded-full transition-colors ${filters.pvpEvents ? "bg-amber-600" : "bg-slate-700"}`}
           >
             <div
               className={`w-4 h-4 bg-white rounded-full transition-transform
-                ${showPvP ? "translate-x-4" : "translate-x-0"}`}
+                ${filters.pvpEvents ? "translate-x-4" : "translate-x-0"}`}
             />
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {events.length === 0 ? (
+        {filteredEvents?.length === 0 ? (
           <div className="col-span-full text-center text-slate-500 py-8">
             {t.noBosses}
           </div>
         ) : (
-          events.map((event) => {
+          filteredEvents?.map((event) => {
             const spawnDate = new Date(event.ts).toLocaleString(
-              lang === LANGUAGES.UA ? "uk-UA" : "en-US",
+              language === LANGUAGES.UA ? "uk-UA" : "en-US",
               {
                 month: "short",
                 day: "numeric",
