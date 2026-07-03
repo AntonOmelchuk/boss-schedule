@@ -21,6 +21,15 @@ export default {
     pvpEvents: "PVP Івенти",
     swatSkip: "SWAT Прайм (Скіп)",
     todaysEventsOption: "Події на сьогодні",
+
+    // Tactical Filter Modal Translations (UA)
+    filtersTitle: "Фільтри",
+    selectAll: "Увімкнути все",
+    deselectAll: "Вимкнути все",
+    applyBtn: "Застосувати",
+    epic: "Епік Боси",
+    ch: "Клан Холи",
+    siege: "Облоги Замків",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -42,5 +51,14 @@ export default {
     pvpEvents: "PVP Events",
     swatSkip: "SWAT Prime (Skip)",
     todaysEventsOption: "Today's Events",
+
+    // Tactical Filter Modal Translations (EN)
+    filtersTitle: "Filters",
+    selectAll: "Check All",
+    deselectAll: "Check None",
+    applyBtn: "Apply",
+    epic: "Epic Bosses",
+    ch: "Clan Halls",
+    siege: "Castle Sieges",
   },
 };

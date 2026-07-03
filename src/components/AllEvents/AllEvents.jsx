@@ -2,16 +2,19 @@ import { useState } from "react";
 
 import useFilterEvents from "../../hooks/useFilterEvents";
 import useTranslation from "../../hooks/useTranslation";
-import { CATEGORIES, LANGUAGES, TIME_FILTERS } from "../../utils/constants";
-import AllEventsItem from "./AllEventsItem";
-import Dropdown from "./Dropdown";
+import ArrowDownIcon from "../../svg/ArrowDownIcon";
+import FilterIcon from "../../svg/FilterIcon";
+import { LANGUAGES, TIME_FILTERS } from "../../utils/constants";
+import AllEventsItem from "./components/AllEventsItem";
+import Dropdown from "./components/Dropdown";
+import FilterModal from "./components/FilterModal"; // Path to your new FilterModal file
 
 const AllEvents = () => {
   const { t, language } = useTranslation();
 
-  const { filteredEvents, filters, toggleFilter, timeFilter } =
-    useFilterEvents();
+  const { filteredEvents, timeFilter } = useFilterEvents();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false); // Modal control state
 
   return (
     <>
@@ -26,44 +29,32 @@ const AllEvents = () => {
             {timeFilter === TIME_FILTERS.AllTime
               ? t.allEvents
               : t.todaysEventsOption}
-            <svg
-              className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2.5"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+            <ArrowDownIcon />
           </button>
 
           {isDropdownOpen && <Dropdown setIsDropdownOpen={setIsDropdownOpen} />}
         </div>
 
-        {/* Toggle PvP filter */}
-        <div
-          className="flex items-center gap-2 cursor-pointer text-lg"
-          onClick={() => toggleFilter(CATEGORIES.PVP)}
+        {/* Tactical Filter Modal Trigger Button */}
+        <button
+          onClick={() => setIsFilterModalOpen(true)}
+          className="flex items-center gap-2 py-1.5 px-3.5 text-xs md:text-sm font-black uppercase tracking-wider
+            bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-amber-500 rounded-xl border
+            border-slate-700 hover:border-amber-500/30 transition-all duration-200 shadow-md select-none
+              focus:outline-none"
         >
-          <span
-            className={filters.pvpEvents ? "text-amber-500" : "text-slate-500"}
-          >
-            {t.pvpEvents}
-          </span>
-          <div
-            className={`w-8 h-4 rounded-full transition-colors ${filters.pvpEvents ? "bg-amber-600" : "bg-slate-700"}`}
-          >
-            <div
-              className={`w-4 h-4 bg-white rounded-full transition-transform
-                ${filters.pvpEvents ? "translate-x-4" : "translate-x-0"}`}
-            />
-          </div>
-        </div>
+          {/* Custom SVG Filter Icon */}
+          <FilterIcon />
+          {t.filtersTitle}
+        </button>
       </div>
+
+      {/* Render Filter overlay dialog component dynamically */}
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        t={t}
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredEvents.length === 0 ? (
