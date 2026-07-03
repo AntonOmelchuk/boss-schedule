@@ -51,9 +51,7 @@ const useFilterEvents = () => {
       .filter(({ category }) => {
         // Fallback to type if category is omitted on database objects
         // If the toggle for this specific category is false, completely exclude it
-        console.log("filters[eventCategory]", category);
-        console.log("filters[eventCategory]", filters[category]);
-        return filters[category];
+        return filters[category] !== false;
       })
       .filter((e) => e.ts > now)
       .filter((e) => timeFilter === TIME_FILTERS.AllTime || e.ts <= todayEndTs)
