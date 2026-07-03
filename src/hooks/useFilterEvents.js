@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { PVP_EVENTS } from "../data";
 import useAppStore from "../store/useAppStore";
-import { CATEGORIES, TIME_FILTERS } from "../utils/constants";
+import { TIME_FILTERS } from "../utils/constants";
 import { getEmojiIcon, getNextPvPTimestamp } from "../utils/general";
 import useCurrentTime from "./useCurrentTime";
 
@@ -17,7 +17,6 @@ import useCurrentTime from "./useCurrentTime";
 const useFilterEvents = () => {
   const { events, filters, toggleFilter, timeFilter, setTimeFilter } =
     useAppStore((state) => state);
-  const { pvpEvents } = filters;
 
   // Single ticker interval representing active system clock state
   const now = useCurrentTime();
@@ -41,8 +40,7 @@ const useFilterEvents = () => {
     return combined;
   }, [events]);
 
-  // Stage 2: Clean and trim expired event entries, applying layout and timeframe filter checks.
-  // This light filter runs on every tick, ensuring zero layout jank or blocking lag.
+  // Stage 2: Clean and trim expired event entries, applying tactical filters and timeframe checks.
   const filteredEvents = useMemo(() => {
     // End of the current calendar day under UTC+0 (00:00 UTC of the next day)
     const todayEnd = new Date();
@@ -50,11 +48,15 @@ const useFilterEvents = () => {
     const todayEndTs = todayEnd.getTime();
 
     return baseMergedEvents
-      .filter((e) => pvpEvents || e.category !== CATEGORIES.PVP)
+      .filter(({ category }) => {
+        // Fallback to type if category is omitted on database objects
+        // If the toggle for this specific category is false, completely exclude it
+        return filters[category] !== false;
+      })
       .filter((e) => e.ts > now)
       .filter((e) => timeFilter === TIME_FILTERS.AllTime || e.ts <= todayEndTs)
       .sort((a, b) => a.ts - b.ts);
-  }, [baseMergedEvents, pvpEvents, now, timeFilter]);
+  }, [baseMergedEvents, filters, now, timeFilter]);
 
   return {
     filteredEvents,

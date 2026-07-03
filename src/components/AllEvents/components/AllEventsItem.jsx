@@ -1,4 +1,4 @@
-import { getDiplomacyConfig } from "../../utils/general";
+import { getDiplomacyConfig } from "../../../utils/general";
 
 const AllEventsItem = ({
   t,

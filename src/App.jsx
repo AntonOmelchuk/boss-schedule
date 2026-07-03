@@ -49,6 +49,7 @@ export default function App() {
               relation: relation,
               ts,
               type,
+              category,
               owner: owner || null,
               icon: getEmojiIcon(type),
               isSwat: category && checkIsSwat(category, ts),
