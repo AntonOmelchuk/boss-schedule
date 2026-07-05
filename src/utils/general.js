@@ -158,5 +158,36 @@ export const checkIsSwat = (category, ts) =>
   category === CATEGORIES.Epic &&
   (() => {
     const hours = new Date(ts).getUTCHours();
-    return hours >= 1 && hours < 6;
+    return hours >= 0 && hours < 7;
   })();
+
+/**
+ * Formats time (HH:MM) for a specific timezone.
+ */
+export const formatTimeForZone = (isoString, zone) => {
+  return new Intl.DateTimeFormat("uk-UA", {
+    timeZone: zone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date(isoString));
+};
+
+/**
+ * Formats date (Day Month) for a specific timezone based on current locale.
+ */
+export const formatDateForZone = (isoString, zone, lang = "uk-UA") => {
+  return new Intl.DateTimeFormat(lang === "ua" ? "uk-UA" : "en-US", {
+    timeZone: zone,
+    month: "short",
+    day: "numeric",
+  }).format(new Date(isoString));
+};
+
+// Adapts seamlessly to either numeric timestamp (ts) or backup serverTime parameters
+export const getEventIsoTime = (evt) => {
+  if (evt.ts) {
+    return new Date(evt.ts).toISOString();
+  }
+  return evt.serverTime;
+};

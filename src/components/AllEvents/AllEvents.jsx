@@ -5,6 +5,7 @@ import useTranslation from "../../hooks/useTranslation";
 import ArrowDownIcon from "../../svg/ArrowDownIcon";
 import FilterIcon from "../../svg/FilterIcon";
 import { LANGUAGES, TIME_FILTERS } from "../../utils/constants";
+import Button from "../UI/Button";
 import AllEventsItem from "./components/AllEventsItem";
 import Dropdown from "./components/Dropdown";
 import FilterModal from "./components/FilterModal"; // Path to your new FilterModal file
@@ -36,17 +37,10 @@ const AllEvents = () => {
         </div>
 
         {/* Tactical Filter Modal Trigger Button */}
-        <button
-          onClick={() => setIsFilterModalOpen(true)}
-          className="flex items-center gap-2 py-1.5 px-3.5 text-xs md:text-sm font-black uppercase tracking-wider
-            bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-amber-500 rounded-xl border
-            border-slate-700 hover:border-amber-500/30 transition-all duration-200 shadow-md select-none
-              focus:outline-none"
-        >
-          {/* Custom SVG Filter Icon */}
+        <Button onClick={() => setIsFilterModalOpen(true)}>
           <FilterIcon />
           {t.filtersTitle}
-        </button>
+        </Button>
       </div>
 
       {/* Render Filter overlay dialog component dynamically */}

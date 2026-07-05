@@ -1,6 +1,6 @@
-import useFilterEvents from "../hooks/useFilterEvents";
-import useTranslation from "../hooks/useTranslation";
-import { formatRemaining, getDiplomacyConfig } from "../utils/general";
+import useFilterEvents from "../../hooks/useFilterEvents";
+import useTranslation from "../../hooks/useTranslation";
+import { formatRemaining, getDiplomacyConfig } from "../../utils/general";
 
 const MainBlock = () => {
   const { t } = useTranslation();

@@ -30,6 +30,35 @@ export default {
     epic: "Епік Боси",
     ch: "Клан Холи",
     siege: "Облоги Замків",
+
+    // Конструктор Розкладів
+    sbTitle: "Конструктор Розкладів Альянсу",
+    sbSubtitle: "Тактичне планування операцій для мультинаціональних паків",
+    sbExportBtn: "Експорт для Discord / Telegram",
+    sbCopied: "Розклад скопійовано!",
+    sbTzTitle: "Додати часовий пояс (Максимум 5)",
+    sbAddBtn: "Додати",
+    sbTzErrorDuplicate: "Цей часовий пояс вже додано до таблиці.",
+    sbTzErrorLimit:
+      "Досягнуто ліміту! Можна додати максимум 5 додаткових часових поясів.",
+    sbControlPanel: "Опції Керування Виглядом & Фільтри",
+    sbLocalTimeOn: "Локальний час: Увімкнено",
+    sbLocalTimeOff: "Локальний час: Вимкнено",
+    sbResetHidden: "Скинути приховані події",
+    sbInstruction:
+      "Налаштуйте таблицю під свій склад та скопіюйте готовий план для публікації на канали координації.",
+    sbNoEvents:
+      "Немає активних подій. Скиньте фільтри/приховані або оновіть сторінку.",
+    sbTableEvent: "Подія",
+    sbTableCategory: "Категорія",
+    sbTableServerTime: "Час Сервера (UTC)",
+    sbTableLocalTime: "Місцевий час",
+    sbDiscordHeader: "📅 **РОЗКЛАД ТАКТИЧНИХ ОПЕРАЦІЙ АЛЬЯНСУ** 📅",
+    sbDiscordFooter:
+      "⚔️ *Приготуйте зброю та синхронізуйте таймери розвідки!* ⚔️",
+    sbDiscordDate: "Дата",
+    sbDiscordServer: "Час Сервера",
+    sbDiscordLocal: "Ваш Локальний Час",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -60,5 +89,33 @@ export default {
     epic: "Epic Bosses",
     ch: "Clan Halls",
     siege: "Castle Sieges",
+
+    // Schedule Builder
+    sbTitle: "Alliance Schedule Builder",
+    sbSubtitle: "Tactical operation planning for multinational parties",
+    sbExportBtn: "Export to Discord / Telegram",
+    sbCopied: "Schedule Copied!",
+    sbTzTitle: "Add Timezone (Max 5)",
+    sbAddBtn: "Add",
+    sbTzErrorDuplicate: "This timezone is already added to the table.",
+    sbTzErrorLimit:
+      "Limit reached! You can add a maximum of 5 additional timezones.",
+    sbControlPanel: "Display Options & Filters",
+    sbLocalTimeOn: "Local Time: Enabled",
+    sbLocalTimeOff: "Local Time: Disabled",
+    sbResetHidden: "Reset Hidden Events",
+    sbInstruction:
+      "Configure the table for your roster and copy the ready plan to coordination channels.",
+    sbNoEvents: "No active events. Reset filters/hidden or refresh the page.",
+    sbTableEvent: "Event",
+    sbTableCategory: "Category",
+    sbTableServerTime: "Server Time (UTC)",
+    sbTableLocalTime: "Local Time",
+    sbDiscordHeader: "📅 **ALLIANCE TACTICAL OPERATIONS SCHEDULE** 📅",
+    sbDiscordFooter:
+      "⚔️ *Prepare your weapons and synchronize intel timers!* ⚔️",
+    sbDiscordDate: "Date",
+    sbDiscordServer: "Server Time",
+    sbDiscordLocal: "Your Local Time",
   },
 };
