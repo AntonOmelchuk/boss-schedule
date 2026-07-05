@@ -158,5 +158,5 @@ export const checkIsSwat = (category, ts) =>
   category === CATEGORIES.Epic &&
   (() => {
     const hours = new Date(ts).getUTCHours();
-    return hours >= 1 && hours < 6;
+    return hours >= 0 && hours < 7;
   })();
