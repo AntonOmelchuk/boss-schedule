@@ -59,6 +59,26 @@ export default {
     sbDiscordDate: "Дата",
     sbDiscordServer: "Час Сервера",
     sbDiscordLocal: "Ваш Локальний Час",
+
+    // Локалізовані часові пояси (UA)
+    timezoneOptions: [
+      { name: "Київ / Східна Європа (EEST)", value: "Europe/Kyiv" },
+      { name: "Лондон / Західна Європа (BST)", value: "Europe/London" },
+      { name: "Берлін / Центральна Європа (CEST)", value: "Europe/Berlin" },
+      { name: "Варшава / Польща (CEST)", value: "Europe/Warsaw" },
+      { name: "Рейк'явік / Ісландія (GMT)", value: "Atlantic/Reykjavik" },
+      {
+        name: "Нью-Йорк / Східне узбережжя США (EDT)",
+        value: "America/New_York",
+      },
+      { name: "Чикаго / Центральні штати США (CDT)", value: "America/Chicago" },
+      { name: "Денвер / Гірський час США (MDT)", value: "America/Denver" },
+      {
+        name: "Лос-Анджелес / Тихоокеанське узбережжя (PDT)",
+        value: "America/Los_Angeles",
+      },
+      { name: "Сан-Паулу / Бразилія (BRT)", value: "America/Sao_Paulo" },
+    ],
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -117,5 +137,22 @@ export default {
     sbDiscordDate: "Date",
     sbDiscordServer: "Server Time",
     sbDiscordLocal: "Your Local Time",
+
+    // Localized Timezones (EN)
+    timezoneOptions: [
+      { name: "Kyiv / Eastern Europe (EEST)", value: "Europe/Kyiv" },
+      { name: "London / Western Europe (BST)", value: "Europe/London" },
+      { name: "Berlin / Central Europe (CEST)", value: "Europe/Berlin" },
+      { name: "Warsaw / Poland (CEST)", value: "Europe/Warsaw" },
+      { name: "Reykjavik / Iceland (GMT)", value: "Atlantic/Reykjavik" },
+      { name: "New York / US East Coast (EDT)", value: "America/New_York" },
+      { name: "Chicago / US Central States (CDT)", value: "America/Chicago" },
+      { name: "Denver / US Mountain Time (MDT)", value: "America/Denver" },
+      {
+        name: "Los Angeles / Pacific Coast (PDT)",
+        value: "America/Los_Angeles",
+      },
+      { name: "Sao Paulo / Brazil (BRT)", value: "America/Sao_Paulo" },
+    ],
   },
 };

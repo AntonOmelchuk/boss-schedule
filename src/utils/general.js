@@ -149,7 +149,7 @@ export const getNextWeeklyEvent = (dayOfWeek, timeStr) => {
 
 /**
  * Evaluates whether an event qualifies for the "SWAT" category (late-night active window restrictions).
- * Identifies if the event category is Epic and if its scheduled time falls between 1:00 AM and 6:00 AM UTC.
+ * Identifies if the event category is Epic and if its scheduled time falls between 00:00 AM and 7:00 AM UTC.
  * @param {string} category - The type of event category.
  * @param {number} ts - Event target execution timestamp in milliseconds.
  * @returns {boolean} True if the event triggers SWAT warnings, otherwise false.
@@ -165,23 +165,31 @@ export const checkIsSwat = (category, ts) =>
  * Formats time (HH:MM) for a specific timezone.
  */
 export const formatTimeForZone = (isoString, zone) => {
-  return new Intl.DateTimeFormat("uk-UA", {
-    timeZone: zone,
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date(isoString));
+  try {
+    return new Intl.DateTimeFormat("uk-UA", {
+      timeZone: zone,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(new Date(isoString));
+  } catch {
+    return "error";
+  }
 };
 
 /**
  * Formats date (Day Month) for a specific timezone based on current locale.
  */
 export const formatDateForZone = (isoString, zone, lang = "uk-UA") => {
-  return new Intl.DateTimeFormat(lang === "ua" ? "uk-UA" : "en-US", {
-    timeZone: zone,
-    month: "short",
-    day: "numeric",
-  }).format(new Date(isoString));
+  try {
+    return new Intl.DateTimeFormat(lang === "ua" ? "uk-UA" : "en-US", {
+      timeZone: zone,
+      month: "short",
+      day: "numeric",
+    }).format(new Date(isoString));
+  } catch {
+    return "error";
+  }
 };
 
 // Adapts seamlessly to either numeric timestamp (ts) or backup serverTime parameters

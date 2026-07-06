@@ -1,5 +1,6 @@
+import { useEffect } from "react";
+
 import useTranslation from "../../../hooks/useTranslation";
-import { TIMEZONE_OPTIONS } from "../../../utils/constants";
 
 export const TimezoneBlock = ({
   activeTimezones,
@@ -10,6 +11,12 @@ export const TimezoneBlock = ({
   removeTimezone,
 }) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (t.timezoneOptions?.length > 0) {
+      setTimezoneToAdd(t.timezoneOptions[0].value);
+    }
+  }, [t]);
 
   return (
     <div className="bg-slate-900/60 border border-slate-800/80 p-5 rounded-2xl flex flex-col gap-4">
@@ -24,11 +31,14 @@ export const TimezoneBlock = ({
       <div className="flex gap-2">
         <select
           value={timezoneToAdd}
-          onChange={(e) => setTimezoneToAdd(e.target.value)}
+          onChange={(e) => {
+            console.log("timezone: ", e.target.value);
+            setTimezoneToAdd(e.target.value);
+          }}
           className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold
           text-slate-200 outline-none"
         >
-          {TIMEZONE_OPTIONS.map((opt) => (
+          {t.timezoneOptions?.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.name}
             </option>
@@ -49,7 +59,7 @@ export const TimezoneBlock = ({
           <span
             key={tz}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-slate-800 text-xs
-                      font-mono font-bold rounded-lg text-slate-300"
+              font-mono font-bold rounded-lg text-slate-300"
           >
             {tz.split("/").pop().replace("_", " ")}
             <button
