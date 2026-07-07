@@ -19,7 +19,7 @@ export default {
     s: "С",
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
-    swatSkip: "SWAT Прайм (Скіп)",
+    swatSkip: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
 
     // Tactical Filter Modal Translations (UA)
@@ -49,7 +49,7 @@ export default {
     s: "S",
     langToggle: "УКР",
     pvpEvents: "PVP Events",
-    swatSkip: "SWAT Prime (Skip)",
+    swatSkip: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
 
     // Tactical Filter Modal Translations (EN)
