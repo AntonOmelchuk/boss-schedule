@@ -124,3 +124,10 @@ export const CATEGORIES_STYLE = {
   [CATEGORIES.CH]: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10",
   [CATEGORIES.PVP]: "border-red-500/30 text-red-400 bg-red-500/10",
 };
+
+export const MAKE_SCREENSHOT_STATUS = {
+  None: "none",
+  Progress: "progress",
+  Success: "success",
+  Error: "error",
+};

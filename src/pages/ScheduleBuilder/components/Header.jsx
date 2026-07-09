@@ -2,53 +2,39 @@ import { useState } from "react";
 
 import useFilterEvents from "../../../hooks/useFilterEvents";
 import useTranslation from "../../../hooks/useTranslation";
+import { MAKE_SCREENSHOT_STATUS } from "../../../utils/constants";
 import {
   formatDateForZone,
   formatTimeForZone,
   getEventIsoTime,
 } from "../../../utils/general";
+import {
+  generateDiscordFormat,
+  takeScreenshot,
+} from "../../../utils/scheduleBuilder";
 
 const Header = ({
+  tableRef,
   showLocalTime,
-  activeTimezones,
-  language,
   localTimezone,
+  activeTimezones,
 }) => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { filteredEvents } = useFilterEvents();
 
   const [copiedStatus, setCopiedStatus] = useState(false);
+  const [screenshotStatus, setScreenshotStatus] = useState(
+    MAKE_SCREENSHOT_STATUS.None,
+  );
 
-  const generateDiscordFormat = (events) => {
-    let output = `${t.sbDiscordHeader}\n========================================\n\n`;
-
-    events.forEach((evt) => {
-      const isoTime = getEventIsoTime(evt);
-      const serverTimeFormatted = formatTimeForZone(isoTime, "UTC");
-      const eventDate = formatDateForZone(isoTime, "UTC", language);
-
-      output += `${evt.icon} **${evt.name}** (${evt.category})\n`;
-      output += `   • ${t.sbDiscordDate}: ${eventDate}\n`;
-      output += `   • ${t.sbDiscordServer}: 🕐 ${serverTimeFormatted} UTC\n`;
-
-      if (showLocalTime) {
-        const localTimeFormatted = formatTimeForZone(isoTime, localTimezone);
-        output += `   • ${t.sbDiscordLocal}: 🏠 ${localTimeFormatted}\n`;
-      }
-
-      activeTimezones.forEach((tz) => {
-        const shortTzName = tz.split("/").pop().replace("_", " ");
-        output += `   • ${shortTzName}: 🕒 ${formatTimeForZone(isoTime, tz)}\n`;
-      });
-      output += "\n";
-    });
-
-    output += t.sbDiscordFooter;
-
-    navigator.clipboard.writeText(output).then(() => {
-      setCopiedStatus(true);
-      setTimeout(() => setCopiedStatus(false), 3000);
-    });
+  const screenshotLabel = () => {
+    if (screenshotStatus == MAKE_SCREENSHOT_STATUS.Progress)
+      return t.sbScreenshotProgress;
+    if (screenshotStatus === MAKE_SCREENSHOT_STATUS.Success)
+      return t.sbScreenshotSuccess;
+    if (screenshotStatus === MAKE_SCREENSHOT_STATUS.Error)
+      return t.sbScreenshotError;
+    return t.sbScreenshotBtn;
   };
 
   return (
@@ -65,7 +51,29 @@ const Header = ({
         </h1>
       </div>
       <button
-        onClick={() => generateDiscordFormat(filteredEvents)}
+        onClick={() => takeScreenshot(tableRef, setScreenshotStatus)}
+        disabled={screenshotStatus === MAKE_SCREENSHOT_STATUS.Error}
+        className="flex items-center gap-2 py-2.5 px-5 text-xs font-black uppercase tracking-wider bg-teal-600
+        hover:bg-teal-500 disabled:bg-teal-800 text-white rounded-xl border border-teal-500/40
+          transition-all duration-300 shadow-lg cursor-pointer"
+      >
+        {screenshotLabel()}
+      </button>
+      <button
+        onClick={() =>
+          generateDiscordFormat(
+            filteredEvents,
+            t,
+            getEventIsoTime,
+            formatTimeForZone,
+            formatDateForZone,
+            language,
+            showLocalTime,
+            localTimezone,
+            activeTimezones,
+            setCopiedStatus,
+          )
+        }
         className="flex items-center gap-2 py-2.5 px-5 text-xs font-black uppercase tracking-wider
          bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl border
          border-indigo-500/40 transition-all duration-300 shadow-lg cursor-pointer"

@@ -1,12 +1,8 @@
 import useTranslation from "../../../hooks/useTranslation";
-import { CATEGORIES_STYLE } from "../../../utils/constants";
-import {
-  formatDateForZone,
-  formatTimeForZone,
-  getEventIsoTime,
-} from "../../../utils/general";
+import TableList from "./TableList";
 
 const MainTable = ({
+  tableRef,
   showLocalTime,
   localTimezone,
   processedEvents,
@@ -14,10 +10,12 @@ const MainTable = ({
   removeTimezone,
   setDeletedEventIds,
 }) => {
-  const { t, language } = useTranslation();
-
+  const { t } = useTranslation();
   return (
-    <div className="bg-slate-900 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl">
+    <div
+      ref={tableRef}
+      className="bg-slate-900 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl"
+    >
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-left">
           <thead>
@@ -65,69 +63,13 @@ const MainTable = ({
                 </td>
               </tr>
             ) : (
-              processedEvents?.map((evt) => {
-                const isoTime = getEventIsoTime(evt);
-                return (
-                  <tr
-                    key={evt.id}
-                    className="hover:bg-slate-800/30 transition-colors"
-                  >
-                    <td className="p-4 font-bold text-slate-200">
-                      <div className="flex items-center justify-between group">
-                        <div className="flex items-center">
-                          <span className="text-xl mr-2.5">{evt.icon}</span>
-                          <span>{evt.name}</span>
-                        </div>
-                        <button
-                          onClick={() =>
-                            setDeletedEventIds((p) => [...p, evt.id])
-                          }
-                          className="text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100
-                            ransition-all p-1 text-xs font-bold cursor-pointer"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <span
-                        className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase
-                          tracking-wider border ${CATEGORIES_STYLE[evt.category] || "border-slate-700"}`}
-                      >
-                        {evt.category}
-                      </span>
-                    </td>
-                    <td className="p-4 font-mono">
-                      <div className="text-slate-400 text-xs font-bold">
-                        {formatDateForZone(isoTime, "UTC", language)}
-                      </div>
-                      <div className="text-base md:text-xl font-black text-slate-200 mt-1">
-                        {formatTimeForZone(isoTime, "UTC")}
-                      </div>
-                    </td>
-                    {showLocalTime && (
-                      <td className="p-4 font-mono bg-slate-950/5">
-                        <div className="text-slate-400/60 text-xs font-bold">
-                          {formatDateForZone(isoTime, localTimezone, language)}
-                        </div>
-                        <div className="text-base md:text-xl font-black text-slate-400 mt-1">
-                          {formatTimeForZone(isoTime, localTimezone)}
-                        </div>
-                      </td>
-                    )}
-                    {activeTimezones.map((tz) => (
-                      <td key={tz} className="p-4 font-mono bg-slate-950/5">
-                        <div className="text-slate-400/60 text-xs font-bold">
-                          {formatDateForZone(isoTime, tz, language)}
-                        </div>
-                        <div className="text-base md:text-xl font-black text-slate-400 mt-1">
-                          {formatTimeForZone(isoTime, tz)}
-                        </div>
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })
+              <TableList
+                events={processedEvents}
+                showLocalTime={showLocalTime}
+                localTimezone={localTimezone}
+                activeTimezones={activeTimezones}
+                setDeletedEventIds={setDeletedEventIds}
+              />
             )}
           </tbody>
         </table>

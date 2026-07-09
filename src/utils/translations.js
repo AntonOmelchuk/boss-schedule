@@ -53,7 +53,7 @@ export default {
     sbTableCategory: "Категорія",
     sbTableServerTime: "Час Сервера (UTC)",
     sbTableLocalTime: "Місцевий час",
-    sbDiscordHeader: "📅 **РОЗКЛАД ТАКТИЧНИХ ОПЕРАЦІЙ АЛЬЯНСУ** 📅",
+    sbDiscordHeader: "📅 **РОЗКЛАД АЛЬЯНСУ** 📅",
     sbDiscordFooter:
       "⚔️ *Приготуйте зброю та синхронізуйте таймери розвідки!* ⚔️",
     sbDiscordDate: "Дата",
@@ -79,6 +79,11 @@ export default {
       },
       { name: "Сан-Паулу / Бразилія (BRT)", value: "America/Sao_Paulo" },
     ],
+
+    // Screenshot Tool (UA)
+    sbScreenshotBtn: "📸 Знімок",
+    sbScreenshotSuccess: "✅ Збережено!",
+    sbScreenshotProgress: "⏳ Малюємо...",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -131,7 +136,7 @@ export default {
     sbTableCategory: "Category",
     sbTableServerTime: "Server Time (UTC)",
     sbTableLocalTime: "Local Time",
-    sbDiscordHeader: "📅 **ALLIANCE TACTICAL OPERATIONS SCHEDULE** 📅",
+    sbDiscordHeader: "📅 **ALLIANCE SCHEDULE** 📅",
     sbDiscordFooter:
       "⚔️ *Prepare your weapons and synchronize intel timers!* ⚔️",
     sbDiscordDate: "Date",
@@ -154,5 +159,10 @@ export default {
       },
       { name: "Sao Paulo / Brazil (BRT)", value: "America/Sao_Paulo" },
     ],
+
+    // Screenshot Tool (EN)
+    sbScreenshotBtn: "📸 Screenshot",
+    sbScreenshotSuccess: "✅ Saved!",
+    sbScreenshotProgress: "⏳ Capturing...",
   },
 };

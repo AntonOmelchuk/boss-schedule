@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import useFilterEvents from "../../hooks/useFilterEvents";
 import useTranslation from "../../hooks/useTranslation";
@@ -8,7 +8,9 @@ import MainTable from "./components/MainTable";
 import TimezoneBlock from "./components/TimezoneBlock";
 
 export default function ScheduleBuilder() {
-  const { t, language } = useTranslation();
+  const tableRef = useRef();
+
+  const { t } = useTranslation();
 
   const { filteredEvents } = useFilterEvents();
 
@@ -58,10 +60,10 @@ export default function ScheduleBuilder() {
     <div className="text-slate-100 p-4 md:p-8 flex flex-col justify-start select-none">
       <div className="max-w-6xl mx-auto w-full">
         <Header
+          tableRef={tableRef}
           showLocalTime={showLocalTime}
-          activeTimezones={activeTimezones}
-          language={language}
           localTimezone={localTimezone}
+          activeTimezones={activeTimezones}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <TimezoneBlock
@@ -82,6 +84,7 @@ export default function ScheduleBuilder() {
         </div>
         {/* Main Schedule Table grid */}
         <MainTable
+          tableRef={tableRef}
           showLocalTime={showLocalTime}
           localTimezone={localTimezone}
           processedEvents={processedEvents}

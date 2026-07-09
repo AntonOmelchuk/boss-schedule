@@ -193,9 +193,8 @@ export const formatDateForZone = (isoString, zone, lang = "uk-UA") => {
 };
 
 // Adapts seamlessly to either numeric timestamp (ts) or backup serverTime parameters
-export const getEventIsoTime = (evt) => {
-  if (evt.ts) {
-    return new Date(evt.ts).toISOString();
+export const getEventIsoTime = (ts) => {
+  if (ts) {
+    return new Date(ts).toISOString();
   }
-  return evt.serverTime;
 };

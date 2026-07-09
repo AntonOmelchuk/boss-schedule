@@ -1,4 +1,5 @@
 import { getDiplomacyConfig } from "../../../utils/general";
+import BadgeOwner from "../../BadgeOwner/BadgeOwner";
 
 const AllEventsItem = ({
   t,
@@ -55,13 +56,11 @@ const AllEventsItem = ({
 
             {/* Owner badge */}
             {owner && (
-              <span
-                className={`inline-flex items-center gap-1 px-2 py-0.5
-                rounded-md text-[10px] font-black uppercase tracking-wider
-                border shadow-sm animate-pulse ${badgeClass}`}
-              >
-                {badgeIcon} {owner}
-              </span>
+              <BadgeOwner
+                badgeClass={badgeClass}
+                badgeIcon={badgeIcon}
+                owner={owner}
+              />
             )}
             <div className="flex">
               {isSwat && (
