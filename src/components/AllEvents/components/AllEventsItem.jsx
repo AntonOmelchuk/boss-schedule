@@ -1,13 +1,14 @@
 import { getDiplomacyConfig } from "../../../utils/general";
+import BadgeOwner from "../../BadgeOwner/BadgeOwner";
+import OutPrime from "../../OutPrime/OutPrime";
 
 const AllEventsItem = ({
-  t,
   icon,
   name,
   owner,
   spawnDate,
   relation,
-  isSwat,
+  isOutPrime,
 }) => {
   const config = getDiplomacyConfig(relation);
   const {
@@ -55,24 +56,13 @@ const AllEventsItem = ({
 
             {/* Owner badge */}
             {owner && (
-              <span
-                className={`inline-flex items-center gap-1 px-2 py-0.5
-                rounded-md text-[10px] font-black uppercase tracking-wider
-                border shadow-sm animate-pulse ${badgeClass}`}
-              >
-                {badgeIcon} {owner}
-              </span>
+              <BadgeOwner
+                badgeClass={badgeClass}
+                badgeIcon={badgeIcon}
+                owner={owner}
+              />
             )}
-            <div className="flex">
-              {isSwat && (
-                <span
-                  className="shrink-0 text-[9px] font-black tracking-widest text-red-400 px-1.5 py-0.5
-                    rounded bg-red-500/10 border border-red-500/20 uppercase"
-                >
-                  🚫 {t.swatSkip}
-                </span>
-              )}
-            </div>
+            {isOutPrime && <OutPrime />}
           </div>
 
           {/* Respawn time */}

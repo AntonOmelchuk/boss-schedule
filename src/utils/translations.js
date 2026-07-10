@@ -19,7 +19,7 @@ export default {
     s: "С",
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
-    swatSkip: "Valhalla Прайм",
+    outPrime: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
 
     // Tactical Filter Modal Translations (UA)
@@ -30,6 +30,64 @@ export default {
     epic: "Епік Боси",
     ch: "Клан Холи",
     siege: "Облоги Замків",
+
+    // Конструктор Розкладів
+    sbTitle: "Конструктор Розкладів Альянсу",
+    sbSubtitle: "Тактичне планування операцій для мультинаціональних паків",
+    sbExportBtn: "Експорт для Discord / Telegram",
+    sbCopied: "Розклад скопійовано!",
+    sbTzTitle: "Додати часовий пояс (Максимум 5)",
+    sbAddBtn: "Додати",
+    sbTzErrorDuplicate: "Цей часовий пояс вже додано до таблиці.",
+    sbTzErrorLimit:
+      "Досягнуто ліміту! Можна додати максимум 5 додаткових часових поясів.",
+    sbControlPanel: "Опції Керування Виглядом & Фільтри",
+    sbLocalTimeOn: "Локальний час: Увімкнено",
+    sbLocalTimeOff: "Локальний час: Вимкнено",
+    sbResetHidden: "Скинути приховані події",
+    sbInstruction:
+      "Налаштуйте таблицю під свій склад та скопіюйте готовий план для публікації на канали координації.",
+    sbNoEvents:
+      "Немає активних подій. Скиньте фільтри/приховані або оновіть сторінку.",
+    sbTableEvent: "Подія",
+    sbTableCategory: "Категорія",
+    sbTableServerTime: "Час Сервера",
+    sbTableLocalTime: "Місцевий час",
+    sbDiscordHeader: "📅 **РОЗКЛАД АЛЬЯНСУ** 📅",
+    sbDiscordFooter:
+      "⚔️ *Приготуйте зброю та синхронізуйте таймери розвідки!* ⚔️",
+    sbDiscordDate: "Дата",
+    sbDiscordServer: "Час Сервера",
+    sbDiscordLocal: "Ваш Локальний Час",
+
+    // Локалізовані часові пояси (UA)
+    timezoneOptions: [
+      { name: "Київ / Східна Європа (EEST)", value: "Europe/Kyiv" },
+      { name: "Лондон / Західна Європа (BST)", value: "Europe/London" },
+      { name: "Лісабон / Португалія (W_EST)", value: "Europe/Lisbon" },
+      { name: "Берлін / Центральна Європа (CEST)", value: "Europe/Berlin" },
+      { name: "Варшава / Польща (CEST)", value: "Europe/Warsaw" },
+      { name: "Рейк'явік / Ісландія (GMT)", value: "Atlantic/Reykjavik" },
+      {
+        name: "Нью-Йорк / Східне узбережжя США (EDT)",
+        value: "America/New_York",
+      },
+      { name: "Чикаго / Центральні штати США (CDT)", value: "America/Chicago" },
+      { name: "Денвер / Гірський час США (MDT)", value: "America/Denver" },
+      {
+        name: "Лос-Анджелес / Тихоокеанське узбережжя (PDT)",
+        value: "America/Los_Angeles",
+      },
+      { name: "Сан-Паулу / Бразилія (BRT)", value: "America/Sao_Paulo" },
+    ],
+
+    // Screenshot Tool (UA)
+    sbScreenshotBtn: "📸 Знімок",
+    sbScreenshotSuccess: "✅ Збережено!",
+    sbScreenshotProgress: "⏳ Малюємо...",
+    sbShowLimit: "Показувати:",
+    sbScheduleFor: "Розклад альянсу",
+    sbOn: "на",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -49,7 +107,7 @@ export default {
     s: "S",
     langToggle: "УКР",
     pvpEvents: "PVP Events",
-    swatSkip: "Valhalla Prime",
+    outPrime: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
 
     // Tactical Filter Modal Translations (EN)
@@ -60,5 +118,59 @@ export default {
     epic: "Epic Bosses",
     ch: "Clan Halls",
     siege: "Castle Sieges",
+
+    // Schedule Builder
+    sbTitle: "Alliance Schedule Builder",
+    sbSubtitle: "Tactical operation planning for multinational parties",
+    sbExportBtn: "Export to Discord / Telegram",
+    sbCopied: "Schedule Copied!",
+    sbTzTitle: "Add Timezone (Max 5)",
+    sbAddBtn: "Add",
+    sbTzErrorDuplicate: "This timezone is already added to the table.",
+    sbTzErrorLimit:
+      "Limit reached! You can add a maximum of 5 additional timezones.",
+    sbControlPanel: "Display Options & Filters",
+    sbLocalTimeOn: "Local Time: Enabled",
+    sbLocalTimeOff: "Local Time: Disabled",
+    sbResetHidden: "Reset Hidden Events",
+    sbInstruction:
+      "Configure the table for your roster and copy the ready plan to coordination channels.",
+    sbNoEvents: "No active events. Reset filters/hidden or refresh the page.",
+    sbTableEvent: "Event",
+    sbTableCategory: "Category",
+    sbTableServerTime: "Server Time",
+    sbTableLocalTime: "Local Time",
+    sbDiscordHeader: "📅 **ALLIANCE SCHEDULE** 📅",
+    sbDiscordFooter:
+      "⚔️ *Prepare your weapons and synchronize intel timers!* ⚔️",
+    sbDiscordDate: "Date",
+    sbDiscordServer: "Server Time",
+    sbDiscordLocal: "Your Local Time",
+
+    // Localized Timezones (EN)
+    timezoneOptions: [
+      { name: "Kyiv / Eastern Europe (EEST)", value: "Europe/Kyiv" },
+      { name: "London / Western Europe (BST)", value: "Europe/London" },
+      { name: "Lisbon / Portugal (W_EST)", value: "Europe/Lisbon" },
+      { name: "Berlin / Central Europe (CEST)", value: "Europe/Berlin" },
+      { name: "Warsaw / Poland (CEST)", value: "Europe/Warsaw" },
+      { name: "Reykjavik / Iceland (GMT)", value: "Atlantic/Reykjavik" },
+      { name: "New York / US East Coast (EDT)", value: "America/New_York" },
+      { name: "Chicago / US Central States (CDT)", value: "America/Chicago" },
+      { name: "Denver / US Mountain Time (MDT)", value: "America/Denver" },
+      {
+        name: "Los Angeles / Pacific Coast (PDT)",
+        value: "America/Los_Angeles",
+      },
+      { name: "Sao Paulo / Brazil (BRT)", value: "America/Sao_Paulo" },
+    ],
+
+    // Screenshot Tool (EN)
+    sbScreenshotBtn: "📸 Screenshot",
+    sbScreenshotSuccess: "✅ Saved!",
+    sbScreenshotProgress: "⏳ Capturing...",
+    sbShowLimit: "Show:",
+    sbScheduleFor: "Alliance Schedule",
+    sbOn: "for",
   },
 };

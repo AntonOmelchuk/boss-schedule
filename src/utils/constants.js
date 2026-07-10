@@ -100,3 +100,17 @@ export const RELATION = {
   Enemy: "enemy",
   Alliance: "alliance",
 };
+
+export const CATEGORIES_STYLE = {
+  [CATEGORIES.Epic]: "border-amber-500/30 text-amber-400 bg-amber-500/10",
+  [CATEGORIES.Siege]: "border-blue-500/30 text-blue-400 bg-blue-500/10",
+  [CATEGORIES.CH]: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10",
+  [CATEGORIES.PVP]: "border-red-500/30 text-red-400 bg-red-500/10",
+};
+
+export const MAKE_SCREENSHOT_STATUS = {
+  None: "none",
+  Progress: "progress",
+  Success: "success",
+  Error: "error",
+};

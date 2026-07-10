@@ -1,6 +1,8 @@
-import useFilterEvents from "../hooks/useFilterEvents";
-import useTranslation from "../hooks/useTranslation";
-import { formatRemaining, getDiplomacyConfig } from "../utils/general";
+import useFilterEvents from "../../hooks/useFilterEvents";
+import useTranslation from "../../hooks/useTranslation";
+import { formatRemaining, getDiplomacyConfig } from "../../utils/general";
+import BadgeOwner from "../BadgeOwner/BadgeOwner";
+import OutPrime from "../OutPrime/OutPrime";
 
 const MainBlock = () => {
   const { t } = useTranslation();
@@ -10,7 +12,7 @@ const MainBlock = () => {
 
   const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
 
-  const { relation, name, owner, icon, isSwat } = nearestEvent || {};
+  const { relation, name, owner, icon, isOutPrime } = nearestEvent || {};
   const config = getDiplomacyConfig(relation);
   const { gradientStyle, timerClass, titleClass, badgeClass, badgeIcon } =
     config;
@@ -48,19 +50,9 @@ const MainBlock = () => {
             >
               {name || "Loading..."}
             </h2>
-            {isSwat && (
-              <span
-                className="shrink-0 text-xl md:text-2xl font-black tracking-widest text-red-400 py-0.5
-               rounded uppercase"
-              >
-                {`🚫 ${t.swatSkip}`}
-              </span>
-            )}
+            {isOutPrime && <OutPrime withoutBorder />}
             {owner && (
-              <p className="text-sm text-slate-400 mt-2 flex items-center gap-1.5">
-                {badgeIcon}
-                <span className="font-bold text-slate-200">{owner}</span>
-              </p>
+              <BadgeOwner owner={owner} badgeIcon={badgeIcon} withoutBorder />
             )}
           </div>
         </div>
