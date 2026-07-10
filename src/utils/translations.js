@@ -19,7 +19,7 @@ export default {
     s: "С",
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
-    swatSkip: "Valhalla Прайм",
+    outPrime: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
 
     // Tactical Filter Modal Translations (UA)
@@ -85,6 +85,9 @@ export default {
     sbScreenshotBtn: "📸 Знімок",
     sbScreenshotSuccess: "✅ Збережено!",
     sbScreenshotProgress: "⏳ Малюємо...",
+    sbShowLimit: "Показувати:",
+    sbScheduleFor: "Розклад альянсу",
+    sbOn: "на",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -104,7 +107,7 @@ export default {
     s: "S",
     langToggle: "УКР",
     pvpEvents: "PVP Events",
-    swatSkip: "Valhalla Prime",
+    outPrime: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
 
     // Tactical Filter Modal Translations (EN)
@@ -166,5 +169,8 @@ export default {
     sbScreenshotBtn: "📸 Screenshot",
     sbScreenshotSuccess: "✅ Saved!",
     sbScreenshotProgress: "⏳ Capturing...",
+    sbShowLimit: "Show:",
+    sbScheduleFor: "Alliance Schedule",
+    sbOn: "for",
   },
 };

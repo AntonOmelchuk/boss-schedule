@@ -19,6 +19,7 @@ export default function ScheduleBuilder() {
   const [showLocalTime, setShowLocalTime] = useState(true);
   const [deletedEventIds, setDeletedEventIds] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [limit, setLimit] = useState(10);
 
   const localTimezone = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -53,8 +54,9 @@ export default function ScheduleBuilder() {
           const timeB = b.ts || new Date(b.serverTime).getTime();
           return timeA - timeB;
         })
+        .slice(0, limit)
     );
-  }, [filteredEvents, deletedEventIds]);
+  }, [limit, filteredEvents, deletedEventIds]);
 
   return (
     <div className="text-slate-100 p-4 md:p-8 flex flex-col justify-start select-none">
@@ -74,13 +76,15 @@ export default function ScheduleBuilder() {
             errorMessage={errorMessage}
             removeTimezone={removeTimezone}
           />
+          {/* Configuration and Category Filters panel */}
           <FilterBlock
-            setShowLocalTime={setShowLocalTime}
+            limit={limit}
+            setLimit={setLimit}
             showLocalTime={showLocalTime}
             deletedEventIds={deletedEventIds}
+            setShowLocalTime={setShowLocalTime}
             setDeletedEventIds={setDeletedEventIds}
           />
-          {/* Configuration and Category Filters panel */}
         </div>
         {/* Main Schedule Table grid */}
         <MainTable

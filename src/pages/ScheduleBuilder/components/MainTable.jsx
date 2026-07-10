@@ -1,4 +1,5 @@
 import useTranslation from "../../../hooks/useTranslation";
+import DynamicTitle from "./DynamicTitle";
 import TableList from "./TableList";
 
 const MainTable = ({
@@ -16,6 +17,7 @@ const MainTable = ({
       ref={tableRef}
       className="bg-slate-900 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl"
     >
+      <DynamicTitle events={processedEvents} />
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-left">
           <thead>

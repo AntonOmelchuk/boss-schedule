@@ -21,7 +21,7 @@ const TableList = ({
   return (
     <>
       {events?.map(
-        ({ id, ts, name, icon, category, owner, relation, isSwat }) => {
+        ({ id, ts, name, icon, category, owner, relation, isOutPrime }) => {
           const isoTime = getEventIsoTime(ts);
           const { badgeIcon, badgeClass } = getDiplomacyConfig(relation);
 
@@ -39,7 +39,7 @@ const TableList = ({
                         owner={owner}
                       />
                     )}
-                    {isSwat && <OutPrime />}
+                    {isOutPrime && <OutPrime />}
                   </div>
                   <button
                     onClick={() => setDeletedEventIds((p) => [...p, id])}

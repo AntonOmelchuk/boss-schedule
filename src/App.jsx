@@ -9,7 +9,11 @@ import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
 import { EVENT_TYPES } from "./utils/constants";
-import { checkIsSwat, getEmojiIcon, getNextWeeklyEvent } from "./utils/general";
+import {
+  checkIsOutPrime,
+  getEmojiIcon,
+  getNextWeeklyEvent,
+} from "./utils/general";
 
 function App() {
   const setEvents = useAppStore((state) => state.setEvents);
@@ -53,7 +57,7 @@ function App() {
               category,
               owner: owner || null,
               icon: getEmojiIcon(type),
-              isSwat: category && checkIsSwat(category, ts),
+              isOutPrime: category && checkIsOutPrime(category, ts),
             };
           },
         )

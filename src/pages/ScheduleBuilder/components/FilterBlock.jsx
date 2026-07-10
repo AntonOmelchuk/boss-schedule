@@ -1,13 +1,16 @@
 import useFilterEvents from "../../../hooks/useFilterEvents";
 import useTranslation from "../../../hooks/useTranslation";
 import { CATEGORIES_STYLE } from "../../../utils/constants";
+import CountSelector from "./CountSelector";
 
 const FilterBlock = ({
-  setSelectedCategories,
-  setShowLocalTime,
+  limit,
+  setLimit,
   showLocalTime,
   deletedEventIds,
+  setShowLocalTime,
   setDeletedEventIds,
+  setSelectedCategories,
 }) => {
   const { t } = useTranslation();
   const { toggleFilter, filters } = useFilterEvents();
@@ -41,6 +44,7 @@ const FilterBlock = ({
           })}
         </div>
         <div className="flex flex-wrap gap-3">
+          <CountSelector limit={limit} setLimit={setLimit} />
           <button
             onClick={() => setShowLocalTime(!showLocalTime)}
             className={`px-4 py-2.5 rounded-xl border text-xs font-black uppercase cursor-pointer

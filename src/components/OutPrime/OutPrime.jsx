@@ -12,7 +12,7 @@ const OutPrime = ({ withoutBorder }) => {
             : "px-1.5 py-0.5 rounded bg-red-500/10 border border-red-500/20"
         }`}
       >
-        🚫 {t.swatSkip}
+        {t.outPrime}
       </span>
     </div>
   );

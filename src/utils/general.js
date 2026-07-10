@@ -154,7 +154,7 @@ export const getNextWeeklyEvent = (dayOfWeek, timeStr) => {
  * @param {number} ts - Event target execution timestamp in milliseconds.
  * @returns {boolean} True if the event triggers SWAT warnings, otherwise false.
  */
-export const checkIsSwat = (category, ts) =>
+export const checkIsOutPrime = (category, ts) =>
   category === CATEGORIES.Epic &&
   (() => {
     const hours = new Date(ts).getUTCHours();

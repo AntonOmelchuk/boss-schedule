@@ -2,7 +2,14 @@ import { getDiplomacyConfig } from "../../../utils/general";
 import BadgeOwner from "../../BadgeOwner/BadgeOwner";
 import OutPrime from "../../OutPrime/OutPrime";
 
-const AllEventsItem = ({ icon, name, owner, spawnDate, relation, isSwat }) => {
+const AllEventsItem = ({
+  icon,
+  name,
+  owner,
+  spawnDate,
+  relation,
+  isOutPrime,
+}) => {
   const config = getDiplomacyConfig(relation);
   const {
     glowClass,
@@ -55,7 +62,7 @@ const AllEventsItem = ({ icon, name, owner, spawnDate, relation, isSwat }) => {
                 owner={owner}
               />
             )}
-            {isSwat && <OutPrime />}
+            {isOutPrime && <OutPrime />}
           </div>
 
           {/* Respawn time */}

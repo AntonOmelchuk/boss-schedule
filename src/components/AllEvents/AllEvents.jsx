@@ -67,7 +67,8 @@ const AllEvents = () => {
               },
             );
 
-            const { id, icon, name, enemy, owner, relation, isSwat } = event;
+            const { id, icon, name, enemy, owner, relation, isOutPrime } =
+              event;
 
             return (
               <AllEventsItem
@@ -76,7 +77,7 @@ const AllEvents = () => {
                 name={name}
                 enemy={enemy}
                 owner={owner}
-                isSwat={isSwat}
+                isOutPrime={isOutPrime}
                 relation={relation}
                 spawnDate={spawnDate}
               />

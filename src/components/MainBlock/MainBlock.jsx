@@ -12,7 +12,7 @@ const MainBlock = () => {
 
   const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
 
-  const { relation, name, owner, icon, isSwat } = nearestEvent || {};
+  const { relation, name, owner, icon, isOutPrime } = nearestEvent || {};
   const config = getDiplomacyConfig(relation);
   const { gradientStyle, timerClass, titleClass, badgeClass, badgeIcon } =
     config;
@@ -50,7 +50,7 @@ const MainBlock = () => {
             >
               {name || "Loading..."}
             </h2>
-            {isSwat && <OutPrime withoutBorder />}
+            {isOutPrime && <OutPrime withoutBorder />}
             {owner && (
               <BadgeOwner owner={owner} badgeIcon={badgeIcon} withoutBorder />
             )}
