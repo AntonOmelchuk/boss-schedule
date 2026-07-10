@@ -9,7 +9,9 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    reactRouter(),
+    reactRouter({
+      ssr: false,
+    }),
     netlifyReactRouter(),
     netlify(),
   ],
