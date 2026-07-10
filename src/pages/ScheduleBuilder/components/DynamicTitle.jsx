@@ -25,7 +25,7 @@ const DynamicTitle = ({ events }) => {
         ? startDateStr
         : `${startDateStr} — ${endDateStr}`;
 
-    return `The 3rd Side | ${t.sbScheduleFor} ${t.sbOn} ${dateRange} (UTC)`;
+    return `The 3rd Side | ${t.sbScheduleFor} ${t.sbOn} ${dateRange}`;
   }, [events, language, t]);
 
   return (
