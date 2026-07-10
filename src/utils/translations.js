@@ -19,7 +19,7 @@ export default {
     s: "С",
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
-    swatSkip: "SWAT Прайм (Скіп)",
+    swatSkip: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
 
     // Tactical Filter Modal Translations (UA)
@@ -51,7 +51,7 @@ export default {
       "Немає активних подій. Скиньте фільтри/приховані або оновіть сторінку.",
     sbTableEvent: "Подія",
     sbTableCategory: "Категорія",
-    sbTableServerTime: "Час Сервера (UTC)",
+    sbTableServerTime: "Час Сервера",
     sbTableLocalTime: "Місцевий час",
     sbDiscordHeader: "📅 **РОЗКЛАД АЛЬЯНСУ** 📅",
     sbDiscordFooter:
@@ -64,6 +64,7 @@ export default {
     timezoneOptions: [
       { name: "Київ / Східна Європа (EEST)", value: "Europe/Kyiv" },
       { name: "Лондон / Західна Європа (BST)", value: "Europe/London" },
+      { name: "Лісабон / Португалія (W_EST)", value: "Europe/Lisbon" },
       { name: "Берлін / Центральна Європа (CEST)", value: "Europe/Berlin" },
       { name: "Варшава / Польща (CEST)", value: "Europe/Warsaw" },
       { name: "Рейк'явік / Ісландія (GMT)", value: "Atlantic/Reykjavik" },
@@ -103,7 +104,7 @@ export default {
     s: "S",
     langToggle: "УКР",
     pvpEvents: "PVP Events",
-    swatSkip: "SWAT Prime (Skip)",
+    swatSkip: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
 
     // Tactical Filter Modal Translations (EN)
@@ -134,7 +135,7 @@ export default {
     sbNoEvents: "No active events. Reset filters/hidden or refresh the page.",
     sbTableEvent: "Event",
     sbTableCategory: "Category",
-    sbTableServerTime: "Server Time (UTC)",
+    sbTableServerTime: "Server Time",
     sbTableLocalTime: "Local Time",
     sbDiscordHeader: "📅 **ALLIANCE SCHEDULE** 📅",
     sbDiscordFooter:
@@ -147,6 +148,7 @@ export default {
     timezoneOptions: [
       { name: "Kyiv / Eastern Europe (EEST)", value: "Europe/Kyiv" },
       { name: "London / Western Europe (BST)", value: "Europe/London" },
+      { name: "Lisbon / Portugal (W_EST)", value: "Europe/Lisbon" },
       { name: "Berlin / Central Europe (CEST)", value: "Europe/Berlin" },
       { name: "Warsaw / Poland (CEST)", value: "Europe/Warsaw" },
       { name: "Reykjavik / Iceland (GMT)", value: "Atlantic/Reykjavik" },

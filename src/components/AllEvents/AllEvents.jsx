@@ -71,7 +71,6 @@ const AllEvents = () => {
 
             return (
               <AllEventsItem
-                t={t}
                 key={id}
                 icon={icon}
                 name={name}

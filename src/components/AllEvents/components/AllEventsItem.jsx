@@ -1,15 +1,8 @@
 import { getDiplomacyConfig } from "../../../utils/general";
 import BadgeOwner from "../../BadgeOwner/BadgeOwner";
+import OutPrime from "../../OutPrime/OutPrime";
 
-const AllEventsItem = ({
-  t,
-  icon,
-  name,
-  owner,
-  spawnDate,
-  relation,
-  isSwat,
-}) => {
+const AllEventsItem = ({ icon, name, owner, spawnDate, relation, isSwat }) => {
   const config = getDiplomacyConfig(relation);
   const {
     glowClass,
@@ -62,16 +55,7 @@ const AllEventsItem = ({
                 owner={owner}
               />
             )}
-            <div className="flex">
-              {isSwat && (
-                <span
-                  className="shrink-0 text-[9px] font-black tracking-widest text-red-400 px-1.5 py-0.5
-                    rounded bg-red-500/10 border border-red-500/20 uppercase"
-                >
-                  🚫 {t.swatSkip}
-                </span>
-              )}
-            </div>
+            {isSwat && <OutPrime />}
           </div>
 
           {/* Respawn time */}

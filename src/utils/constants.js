@@ -101,23 +101,6 @@ export const RELATION = {
   Alliance: "alliance",
 };
 
-export const TIMEZONE_OPTIONS = [
-  { name: "Час Сервера (UTC)", value: "UTC" },
-  { name: "Київ / Східна Європа (EEST)", value: "Europe/Kyiv" },
-  { name: "Лондон / Західна Європа (BST)", value: "Europe/London" },
-  { name: "Берлін / Центральна Європа (CEST)", value: "Europe/Berlin" },
-  { name: "Варшава / Польща (CEST)", value: "Europe/Warsaw" },
-  { name: "Рейк'явік / Ісландія (GMT)", value: "Atlantic/Reykjavik" },
-  { name: "Нью-Йорк / Східне узбережжя США (EDT)", value: "America/New_York" },
-  { name: "Чикаго / Центральні штати США (CDT)", value: "America/Chicago" },
-  { name: "Денвер / Гірський час США (MDT)", value: "America/Denver" },
-  {
-    name: "Лос-Анджелес / Тихоокеанське узбережжя (PDT)",
-    value: "America/Los_Angeles",
-  },
-  { name: "Сан-Паулу / Бразилія (BRT)", value: "America/Sao_Paulo" },
-];
-
 export const CATEGORIES_STYLE = {
   [CATEGORIES.Epic]: "border-amber-500/30 text-amber-400 bg-amber-500/10",
   [CATEGORIES.Siege]: "border-blue-500/30 text-blue-400 bg-blue-500/10",
