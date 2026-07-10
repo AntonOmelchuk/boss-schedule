@@ -58,7 +58,7 @@ const MainTable = ({
             {processedEvents?.length === 0 ? (
               <tr>
                 <td
-                  colSpan={4 + activeTimezones.length}
+                  colSpan={3 + (showLocalTime ? 1 : 0) + activeTimezones.length}
                   className="p-12 text-center text-slate-500 font-bold uppercase text-xs"
                 >
                   {t.sbNoEvents}

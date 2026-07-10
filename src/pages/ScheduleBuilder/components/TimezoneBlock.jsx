@@ -31,10 +31,7 @@ export const TimezoneBlock = ({
       <div className="flex gap-2">
         <select
           value={timezoneToAdd}
-          onChange={(e) => {
-            console.log("timezone: ", e.target.value);
-            setTimezoneToAdd(e.target.value);
-          }}
+          onChange={(e) => setTimezoneToAdd(e.target.value)}
           className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-bold
           text-slate-200 outline-none"
         >

@@ -28,14 +28,20 @@ export default function ScheduleBuilder() {
 
   const addTimezone = () => {
     setErrorMessage("");
+    if (!timezoneToAdd.trim()) {
+      return;
+    }
+
     if (activeTimezones.includes(timezoneToAdd)) {
       setErrorMessage(t.sbTzErrorDuplicate);
       return;
     }
+
     if (activeTimezones.length >= 5) {
       setErrorMessage(t.sbTzErrorLimit);
       return;
     }
+
     setActiveTimezones((prev) => [...prev, timezoneToAdd]);
   };
 

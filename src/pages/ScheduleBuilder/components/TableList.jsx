@@ -44,7 +44,7 @@ const TableList = ({
                   <button
                     onClick={() => setDeletedEventIds((p) => [...p, id])}
                     className="text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100
-                      ransition-all p-1 text-xs font-bold cursor-pointer"
+                      transition-all p-1 text-xs font-bold cursor-pointer"
                   >
                     ✕
                   </button>

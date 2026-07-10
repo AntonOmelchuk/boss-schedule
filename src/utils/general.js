@@ -1,4 +1,4 @@
-import { CATEGORIES, EMOJI_MAP, RELATION } from "./constants";
+import { CATEGORIES, EMOJI_MAP, LANGUAGES, RELATION } from "./constants";
 
 /**
  * Retrieves the corresponding emoji icon for a given event type from the mapped dictionary.
@@ -180,9 +180,9 @@ export const formatTimeForZone = (isoString, zone) => {
 /**
  * Formats date (Day Month) for a specific timezone based on current locale.
  */
-export const formatDateForZone = (isoString, zone, lang = "uk-UA") => {
+export const formatDateForZone = (isoString, zone, lang = "ua") => {
   try {
-    return new Intl.DateTimeFormat(lang === "ua" ? "uk-UA" : "en-US", {
+    return new Intl.DateTimeFormat(lang === LANGUAGES.UA ? "uk-UA" : "en-US", {
       timeZone: zone,
       month: "short",
       day: "numeric",

@@ -52,7 +52,10 @@ const Header = ({
       </div>
       <button
         onClick={() => takeScreenshot(tableRef, setScreenshotStatus)}
-        disabled={screenshotStatus === MAKE_SCREENSHOT_STATUS.Error}
+        disabled={
+          screenshotStatus === MAKE_SCREENSHOT_STATUS.Error ||
+          screenshotStatus === MAKE_SCREENSHOT_STATUS.Progress
+        }
         className="flex items-center gap-2 py-2.5 px-5 text-xs font-black uppercase tracking-wider bg-teal-600
         hover:bg-teal-500 disabled:bg-teal-800 text-white rounded-xl border border-teal-500/40
           transition-all duration-300 shadow-lg cursor-pointer"

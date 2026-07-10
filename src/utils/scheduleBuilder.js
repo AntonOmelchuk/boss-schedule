@@ -1,3 +1,5 @@
+import * as htmlToImage from "html-to-image";
+
 import { MAKE_SCREENSHOT_STATUS } from "./constants";
 
 export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
@@ -5,21 +7,9 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
   setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Progress);
 
   try {
-    // 1. Динамічно завантажуємо модуль html-to-image з надійного CDN
-    if (!window.htmlToImage) {
-      await new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src =
-          "https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js";
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
-    }
-
     const element = tableRef.current;
 
-    // 2. Тимчасово ховаємо елементи, які не мають бути на скріншоті (кнопки видалення)
+    // 1. Тимчасово ховаємо елементи, які не мають бути на скріншоті (кнопки видалення)
     const ignoredElements = element.querySelectorAll(
       '[data-html2canvas-ignore="true"]',
     );
@@ -27,16 +17,14 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
       el.style.setProperty("display", "none", "important"),
     );
 
-    // 3. Генеруємо PNG-зображення з урахуванням усіх стилів та CORS-картинок
-    const dataUrl = await window.htmlToImage.toPng(element, {
+    // 2. Викликаємо встановлений npm-пакет НАПРЯМУ без жодних CDN скриптів
+    const dataUrl = await htmlToImage.toPng(element, {
       backgroundColor: "#020617", // Колір фону таблиці (slate-950)
       pixelRatio: 2, // Подвійна чіткість для гарного читання в Discord
       style: {
-        // Гарантуємо, що при копіюванні збережеться темний геймерський стиль
         backgroundColor: "#020617",
         color: "#f1f5f9",
       },
-      // Колбек, який відфільтрує непотрібні елементи, якщо пропустив inline-стиль
       filter: (node) => {
         if (
           node.getAttribute &&
@@ -48,10 +36,10 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
       },
     });
 
-    // 4. Повертаємо видимість кнопкам на самому сайті
+    // 3. Повертаємо видимість кнопкам на самому сайті
     ignoredElements.forEach((el) => el.style.removeProperty("display"));
 
-    // 5. Запускаємо скачування файлу
+    // 4. Запускаємо скачування файлу
     const link = document.createElement("a");
     link.href = dataUrl;
     link.download = `alliance-schedule-${new Date().toISOString().slice(0, 10)}.png`;
@@ -70,6 +58,7 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
     }
 
     setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Error);
+    setTimeout(() => setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.None), 5000);
   }
 };
 

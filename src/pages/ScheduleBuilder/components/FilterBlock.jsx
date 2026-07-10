@@ -10,7 +10,6 @@ const FilterBlock = ({
   deletedEventIds,
   setShowLocalTime,
   setDeletedEventIds,
-  setSelectedCategories,
 }) => {
   const { t } = useTranslation();
   const { toggleFilter, filters } = useFilterEvents();
@@ -27,16 +26,10 @@ const FilterBlock = ({
             return (
               <button
                 key={cat}
-                onClick={() =>
-                  setSelectedCategories(
-                    (prev) =>
-                      isActive ? prev.filter((c) => c !== cat) : [...prev, cat],
-                    toggleFilter(cat),
-                  )
-                }
+                onClick={() => toggleFilter(cat)}
                 className={`px-3 py-1.5 rounded-xl border text-[10px] font-black uppercase tracking-wider
-                  transition-allcursor-pointer
-                    ${isActive ? CATEGORIES_STYLE[cat] : "border-slate-800/60 text-slate-500"}`}
+                  transition-all cursor-pointer
+                  ${isActive ? CATEGORIES_STYLE[cat] : "border-slate-800/60 text-slate-500"}`}
               >
                 {t[cat]} {isActive ? "✓" : "✗"}
               </button>
