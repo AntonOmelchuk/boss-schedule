@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { PVP_EVENTS } from "../data";
 import useAppStore from "../store/useAppStore";
 import { TIME_FILTERS } from "../utils/constants";
-import { getEmojiIcon, getNextPvPTimestamp } from "../utils/general";
+import { getEmojiIcon, getSingleEventTimestamp } from "../utils/general";
 import useCurrentTime from "./useCurrentTime";
 
 /**
@@ -27,13 +27,18 @@ const useFilterEvents = () => {
     const combined = [...events];
 
     PVP_EVENTS.forEach(({ name, time, type, category }) => {
-      combined.push({
-        id: name,
-        name,
-        ts: getNextPvPTimestamp(time),
-        category,
-        type,
-        icon: getEmojiIcon(type),
+      // Замість одного івенту, створюємо об'єкт під КОЖЕН час із масиву
+      time.forEach((timeString) => {
+        combined.push({
+          // Робимо ID унікальним для кожної сесії (наприклад, "Multi Team Battle-18:00")
+          id: `${name}-${timeString}`,
+          name,
+          // Рахуємо таймстамп конкретно для ЦІЄЇ сесії на сьогодні або завтра
+          ts: getSingleEventTimestamp(timeString),
+          category,
+          type,
+          icon: getEmojiIcon(type),
+        });
       });
     });
 
@@ -42,17 +47,12 @@ const useFilterEvents = () => {
 
   // Stage 2: Clean and trim expired event entries, applying tactical filters and timeframe checks.
   const filteredEvents = useMemo(() => {
-    // End of the current calendar day under UTC+0 (00:00 UTC of the next day)
     const todayEnd = new Date();
     todayEnd.setUTCHours(24, 0, 0, 0);
     const todayEndTs = todayEnd.getTime();
 
     return baseMergedEvents
-      .filter(({ category }) => {
-        // Fallback to type if category is omitted on database objects
-        // If the toggle for this specific category is false, completely exclude it
-        return filters[category] !== false;
-      })
+      .filter(({ category }) => filters[category] !== false)
       .filter((e) => e.ts > now)
       .filter((e) => timeFilter === TIME_FILTERS.AllTime || e.ts <= todayEndTs)
       .sort((a, b) => a.ts - b.ts);

@@ -39,39 +39,32 @@ export const formatRemaining = (msDiff, detailed, t) => {
 };
 
 /**
- * Calculates the next active UTC timestamp for recurring daily PvP events.
- * Automatically schedules the target timestamp for the following day if all daily windows have already passed.
- * @param {string[]} timeArray - Array of scheduled daily execution times (e.g., ["02:00", "10:00", "18:00"]).
- * @returns {number} Millisecond timestamp of the next upcoming PvP event.
+ * Calculates the absolute UTC timestamp for a specific recurring daily PvP event window.
+ * Automatically shifts the scheduled time to the following day if the window for today has already elapsed.
+ * @param {string} timeString - Scheduled daily execution time in HH:MM format (e.g., "18:00").
+ * @returns {number} Millisecond timestamp of the target upcoming PvP event window.
  */
-export function getNextPvPTimestamp(timeArray) {
-  const now = new Date();
+export function getSingleEventTimestamp(timeString) {
+  // Use a single Date object to avoid edge-case time discrepancies around midnight UTC
+  const eventDate = new Date();
+
   // Calculate current elapsed time of the day in minutes under UTC timezone
-  const currentTotalMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+  const currentTotalMinutes =
+    eventDate.getUTCHours() * 60 + eventDate.getUTCMinutes();
 
-  // Parse time strings (HH:MM) to total minutes from midnight and sort them chronologically
-  const eventMinutes = timeArray
-    .map((t) => {
-      const [h, m] = t.split(":");
-      return parseInt(h) * 60 + parseInt(m);
-    })
-    .sort((a, b) => a - b);
+  // Parse target time string (HH:MM) to total minutes from midnight
+  const [h, m] = timeString.split(":");
+  const eventMinutes = parseInt(h) * 60 + parseInt(m);
 
-  // Search for the closest remaining execution window scheduled for today
-  let nextMin = eventMinutes.find((m) => m > currentTotalMinutes);
-  let isTomorrow = false;
-
-  // If no remaining schedules are left today, wrap around to the first slot of tomorrow
-  if (nextMin === undefined) {
-    nextMin = eventMinutes[0];
-    isTomorrow = true;
+  // If the target schedule slot has already passed today, wrap around to tomorrow
+  if (eventMinutes <= currentTotalMinutes) {
+    eventDate.setUTCDate(eventDate.getUTCDate() + 1);
   }
 
-  const nextDate = new Date();
-  if (isTomorrow) nextDate.setUTCDate(nextDate.getUTCDate() + 1);
-  nextDate.setUTCHours(Math.floor(nextMin / 60), nextMin % 60, 0, 0);
+  // Build the final precise target execution timestamp under UTC context
+  eventDate.setUTCHours(Math.floor(eventMinutes / 60), eventMinutes % 60, 0, 0);
 
-  return nextDate.getTime();
+  return eventDate.getTime();
 }
 
 /**
