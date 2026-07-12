@@ -45,15 +45,16 @@ export const formatRemaining = (msDiff, detailed, t) => {
  * @returns {number} Millisecond timestamp of the target upcoming PvP event window.
  */
 export function getSingleEventTimestamp(timeString) {
-  const now = new Date();
+  // Use a single Date object to avoid edge-case time discrepancies around midnight UTC
+  const eventDate = new Date();
+
   // Calculate current elapsed time of the day in minutes under UTC timezone
-  const currentTotalMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+  const currentTotalMinutes =
+    eventDate.getUTCHours() * 60 + eventDate.getUTCMinutes();
 
   // Parse target time string (HH:MM) to total minutes from midnight
   const [h, m] = timeString.split(":");
   const eventMinutes = parseInt(h) * 60 + parseInt(m);
-
-  const eventDate = new Date();
 
   // If the target schedule slot has already passed today, wrap around to tomorrow
   if (eventMinutes <= currentTotalMinutes) {
