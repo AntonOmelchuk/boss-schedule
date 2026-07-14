@@ -16,7 +16,7 @@ const TableList = ({
   activeTimezones,
   setDeletedEventIds,
 }) => {
-  const { language } = useTranslation();
+  const { t, language } = useTranslation();
 
   return (
     <>
@@ -57,7 +57,7 @@ const TableList = ({
                   className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase
                   tracking-wider border ${CATEGORIES_STYLE[category] || "border-slate-700"}`}
                 >
-                  {category}
+                  {t[category]}
                 </span>
               </td>
               <td className="p-4 font-mono">

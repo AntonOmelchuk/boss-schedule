@@ -141,17 +141,17 @@ export const getNextWeeklyEvent = (dayOfWeek, timeStr) => {
 };
 
 /**
- * Evaluates whether an event qualifies for the "SWAT" category (late-night active window restrictions).
- * Identifies if the event category is Epic and if its scheduled time falls between 00:00 AM and 7:00 AM UTC.
+ * Evaluates whether an event qualifies for the "out of prime time" category (late-night active window restrictions).
+ * Identifies if the event category is Epic and if its scheduled time falls between 23:00 and 6:00 AM UTC.
  * @param {string} category - The type of event category.
  * @param {number} ts - Event target execution timestamp in milliseconds.
- * @returns {boolean} True if the event triggers SWAT warnings, otherwise false.
+ * @returns {boolean} True if the event triggers Out prime warnings, otherwise false.
  */
 export const checkIsOutPrime = (category, ts) =>
   category === CATEGORIES.Epic &&
   (() => {
     const hours = new Date(ts).getUTCHours();
-    return hours >= 23 && hours < 6;
+    return hours >= 23 || hours < 6;
   })();
 
 /**
