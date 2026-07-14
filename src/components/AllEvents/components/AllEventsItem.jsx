@@ -43,7 +43,11 @@ const AllEventsItem = ({
           className={`w-12 h-12 rounded-lg border flex items-center justify-center text-3xl shrink-0
           shadow-inner group-hover:scale-105 duration-300 transition-transform ${iconBorder}`}
         >
-          {icon}
+          {icon.length <= 3 ? (
+            icon
+          ) : (
+            <img src={icon} width={45} className="rounded-xl" />
+          )}
         </div>
 
         <div className="flex-1 overflow-hidden min-w-0">

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 import allyLogo from "../../../assets/ally-logo.png";
+import Watermark from "../../../components/Watermark/Watermark";
 import useTranslation from "../../../hooks/useTranslation";
 import { formatDateForZone } from "../../../utils/general";
 
@@ -38,6 +39,8 @@ const DynamicTitle = ({ events }) => {
       <h2 className="text-lg font-black tracking-widest text-indigo-100 uppercase font-mono">
         {tableTitle}
       </h2>
+
+      <Watermark />
     </div>
   );
 };

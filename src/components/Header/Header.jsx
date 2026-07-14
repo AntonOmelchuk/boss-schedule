@@ -37,7 +37,10 @@ const Header = () => {
           secondItem="EN"
           isActive={language === LANGUAGES.UA}
         />
-        <Button onClick={() => navigate("/schedule")} className=" mt-3">
+        <Button
+          onClick={() => navigate("/schedule")}
+          className="mt-3 hidden md:inline-flex"
+        >
           <span className="uppercase font-bold">Schedule</span>
         </Button>
       </div>

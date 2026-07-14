@@ -72,7 +72,7 @@ function App() {
   return (
     <BrowserRouter>
       <div
-        className="min-h-screen text-slate-200 font-sans"
+        className="min-h-screen text-slate-200 font-sans px-4"
         style={{
           backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
           backgroundSize: "cover",
