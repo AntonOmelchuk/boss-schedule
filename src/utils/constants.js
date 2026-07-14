@@ -1,3 +1,12 @@
+import antharasIcon from "../assets/epic/antharas.png";
+import baiumIcon from "../assets/epic/baium.png";
+import coreIcon from "../assets/epic/core.png";
+import frintezzaIcon from "../assets/epic/frintezza.png";
+import orfenIcon from "../assets/epic/orfen.png";
+import qaIcon from "../assets/epic/qa.png";
+import valakasIcon from "../assets/epic/valakas.png";
+import zakenIcon from "../assets/epic/zaken.png";
+
 /**
  * @file constants.js
  * @description Global application constants including timing configurations, supported languages,
@@ -69,14 +78,14 @@ export const EVENT_TYPES = {
  */
 export const EMOJI_MAP = {
   // Epic Bosses
-  [EVENT_TYPES.QA]: "🐜",
-  [EVENT_TYPES.Core]: "⚙️",
-  [EVENT_TYPES.Orfen]: "🕸️",
-  [EVENT_TYPES.Zaken]: "🏴‍☠️",
-  [EVENT_TYPES.Tezza]: "🎻",
-  [EVENT_TYPES.Baium]: "👑",
-  [EVENT_TYPES.Antharas]: "🐉",
-  [EVENT_TYPES.Valakas]: "🔥",
+  [EVENT_TYPES.QA]: qaIcon,
+  [EVENT_TYPES.Core]: coreIcon,
+  [EVENT_TYPES.Orfen]: orfenIcon,
+  [EVENT_TYPES.Zaken]: zakenIcon,
+  [EVENT_TYPES.Tezza]: frintezzaIcon,
+  [EVENT_TYPES.Baium]: baiumIcon,
+  [EVENT_TYPES.Antharas]: antharasIcon,
+  [EVENT_TYPES.Valakas]: valakasIcon,
 
   // PvP Events
   [EVENT_TYPES.MTB]: "⚔️",
@@ -86,7 +95,7 @@ export const EMOJI_MAP = {
 
   // Castles & Clan Halls
   [EVENT_TYPES.Siege]: "🏰",
-  [EVENT_TYPES.CH]: "🏠",
+  [EVENT_TYPES.CH]: "🏛️",
 };
 
 /**

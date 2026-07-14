@@ -30,7 +30,13 @@ const TableList = ({
               <td className="p-4 font-bold text-slate-200">
                 <div className="flex items-center justify-between group">
                   <div className="flex items-center">
-                    <span className="text-xl mr-2.5">{icon}</span>
+                    <span className="text-xl mr-2.5">
+                      {icon.length <= 3 ? (
+                        icon
+                      ) : (
+                        <img src={icon} width={25} height={25} />
+                      )}
+                    </span>
                     <span className="mr-4 min-w-52.5">{name}</span>
                     {owner && (
                       <BadgeOwner

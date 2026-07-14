@@ -7,7 +7,6 @@ import OutPrime from "../OutPrime/OutPrime";
 const MainBlock = () => {
   const { t } = useTranslation();
 
-  // Directly pull filtered events, nearest is the first item
   const { filteredEvents, now } = useFilterEvents();
 
   const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
@@ -36,7 +35,15 @@ const MainBlock = () => {
             className={`w-16 h-16 text-3xl rounded-2xl border flex items-center justify-center
               shrink-0 shadow-inner ${badgeClass}`}
           >
-            {icon || "⏳"}
+            {icon ? (
+              icon.length <= 3 ? (
+                icon
+              ) : (
+                <img src={icon} width={54} />
+              )
+            ) : (
+              "⏳"
+            )}
           </div>
           <div>
             <span
