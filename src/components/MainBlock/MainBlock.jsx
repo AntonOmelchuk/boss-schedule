@@ -39,7 +39,7 @@ const MainBlock = () => {
               icon.length <= 3 ? (
                 icon
               ) : (
-                <img src={icon} width={54} />
+                <img src={icon} width={63} className="rounded-xl" />
               )
             ) : (
               "⏳"
