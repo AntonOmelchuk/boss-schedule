@@ -9,7 +9,7 @@ const MainBlock = () => {
 
   const { filteredEvents, now } = useFilterEvents();
 
-  const nearestEvent = filteredEvents.length > 0 ? filteredEvents[4] : null;
+  const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
 
   const { relation, name, owner, icon, isOutPrime } = nearestEvent || {};
   const config = getDiplomacyConfig(relation);

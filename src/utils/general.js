@@ -151,7 +151,7 @@ export const checkIsOutPrime = (category, ts) =>
   category === CATEGORIES.Epic &&
   (() => {
     const hours = new Date(ts).getUTCHours();
-    return hours >= 0 && hours < 6;
+    return hours >= 23 && hours < 6;
   })();
 
 /**
