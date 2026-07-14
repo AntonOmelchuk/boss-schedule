@@ -1,28 +1,12 @@
 import { useState } from "react";
 
-import useFilterEvents from "../../../hooks/useFilterEvents";
 import useTranslation from "../../../hooks/useTranslation";
 import { MAKE_SCREENSHOT_STATUS } from "../../../utils/constants";
-import {
-  formatDateForZone,
-  formatTimeForZone,
-  getEventIsoTime,
-} from "../../../utils/general";
-import {
-  generateDiscordFormat,
-  takeScreenshot,
-} from "../../../utils/scheduleBuilder";
+import { takeScreenshot } from "../../../utils/scheduleBuilder";
 
-const Header = ({
-  tableRef,
-  showLocalTime,
-  localTimezone,
-  activeTimezones,
-}) => {
-  const { t, language } = useTranslation();
-  const { filteredEvents } = useFilterEvents();
+const Header = ({ tableRef }) => {
+  const { t } = useTranslation();
 
-  const [copiedStatus, setCopiedStatus] = useState(false);
   const [screenshotStatus, setScreenshotStatus] = useState(
     MAKE_SCREENSHOT_STATUS.None,
   );
@@ -61,27 +45,6 @@ const Header = ({
           transition-all duration-300 shadow-lg cursor-pointer"
       >
         {screenshotLabel()}
-      </button>
-      <button
-        onClick={() =>
-          generateDiscordFormat(
-            filteredEvents,
-            t,
-            getEventIsoTime,
-            formatTimeForZone,
-            formatDateForZone,
-            language,
-            showLocalTime,
-            localTimezone,
-            activeTimezones,
-            setCopiedStatus,
-          )
-        }
-        className="flex items-center gap-2 py-2.5 px-5 text-xs font-black uppercase tracking-wider
-         bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl border
-         border-indigo-500/40 transition-all duration-300 shadow-lg cursor-pointer"
-      >
-        {copiedStatus ? t.sbCopied : t.sbExportBtn}
       </button>
     </div>
   );

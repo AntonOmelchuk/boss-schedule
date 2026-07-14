@@ -13,7 +13,7 @@ const BadgeOwner = ({ badgeClass, badgeIcon, owner, withoutBorder }) => {
         animate-pulse transition-all
         ${withoutBorderClasses} ${cleanBadgeClass}`}
     >
-      {badgeIcon} {owner}
+      {badgeIcon || ""} {owner}
     </span>
   );
 };

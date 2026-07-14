@@ -2,6 +2,13 @@ import * as htmlToImage from "html-to-image";
 
 import { MAKE_SCREENSHOT_STATUS } from "./constants";
 
+/**
+ * Captures a visual snapshot of a DOM element specified by tableRef and triggers a file download.
+ * Handles temporary hiding of flagged elements during generation and updates state indicators.
+ * @param {React.RefObject<HTMLElement>} tableRef - React reference pointing to the DOM node to capture.
+ * @param {Function} setScreenshotSuccess - State dispatch function updating the current capture status.
+ * @returns {Promise<void>} A promise that resolves when the capture and download sequence completes.
+ */
 export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
   if (!tableRef.current) return;
   setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Progress);
@@ -9,7 +16,7 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
   try {
     const element = tableRef.current;
 
-    // 1. Тимчасово ховаємо елементи, які не мають бути на скріншоті (кнопки видалення)
+    // 1. Hide element which shouldn't be on screenshot (remove buttons)
     const ignoredElements = element.querySelectorAll(
       '[data-html2canvas-ignore="true"]',
     );
@@ -17,10 +24,9 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
       el.style.setProperty("display", "none", "important"),
     );
 
-    // 2. Викликаємо встановлений npm-пакет НАПРЯМУ без жодних CDN скриптів
     const dataUrl = await htmlToImage.toPng(element, {
-      backgroundColor: "#020617", // Колір фону таблиці (slate-950)
-      pixelRatio: 2, // Подвійна чіткість для гарного читання в Discord
+      backgroundColor: "#020617", // (slate-950)
+      pixelRatio: 2, // Double quality
       style: {
         backgroundColor: "#020617",
         color: "#f1f5f9",
@@ -36,10 +42,10 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
       },
     });
 
-    // 3. Повертаємо видимість кнопкам на самому сайті
+    // 3. Make remove buttons visible again
     ignoredElements.forEach((el) => el.style.removeProperty("display"));
 
-    // 4. Запускаємо скачування файлу
+    // 4. start download the image
     const link = document.createElement("a");
     link.href = dataUrl;
     link.download = `alliance-schedule-${new Date().toISOString().slice(0, 10)}.png`;
@@ -50,7 +56,6 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
   } catch (err) {
     console.error("Error during capture:", err);
 
-    // Про всяк випадок повертаємо кнопки на місце при помилці
     if (tableRef.current) {
       tableRef.current
         .querySelectorAll('[data-html2canvas-ignore="true"]')
@@ -60,47 +65,4 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
     setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Error);
     setTimeout(() => setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.None), 5000);
   }
-};
-
-export const generateDiscordFormat = (
-  events,
-  t,
-  getEventIsoTime,
-  formatTimeForZone,
-  formatDateForZone,
-  language,
-  showLocalTime,
-  localTimezone,
-  activeTimezones,
-  setCopiedStatus,
-) => {
-  let output = `${t.sbDiscordHeader}\n========================================\n\n`;
-
-  events.forEach(({ ts, name, icon, category }) => {
-    const isoTime = getEventIsoTime(ts);
-    const serverTimeFormatted = formatTimeForZone(isoTime, "UTC");
-    const eventDate = formatDateForZone(isoTime, "UTC", language);
-
-    output += `${icon} **${name}** (${category})\n`;
-    output += `   • ${t.sbDiscordDate}: ${eventDate}\n`;
-    output += `   • ${t.sbDiscordServer}: 🕐 ${serverTimeFormatted} UTC\n`;
-
-    if (showLocalTime) {
-      const localTimeFormatted = formatTimeForZone(isoTime, localTimezone);
-      output += `   • ${t.sbDiscordLocal}: 🏠 ${localTimeFormatted}\n`;
-    }
-
-    activeTimezones.forEach((tz) => {
-      const shortTzName = tz.split("/").pop().replace("_", " ");
-      output += `   • ${shortTzName}: 🕒 ${formatTimeForZone(isoTime, tz)}\n`;
-    });
-    output += "\n";
-  });
-
-  output += t.sbDiscordFooter;
-
-  navigator.clipboard.writeText(output).then(() => {
-    setCopiedStatus(true);
-    setTimeout(() => setCopiedStatus(false), 3000);
-  });
 };

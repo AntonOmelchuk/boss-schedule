@@ -23,7 +23,7 @@ const TableList = ({
       {events?.map(
         ({ id, ts, name, icon, category, owner, relation, isOutPrime }) => {
           const isoTime = getEventIsoTime(ts);
-          const { badgeIcon, badgeClass } = getDiplomacyConfig(relation);
+          const { badgeClass } = getDiplomacyConfig(relation);
 
           return (
             <tr key={id} className="hover:bg-slate-800/30 transition-colors">
@@ -39,11 +39,7 @@ const TableList = ({
                     </span>
                     <span className="mr-4 min-w-52.5">{name}</span>
                     {owner && (
-                      <BadgeOwner
-                        badgeIcon={badgeIcon}
-                        badgeClass={badgeClass}
-                        owner={owner}
-                      />
+                      <BadgeOwner badgeClass={badgeClass} owner={owner} />
                     )}
                     {isOutPrime && <OutPrime />}
                   </div>
