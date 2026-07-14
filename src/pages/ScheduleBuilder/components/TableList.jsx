@@ -34,7 +34,7 @@ const TableList = ({
                       {icon.length <= 3 ? (
                         icon
                       ) : (
-                        <img src={icon} width={25} height={25} />
+                        <img src={icon} width={25} className="rounded-sm" />
                       )}
                     </span>
                     <span className="mr-4 min-w-52.5">{name}</span>

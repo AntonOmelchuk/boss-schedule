@@ -9,7 +9,7 @@ const MainBlock = () => {
 
   const { filteredEvents, now } = useFilterEvents();
 
-  const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
+  const nearestEvent = filteredEvents.length > 0 ? filteredEvents[4] : null;
 
   const { relation, name, owner, icon, isOutPrime } = nearestEvent || {};
   const config = getDiplomacyConfig(relation);
@@ -39,7 +39,7 @@ const MainBlock = () => {
               icon.length <= 3 ? (
                 icon
               ) : (
-                <img src={icon} width={54} />
+                <img src={icon} width={63} className="rounded-xl" />
               )
             ) : (
               "⏳"

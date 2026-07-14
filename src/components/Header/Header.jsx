@@ -39,7 +39,7 @@ const Header = () => {
         />
         <Button
           onClick={() => navigate("/schedule")}
-          className="mt-3 hidden md:inline-flex"
+          className="mt-3 hidden lg:inline-flex"
         >
           <span className="uppercase font-bold">Schedule</span>
         </Button>
