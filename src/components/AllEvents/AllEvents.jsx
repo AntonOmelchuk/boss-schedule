@@ -4,14 +4,14 @@ import useFilterEvents from "../../hooks/useFilterEvents";
 import useTranslation from "../../hooks/useTranslation";
 import ArrowDownIcon from "../../svg/ArrowDownIcon";
 import FilterIcon from "../../svg/FilterIcon";
-import { TIME_FILTERS } from "../../utils/constants";
+import { LANGUAGES, TIME_FILTERS } from "../../utils/constants";
 import Button from "../UI/Button";
 import AllEventsItem from "./components/AllEventsItem";
 import Dropdown from "./components/Dropdown";
 import FilterModal from "./components/FilterModal"; // Path to your new FilterModal file
 
 const AllEvents = () => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const { filteredEvents, timeFilter } = useFilterEvents();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -57,12 +57,16 @@ const AllEvents = () => {
           </div>
         ) : (
           filteredEvents.map((event) => {
-            const spawnDate = new Date(event.ts).toLocaleString("uk-UA", {
-              month: "short",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
+            const spawnDate = new Date(event.ts).toLocaleString(
+              language === LANGUAGES.UA ? "uk-UA" : "en-US",
+              {
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+              },
+            );
 
             const { id, icon, name, enemy, owner, relation, isOutPrime } =
               event;
