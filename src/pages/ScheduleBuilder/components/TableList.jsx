@@ -16,28 +16,30 @@ const TableList = ({
   activeTimezones,
   setDeletedEventIds,
 }) => {
-  const { language } = useTranslation();
+  const { t, language } = useTranslation();
 
   return (
     <>
       {events?.map(
         ({ id, ts, name, icon, category, owner, relation, isOutPrime }) => {
           const isoTime = getEventIsoTime(ts);
-          const { badgeIcon, badgeClass } = getDiplomacyConfig(relation);
+          const { badgeClass } = getDiplomacyConfig(relation);
 
           return (
             <tr key={id} className="hover:bg-slate-800/30 transition-colors">
               <td className="p-4 font-bold text-slate-200">
                 <div className="flex items-center justify-between group">
                   <div className="flex items-center">
-                    <span className="text-xl mr-2.5">{icon}</span>
+                    <span className="text-xl mr-2.5">
+                      {icon.length <= 3 ? (
+                        icon
+                      ) : (
+                        <img src={icon} width={25} className="rounded-sm" />
+                      )}
+                    </span>
                     <span className="mr-4 min-w-52.5">{name}</span>
                     {owner && (
-                      <BadgeOwner
-                        badgeIcon={badgeIcon}
-                        badgeClass={badgeClass}
-                        owner={owner}
-                      />
+                      <BadgeOwner badgeClass={badgeClass} owner={owner} />
                     )}
                     {isOutPrime && <OutPrime />}
                   </div>
@@ -55,7 +57,7 @@ const TableList = ({
                   className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase
                   tracking-wider border ${CATEGORIES_STYLE[category] || "border-slate-700"}`}
                 >
-                  {category}
+                  {t[category]}
                 </span>
               </td>
               <td className="p-4 font-mono">
