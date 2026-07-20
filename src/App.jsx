@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import bgImg from "./assets/bg3.png";
+import AllianceStats from "./pages/AllianceStats/AllianceStats";
 import MainPage from "./pages/MainPage/MainPage";
 import NotFound from "./pages/NotFound/NotFound";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
@@ -86,6 +87,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/schedule" element={<ScheduleBuilder />} />
+          <Route path="/stats" element={<AllianceStats />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
