@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/Loader";
@@ -6,6 +6,7 @@ import useAppStore from "../../store/useAppStore";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
 import BarChartCustom from "./components/BarChart";
 import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
+import EventDeepDive from "./components/EventDeepDive";
 import Leaderboard from "./components/Leaderboard";
 import ParetoLineChart from "./components/ParetoLineChart";
 import PieChartCustom from "./components/PieChart";
@@ -13,6 +14,7 @@ import RadarChartCustom from "./components/RadarChart";
 import SummaryCards from "./components/SummaryCards";
 
 const AllianceStats = () => {
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const { statsData, isLoading, error, fetchAllData } = useAppStore();
 
   useEffect(() => fetchAllData, []);
@@ -54,7 +56,13 @@ const AllianceStats = () => {
         <ParetoLineChart />
       </div>
       <CPProgressLineChart />
-      <AllianceActivityComboChart />
+      <AllianceActivityComboChart
+        onEventClick={(eventLabel) => setSelectedEvent(eventLabel)}
+      />
+      <EventDeepDive
+        selectedEventLabel={selectedEvent}
+        onSelectEvent={(eventLabel) => setSelectedEvent(eventLabel)}
+      />
     </div>
   );
 };

@@ -1,0 +1,217 @@
+import { useEffect, useMemo, useState } from "react";
+import {
+  Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip as RechartsTooltip,
+} from "recharts";
+
+import useAppStore from "../../../store/useAppStore";
+
+const COLOR_PALETTE = [
+  "#38bdf8",
+  "#34d399",
+  "#fbbf24",
+  "#f43f5e",
+  "#a855f7",
+  "#e879f9",
+  "#f97316",
+  "#22d3ee",
+  "#a3e635",
+  "#f472b6",
+  "#818cf8",
+  "#10b981",
+  "#fb7185",
+  "#c084fc",
+  "#facc15",
+];
+
+const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
+  const rawTimeline = useAppStore(
+    (state) => state.timelineData?.timeline || [],
+  );
+
+  const [activeLabel, setActiveLabel] = useState("");
+
+  // Оновлюємо внутрішній стан при виборі ззовні або беремо останній івент
+  useEffect(() => {
+    if (selectedEventLabel) {
+      setActiveLabel(selectedEventLabel);
+    } else if (rawTimeline.length > 0 && !activeLabel) {
+      setActiveLabel(rawTimeline[rawTimeline.length - 1].event_label);
+    }
+  }, [selectedEventLabel, rawTimeline]);
+
+  // Знаходимо сирі дані обраного івенту
+  const currentEvent = useMemo(() => {
+    return rawTimeline.find((e) => e.event_label === activeLabel);
+  }, [rawTimeline, activeLabel]);
+
+  // Трансформуємо КП у масив для PieChart
+  const cpBreakdown = useMemo(() => {
+    if (!currentEvent) return [];
+    const systemKeys = ["date", "action", "event_label", "total_players"];
+
+    return Object.keys(currentEvent)
+      .filter(
+        (key) => !systemKeys.includes(key) && Number(currentEvent[key]) > 0,
+      )
+      .map((cpName) => ({
+        name: cpName,
+        value: Number(currentEvent[cpName]),
+      }))
+      .sort((a, b) => b.value - a.value);
+  }, [currentEvent]);
+
+  if (!rawTimeline.length || !currentEvent) return null;
+
+  const totalPlayers = Number(currentEvent.total_players) || 0;
+  const topCP = cpBreakdown[0];
+
+  return (
+    <div
+      className="w-full mt-16 bg-slate-900/30 backdrop-blur-md border border-slate-800
+      rounded-2xl p-6 shadow-xl flex flex-col gap-6"
+    >
+      {/* Шапка з вибором івенту */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+        <div>
+          <h2 className="text-xl font-bold text-slate-100 tracking-wide">
+            Event Deep Dive
+          </h2>
+          <p className="text-xs text-slate-400 mt-1">
+            Detailed attendance breakdown & MVP CP for a specific raid or siege
+          </p>
+        </div>
+
+        {/* Dropdown вибору івенту */}
+        <select
+          value={activeLabel}
+          onChange={(e) => {
+            setActiveLabel(e.target.value);
+            if (onSelectEvent) onSelectEvent(e.target.value);
+          }}
+          className="bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-2
+            focus:outline-none focus:border-sky-500 transition cursor-pointer"
+        >
+          {rawTimeline.map((item) => (
+            <option key={item.event_label} value={item.event_label}>
+              {item.event_label} ({item.action})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Основна сітка */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        {/* Ключові метрики */}
+        <div className="flex flex-col gap-3">
+          <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <span className="text-xs text-slate-400 uppercase font-semibold">
+              Total Event Attendance
+            </span>
+            <div className="text-3xl font-extrabold text-sky-400 mt-1">
+              {totalPlayers}{" "}
+              <span className="text-sm font-normal text-slate-400">
+                players
+              </span>
+            </div>
+          </div>
+
+          {topCP && (
+            <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+              <span className="text-xs text-slate-400 uppercase font-semibold">
+                Top Contributor (MVP CP)
+              </span>
+              <div className="text-lg font-bold text-emerald-400 mt-1 flex items-center justify-between">
+                <span>{topCP.name}</span>
+                <span
+                  className="text-xs bg-emerald-500/10 text-emerald-400 border
+                 border-emerald-500/20 px-2 py-1 rounded-lg"
+                >
+                  {topCP.value} players (
+                  {Math.round((topCP.value / totalPlayers) * 100)}%)
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <span className="text-xs text-slate-400 uppercase font-semibold">
+              Event Category / Target
+            </span>
+            <div className="text-base font-semibold text-amber-400 mt-1 capitalize">
+              {currentEvent.action || "N/A"}
+            </div>
+          </div>
+        </div>
+
+        {/* Donut Chart (Діаграма) */}
+        <div className="h-64 w-full flex items-center justify-center">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={cpBreakdown}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius={55}
+                outerRadius={85}
+                paddingAngle={3}
+              >
+                {cpBreakdown.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLOR_PALETTE[index % COLOR_PALETTE.length]}
+                  />
+                ))}
+              </Pie>
+              <RechartsTooltip
+                contentStyle={{
+                  backgroundColor: "#0f172a",
+                  borderColor: "#334155",
+                  borderRadius: "0.75rem",
+                  color: "#f8fafc",
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Таблиця / Список КП */}
+        <div className="flex flex-col gap-1.5 max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+            Party Breakdown ({cpBreakdown.length} CPs present):
+          </span>
+          {cpBreakdown.map((cp, idx) => (
+            <div
+              key={cp.name}
+              className="flex items-center justify-between p-2 rounded-lg bg-slate-800/30 border
+               border-slate-800/60 text-xs"
+            >
+              <div className="flex items-center gap-2">
+                <span
+                  className="w-2.5 h-2.5 rounded-full"
+                  style={{
+                    backgroundColor: COLOR_PALETTE[idx % COLOR_PALETTE.length],
+                  }}
+                />
+                <span className="font-medium text-slate-200">{cp.name}</span>
+              </div>
+              <div className="font-bold text-slate-100">
+                {cp.value}{" "}
+                <span className="text-slate-500 font-normal">
+                  ({Math.round((cp.value / totalPlayers) * 100)}%)
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EventDeepDive;
