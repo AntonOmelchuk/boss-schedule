@@ -191,3 +191,27 @@ export const getEventIsoTime = (ts) => {
     return new Date(ts).toISOString();
   }
 };
+
+export const getCategoryByAction = (action) => {
+  if (!action) return CATEGORIES.PVP;
+
+  const act = action.toLowerCase();
+
+  if (act.includes("siege")) return CATEGORIES.Siege;
+  if (act.includes("ch") || act.includes("hall")) return CATEGORIES.CH;
+
+  // Epic bosses (Valakas, Baium, Frintezza, Zaken, QueenAnt, Core, Orfen)
+  if (
+    act.includes("valakas") ||
+    act.includes("baium") ||
+    act.includes("frintezza") ||
+    act.includes("zaken") ||
+    act.includes("queenant") ||
+    act.includes("core") ||
+    act.includes("orfen")
+  ) {
+    return CATEGORIES.Epic;
+  }
+
+  return CATEGORIES.PVP; // Deafult for PvP Events
+};

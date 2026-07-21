@@ -14,7 +14,7 @@ const ParetoLineChart = () => {
   const pareto = useAppStore((state) => state.statsData.pareto);
 
   return (
-    <div className="w-full h-full p-6 rounded-xl border border-slate-700 flex flex-col relative">
+    <div className="w-full h-full bg-slate-900/30 p-6 rounded-xl border border-slate-700 flex flex-col relative">
       <div className="flex justify-between items-start mb-2">
         <div>
           <h3 className="text-xl text-white font-semibold">

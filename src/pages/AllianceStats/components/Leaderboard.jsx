@@ -37,7 +37,7 @@ const Leaderboard = () => {
 
   return (
     <div className="w-full h-screen lg:w-87.5 shrink-0">
-      <div className="bg-slate-900 rounded-xl border border-slate-800 p-4 w-full relative">
+      <div className="bg-slate-900/30 rounded-xl border border-slate-800 p-4 w-full relative">
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-xl font-semibold text-slate-200">
             {viewMode === "points" ? "Alliance Roster" : "Priority Queue"}
@@ -46,7 +46,7 @@ const Leaderboard = () => {
           {/* Info Icon */}
           <div className="relative group cursor-pointer">
             <div
-              className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-6 h-6
+              className="text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-700 w-6 h-6
             rounded-full flex items-center justify-center text-xs font-serif italic font-bold transition"
             >
               i

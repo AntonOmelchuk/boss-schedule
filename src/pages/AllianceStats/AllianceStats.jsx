@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/Loader";
 import useAppStore from "../../store/useAppStore";
+import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
 import BarChartCustom from "./components/BarChart";
 import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
 import Leaderboard from "./components/Leaderboard";
@@ -52,9 +53,8 @@ const AllianceStats = () => {
       <div className="w-full h-112.5 mt-8">
         <ParetoLineChart />
       </div>
-      <div className="w-full mt-8">
-        <CPProgressLineChart />
-      </div>
+      <CPProgressLineChart />
+      <AllianceActivityComboChart />
     </div>
   );
 };

@@ -37,7 +37,7 @@ const CPProgressLineChart = () => {
 
   const [selectedCPs, setSelectedCPs] = useState({});
 
-  // 2. List of all CP (Turn off system fields)
+  // List of all CP (Turn off system fields)
   const allCPNames = useMemo(() => {
     if (!rawTimeline.length) return [];
     const firstRow = rawTimeline[0];
@@ -45,7 +45,7 @@ const CPProgressLineChart = () => {
     return Object.keys(firstRow).filter((key) => !systemKeys.includes(key));
   }, [rawTimeline]);
 
-  // 3. Init checkbox (Default top-5 CP)
+  // Init checkbox (Default top-5 CP)
   useEffect(() => {
     if (allCPNames.length > 0 && Object.keys(selectedCPs).length === 0) {
       const initialSelection = {};
@@ -56,7 +56,7 @@ const CPProgressLineChart = () => {
     }
   }, [allCPNames]);
 
-  // 4. Cumulative Sum
+  // Cumulative Sum
   const cumulativeData = useMemo(() => {
     if (!rawTimeline.length) return [];
 
@@ -94,7 +94,7 @@ const CPProgressLineChart = () => {
 
   return (
     <div
-      className="w-full bg-slate-900/60 backdrop-blur-md border border-slate-800
+      className="w-full mt-8 bg-slate-900/10 backdrop-blur-md border border-slate-800
       rounded-2xl p-6 shadow-xl flex flex-col gap-6"
     >
       <div className="flex flex-wrap items-center justify-between gap-4">
