@@ -45,11 +45,11 @@ const AllianceStats = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-112.5">
+      <div className="w-full h-112.5 mt-8">
         <ParetoLineChart data={data.pareto} />
       </div>
     </div>
   );
 };
 
-export default AllianceStats; // або export default AllianceStats залежно від твого збирача
+export default AllianceStats;
