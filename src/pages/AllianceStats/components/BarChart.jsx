@@ -42,6 +42,8 @@ const BarChartCustom = () => {
               backgroundColor: "#1e293b",
               border: "none",
             }}
+            labelStyle={{ color: "#ffffff", fontWeight: "bold" }}
+            itemStyle={{ color: "#ffffff" }}
           />
           <Bar dataKey="points" radius={[4, 4, 0, 0]}>
             {pareto?.map((_, i) => (

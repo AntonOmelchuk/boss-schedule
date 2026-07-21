@@ -4,6 +4,7 @@ import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/Loader";
 import useAppStore from "../../store/useAppStore";
 import BarChartCustom from "./components/BarChart";
+import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
 import Leaderboard from "./components/Leaderboard";
 import ParetoLineChart from "./components/ParetoLineChart";
 import PieChartCustom from "./components/PieChart";
@@ -50,6 +51,9 @@ const AllianceStats = () => {
       </div>
       <div className="w-full h-112.5 mt-8">
         <ParetoLineChart />
+      </div>
+      <div className="w-full mt-8">
+        <CPProgressLineChart />
       </div>
     </div>
   );
