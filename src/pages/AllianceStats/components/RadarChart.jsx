@@ -9,8 +9,8 @@ import {
 
 const RadarChartCustom = ({ data }) => {
   return (
-    <div className="h-125 bg-slate-900 p-6 rounded-xl border border-slate-800">
-      <h3 className="text-xl mb-6">Top 10 Comparison</h3>
+    <div className="h-125 p-4 rounded-xl border border-slate-800">
+      <h3 className="text-xl mb-2">Top 10 Comparison</h3>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart data={data.slice(0, 10)}>
           <PolarGrid stroke="#334155" />

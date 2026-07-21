@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 import BarChartCustom from "./components/BarChart";
 import Leaderboard from "./components/Leaderboard";
+import ParetoLineChart from "./components/ParetoLineChart";
 import PieChartCustom from "./components/PieChart";
 import RadarChartCustom from "./components/RadarChart";
+import SummaryCards from "./components/SummaryCards";
 
 const AllianceStats = () => {
   const [data, setData] = useState({ pareto: [], summary: {} });
@@ -24,21 +26,27 @@ const AllianceStats = () => {
       >
         The 3rd Side Analytics
       </h1>
+      <SummaryCards summary={data.summary} />
 
       <div className="flex flex-wrap lg:flex-nowrap gap-8 items-start justify-center">
         <div className="w-full lg:w-87.5 shrink-0">
-          <div className="bg-slate-900 rounded-xl border border-slate-800 p-4">
-            <Leaderboard data={data.pareto} />
-          </div>
+          <Leaderboard data={data.pareto} />
         </div>
 
         <div className="flex-1 w-full flex flex-col gap-8 min-w-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 min-[1400px]:grid-cols-2 gap-8">
             <PieChartCustom data={data.pareto} />
             <RadarChartCustom data={data.pareto} />
+          </div>
+
+          {/* BarChart залишається на повну ширину знизу */}
+          <div className="w-full">
             <BarChartCustom data={data.pareto} />
           </div>
         </div>
+      </div>
+      <div className="w-full h-112.5">
+        <ParetoLineChart data={data.pareto} />
       </div>
     </div>
   );
