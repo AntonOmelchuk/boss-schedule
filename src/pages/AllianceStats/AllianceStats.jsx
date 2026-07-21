@@ -39,7 +39,6 @@ const AllianceStats = () => {
             <RadarChartCustom data={data.pareto} />
           </div>
 
-          {/* BarChart залишається на повну ширину знизу */}
           <div className="w-full">
             <BarChartCustom data={data.pareto} />
           </div>

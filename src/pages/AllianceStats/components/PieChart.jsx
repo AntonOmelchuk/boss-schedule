@@ -17,7 +17,7 @@ const DARK_COLORS = [
 ];
 
 const PieChartCustom = ({ data = [] }) => {
-  // Кастомний лейбл для виведення імені та відсотка на всіх секціях
+  // Custom label for name & percent
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -26,11 +26,11 @@ const PieChartCustom = ({ data = [] }) => {
     percent,
     index,
   }) => {
-    // Пропускаємо зовсім мікроскопічні частки, щоб уникнути каші з текстом
+    // Skip small value to avoid mess
     if (percent < 0.01) return null;
 
     const RADIAN = Math.PI / 180;
-    // Збільшуємо відстань для виносних міток, оскільки секторів багато
+    // Increase distance for label
     const radius = outerRadius + 28;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -63,7 +63,7 @@ const PieChartCustom = ({ data = [] }) => {
               nameKey="cp_name"
               cx="50%"
               cy="50%"
-              outerRadius={150} // Зробили діаграму помітно більшою
+              outerRadius={150} // Chart size
               label={renderCustomizedLabel}
               labelLine={{ stroke: "#475569", strokeWidth: 1 }}
             >

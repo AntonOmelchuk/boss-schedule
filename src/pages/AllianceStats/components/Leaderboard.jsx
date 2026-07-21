@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 const Leaderboard = ({ data = [] }) => {
-  // Функція для визначення Tier на основі позиції в рейтингу
+  const [viewMode, setViewMode] = useState("points"); // "points" | "priority"
+
   const getTier = (index, total) => {
     if (total === 0)
       return { label: "B", color: "text-slate-400 bg-slate-800" };
@@ -20,15 +23,22 @@ const Leaderboard = ({ data = [] }) => {
     };
   };
 
+  const sortedData = [...data].sort((a, b) => {
+    if (viewMode === "priority") {
+      return (a.gb_pts_ratio ?? 0) - (b.gb_pts_ratio ?? 0);
+    }
+
+    return b.points - a.points;
+  });
+
   return (
-    <div className="bg-slate-900 rounded-xl border border-slate-700 p-4 w-full relative">
-      {/* Header & Icon */}
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-slate-900 rounded-xl border border-slate-800 p-4 w-full relative">
+      <div className="flex justify-between items-center mb-3">
         <h3 className="text-xl font-semibold text-slate-200">
-          Alliance Roster
+          {viewMode === "points" ? "Alliance Roster" : "Priority Queue"}
         </h3>
 
-        {/* Info Icon with Hover Tooltip */}
+        {/* Info Icon */}
         <div className="relative group cursor-pointer">
           <div
             className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-6 h-6
@@ -36,42 +46,76 @@ const Leaderboard = ({ data = [] }) => {
           >
             i
           </div>
-
-          {/* Hover Tooltip Box */}
           <div
             className="absolute right-0 top-8 w-72 z-20 bg-slate-950 border border-slate-700 p-3
             rounded-xl shadow-2xl text-xs text-slate-300 opacity-0 invisible group-hover:opacity-100
             group-hover:visible transition-all duration-200 pointer-events-none"
           >
-            <p className="font-bold text-indigo-400 mb-1">
-              How Tiers Are Calculated:
-            </p>
-            <p className="leading-relaxed mb-2">
-              Tiers are determined dynamically based on the relative ranking
-              (percentile) within the current roster:
-            </p>
-            <ul className="space-y-1 text-[11px] text-slate-400">
-              <li>
-                <strong className="text-amber-400">S-TIER:</strong> Top 15%
-                performers
-              </li>
-              <li>
-                <strong className="text-indigo-300">A-TIER:</strong> Next 40%
-                (15% – 55%)
-              </li>
-              <li>
-                <strong className="text-slate-400">B-TIER:</strong> Remaining
-                CPs (55% – 100%)
-              </li>
-            </ul>
+            {viewMode === "points" ? (
+              <>
+                <p className="font-bold text-indigo-400 mb-1">
+                  How Tiers Are Calculated:
+                </p>
+                <p className="leading-relaxed mb-2">
+                  Tiers based on relative ranking (percentile):
+                </p>
+                <ul className="space-y-1 text-[11px] text-slate-400">
+                  <li>
+                    <strong className="text-amber-400">S-TIER:</strong> Top 15%
+                    performers
+                  </li>
+                  <li>
+                    <strong className="text-indigo-300">A-TIER:</strong> Next
+                    40% (15% – 55%)
+                  </li>
+                  <li>
+                    <strong className="text-slate-400">B-TIER:</strong>{" "}
+                    Remaining CPs (55% – 100%)
+                  </li>
+                </ul>
+              </>
+            ) : (
+              <>
+                <p className="font-bold text-amber-400 mb-1">Priority Queue:</p>
+                <p className="leading-relaxed text-[11px] text-slate-400">
+                  Sorted by GB/PTs ratio from lowest to highest. CPs at the top
+                  have accumulated the most points relative to received epics,
+                  making them top priority for the next drop.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>
 
+      {/* Tabs / Switcher */}
+      <div className="flex bg-slate-950 p-1 rounded-lg border border-slate-800 mb-4">
+        <button
+          onClick={() => setViewMode("points")}
+          className={`flex-1 py-1.5 text-xs font-medium rounded-md transition ${
+            viewMode === "points"
+              ? "bg-indigo-600 text-white shadow"
+              : "text-slate-400 hover:text-slate-200"
+          }`}
+        >
+          By Points
+        </button>
+        <button
+          onClick={() => setViewMode("priority")}
+          className={`flex-1 py-1.5 text-xs font-medium rounded-md transition ${
+            viewMode === "priority"
+              ? "bg-amber-600 text-white shadow"
+              : "text-slate-400 hover:text-slate-200"
+          }`}
+        >
+          By GB/PTs Ratio
+        </button>
+      </div>
+
       {/* CP List */}
-      <div className="max-h-150 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
-        {data.map((item, index) => {
-          const tier = getTier(index, data.length);
+      <div className="max-h-137.5 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+        {sortedData.map((item, index) => {
+          const tier = getTier(index, sortedData.length);
           return (
             <div
               key={index}
@@ -86,21 +130,39 @@ const Leaderboard = ({ data = [] }) => {
                   <span className="font-medium text-slate-200 text-sm block">
                     {item.cp_name}
                   </span>
-                  <span
-                    className={`inline-block text-left px-1.5 py-0.5 text-[10px] font-bold
-                      rounded border mt-0.5 ${tier.color}`}
-                  >
-                    {tier.label}
-                  </span>
+
+                  {/* Badge depends on current mode */}
+                  {viewMode === "points" && (
+                    <span
+                      className={`inline-block text-left px-1.5 py-0.5 text-[10px] font-bold
+                        rounded border mt-0.5 ${tier.color}`}
+                    >
+                      {tier.label}
+                    </span>
+                  )}
                 </div>
               </div>
+
               <div className="text-right">
-                <span className="font-bold text-indigo-300 text-sm block">
-                  {item.points} pts
-                </span>
-                <span className="text-[10px] text-slate-400">
-                  {item.contribution_pct}%
-                </span>
+                {viewMode === "points" ? (
+                  <>
+                    <span className="font-bold text-indigo-300 text-sm block">
+                      {item.points} pts
+                    </span>
+                    <span className="text-[10px] text-slate-400">
+                      {item.contribution_pct}%
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="font-bold text-amber-300 text-sm block">
+                      {item.gb_pts_ratio ?? 0} ratio
+                    </span>
+                    <span className="text-[10px] text-slate-400">
+                      {item.points} pts total
+                    </span>
+                  </>
+                )}
               </div>
             </div>
           );
