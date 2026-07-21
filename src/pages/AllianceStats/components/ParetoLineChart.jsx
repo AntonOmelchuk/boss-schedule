@@ -8,7 +8,11 @@ import {
   YAxis,
 } from "recharts";
 
-const ParetoLineChart = ({ data = [] }) => {
+import useAppStore from "../../../store/useAppStore";
+
+const ParetoLineChart = () => {
+  const pareto = useAppStore((state) => state.statsData.pareto);
+
   return (
     <div className="w-full h-full p-6 rounded-xl border border-slate-700 flex flex-col relative">
       <div className="flex justify-between items-start mb-2">
@@ -52,7 +56,7 @@ const ParetoLineChart = ({ data = [] }) => {
       <div className="w-full flex-1 min-h-87.5 mt-4">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            data={data}
+            data={pareto}
             margin={{ top: 10, right: 30, left: 0, bottom: 30 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />

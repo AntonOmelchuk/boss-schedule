@@ -9,6 +9,8 @@ import {
   YAxis,
 } from "recharts";
 
+import useAppStore from "../../../store/useAppStore";
+
 const COLORS = [
   "#8884d8",
   "#82ca9d",
@@ -18,12 +20,14 @@ const COLORS = [
   "#00C49F",
 ];
 
-const BarChartCustom = ({ data }) => {
+const BarChartCustom = () => {
+  const pareto = useAppStore((state) => state.statsData.pareto);
+
   return (
     <div className="col-span-full h-125 p-6 rounded-xl border border-slate-700">
       <h3 className="text-xl mb-6">Performance</h3>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 20, bottom: 80 }}>
+        <BarChart data={pareto} margin={{ top: 20, bottom: 80 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
           <XAxis
             dataKey="cp_name"
@@ -40,7 +44,7 @@ const BarChartCustom = ({ data }) => {
             }}
           />
           <Bar dataKey="points" radius={[4, 4, 0, 0]}>
-            {data?.map((_, i) => (
+            {pareto?.map((_, i) => (
               <Cell key={i} fill={COLORS[i % COLORS.length]} />
             ))}
           </Bar>

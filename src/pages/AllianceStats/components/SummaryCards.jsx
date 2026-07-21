@@ -1,6 +1,9 @@
+import useAppStore from "../../../store/useAppStore";
 import SummaryCard from "./SummaryCard";
 
-const SummaryCards = ({ summary }) => {
+const SummaryCards = () => {
+  const summary = useAppStore((state) => state.statsData.summary);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       {/* 1. Total Points */}

@@ -1,5 +1,7 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
+import useAppStore from "../../../store/useAppStore";
+
 const DARK_COLORS = [
   "#4f46e5",
   "#0ea5e9",
@@ -16,7 +18,9 @@ const DARK_COLORS = [
   "#475569",
 ];
 
-const PieChartCustom = ({ data = [] }) => {
+const PieChartCustom = () => {
+  const pareto = useAppStore((state) => state.statsData.pareto);
+
   // Custom label for name & percent
   const renderCustomizedLabel = ({
     cx,
@@ -35,7 +39,7 @@ const PieChartCustom = ({ data = [] }) => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    const currentItem = data[index];
+    const currentItem = pareto[index];
 
     return (
       <text
@@ -58,16 +62,16 @@ const PieChartCustom = ({ data = [] }) => {
         <ResponsiveContainer width="100%" height="100%">
           <PieChart margin={{ top: 40, right: 80, bottom: 40, left: 80 }}>
             <Pie
-              data={data}
+              data={pareto}
               dataKey="points"
               nameKey="cp_name"
               cx="50%"
               cy="50%"
-              outerRadius={150} // Chart size
+              outerRadius={210} // Chart size
               label={renderCustomizedLabel}
               labelLine={{ stroke: "#475569", strokeWidth: 1 }}
             >
-              {data.map((_, i) => (
+              {pareto?.map((_, i) => (
                 <Cell
                   key={`cell-${i}`}
                   fill={DARK_COLORS[i % DARK_COLORS.length]}

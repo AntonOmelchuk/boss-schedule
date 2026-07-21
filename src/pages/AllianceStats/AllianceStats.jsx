@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
+import Error from "../../components/Error/Error";
+import Loader from "../../components/Loader/Loader";
+import useAppStore from "../../store/useAppStore";
 import BarChartCustom from "./components/BarChart";
 import Leaderboard from "./components/Leaderboard";
 import ParetoLineChart from "./components/ParetoLineChart";
@@ -8,14 +11,17 @@ import RadarChartCustom from "./components/RadarChart";
 import SummaryCards from "./components/SummaryCards";
 
 const AllianceStats = () => {
-  const [data, setData] = useState({ pareto: [], summary: {} });
+  const { statsData, isLoading, error, fetchAllData } = useAppStore();
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/cp-stats")
-      .then((res) => res.json())
-      .then((result) => setData(result.data))
-      .catch((err) => console.error("Error fetching stats:", err));
-  }, []);
+  useEffect(() => fetchAllData, []);
+
+  if (isLoading && !statsData.pareto.length) {
+    return <Loader title="Loading Alliance Analytics.." />;
+  }
+
+  if (error) {
+    return <Error title={error} onClickHandler={fetchAllData} />;
+  }
 
   return (
     <div className="p-8 text-white min-h-screen">
@@ -26,26 +32,24 @@ const AllianceStats = () => {
       >
         The 3rd Side Analytics
       </h1>
-      <SummaryCards summary={data.summary} />
+      <SummaryCards />
 
       <div className="flex flex-wrap lg:flex-nowrap gap-8 items-start justify-center">
-        <div className="w-full lg:w-87.5 shrink-0">
-          <Leaderboard data={data.pareto} />
-        </div>
+        <Leaderboard />
 
         <div className="flex-1 w-full flex flex-col gap-8 min-w-0">
           <div className="grid grid-cols-1 min-[1400px]:grid-cols-2 gap-8">
-            <PieChartCustom data={data.pareto} />
-            <RadarChartCustom data={data.pareto} />
+            <PieChartCustom />
+            <RadarChartCustom />
           </div>
 
           <div className="w-full">
-            <BarChartCustom data={data.pareto} />
+            <BarChartCustom />
           </div>
         </div>
       </div>
       <div className="w-full h-112.5 mt-8">
-        <ParetoLineChart data={data.pareto} />
+        <ParetoLineChart />
       </div>
     </div>
   );
