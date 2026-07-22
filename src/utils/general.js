@@ -1,4 +1,10 @@
-import { CATEGORIES, EMOJI_MAP, LANGUAGES, RELATION } from "./constants";
+import {
+  CATEGORIES,
+  EMOJI_MAP,
+  EPIC_NAME_TO_EVENT_TYPE,
+  LANGUAGES,
+  RELATION,
+} from "./constants";
 
 /**
  * Retrieves the corresponding emoji icon for a given event type from the mapped dictionary.
@@ -228,4 +234,12 @@ export const shuffleArray = (array) => {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
+};
+
+/**
+ * Get icon for epics from backend
+ */
+export const getBossIcon = (bossName) => {
+  const eventType = EPIC_NAME_TO_EVENT_TYPE[bossName] || bossName;
+  return getEmojiIcon(eventType) || "💎";
 };

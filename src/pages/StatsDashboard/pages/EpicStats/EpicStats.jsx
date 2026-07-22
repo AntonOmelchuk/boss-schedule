@@ -5,6 +5,8 @@ import Loader from "../../../../components/Loader/Loader";
 import useAppStore from "../../../../store/useAppStore";
 import DistributionHistory from "./components/DistributionHistory/DistributionHistory";
 import EpicAllocation from "./components/EpicAllocation/EpicAllocation";
+import EpicFarmedTimeline from "./components/EpicFarmedTimeline/EpicFarmedTimeline";
+import EpicTypesBreakdownChart from "./components/EpicTypesBreakdownChart/EpicTypesBreakdownChart";
 import Header from "./components/Header/Header";
 import StatCards from "./components/StatCards/StatCards";
 
@@ -38,11 +40,16 @@ const EpicStats = () => {
         <StatCards />
       </div>
 
+      <EpicTypesBreakdownChart />
+
       {/* 2. CP Epic Allocation Chart (Stacked Bar Chart) */}
       <EpicAllocation />
 
       {/* 3. Detailed Distribution Table */}
-      <DistributionHistory />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch w-full">
+        <EpicFarmedTimeline />
+        <DistributionHistory />
+      </div>
     </div>
   );
 };

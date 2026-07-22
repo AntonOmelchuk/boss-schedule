@@ -139,3 +139,29 @@ export const EPIC_COLORS = {
   Valakas: "#ef4444", // Deep Red (Вогняно-червоний top-tier)
   Antharas: "#84cc16", // Toxic Lime (Токсично-зелений)
 };
+
+// 'all' | 'treasury' | 'shared'
+export const FARMED_EPIC_FILTERS = {
+  ALL: "all",
+  TREASURY: "treasury",
+  SHARED: "shared",
+};
+
+export const SORT = {
+  DESC: "desc",
+  ASC: "asc",
+};
+
+// Map for epic from backend
+export const EPIC_NAME_TO_EVENT_TYPE = {
+  QueenAnt: EVENT_TYPES.QA,
+  QA: EVENT_TYPES.QA,
+  Core: EVENT_TYPES.Core,
+  Orfen: EVENT_TYPES.Orfen,
+  Zaken: EVENT_TYPES.Zaken,
+  Frintezza: EVENT_TYPES.Tezza,
+  Tezza: EVENT_TYPES.Tezza,
+  Baium: EVENT_TYPES.Baium,
+  Antharas: EVENT_TYPES.Antharas,
+  Valakas: EVENT_TYPES.Valakas,
+};

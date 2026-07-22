@@ -134,7 +134,7 @@ const Leaderboard = () => {
                     #{index + 1}
                   </span>
                   <div className="text-left">
-                    <span className="font-medium text-slate-200 text-sm block">
+                    <span className="font-medium text-slate-200 text-lg block">
                       {item.cp_name}
                     </span>
 
@@ -153,10 +153,10 @@ const Leaderboard = () => {
                 <div className="text-right">
                   {viewMode === "points" ? (
                     <>
-                      <span className="font-bold text-indigo-300 text-sm block">
+                      <span className="font-bold text-indigo-300 text-lg block">
                         {item.points} pts
                       </span>
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-sm text-slate-400">
                         {item.contribution_pct}%
                       </span>
                     </>
