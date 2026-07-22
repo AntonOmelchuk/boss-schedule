@@ -49,7 +49,7 @@ const useAppStore = create(
             return acc;
           }, {}),
         })),
-      fetchAlStatlData: async () => {
+      fetchAllStatData: async () => {
         set({ isLoading: true, error: null });
         try {
           const [statsRes, timelineRes, summaryRes] = await Promise.all([
@@ -67,27 +67,41 @@ const useAppStore = create(
           const summaryJson = await summaryRes.json();
 
           set({
-            statsData: statsJson.data,
-            timelineData: timelineJson.data,
-            summaryData: summaryJson.data,
+            statsData: statsJson.data ? { ...statsJson.data } : null,
+            timelineData: Array.isArray(timelineJson.data)
+              ? [...timelineJson.data]
+              : timelineJson.data,
+            summaryData: summaryJson.data ? { ...summaryJson.data } : null,
             isLoading: false,
           });
         } catch (err) {
-          console.error("Error fetching data:", err);
+          console.error("Error fetching analytics data:", err);
           set({ error: err.message, isLoading: false });
         }
       },
+
       fetchEpicData: async () => {
-        set({ loadingEpics: true });
+        set({ loadingEpics: true, error: null });
         try {
           const res = await fetch(`${BASE_URL}/api/epics`);
+
+          if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+          }
+
           const json = await res.json();
+
           if (json.status === "success") {
-            set({ epicData: json.data, loadingEpics: false });
+            set({
+              epicData: { ...json.data },
+              loadingEpics: false,
+            });
+          } else {
+            throw new Error(json.message || "Failed to load epic data");
           }
         } catch (err) {
-          set({ error: err.message, isLoading: false });
           console.error("Error fetching epic data:", err);
+          set({ error: err.message, loadingEpics: false });
         }
       },
     }),

@@ -18,7 +18,9 @@ const EpicStats = () => {
     })),
   );
 
-  useEffect(() => fetchEpicData, []);
+  useEffect(() => {
+    fetchEpicData();
+  }, [fetchEpicData]);
 
   if (loadingEpics) {
     return <Loader title="Loading Epic Bosses Analytics.." />;
