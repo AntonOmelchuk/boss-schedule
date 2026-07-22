@@ -39,13 +39,6 @@ const AllianceStats = () => {
 
   return (
     <div className="p-8 text-white min-h-screen">
-      <h1
-        className="text-2xl md:text-3xl lg:text-4xl
-          font-bold text-transparent [-webkit-text-stroke:1px_#94a3b8]
-          tracking-widest px-4 text-center drop-shadow-md mb-8"
-      >
-        The 3rd Side Analytics
-      </h1>
       <SummaryCards />
 
       <div className="flex flex-wrap xl:flex-nowrap gap-8 items-start justify-center">

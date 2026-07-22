@@ -7,7 +7,6 @@ import DistributionHistory from "./components/DistributionHistory/DistributionHi
 import EpicAllocation from "./components/EpicAllocation/EpicAllocation";
 import EpicFarmedTimeline from "./components/EpicFarmedTimeline/EpicFarmedTimeline";
 import EpicTypesBreakdownChart from "./components/EpicTypesBreakdownChart/EpicTypesBreakdownChart";
-import Header from "./components/Header/Header";
 import StatCards from "./components/StatCards/StatCards";
 
 const EpicStats = () => {
@@ -31,14 +30,7 @@ const EpicStats = () => {
 
   return (
     <div className="w-full mt-16 flex flex-col gap-8">
-      {/* 1. Header & Summary Cards */}
-      <div
-        className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-        p-6 shadow-xl flex flex-col gap-6"
-      >
-        <Header />
-        <StatCards />
-      </div>
+      <StatCards />
 
       <EpicTypesBreakdownChart />
 

@@ -13,7 +13,7 @@ const DistributionHistory = () => {
         CP Distribution Breakdown & History
       </h3>
 
-      <div className="overflow-x-auto custom-scrollbar">
+      <div className="overflow-x-auto overflow-y-auto max-h-200 custom-scrollbar rounded-xl border border-slate-800/60">
         <table className="w-full text-left text-xs text-slate-300">
           <thead className="text-[11px] uppercase bg-slate-800/60 text-slate-400 border-b border-slate-800">
             <tr>

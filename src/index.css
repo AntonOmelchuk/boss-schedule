@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --wide: 1900px;
-}
-
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -83,4 +79,27 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+@theme {
+  --wide: 1900px;
+}
+
+/* Custom Dark Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6); /* Slate-900 */
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155; /* Slate-700 */
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569; /* Slate-600 */
 }

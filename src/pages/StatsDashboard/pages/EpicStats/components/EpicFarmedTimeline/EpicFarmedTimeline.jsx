@@ -83,34 +83,43 @@ const EpicFarmedTimeline = () => {
       />
 
       {/* Timeline List */}
-      <div
-        className="relative pl-6 sm:pl-8 flex flex-col gap-6 before:absolute before:left-2.5 sm:before:left-3.5
+      <div className="max-h-200 overflow-y-auto pr-2 custom-scrollbar">
+        <div
+          className="relative pl-6 sm:pl-8 flex flex-col gap-6 before:absolute before:left-2.5 sm:before:left-3.5
         before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-800"
-      >
-        {filteredEvents.length === 0 ? (
-          <div className="text-center py-8 text-xs text-slate-500">
-            No epic kill events found matching your criteria.
-          </div>
-        ) : (
-          filteredEvents.map(
-            ({ id, epic_name, farm_date, status, share_date, assigned_cp }) => {
-              const bossColor = EPIC_COLORS[epic_name] || "#64748b";
-              const isShared = status === FARMED_EPIC_FILTERS.SHARED;
+        >
+          {filteredEvents.length === 0 ? (
+            <div className="text-center py-8 text-xs text-slate-500">
+              No epic kill events found matching your criteria.
+            </div>
+          ) : (
+            filteredEvents.map(
+              ({
+                id,
+                epic_name,
+                farm_date,
+                status,
+                share_date,
+                assigned_cp,
+              }) => {
+                const bossColor = EPIC_COLORS[epic_name] || "#64748b";
+                const isShared = status === FARMED_EPIC_FILTERS.SHARED;
 
-              return (
-                <TimelineItem
-                  key={id}
-                  name={epic_name}
-                  farmDate={farm_date}
-                  bossColor={bossColor}
-                  isShared={isShared}
-                  shareDate={share_date}
-                  cp={assigned_cp}
-                />
-              );
-            },
-          )
-        )}
+                return (
+                  <TimelineItem
+                    key={id}
+                    name={epic_name}
+                    farmDate={farm_date}
+                    bossColor={bossColor}
+                    isShared={isShared}
+                    shareDate={share_date}
+                    cp={assigned_cp}
+                  />
+                );
+              },
+            )
+          )}
+        </div>
       </div>
     </div>
   );
