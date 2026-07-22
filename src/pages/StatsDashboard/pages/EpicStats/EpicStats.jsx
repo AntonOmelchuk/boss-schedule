@@ -40,7 +40,7 @@ const EpicStats = () => {
       <EpicAllocation />
 
       {/* 3. Detailed Distribution Table */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch w-full">
+      <div className="grid grid-cols-1 min-[1950px]:grid-cols-2 gap-6 items-stretch w-full">
         <EpicFarmedTimeline />
         <DistributionHistory />
       </div>

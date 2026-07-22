@@ -43,7 +43,7 @@ const AllianceStats = () => {
     <div className="p-8 text-white min-h-screen">
       <SummaryCards />
 
-      <div className="flex flex-wrap xl:flex-nowrap gap-8 items-start justify-center">
+      <div className="flex flex-wrap min-[1600px]:flex-nowrap gap-8 items-start justify-center">
         <Leaderboard />
         <PieChartCustom />
         <RadarChartCustom />
