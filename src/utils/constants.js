@@ -123,3 +123,45 @@ export const MAKE_SCREENSHOT_STATUS = {
   Success: "success",
   Error: "error",
 };
+
+export const DASHBOARD_TABS = {
+  ATTENDANCE: "attendance",
+  EPICS: "epics",
+};
+
+export const EPIC_COLORS = {
+  QueenAnt: "#f59e0b", // Amber / Warm Gold (Замість рожевого)
+  Orfen: "#38bdf8", // Sky Blue (Світло-блакитний)
+  Core: "#22d3ee", // Cyan / Ice (Крижаний ціан)
+  Zaken: "#10b981", // Emerald (Темно-зелений/смарагдовий)
+  Baium: "#f97316", // Flame Orange (Вогняно-помаранчевий)
+  Frintezza: "#64748b", // Slate / Crimson Silver (Стриманий темно-сталевий замість фіолетового)
+  Valakas: "#ef4444", // Deep Red (Вогняно-червоний top-tier)
+  Antharas: "#84cc16", // Toxic Lime (Токсично-зелений)
+};
+
+// 'all' | 'treasury' | 'shared'
+export const FARMED_EPIC_FILTERS = {
+  ALL: "all",
+  TREASURY: "treasury",
+  SHARED: "shared",
+};
+
+export const SORT = {
+  DESC: "desc",
+  ASC: "asc",
+};
+
+// Map for epic from backend
+export const EPIC_NAME_TO_EVENT_TYPE = {
+  QueenAnt: EVENT_TYPES.QA,
+  QA: EVENT_TYPES.QA,
+  Core: EVENT_TYPES.Core,
+  Orfen: EVENT_TYPES.Orfen,
+  Zaken: EVENT_TYPES.Zaken,
+  Frintezza: EVENT_TYPES.Tezza,
+  Tezza: EVENT_TYPES.Tezza,
+  Baium: EVENT_TYPES.Baium,
+  Antharas: EVENT_TYPES.Antharas,
+  Valakas: EVENT_TYPES.Valakas,
+};

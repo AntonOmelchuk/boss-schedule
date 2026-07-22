@@ -1,4 +1,10 @@
-import { CATEGORIES, EMOJI_MAP, LANGUAGES, RELATION } from "./constants";
+import {
+  CATEGORIES,
+  EMOJI_MAP,
+  EPIC_NAME_TO_EVENT_TYPE,
+  LANGUAGES,
+  RELATION,
+} from "./constants";
 
 /**
  * Retrieves the corresponding emoji icon for a given event type from the mapped dictionary.
@@ -190,4 +196,50 @@ export const getEventIsoTime = (ts) => {
   if (ts) {
     return new Date(ts).toISOString();
   }
+};
+
+export const getCategoryByAction = (action) => {
+  if (!action) return CATEGORIES.PVP;
+
+  const act = action.toLowerCase();
+
+  if (act.includes("siege")) return CATEGORIES.Siege;
+  if (act.includes("ch") || act.includes("hall")) return CATEGORIES.CH;
+
+  // Epic bosses (Valakas, Baium, Frintezza, Zaken, QueenAnt, Core, Orfen)
+  if (
+    act.includes("valakas") ||
+    act.includes("baium") ||
+    act.includes("frintezza") ||
+    act.includes("zaken") ||
+    act.includes("queenant") ||
+    act.includes("core") ||
+    act.includes("orfen")
+  ) {
+    return CATEGORIES.Epic;
+  }
+
+  return CATEGORIES.PVP; // Deafult for PvP Events
+};
+
+/**
+ * Fisher-Yates algorithm
+ * Doesn't change original array.
+ */
+export const shuffleArray = (array) => {
+  if (!array || !Array.isArray(array)) return [];
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+/**
+ * Get icon for epics from backend
+ */
+export const getBossIcon = (bossName) => {
+  const eventType = EPIC_NAME_TO_EVENT_TYPE[bossName] || bossName;
+  return getEmojiIcon(eventType) || "💎";
 };
