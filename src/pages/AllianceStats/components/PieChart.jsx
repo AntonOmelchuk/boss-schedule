@@ -56,7 +56,7 @@ const PieChartCustom = () => {
   };
 
   return (
-    <div className="w-full h-125 bg-slate-900/30 p-4 rounded-xl border border-slate-700 flex flex-col">
+    <div className="w-full h-150 bg-slate-900/30 p-4 rounded-xl border border-slate-700 flex flex-col">
       <h3 className="text-xl mb-2 text-white">Distribution Share (All CPs)</h3>
       <div className="w-full flex-1 min-h-112.5">
         <ResponsiveContainer width="100%" height="100%">

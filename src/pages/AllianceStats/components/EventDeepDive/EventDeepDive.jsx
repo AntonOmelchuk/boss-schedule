@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  Cell,
-  Pie,
-  PieChart,
   ResponsiveContainer,
   Tooltip as RechartsTooltip,
+  Treemap,
 } from "recharts";
 
-import useAppStore from "../../../store/useAppStore";
+import useAppStore from "../../../../store/useAppStore";
+import CustomTreemapContent from "./CustomTreemapContent";
 
 const COLOR_PALETTE = [
   "#38bdf8",
@@ -34,7 +33,7 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
 
   const [activeLabel, setActiveLabel] = useState("");
 
-  // Оновлюємо внутрішній стан при виборі ззовні або беремо останній івент
+  // Update state after select event
   useEffect(() => {
     if (selectedEventLabel) {
       setActiveLabel(selectedEventLabel);
@@ -43,12 +42,12 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
     }
   }, [selectedEventLabel, rawTimeline]);
 
-  // Знаходимо сирі дані обраного івенту
+  // Find data for selected event
   const currentEvent = useMemo(() => {
     return rawTimeline.find((e) => e.event_label === activeLabel);
   }, [rawTimeline, activeLabel]);
 
-  // Трансформуємо КП у масив для PieChart
+  // Format data for chart
   const cpBreakdown = useMemo(() => {
     if (!currentEvent) return [];
     const systemKeys = ["date", "action", "event_label", "total_players"];
@@ -74,7 +73,7 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
       className="w-full mt-16 bg-slate-900/30 backdrop-blur-md border border-slate-800
       rounded-2xl p-6 shadow-xl flex flex-col gap-6"
     >
-      {/* Шапка з вибором івенту */}
+      {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
         <div>
           <h2 className="text-xl font-bold text-slate-100 tracking-wide">
@@ -85,7 +84,7 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
           </p>
         </div>
 
-        {/* Dropdown вибору івенту */}
+        {/* Dropdown */}
         <select
           value={activeLabel}
           onChange={(e) => {
@@ -103,10 +102,10 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
         </select>
       </div>
 
-      {/* Основна сітка */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        {/* Ключові метрики */}
-        <div className="flex flex-col gap-3">
+      {/* Main grid — 12-колонкова сітка */}
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+        {/* 1. Key Metrics */}
+        <div className="flex flex-col gap-3 xl:col-span-3">
           <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
             <span className="text-xs text-slate-400 uppercase font-semibold">
               Total Event Attendance
@@ -124,13 +123,13 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
               <span className="text-xs text-slate-400 uppercase font-semibold">
                 Top Contributor (MVP CP)
               </span>
-              <div className="text-lg font-bold text-emerald-400 mt-1 flex items-center justify-between">
-                <span>{topCP.name}</span>
+              <div className="text-lg font-bold text-emerald-400 mt-1 flex items-center justify-between gap-2">
+                <span className="truncate">{topCP.name}</span>
                 <span
                   className="text-xs bg-emerald-500/10 text-emerald-400 border
-                 border-emerald-500/20 px-2 py-1 rounded-lg"
+                  border-emerald-500/20 px-2 py-1 rounded-lg shrink-0"
                 >
-                  {topCP.value} players (
+                  {topCP.value} pl. (
                   {Math.round((topCP.value / totalPlayers) * 100)}%)
                 </span>
               </div>
@@ -147,60 +146,66 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
           </div>
         </div>
 
-        {/* Donut Chart */}
-        <div className="h-64 w-full flex items-center justify-center">
+        {/* 2. Treemap */}
+        <div
+          className="h-80 w-full lg:col-span-7 flex items-center justify-center
+         bg-slate-900/20 rounded-xl p-2 border border-slate-800/50"
+        >
           <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={cpBreakdown}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                innerRadius={55}
-                outerRadius={85}
-                paddingAngle={3}
-              >
-                {cpBreakdown.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLOR_PALETTE[index % COLOR_PALETTE.length]}
-                  />
-                ))}
-              </Pie>
+            <Treemap
+              data={cpBreakdown}
+              dataKey="value"
+              aspectRatio={4 / 3}
+              stroke="#0f172a"
+              content={<CustomTreemapContent />}
+            >
               <RechartsTooltip
                 contentStyle={{
                   backgroundColor: "#0f172a",
                   borderColor: "#334155",
                   borderRadius: "0.75rem",
+                }}
+                labelStyle={{
                   color: "#f8fafc",
+                  fontWeight: "bold",
+                  marginBottom: "0.25rem",
+                }}
+                itemStyle={{
+                  color: "#fff",
+                  fontSize: "0.875rem",
+                  fontWeight: "600",
                 }}
               />
-            </PieChart>
+            </Treemap>
           </ResponsiveContainer>
         </div>
 
-        {/* Таблиця / Список КП */}
-        <div className="flex flex-col gap-1.5 max-h-64 overflow-y-auto pr-1 custom-scrollbar">
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+        {/* 3. CP List */}
+        <div className="flex flex-col gap-1.5 xl:col-span-2 max-h-80 overflow-y-auto pr-1 custom-scrollbar">
+          <span
+            className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1
+          sticky top-0 bg-slate-900/90 py-1 z-10"
+          >
             Party Breakdown ({cpBreakdown.length} CPs present):
           </span>
           {cpBreakdown.map((cp, idx) => (
             <div
               key={cp.name}
               className="flex items-center justify-between p-2 rounded-lg bg-slate-800/30 border
-               border-slate-800/60 text-xs"
+         border-slate-800/60 text-xs"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 truncate pr-2">
                 <span
-                  className="w-2.5 h-2.5 rounded-full"
+                  className="w-2.5 h-2.5 rounded-full shrink-0"
                   style={{
                     backgroundColor: COLOR_PALETTE[idx % COLOR_PALETTE.length],
                   }}
                 />
-                <span className="font-medium text-slate-200">{cp.name}</span>
+                <span className="font-medium text-slate-200 truncate">
+                  {cp.name}
+                </span>
               </div>
-              <div className="font-bold text-slate-100">
+              <div className="font-bold text-slate-100 shrink-0">
                 {cp.value}{" "}
                 <span className="text-slate-500 font-normal">
                   ({Math.round((cp.value / totalPlayers) * 100)}%)

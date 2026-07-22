@@ -25,7 +25,7 @@ const BarChartCustom = () => {
   const data = [...pareto].reverse();
 
   return (
-    <div className="col-span-full h-125 bg-slate-900/30 p-6 rounded-xl border border-slate-700">
+    <div className="h-150 mt-8 bg-slate-900/30 p-6 rounded-xl border border-slate-700">
       <h3 className="text-xl mb-6">Performance</h3>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 20, bottom: 80 }}>

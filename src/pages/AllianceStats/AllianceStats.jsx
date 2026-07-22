@@ -6,7 +6,7 @@ import useAppStore from "../../store/useAppStore";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
 import BarChartCustom from "./components/BarChart";
 import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
-import EventDeepDive from "./components/EventDeepDive";
+import EventDeepDive from "./components/EventDeepDive/EventDeepDive";
 import Leaderboard from "./components/Leaderboard";
 import ParetoLineChart from "./components/ParetoLineChart";
 import PieChartCustom from "./components/PieChart";
@@ -39,23 +39,13 @@ const AllianceStats = () => {
       </h1>
       <SummaryCards />
 
-      <div className="flex flex-wrap lg:flex-nowrap gap-8 items-start justify-center">
+      <div className="flex flex-wrap xl:flex-nowrap gap-8 items-start justify-center">
         <Leaderboard />
-
-        <div className="flex-1 w-full flex flex-col gap-8 min-w-0">
-          <div className="grid grid-cols-1 min-[1400px]:grid-cols-2 gap-8">
-            <PieChartCustom />
-            <RadarChartCustom />
-          </div>
-
-          <div className="w-full">
-            <BarChartCustom />
-          </div>
-        </div>
+        <PieChartCustom />
+        <RadarChartCustom />
       </div>
-      <div className="w-full h-112.5 mt-8">
-        <ParetoLineChart />
-      </div>
+      <BarChartCustom />
+      <ParetoLineChart />
       <CPProgressLineChart />
       <AllianceActivityComboChart
         onEventClick={(eventLabel) => setSelectedEvent(eventLabel)}

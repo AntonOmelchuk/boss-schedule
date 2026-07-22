@@ -15,7 +15,7 @@ const RadarChartCustom = () => {
   const data = [...pareto].reverse();
 
   return (
-    <div className="h-125 bg-slate-900/30 p-4 rounded-xl border border-slate-700">
+    <div className="w-full h-150 bg-slate-900/30 p-4 rounded-xl border border-slate-700">
       <h3 className="text-xl mb-2">{`Top ${TOP_AMOUNT} Comparison`}</h3>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart data={data}>
