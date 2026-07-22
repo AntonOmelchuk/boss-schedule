@@ -8,7 +8,7 @@ import {
   YAxis,
 } from "recharts";
 
-import useAppStore from "../../../store/useAppStore";
+import useAppStore from "../../../../../store/useAppStore";
 
 const ParetoLineChart = () => {
   const pareto = useAppStore((state) => state.statsData.pareto);

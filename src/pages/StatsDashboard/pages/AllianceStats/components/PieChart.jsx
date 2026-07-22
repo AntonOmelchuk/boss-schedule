@@ -1,6 +1,8 @@
+import { useMemo } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import useAppStore from "../../../store/useAppStore";
+import useAppStore from "../../../../../store/useAppStore";
+import { shuffleArray } from "../../../../../utils/general";
 
 const DARK_COLORS = [
   "#4f46e5",
@@ -20,6 +22,10 @@ const DARK_COLORS = [
 
 const PieChartCustom = () => {
   const pareto = useAppStore((state) => state.statsData.pareto);
+
+  const randomizedData = useMemo(() => {
+    return shuffleArray(pareto);
+  }, [pareto]);
 
   // Custom label for name & percent
   const renderCustomizedLabel = ({
@@ -48,7 +54,7 @@ const PieChartCustom = () => {
         fill="#94a3b8"
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
-        fontSize={10}
+        fontSize={12}
       >
         {`${currentItem.cp_name}: ${(percent * 100).toFixed(1)}%`}
       </text>
@@ -62,7 +68,7 @@ const PieChartCustom = () => {
         <ResponsiveContainer width="100%" height="100%">
           <PieChart margin={{ top: 40, right: 80, bottom: 40, left: 80 }}>
             <Pie
-              data={pareto}
+              data={randomizedData}
               dataKey="points"
               nameKey="cp_name"
               cx="50%"
@@ -71,7 +77,7 @@ const PieChartCustom = () => {
               label={renderCustomizedLabel}
               labelLine={{ stroke: "#475569", strokeWidth: 1 }}
             >
-              {pareto?.map((_, i) => (
+              {randomizedData?.map((_, i) => (
                 <Cell
                   key={`cell-${i}`}
                   fill={DARK_COLORS[i % DARK_COLORS.length]}

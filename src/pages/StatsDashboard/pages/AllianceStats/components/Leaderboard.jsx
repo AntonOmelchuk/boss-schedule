@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import useAppStore from "../../../store/useAppStore";
+import useAppStore from "../../../../../store/useAppStore";
 
 const Leaderboard = () => {
   const [viewMode, setViewMode] = useState("points"); // "points" | "priority"
@@ -36,7 +36,7 @@ const Leaderboard = () => {
   });
 
   return (
-    <div className="w-full lg:w-82.5 2xl:w-100 shrink-0 mr-auto">
+    <div className="w-full 2xl:w-150 shrink-0 mr-auto">
       <div className="bg-slate-900/30 rounded-xl border border-slate-800 p-4 w-full relative">
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-xl font-semibold text-slate-200">

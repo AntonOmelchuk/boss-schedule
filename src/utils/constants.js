@@ -123,3 +123,8 @@ export const MAKE_SCREENSHOT_STATUS = {
   Success: "success",
   Error: "error",
 };
+
+export const DASHBOARD_TABS = {
+  ATTENDANCE: "attendance",
+  EPICS: "epics",
+};

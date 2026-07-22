@@ -22,6 +22,11 @@ const useAppStore = create(
       timelineData: { current_snapshot: [], timeline: [] },
       isLoading: false,
       error: null,
+      // Summary Cards
+      summaryData: null,
+      // Epics Stats
+      epicData: null,
+      loadingEpics: false,
 
       // Actions
       setLanguage: (lang) => set({ language: lang }),
@@ -42,30 +47,45 @@ const useAppStore = create(
             return acc;
           }, {}),
         })),
-      fetchAllData: async () => {
+      fetchAlStatlData: async () => {
         set({ isLoading: true, error: null });
         try {
-          // Робимо два запити паралельно для швидкості
-          const [statsRes, timelineRes] = await Promise.all([
+          const [statsRes, timelineRes, summaryRes] = await Promise.all([
             fetch("http://127.0.0.1:8000/api/cp-stats"),
             fetch("http://127.0.0.1:8000/api/timeline"),
+            fetch("http://127.0.0.1:8000/api/summary"),
           ]);
 
-          if (!statsRes.ok || !timelineRes.ok) {
+          if (!statsRes.ok || !timelineRes.ok || !summaryRes.ok) {
             throw new Error("Failed to fetch analytics data from backend");
           }
 
           const statsJson = await statsRes.json();
           const timelineJson = await timelineRes.json();
+          const summaryJson = await summaryRes.json();
 
           set({
             statsData: statsJson.data,
             timelineData: timelineJson.data,
+            summaryData: summaryJson.data,
             isLoading: false,
           });
         } catch (err) {
           console.error("Error fetching data:", err);
           set({ error: err.message, isLoading: false });
+        }
+      },
+      fetchEpicData: async () => {
+        set({ loadingEpics: true });
+        try {
+          const res = await fetch("http://127.0.0.1:8000/api/epics");
+          const json = await res.json();
+          if (json.status === "success") {
+            set({ epicData: json.data, loadingEpics: false });
+          }
+        } catch (err) {
+          set({ error: err.message, isLoading: false });
+          console.error("Error fetching epic data:", err);
         }
       },
     }),

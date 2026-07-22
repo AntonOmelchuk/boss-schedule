@@ -10,7 +10,7 @@ import {
   YAxis,
 } from "recharts";
 
-import useAppStore from "../../../../store/useAppStore";
+import useAppStore from "../../../../../../store/useAppStore";
 
 const CP_COLORS = [
   "#38bdf8",

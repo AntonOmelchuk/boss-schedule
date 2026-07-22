@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   Bar,
   BarChart,
@@ -9,7 +10,8 @@ import {
   YAxis,
 } from "recharts";
 
-import useAppStore from "../../../store/useAppStore";
+import useAppStore from "../../../../../store/useAppStore";
+import { shuffleArray } from "../../../../../utils/general";
 
 const COLORS = [
   "#8884d8",
@@ -22,7 +24,9 @@ const COLORS = [
 
 const BarChartCustom = () => {
   const pareto = useAppStore((state) => state.statsData.pareto);
-  const data = [...pareto].reverse();
+  const data = useMemo(() => {
+    return shuffleArray(pareto);
+  }, [pareto]);
 
   return (
     <div className="h-150 mt-8 bg-slate-900/30 p-6 rounded-xl border border-slate-700">

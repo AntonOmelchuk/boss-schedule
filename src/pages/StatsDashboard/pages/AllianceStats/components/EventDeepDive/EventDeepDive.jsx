@@ -5,7 +5,7 @@ import {
   Treemap,
 } from "recharts";
 
-import useAppStore from "../../../../store/useAppStore";
+import useAppStore from "../../../../../../store/useAppStore";
 import CustomTreemapContent from "./CustomTreemapContent";
 
 const COLOR_PALETTE = [
