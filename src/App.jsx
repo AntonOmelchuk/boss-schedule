@@ -6,6 +6,7 @@ import bgImg from "./assets/bg3.png";
 import MainPage from "./pages/MainPage/MainPage";
 import NotFound from "./pages/NotFound/NotFound";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
+import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
 import { EVENT_TYPES } from "./utils/constants";
@@ -86,6 +87,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/schedule" element={<ScheduleBuilder />} />
+          <Route path="/stats" element={<StatsDashboard />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
