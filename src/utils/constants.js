@@ -128,3 +128,14 @@ export const DASHBOARD_TABS = {
   ATTENDANCE: "attendance",
   EPICS: "epics",
 };
+
+export const EPIC_COLORS = {
+  QueenAnt: "#f59e0b", // Amber / Warm Gold (Замість рожевого)
+  Orfen: "#38bdf8", // Sky Blue (Світло-блакитний)
+  Core: "#22d3ee", // Cyan / Ice (Крижаний ціан)
+  Zaken: "#10b981", // Emerald (Темно-зелений/смарагдовий)
+  Baium: "#f97316", // Flame Orange (Вогняно-помаранчевий)
+  Frintezza: "#64748b", // Slate / Crimson Silver (Стриманий темно-сталевий замість фіолетового)
+  Valakas: "#ef4444", // Deep Red (Вогняно-червоний top-tier)
+  Antharas: "#84cc16", // Toxic Lime (Токсично-зелений)
+};

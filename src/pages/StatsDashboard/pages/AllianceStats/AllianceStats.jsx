@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 import Error from "../../../../components/Error/Error";
 import Loader from "../../../../components/Loader/Loader";
@@ -16,7 +17,15 @@ import SummaryCards from "./components/SummaryCards/SummaryCards";
 
 const AllianceStats = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const { statsData, isLoading, error, fetchAlStatlData } = useAppStore();
+
+  const { statsData, isLoading, error, fetchAlStatlData } = useAppStore(
+    useShallow((state) => ({
+      statsData: state.statsData,
+      isLoading: state.isLoading,
+      error: state.error,
+      fetchAlStatlData: state.fetchAlStatlData,
+    })),
+  );
 
   useEffect(() => fetchAlStatlData, []);
 

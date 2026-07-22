@@ -3,6 +3,7 @@ import { useState } from "react";
 import { DASHBOARD_TABS } from "../../utils/constants";
 import Tabs from "./components/Tabs";
 import AllianceStats from "./pages/AllianceStats/AllianceStats";
+import EpicStats from "./pages/EpicStats/EpicStats";
 
 const StatsDashboard = () => {
   const [activeTab, setActiveTab] = useState(DASHBOARD_TABS.ATTENDANCE);
@@ -15,7 +16,7 @@ const StatsDashboard = () => {
       {/* Dynamic Content */}
       <main className="w-full">
         {activeTab === DASHBOARD_TABS.ATTENDANCE && <AllianceStats />}
-        {activeTab === DASHBOARD_TABS.EPICS && <div></div>}
+        {activeTab === DASHBOARD_TABS.EPICS && <EpicStats />}
       </main>
     </div>
   );
