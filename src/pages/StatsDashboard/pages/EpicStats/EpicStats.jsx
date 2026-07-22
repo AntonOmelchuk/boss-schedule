@@ -23,7 +23,7 @@ const EpicStats = () => {
   }, [fetchEpicData]);
 
   if (loadingEpics) {
-    return <Loader title="Loading Epic Bosses Analytics.." />;
+    return <Loader title="Loading Epic Bosses Analytics..." />;
   }
 
   if (error) {

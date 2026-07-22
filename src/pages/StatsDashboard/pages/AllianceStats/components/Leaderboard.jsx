@@ -99,7 +99,7 @@ const Leaderboard = () => {
         <div className="flex bg-slate-950 p-1 rounded-lg border border-slate-800 mb-4">
           <button
             onClick={() => setViewMode("points")}
-            className={`flex-1 py-1.5 text-xs font-medium rounded-md transition ${
+            className={`flex-1 py-1.5 text-xs font-medium rounded-md cursor-pointer transition ${
               viewMode === "points"
                 ? "bg-indigo-600 text-white shadow"
                 : "text-slate-400 hover:text-slate-200"
@@ -109,7 +109,7 @@ const Leaderboard = () => {
           </button>
           <button
             onClick={() => setViewMode("priority")}
-            className={`flex-1 py-1.5 text-xs font-medium rounded-md transition ${
+            className={`flex-1 py-1.5 text-xs font-medium rounded-md cursor-pointer transition ${
               viewMode === "priority"
                 ? "bg-amber-600 text-white shadow"
                 : "text-slate-400 hover:text-slate-200"

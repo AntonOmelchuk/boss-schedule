@@ -32,7 +32,7 @@ const AllianceStats = () => {
   }, [fetchAllStatData]);
 
   if (isLoading && !statsData.pareto.length) {
-    return <Loader title="Loading Alliance Analytics.." />;
+    return <Loader title="Loading Alliance Analytics..." />;
   }
 
   if (error) {
