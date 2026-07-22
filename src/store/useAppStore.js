@@ -3,7 +3,8 @@ import { persist } from "zustand/middleware";
 
 import { CATEGORIES, LANGUAGES, TIME_FILTERS } from "../utils/constants";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+// const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BASE_URL = "http://localhost:8000";
 
 const useAppStore = create(
   persist(

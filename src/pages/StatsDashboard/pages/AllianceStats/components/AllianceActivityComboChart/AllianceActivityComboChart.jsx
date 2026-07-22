@@ -75,7 +75,7 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
           Alliance Attendance & Moving Average Trend
         </h2>
         <span
-          className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-sky-500/10
+          className="text-xs uppercase font-semibold px-2 py-0.5 rounded-full bg-sky-500/10
          text-sky-400 border border-sky-500/20"
         >
           Click bar to Deep Dive 💡
