@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import InfoIcon from "../../../../../components/InfoIcon/InfoIcon";
 import useAppStore from "../../../../../store/useAppStore";
 
 const Leaderboard = () => {
@@ -45,12 +46,7 @@ const Leaderboard = () => {
 
           {/* Info Icon */}
           <div className="relative group cursor-pointer">
-            <div
-              className="text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-700 w-6 h-6
-            rounded-full flex items-center justify-center text-xs font-serif italic font-bold transition"
-            >
-              i
-            </div>
+            <InfoIcon />
             <div
               className="absolute right-0 top-8 w-72 z-20 bg-slate-950 border border-slate-700 p-3
             rounded-xl shadow-2xl text-xs text-slate-300 opacity-0 invisible group-hover:opacity-100

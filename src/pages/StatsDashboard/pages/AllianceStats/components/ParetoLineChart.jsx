@@ -8,6 +8,7 @@ import {
   YAxis,
 } from "recharts";
 
+import InfoIcon from "../../../../../components/InfoIcon/InfoIcon";
 import useAppStore from "../../../../../store/useAppStore";
 
 const ParetoLineChart = () => {
@@ -26,12 +27,7 @@ const ParetoLineChart = () => {
           </div>
 
           <div className="relative group cursor-pointer">
-            <div
-              className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700
-            w-7 h-7 rounded-full flex items-center justify-center text-xs font-serif italic font-bold transition"
-            >
-              i
-            </div>
+            <InfoIcon />
 
             <div
               className="absolute right-0 top-9 w-80 z-20 bg-slate-950 border border-slate-700 p-4
