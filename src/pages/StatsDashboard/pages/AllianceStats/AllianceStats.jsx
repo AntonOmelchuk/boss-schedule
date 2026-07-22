@@ -27,7 +27,9 @@ const AllianceStats = () => {
     })),
   );
 
-  useEffect(() => fetchAlStatlData, []);
+  useEffect(() => {
+    fetchAlStatlData();
+  }, [fetchAlStatlData]);
 
   if (isLoading && !statsData.pareto.length) {
     return <Loader title="Loading Alliance Analytics.." />;
