@@ -1,9 +1,8 @@
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload || !payload.length) return null;
 
-  const data = payload[0].payload; // Усі дані поточного івенту
+  const data = payload[0].payload; // All data from current event
 
-  // Системні та розраховані поля, які не є назвами КП
   const systemKeys = [
     "event_label",
     "date",
@@ -12,7 +11,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     "avg_players",
   ];
 
-  // Фільтруємо лише КП з онлайном > 0 та сортуємо від більшого до меншого
+  // Filter CP with online > 0 and sort
   const cpList = Object.keys(data)
     .filter((key) => !systemKeys.includes(key) && Number(data[key]) > 0)
     .map((cpName) => ({ name: cpName, count: Number(data[cpName]) }))
@@ -21,9 +20,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   return (
     <div
       className="bg-slate-900/95 border border-slate-700/80 p-4 rounded-xl shadow-2xl
-      backdrop-blur-md min-w-72.5 text-slate-100 pointer-events-none"
+      backdrop-blur-md min-w-72.5 h-auto text-slate-100 pointer-events-none"
     >
-      {/* Заголовок: Назва івенту та загальна явка */}
+      {/* Header */}
       <div className="border-b border-slate-700/60 pb-2 mb-2 flex items-center justify-between gap-4">
         <span className="font-bold text-sm text-slate-100">{label}</span>
         <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-sky-400 font-semibold border border-slate-700">
@@ -31,7 +30,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         </span>
       </div>
 
-      {/* Метрики онлайну та порівняння із середньою лінією */}
+      {/* Online and compare with average value */}
       <div className="flex justify-between text-xs mb-3 px-1 text-slate-400">
         <span>
           5-Event Avg:{" "}
@@ -53,7 +52,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         </span>
       </div>
 
-      {/* Розподіл по КП (Grid у 2 колонки) */}
+      {/* CP List */}
       <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
         CP Breakdown:
       </div>

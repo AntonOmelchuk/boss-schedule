@@ -12,6 +12,7 @@ import ParetoLineChart from "./components/ParetoLineChart";
 import PieChartCustom from "./components/PieChart";
 import RadarChartCustom from "./components/RadarChart";
 import SummaryCards from "./components/SummaryCards";
+import CPConsistencyMatrix from "./CPConsistencyMatrix/CPConsistencyMatrix";
 
 const AllianceStats = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -63,6 +64,7 @@ const AllianceStats = () => {
         selectedEventLabel={selectedEvent}
         onSelectEvent={(eventLabel) => setSelectedEvent(eventLabel)}
       />
+      <CPConsistencyMatrix />
     </div>
   );
 };

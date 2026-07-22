@@ -22,12 +22,13 @@ const COLORS = [
 
 const BarChartCustom = () => {
   const pareto = useAppStore((state) => state.statsData.pareto);
+  const data = [...pareto].reverse();
 
   return (
     <div className="col-span-full h-125 bg-slate-900/30 p-6 rounded-xl border border-slate-700">
       <h3 className="text-xl mb-6">Performance</h3>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={pareto} margin={{ top: 20, bottom: 80 }}>
+        <BarChart data={data} margin={{ top: 20, bottom: 80 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
           <XAxis
             dataKey="cp_name"
@@ -46,7 +47,7 @@ const BarChartCustom = () => {
             itemStyle={{ color: "#ffffff" }}
           />
           <Bar dataKey="points" radius={[4, 4, 0, 0]}>
-            {pareto?.map((_, i) => (
+            {data?.map((_, i) => (
               <Cell key={i} fill={COLORS[i % COLORS.length]} />
             ))}
           </Bar>
