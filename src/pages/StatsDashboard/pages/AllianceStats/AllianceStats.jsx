@@ -18,25 +18,25 @@ import SummaryCards from "./components/SummaryCards/SummaryCards";
 const AllianceStats = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const { statsData, isLoading, error, fetchAlStatlData } = useAppStore(
+  const { statsData, isLoading, error, fetchAllStatData } = useAppStore(
     useShallow((state) => ({
       statsData: state.statsData,
       isLoading: state.isLoading,
       error: state.error,
-      fetchAlStatlData: state.fetchAlStatlData,
+      fetchAllStatData: state.fetchAllStatData,
     })),
   );
 
   useEffect(() => {
-    fetchAlStatlData();
-  }, [fetchAlStatlData]);
+    fetchAllStatData();
+  }, [fetchAllStatData]);
 
   if (isLoading && !statsData.pareto.length) {
     return <Loader title="Loading Alliance Analytics.." />;
   }
 
   if (error) {
-    return <Error title={error} onClickHandler={fetchAlStatlData} />;
+    return <Error title={error} onClickHandler={fetchAllStatData} />;
   }
 
   return (
