@@ -12,13 +12,15 @@ const SummaryCard = ({
       rounded-2xl p-5 shadow-xl flex flex-col justify-between"
     >
       <div className="flex justify-between items-start">
-        <span className="text-xl font-semibold text-slate-400 uppercase tracking-wider">
+        <span className="text-sm 2xl:text-xl font-semibold text-slate-400 uppercase tracking-wider">
           {title}
         </span>
         <span className="text-base">{icon}</span>
       </div>
       <div className="mt-2">
-        <div className={`text-4xl font-extrabold ${valueColor} truncate`}>
+        <div
+          className={`text-xl 2xl:text-4xl font-extrabold ${valueColor} truncate`}
+        >
           {value}{" "}
           {valueUnit && (
             <span className="text-xl font-normal text-slate-400">
