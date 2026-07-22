@@ -3,6 +3,8 @@ import { persist } from "zustand/middleware";
 
 import { CATEGORIES, LANGUAGES, TIME_FILTERS } from "../utils/constants";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 const useAppStore = create(
   persist(
     (set) => ({
@@ -51,9 +53,9 @@ const useAppStore = create(
         set({ isLoading: true, error: null });
         try {
           const [statsRes, timelineRes, summaryRes] = await Promise.all([
-            fetch("http://127.0.0.1:8000/api/cp-stats"),
-            fetch("http://127.0.0.1:8000/api/timeline"),
-            fetch("http://127.0.0.1:8000/api/summary"),
+            fetch(`${BASE_URL}/api/cp-stats`),
+            fetch(`${BASE_URL}/api/timeline`),
+            fetch(`${BASE_URL}/api/summary`),
           ]);
 
           if (!statsRes.ok || !timelineRes.ok || !summaryRes.ok) {
