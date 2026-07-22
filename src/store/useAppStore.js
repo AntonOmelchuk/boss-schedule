@@ -80,7 +80,7 @@ const useAppStore = create(
       fetchEpicData: async () => {
         set({ loadingEpics: true });
         try {
-          const res = await fetch("http://127.0.0.1:8000/api/epics");
+          const res = await fetch(`${BASE_URL}/api/epics`);
           const json = await res.json();
           if (json.status === "success") {
             set({ epicData: json.data, loadingEpics: false });
