@@ -175,3 +175,21 @@ export const EPIC_NAME_TO_EVENT_TYPE = {
   Antharas: EVENT_TYPES.Antharas,
   Valakas: EVENT_TYPES.Valakas,
 };
+
+// Default breakpoints value for Tailwind CSS for useMediaQuery
+export const BREAKPOINTS = {
+  // Mobile & Tablet
+  IS_MOBILE: "(max-width: 767px)",
+  IS_TABLET: "(min-width: 768px) and (max-width: 1279px)",
+
+  // Desktop
+  IS_DESKTOP: "(min-width: 1280px)",
+  IS_LARGE_DESKTOP: "(min-width: 1600px)",
+
+  // Specific values(for min-width)
+  MIN_SM: "(min-width: 640px)",
+  MIN_MD: "(min-width: 768px)",
+  MIN_LG: "(min-width: 1024px)",
+  MIN_XL: "(min-width: 1280px)",
+  MIN_2XL: "(min-width: 1536px)",
+};

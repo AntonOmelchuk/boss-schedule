@@ -56,7 +56,7 @@ const CPAvgOnlineMatrix = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-      p-6 shadow-xl flex flex-col gap-4 h-full min-h-0"
+      p-1 md:p-6 shadow-xl flex flex-col gap-4 h-full min-[1240px]:col-span-2 min-[1700px]:col-span-1"
     >
       {/* Header */}
       <HeaderList
@@ -80,12 +80,12 @@ const CPAvgOnlineMatrix = () => {
                 <div className="flex justify-between items-center text-xs">
                   <CPNameItem cpName={cpName} index={index} />
                   <div className="flex items-center gap-2">
-                    <span className="text-sm min-[1820px]:text-lg text-slate-500">
+                    <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-500">
                       ({attendedEvents} events)
                     </span>
-                    <span className="font-mono font-bold text-sky-400 text-sm min-[1820px]:text-lg">
+                    <span className="font-mono font-bold text-sky-400 text-xs md:text-sm min-[1820px]:text-lg">
                       {avgOnline}{" "}
-                      <span className="text-sm min-[1820px]:text-lg text-slate-400 font-normal">
+                      <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400 font-normal">
                         pts/event
                       </span>
                     </span>
@@ -98,7 +98,7 @@ const CPAvgOnlineMatrix = () => {
                border-slate-800/80 overflow-hidden"
                 >
                   <div
-                    className="bg-linear-to-r from-sky-600 via-indigo-500 to-amber-500
+                    className="bg-gradient-to-r from-sky-600 via-indigo-500 to-amber-500
                     h-full rounded-full transition-all duration-500 ease-out group-hover:brightness-125"
                     style={{ width: `${fillPercentage}%` }}
                   />
