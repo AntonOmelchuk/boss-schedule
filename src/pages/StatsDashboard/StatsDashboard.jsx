@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import TitleWithWatermark from "../../components/TitleWithWatermark/TitleWithWatermark";
 import { DASHBOARD_TABS } from "../../utils/constants";
 import Tabs from "./components/Tabs";
 import AllianceStats from "./pages/AllianceStats/AllianceStats";
@@ -12,14 +13,11 @@ const StatsDashboard = () => {
     <div className="min-h-screen text-slate-100 p-6 flex flex-col gap-6">
       {/* Navigation Tabs */}
       <Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
-      <h1
-        className="text-2xl md:text-3xl lg:text-4xl
-          font-bold text-transparent [-webkit-text-stroke:1px_#94a3b8]
-          tracking-widest px-4 text-center drop-shadow-md"
-      >
-        The 3rd Side Analytics
-      </h1>
-
+      <TitleWithWatermark
+        title="The 3rd Side Analytics"
+        size="xl"
+        className=""
+      />
       {/* Dynamic Content */}
       <main className="w-full">
         {activeTab === DASHBOARD_TABS.ATTENDANCE && <AllianceStats />}

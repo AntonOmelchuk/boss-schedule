@@ -102,7 +102,7 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
         </select>
       </div>
 
-      {/* Main grid — 12-колонкова сітка */}
+      {/* Main grid — 12-cells */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
         {/* 1. Key Metrics */}
         <div className="flex flex-col gap-3 xl:col-span-3">

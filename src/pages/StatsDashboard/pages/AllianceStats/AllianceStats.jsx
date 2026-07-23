@@ -5,9 +5,11 @@ import Error from "../../../../components/Error/Error";
 import Loader from "../../../../components/Loader/Loader";
 import useAppStore from "../../../../store/useAppStore";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
+import CPAvgOnlineMatrix from "./components/CPAvgOnlineMatrix/CPAvgOnlineMatrix";
 import CPConsistencyMatrix from "./components/CPConsistencyMatrix/CPConsistencyMatrix";
 import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
 import EventDeepDive from "./components/EventDeepDive/EventDeepDive";
+import FullPartyLeaderboard from "./components/FullPartyLeaderboard/FullPartyLeaderboard";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import ParetoLineChart from "./components/ParetoLineChart/ParetoLineChart";
 import PerfomanceChart from "./components/PermomanceChart/PerfomanceChart";
@@ -41,8 +43,11 @@ const AllianceStats = () => {
     <div className="p-8 text-white min-h-screen">
       <SummaryCards />
 
-      <div className="flex flex-wrap min-[1600px]:flex-nowrap gap-8 items-start justify-center">
+      {/* <div className="flex flex-wrap gap-8 items-stretch w-full *:flex-1 *:min-w-125"> */}
+      <div className="grid grid-cols-1 min-[1240px]:grid-cols-2 min-[1700px]:grid-cols-3 gap-8 items-stretch w-full">
         <Leaderboard />
+        <FullPartyLeaderboard />
+        <CPAvgOnlineMatrix />
       </div>
       <PerfomanceChart />
       <CPConsistencyMatrix />
