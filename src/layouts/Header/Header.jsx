@@ -60,7 +60,7 @@ const Header = () => {
               isActive={pathname === item.path}
               title={item.title}
               icon={item.icon}
-              className="px-4 py-2 text-xs font-bold rounded-xl"
+              className="px-5 py-3 text-base font-bold rounded-xl"
               activeClassName={item.activeClass}
               inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
             />
