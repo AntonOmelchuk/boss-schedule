@@ -24,12 +24,12 @@ const CPConsistencyMatrix = () => {
     const totalEventsCount = rawTimeline.length;
     const systemKeys = ["date", "action", "event_label", "total_players"];
 
-    // 1. Збираємо унікальні назви КП
+    // 1. Unique CP
     const cpNames = Object.keys(rawTimeline[0]).filter(
       (key) => !systemKeys.includes(key),
     );
 
-    // 2. Рахуємо статистику по кожній КП
+    // 2. Calculate data for each CP
     const stats = cpNames.map((cp) => {
       let attendedEvents = 0;
       let totalPlayersSum = 0;
@@ -52,15 +52,18 @@ const CPConsistencyMatrix = () => {
 
       return {
         cpName: cp,
-        attendanceRate, // % відвідуваності
+        attendanceRate, // % visiting
         attendedEvents,
         totalEvents: totalEventsCount,
         avgOnline,
       };
     });
 
-    // 3. Сортуємо від найактивніших до найменш активних
-    return stats.sort((a, b) => b.attendanceRate - a.attendanceRate);
+    // 3. Sort from more active to less || if equal -> sort by avarage online
+    return stats.sort(
+      (a, b) =>
+        b.attendanceRate - a.attendanceRate || b.avgOnline - a.avgOnline,
+    );
   }, [rawTimeline]);
 
   if (!rawTimeline.length) return null;

@@ -5,14 +5,12 @@ import Error from "../../../../components/Error/Error";
 import Loader from "../../../../components/Loader/Loader";
 import useAppStore from "../../../../store/useAppStore";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
-import BarChartCustom from "./components/BarChart";
 import CPConsistencyMatrix from "./components/CPConsistencyMatrix/CPConsistencyMatrix";
 import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
 import EventDeepDive from "./components/EventDeepDive/EventDeepDive";
-import Leaderboard from "./components/Leaderboard";
-import ParetoLineChart from "./components/ParetoLineChart";
-import PieChartCustom from "./components/PieChart";
-import RadarChartCustom from "./components/RadarChart";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
+import ParetoLineChart from "./components/ParetoLineChart/ParetoLineChart";
+import PerfomanceChart from "./components/PermomanceChart/PerfomanceChart";
 import SummaryCards from "./components/SummaryCards/SummaryCards";
 
 const AllianceStats = () => {
@@ -45,11 +43,9 @@ const AllianceStats = () => {
 
       <div className="flex flex-wrap min-[1600px]:flex-nowrap gap-8 items-start justify-center">
         <Leaderboard />
-        <PieChartCustom />
-        <RadarChartCustom />
       </div>
-      <BarChartCustom />
-      <ParetoLineChart />
+      <PerfomanceChart />
+      <CPConsistencyMatrix />
       <CPProgressLineChart />
       <AllianceActivityComboChart
         onEventClick={(eventLabel) => setSelectedEvent(eventLabel)}
@@ -58,7 +54,7 @@ const AllianceStats = () => {
         selectedEventLabel={selectedEvent}
         onSelectEvent={(eventLabel) => setSelectedEvent(eventLabel)}
       />
-      <CPConsistencyMatrix />
+      <ParetoLineChart />
     </div>
   );
 };
