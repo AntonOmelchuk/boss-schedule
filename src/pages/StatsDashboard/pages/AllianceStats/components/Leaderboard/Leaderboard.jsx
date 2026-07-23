@@ -20,7 +20,7 @@ const Leaderboard = () => {
   });
 
   return (
-    <div className="h-full bg-slate-900/30 rounded-xl border border-slate-800 p-4">
+    <div className="h-full bg-slate-900/30 rounded-xl border border-slate-800 p-1 md:p-4">
       <div className="flex justify-between items-center mb-3">
         <h3 className="text-xl font-semibold text-slate-200">
           {viewMode === SORT.POINTS ? "Alliance Roster" : "Priority Queue"}

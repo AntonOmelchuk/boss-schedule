@@ -3,7 +3,7 @@ import Tab from "./Tab";
 
 const Tabs = ({ setActiveTab, activeTab }) => {
   return (
-    <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
+    <div className="hidden md:flex items-center gap-2 border-b border-slate-800 pb-3">
       <Tab
         onClickHandler={() => setActiveTab(DASHBOARD_TABS.ATTENDANCE)}
         isActive={activeTab === DASHBOARD_TABS.ATTENDANCE}

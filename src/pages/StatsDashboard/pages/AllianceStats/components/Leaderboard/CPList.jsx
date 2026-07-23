@@ -30,14 +30,14 @@ const CPList = ({ data, viewMode }) => {
           return (
             <div
               key={index}
-              className="flex justify-between items-center p-3 bg-slate-800/50 rounded-lg border
+              className="flex justify-between items-center p-1 md:p-3 bg-slate-800/50 rounded-lg border
               border-slate-700/40 hover:bg-slate-800 transition"
             >
-              <div className="flex  flexitems-center gap-3">
+              <div className="flex flexitems-center gap-3">
                 <CPNameItem cpName={cp_name} index={index} />
                 {viewMode === SORT.POINTS && (
                   <div
-                    className={`flex self-wrap text-left px-1.5 py-0.5 text-[10px] font-bold
+                    className={`flex self-wrap text-left px-1 md:px-1.5 md:py-0.5 text-[8px] md:text-[10px] font-bold
                   rounded border mt-0.5 ${tier.color}`}
                   >
                     {tier.label}
@@ -48,10 +48,10 @@ const CPList = ({ data, viewMode }) => {
               <div className="text-right">
                 {viewMode === SORT.POINTS ? (
                   <>
-                    <span className="font-bold text-indigo-300 text-lg block">
+                    <span className="font-bold text-indigo-300 text-sm md:text-lg block">
                       {points} pts
                     </span>
-                    <span className="text-sm text-slate-400">
+                    <span className="text-xs md:text-sm text-slate-400">
                       {contribution_pct}%
                     </span>
                   </>

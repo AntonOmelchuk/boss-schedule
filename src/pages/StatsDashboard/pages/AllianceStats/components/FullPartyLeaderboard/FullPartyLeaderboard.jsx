@@ -69,7 +69,7 @@ const FullPartyLeaderboard = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-      p-6 shadow-xl flex flex-col gap-5 h-full"
+      p-1 md:p-6 shadow-xl flex flex-col gap-5 h-full"
     >
       {/* Header */}
       <HeaderList
@@ -82,23 +82,23 @@ const FullPartyLeaderboard = () => {
       {topCP && (
         <div
           className="relative overflow-hidden bg-linear-to-r from-amber-500/10 via-amber-500/5
-          to-transparent border border-amber-500/30 rounded-xl p-4 flex items-center justify-between"
+          to-transparent border border-amber-500/30 rounded-xl p-2 md:p-4 flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
-            <span className="text-3xl">🏆</span>
+            <span className="text-xs md:text-3xl">🏆</span>
             <div>
               <span className="text-xs uppercase font-bold text-amber-400 tracking-wider block">
                 Most Disciplined Squad
               </span>
-              <h4 className="text-base font-extrabold text-slate-100">
+              <h4 className="text-sm md:text-base font-extrabold text-slate-100">
                 {topCP.cpName}
               </h4>
             </div>
           </div>
           <div className="text-right">
-            <span className="text-xl font-black text-amber-400 font-mono block">
+            <span className="text-sm md:text-xl font-black text-amber-400 font-mono block">
               {topCP.fullPartyCount}x{" "}
-              <span className="text-lg font-normal">Full</span>
+              <span className="text-sm md:text-lg font-normal">Full</span>
             </span>
             <span className="text-sm min-[1820px]:text-lg text-slate-400">
               {topCP.fullPartyRate}% of their events
@@ -124,15 +124,15 @@ const FullPartyLeaderboard = () => {
 
                   {/* Right: Stats */}
                   <div className="flex items-center gap-3">
-                    <span className="text-sm min-[1820px]:text-lg text-slate-500">
+                    <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-500">
                       {fullPartyRate}% efficiency
                     </span>
                     <span
-                      className="font-mono font-bold text-amber-400 text-sm min-[1820px]:text-lg
+                      className="font-mono font-bold text-amber-400 text-xs md:text-sm min-[1820px]:text-lg
                      min-w-13.75 text-right"
                     >
                       {fullPartyCount}{" "}
-                      <span className="text-sm min-[1820px]:text-lg text-slate-400 font-normal">
+                      <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400 font-normal">
                         / {totalAttended}
                       </span>
                     </span>
@@ -145,7 +145,7 @@ const FullPartyLeaderboard = () => {
                   overflow-hidden"
                 >
                   <div
-                    className="bg-linear-to-r from-amber-600 to-amber-400 h-full rounded-full transition-all
+                    className="bg-gradient-to-r from-amber-600 to-amber-400 h-full rounded-full transition-all
                       duration-500 ease-out group-hover:brightness-125"
                     style={{ width: `${fillWidth}%` }}
                   />
