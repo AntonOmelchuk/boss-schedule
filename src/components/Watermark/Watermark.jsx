@@ -23,14 +23,17 @@ const WATERMARK_SIZES = {
   },
 };
 
-const Watermark = ({ size = "md" }) => {
+const Watermark = ({
+  size = "md",
+  className = "ml-4 pl-4 border-l border-slate-800",
+}) => {
   const currentSize = WATERMARK_SIZES[size] || WATERMARK_SIZES.md;
 
   return (
     <div
       data-screenshot-watermark="true"
-      className={`justify-center items-center ml-4 pl-4 border-l border-slate-800
-        text-slate-500 tracking-wider uppercase font-semibold ${currentSize.text}`}
+      className={`justify-center items-center
+        text-slate-500 tracking-wider uppercase font-semibold ${currentSize.text} ${className}`}
     >
       <div className={`flex items-center opacity-80 ${currentSize.gap}`}>
         <span>Designed by</span>
