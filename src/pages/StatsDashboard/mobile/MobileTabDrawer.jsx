@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { DASHBOARD_TABS } from "../../../utils/constants";
 import TabItem from "./TabItem";
 
@@ -7,6 +9,8 @@ const TAB_OPTIONS = [
 ];
 
 const MobileTabDrawer = ({ isOpen, onClose, activeTab, setActiveTab }) => {
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
 
   return (
@@ -50,6 +54,19 @@ const MobileTabDrawer = ({ isOpen, onClose, activeTab, setActiveTab }) => {
               />
             );
           })}
+        </div>
+        <div className="border-t border-slate-800/80 pt-3 mt-1">
+          <button
+            onClick={() => {
+              onClose();
+              navigate("/");
+            }}
+            className="w-full py-3 px-4 rounded-xl bg-amber-500/10 border border-amber-500/20
+             text-amber-400 font-bold text-sm flex items-center justify-center gap-2
+             hover:bg-amber-500/20 transition cursor-pointer"
+          >
+            <span>⚔️</span> Go to Boss Respawn
+          </button>
         </div>
       </div>
     </div>

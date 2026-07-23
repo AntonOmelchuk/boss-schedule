@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 import Switch from "../../components/UI/Switch";
 import Tab from "../../components/UI/Tab";
 import useTranslation from "../../hooks/useTranslation";
@@ -7,6 +9,7 @@ import BrandLogo from "./BrandLogo";
 const NAV_CONFIG = [
   {
     id: NAV_ITEMS.RESPAWN,
+    path: "/",
     title: "Respawn",
     icon: "⚔️",
     activeClass:
@@ -15,6 +18,7 @@ const NAV_CONFIG = [
   },
   {
     id: NAV_ITEMS.SCHEDULE,
+    path: "/schedule",
     title: "Schedule",
     icon: "📅",
     activeClass:
@@ -24,8 +28,8 @@ const NAV_CONFIG = [
   },
   {
     id: NAV_ITEMS.STATISTICS,
+    path: "/statistics",
     title: "Statistics",
-    mobileTitle: "Stats",
     icon: "📊",
     activeClass:
       "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.2)]",
@@ -33,8 +37,14 @@ const NAV_CONFIG = [
   },
 ];
 
-const Header = ({ activeNav, setActiveNav }) => {
+const Header = () => {
   const { language, setLanguage } = useTranslation();
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  // Перевірка чи ми на сторінці статистики
+  const isStatisticsPage = pathname === "/statistics";
 
   return (
     <header className="w-full border-b border-slate-800/80 bg-slate-950/10 backdrop-blur-md sticky top-0 z-40">
@@ -46,8 +56,8 @@ const Header = ({ activeNav, setActiveNav }) => {
           {NAV_CONFIG.map((item) => (
             <Tab
               key={item.id}
-              onClickHandler={() => setActiveNav(item.id)}
-              isActive={activeNav === item.id}
+              onClickHandler={() => navigate(item.path)}
+              isActive={pathname === item.path}
               title={item.title}
               icon={item.icon}
               className="px-4 py-2 text-xs font-bold rounded-xl"
@@ -73,20 +83,22 @@ const Header = ({ activeNav, setActiveNav }) => {
       </div>
 
       {/* 4. MOBILE NAVIGATION BAR (Знизу для мобілок) */}
-      <div className="md:hidden flex items-center justify-around border-t border-slate-800 bg-slate-950/10">
-        {NAV_CONFIG.filter((item) => !item.hideOnMobile).map((item) => (
-          <Tab
-            key={item.id}
-            onClickHandler={() => setActiveNav(item.id)}
-            isActive={activeNav === item.id}
-            title={item.mobileTitle || item.title}
-            icon={<span className="text-base">{item.icon}</span>}
-            className="flex-col gap-1 text-[11px] font-bold px-3 py-1"
-            activeClassName={item.mobileActiveClass}
-            inactiveClassName="text-slate-500"
-          />
-        ))}
-      </div>
+      {!isStatisticsPage && (
+        <div className="md:hidden flex items-center justify-around border-t border-slate-800 bg-slate-950/90 p-2">
+          {NAV_CONFIG.filter((item) => !item.hideOnMobile).map((item) => (
+            <Tab
+              key={item.id}
+              onClickHandler={() => () => navigate(item.path)}
+              isActive={pathname === item.path}
+              title={item.title}
+              icon={<span className="text-base">{item.icon}</span>}
+              className="flex-col gap-1 text-[11px] font-bold px-3 py-1"
+              activeClassName={item.mobileActiveClass}
+              inactiveClassName="text-slate-500"
+            />
+          ))}
+        </div>
+      )}
     </header>
   );
 };

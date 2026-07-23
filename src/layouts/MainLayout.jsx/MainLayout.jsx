@@ -1,10 +1,10 @@
 import bgImg from "../../assets/bg3.png";
 import Header from "../Header/Header";
 
-const MainLayout = ({ children, activeNav, setActiveNav }) => {
+const MainLayout = ({ children }) => {
   return (
     <div
-      className="min-h-screen text-slate-200 font-sans px-4"
+      className="min-h-screen text-slate-200 font-sans px-1 md:px-4"
       style={{
         backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
         backgroundSize: "cover",
@@ -15,13 +15,8 @@ const MainLayout = ({ children, activeNav, setActiveNav }) => {
         paddingTop: "32px",
       }}
     >
-      {/* Stick Header */}
-      <Header activeNav={activeNav} setActiveNav={setActiveNav} />
-
-      {/* Page content */}
-      <main className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6">
-        {children}
-      </main>
+      <Header />
+      <main className="flex-1 w-full mx-auto p-1 md:p-6">{children}</main>
     </div>
   );
 };

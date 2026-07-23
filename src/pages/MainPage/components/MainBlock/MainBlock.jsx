@@ -17,7 +17,7 @@ const MainBlock = () => {
     config;
 
   return (
-    <div className="relative mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
+    <div className="relative mb-4 md:mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
       <div
         className="absolute inset-[-150%] animate-spin"
         style={{
@@ -27,12 +27,12 @@ const MainBlock = () => {
       />
 
       <div
-        className="bg-slate-900/95 backdrop-blur-xl rounded-3xl p-6 relative z-10 flex flex-col md:flex-row
-        justify-between items-start md:items-center gap-6 text-left"
+        className="bg-slate-900/95 backdrop-blur-xl rounded-3xl p-4 md:p-6 relative z-10 flex flex-col md:flex-row
+        justify-between items-start md:items-center md:gap-6 text-left"
       >
         <div className="flex items-center gap-4">
           <div
-            className={`w-16 h-16 text-3xl rounded-2xl border flex items-center justify-center
+            className={`w-12 h-12 md:w-16 md:h-16 text-3xl rounded-2xl border flex items-center justify-center
               shrink-0 shadow-inner ${badgeClass}`}
           >
             {icon ? (
@@ -53,7 +53,7 @@ const MainBlock = () => {
               {t.nearestEvent}
             </span>
             <h2
-              className={`text-2xl md:text-3xl font-black tracking-wide text-slate-100 mt-2.5 capitalize ${titleClass}`}
+              className={`text-xl md:text-3xl font-black tracking-wide text-slate-100 mt-2.5 capitalize ${titleClass}`}
             >
               {name || "Loading..."}
             </h2>
@@ -71,7 +71,7 @@ const MainBlock = () => {
             {t.timeToStart}
           </p>
           <p
-            className={`text-3xl md:text-4xl font-black tracking-widest font-mono animate-pulse ${timerClass}`}
+            className={`text-2xl md:text-4xl font-black tracking-widest font-mono animate-pulse ${timerClass}`}
           >
             {nearestEvent
               ? formatRemaining(nearestEvent.ts - now, false, t)

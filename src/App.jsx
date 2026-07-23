@@ -1,5 +1,5 @@
 import { onValue, ref } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
@@ -9,7 +9,7 @@ import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
-import { EVENT_TYPES, NAV_ITEMS } from "./utils/constants";
+import { EVENT_TYPES } from "./utils/constants";
 import {
   checkIsOutPrime,
   getEmojiIcon,
@@ -17,7 +17,6 @@ import {
 } from "./utils/general";
 
 function App() {
-  const [activeNav, setActiveNav] = useState(NAV_ITEMS.RESPAWN);
   const setEvents = useAppStore((state) => state.setEvents);
 
   useEffect(() => {
@@ -73,11 +72,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <MainLayout activeNav={activeNav} setActiveNav={setActiveNav}>
+      <MainLayout>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/schedule" element={<ScheduleBuilder />} />
-          <Route path="/stats" element={<StatsDashboard />} />
+          <Route path="/statistics" element={<StatsDashboard />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
