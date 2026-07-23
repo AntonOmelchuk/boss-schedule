@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
-import Loader from "../../../../components/Loader/Loader";
+import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgressBar";
 import useAppStore from "../../../../store/useAppStore";
 import DistributionHistory from "./components/DistributionHistory/DistributionHistory";
 import EpicAllocation from "./components/EpicAllocation/EpicAllocation";
@@ -23,7 +23,7 @@ const EpicStats = () => {
   }, [fetchEpicData]);
 
   if (loadingEpics) {
-    return <Loader title="Loading Epic Bosses Analytics..." />;
+    return <TimerProgressBar label="Loading Epics Analytics..." />;
   }
 
   if (error) {

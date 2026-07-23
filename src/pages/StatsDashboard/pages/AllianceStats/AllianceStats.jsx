@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import Error from "../../../../components/Error/Error";
-import Loader from "../../../../components/Loader/Loader";
+import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgressBar";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../store/useAppStore";
 import { BREAKPOINTS } from "../../../../utils/constants";
@@ -35,7 +35,7 @@ const AllianceStats = () => {
   }, [fetchAllStatData]);
 
   if (isLoading && !statsData.pareto.length) {
-    return <Loader title="Loading Alliance Analytics..." />;
+    return <TimerProgressBar label="Loading Alliance Analytics..." />;
   }
 
   if (error) {
