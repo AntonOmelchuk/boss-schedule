@@ -37,7 +37,7 @@ const HeaderWithControl = ({
       <div className="flex flex-wrap items-center gap-2">
         <button
           onClick={setSortOrder}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800
+          className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800
           text-xs font-semibold text-slate-300 hover:text-slate-100 hover:border-slate-700 cursor-pointer transition"
           title="Toggle Date Order"
         >
@@ -52,7 +52,7 @@ const HeaderWithControl = ({
           placeholder="Search boss, CP, date..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-1.5 text-xs
+          className="bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2.5 text-xs
           text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500/50 w-full
             sm:w-44 transition"
         />
@@ -65,6 +65,7 @@ const HeaderWithControl = ({
               onClickHandler={() => setFilterStatus(filter)}
               isActive={filterStatus === filter}
               title={filter}
+              className="px-3 py-1"
             />
           ))}
         </div>

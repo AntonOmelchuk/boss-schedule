@@ -35,13 +35,13 @@ const Leaderboard = () => {
           onClickHandler={() => setViewMode(SORT.POINTS)}
           isActive={viewMode === SORT.POINTS}
           title="By Points"
-          className="flex-1 text-sm"
+          className="flex-1 text-sm py-1"
         />
         <Tab
           onClickHandler={() => setViewMode(SORT.PRIORITY)}
           isActive={viewMode === SORT.PRIORITY}
           title="By GB/PTs Ratio"
-          className="flex-1 text-sm"
+          className="flex-1 text-sm py-1"
           activeClassName="bg-amber-600 text-white shadow"
         />
       </div>
