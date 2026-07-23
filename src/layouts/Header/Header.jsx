@@ -82,13 +82,13 @@ const Header = () => {
         </div>
       </div>
 
-      {/* 4. MOBILE NAVIGATION BAR (Знизу для мобілок) */}
+      {/* 4. MOBILE NAVIGATION BAR */}
       {!isStatisticsPage && (
-        <div className="md:hidden flex items-center justify-around border-t border-slate-800 bg-slate-950/90 p-2">
+        <div className="md:hidden flex items-center justify-around border-t border-slate-800 p-2">
           {NAV_CONFIG.filter((item) => !item.hideOnMobile).map((item) => (
             <Tab
               key={item.id}
-              onClickHandler={() => () => navigate(item.path)}
+              onClickHandler={() => navigate(item.path)}
               isActive={pathname === item.path}
               title={item.title}
               icon={<span className="text-base">{item.icon}</span>}
