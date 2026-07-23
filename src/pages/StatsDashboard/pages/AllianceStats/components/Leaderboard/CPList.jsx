@@ -22,10 +22,12 @@ const CPList = ({ data, viewMode }) => {
   };
 
   return (
-    <div className="max-h-137.5 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+    <div className="h-175 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
       {data.map((item, index) => {
         const tier = getTier(index, data.length);
         const icon = WINNER_ICONS[index];
+        const numberWidth = index > 8 ? "w-8" : "w-4";
+
         return (
           <div
             key={index}
@@ -33,7 +35,9 @@ const CPList = ({ data, viewMode }) => {
               border-slate-700/40 hover:bg-slate-800 transition"
           >
             <div className="flex items-center gap-3">
-              <span className="font-mono text-slate-500 text-lg w-5">
+              <span
+                className={`font-mono text-slate-500 text-lg ${numberWidth}`}
+              >
                 {icon ? icon : `#${index + 1}`}
               </span>
               <div className="text-left">

@@ -12,31 +12,33 @@ const InfoBlock = ({ viewMode }) => {
       >
         {viewMode === SORT.POINTS ? (
           <>
-            <p className="font-bold text-indigo-400 mb-1">
+            <p className="text-sm font-bold text-indigo-400 mb-1">
               How Tiers Are Calculated:
             </p>
-            <p className="leading-relaxed mb-2">
+            <p className="text-sm leading-relaxed mb-2">
               Tiers based on relative ranking (percentile):
             </p>
             <ul className="space-y-1 text-[11px] text-slate-400">
-              <li>
+              <li className="text-sm">
                 <strong className="text-amber-400">S-TIER:</strong> Top 15%
                 performers
               </li>
-              <li>
-                <strong className="text-indigo-300">A-TIER:</strong> Next 40%
-                (15% – 55%)
+              <li className="text-sm">
+                <strong className="text-sm text-indigo-300">A-TIER:</strong>{" "}
+                Next 40% (15% – 55%)
               </li>
-              <li>
-                <strong className="text-slate-400">B-TIER:</strong> Remaining
-                CPs (55% – 100%)
+              <li className="text-sm">
+                <strong className="text-sm text-slate-400">B-TIER:</strong>{" "}
+                Remaining CPs (55% – 100%)
               </li>
             </ul>
           </>
         ) : (
           <>
-            <p className="font-bold text-amber-400 mb-1">Priority Queue:</p>
-            <p className="leading-relaxed text-[11px] text-slate-400">
+            <p className="text-sm font-bold text-amber-400 mb-1">
+              Priority Queue:
+            </p>
+            <p className="text-sm leading-relaxed text-slate-400">
               Sorted by GB/PTs ratio from lowest to highest. CPs at the top have
               accumulated the most points relative to received epics, making
               them top priority for the next drop.

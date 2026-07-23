@@ -136,8 +136,8 @@ const CPConsistencyMatrix = () => {
               barSize={20}
             >
               {matrixData.map((entry, index) => {
-                // Динамічний колір залежно від рівня відвідуваності:
-                // > 80% — зелений, 50-80% — синій, < 50% — червоний/рожевий
+                // Dynamic color depens on activity:
+                // > 80% — green, 50-80% — blue, < 50% — red/orange
                 let color = "#f87171"; // Red
                 if (entry.attendanceRate >= 80)
                   color = "#34d399"; // Green
