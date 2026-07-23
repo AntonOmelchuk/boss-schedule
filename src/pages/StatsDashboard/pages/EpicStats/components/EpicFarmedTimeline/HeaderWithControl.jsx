@@ -1,4 +1,4 @@
-import FilterTab from "../../../../../../components/FilterTab/FilterTab";
+import Tab from "../../../../../../components/UI/Tab";
 import { FARMED_EPIC_FILTERS, SORT } from "../../../../../../utils/constants";
 
 const FILTER_OPTIONS = [
@@ -60,7 +60,7 @@ const HeaderWithControl = ({
         {/* Filter Status Buttons */}
         <div className="flex bg-slate-950/80 border border-slate-800 p-1 rounded-xl gap-1">
           {FILTER_OPTIONS.map((filter) => (
-            <FilterTab
+            <Tab
               key={filter}
               onClickHandler={() => setFilterStatus(filter)}
               isActive={filterStatus === filter}

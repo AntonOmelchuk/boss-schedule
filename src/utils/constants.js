@@ -193,3 +193,10 @@ export const BREAKPOINTS = {
   MIN_XL: "(min-width: 1280px)",
   MIN_2XL: "(min-width: 1536px)",
 };
+
+// Main Navigation
+export const NAV_ITEMS = {
+  RESPAWN: "respawn",
+  SCHEDULE: "schedule",
+  STATISTICS: "statistics",
+};
