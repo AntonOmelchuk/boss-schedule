@@ -10,7 +10,7 @@ import {
   YAxis,
 } from "recharts";
 
-import FilterTab from "../../../../../../components/FilterTab/FilterTab";
+import Tab from "../../../../../../components/UI/Tab";
 import useAppStore from "../../../../../../store/useAppStore";
 import { SORT } from "../../../../../../utils/constants";
 import { shuffleArray } from "../../../../../../utils/general";
@@ -43,12 +43,12 @@ const PerfomanceChart = () => {
     <div className="h-150 mt-8 bg-slate-900/30 p-6 rounded-xl border border-slate-700">
       <h3 className="text-xl mb-6">Performance</h3>
       <div className="flex justify-end items-center p-1 rounded-xl">
-        <FilterTab
+        <Tab
           title="📊 Sorted"
           isActive={viewMode === SORT.SORTED}
           onClickHandler={() => setViewMode(SORT.SORTED)}
         />
-        <FilterTab
+        <Tab
           title="🎲 Random"
           isActive={viewMode === SORT.RANDOM}
           onClickHandler={() => setViewMode(SORT.RANDOM)}

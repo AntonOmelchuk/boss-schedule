@@ -1,15 +1,15 @@
 import { onValue, ref } from "firebase/database";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import bgImg from "./assets/bg3.png";
+import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 import MainPage from "./pages/MainPage/MainPage";
 import NotFound from "./pages/NotFound/NotFound";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
-import { EVENT_TYPES } from "./utils/constants";
+import { EVENT_TYPES, NAV_ITEMS } from "./utils/constants";
 import {
   checkIsOutPrime,
   getEmojiIcon,
@@ -17,6 +17,7 @@ import {
 } from "./utils/general";
 
 function App() {
+  const [activeNav, setActiveNav] = useState(NAV_ITEMS.RESPAWN);
   const setEvents = useAppStore((state) => state.setEvents);
 
   useEffect(() => {
@@ -72,18 +73,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div
-        className="min-h-screen text-slate-200 font-sans px-4"
-        style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          minHeight: "100vh",
-          width: "100%",
-          paddingTop: "32px",
-        }}
-      >
+      <MainLayout activeNav={activeNav} setActiveNav={setActiveNav}>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/schedule" element={<ScheduleBuilder />} />
@@ -91,7 +81,7 @@ function App() {
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
-      </div>
+      </MainLayout>
     </BrowserRouter>
   );
 }

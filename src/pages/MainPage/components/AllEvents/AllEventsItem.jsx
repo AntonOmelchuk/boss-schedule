@@ -1,6 +1,6 @@
-import { getDiplomacyConfig } from "../../../utils/general";
-import BadgeOwner from "../../BadgeOwner/BadgeOwner";
-import OutPrime from "../../OutPrime/OutPrime";
+import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
+import OutPrime from "../../../../components/OutPrime/OutPrime";
+import { getDiplomacyConfig } from "../../../../utils/general";
 
 const AllEventsItem = ({
   icon,

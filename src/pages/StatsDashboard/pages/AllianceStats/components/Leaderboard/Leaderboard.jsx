@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import FilterTab from "../../../../../../components/FilterTab/FilterTab";
+import Tab from "../../../../../../components/UI/Tab";
 import useAppStore from "../../../../../../store/useAppStore";
 import { SORT } from "../../../../../../utils/constants";
 import CPList from "./CPList";
@@ -31,13 +31,13 @@ const Leaderboard = () => {
 
       {/* Tabs */}
       <div className="flex bg-slate-950 p-1 rounded-lg border border-slate-800 mb-4">
-        <FilterTab
+        <Tab
           onClickHandler={() => setViewMode(SORT.POINTS)}
           isActive={viewMode === SORT.POINTS}
           title="By Points"
           className="flex-1 text-sm"
         />
-        <FilterTab
+        <Tab
           onClickHandler={() => setViewMode(SORT.PRIORITY)}
           isActive={viewMode === SORT.PRIORITY}
           title="By GB/PTs Ratio"

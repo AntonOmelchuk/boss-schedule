@@ -1,8 +1,8 @@
-import useFilterEvents from "../../hooks/useFilterEvents";
-import useTranslation from "../../hooks/useTranslation";
-import { formatRemaining, getDiplomacyConfig } from "../../utils/general";
-import BadgeOwner from "../BadgeOwner/BadgeOwner";
-import OutPrime from "../OutPrime/OutPrime";
+import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
+import OutPrime from "../../../../components/OutPrime/OutPrime";
+import useFilterEvents from "../../../../hooks/useFilterEvents";
+import useTranslation from "../../../../hooks/useTranslation";
+import { formatRemaining, getDiplomacyConfig } from "../../../../utils/general";
 
 const MainBlock = () => {
   const { t } = useTranslation();
