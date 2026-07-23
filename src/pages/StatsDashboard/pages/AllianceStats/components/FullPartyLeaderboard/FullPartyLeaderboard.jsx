@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 
 import useAppStore from "../../../../../../store/useAppStore";
-import { WINNER_ICONS } from "../../../../../../utils/constants";
+import CPNameItem from "../CPNameItem/CPNameItem";
+import HeaderList from "../HeaderList/HeaderList";
 
 const FullPartyLeaderboard = () => {
   const rawTimeline = useAppStore(
@@ -71,14 +72,11 @@ const FullPartyLeaderboard = () => {
       p-6 shadow-xl flex flex-col gap-5 h-full"
     >
       {/* Header */}
-      <div className="border-b border-slate-800 pb-3">
-        <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-          <span>👑</span> Full Party (9/9) Leaderboard
-        </h3>
-        <p className="text-xs text-slate-400">
-          Ranking CPs by total number of fully assembled 9-man squads
-        </p>
-      </div>
+      <HeaderList
+        icon="👑"
+        title="Full Party (9/9) Leaderboard"
+        text="Ranking CPs by total number of fully assembled 9-man squads"
+      />
 
       {/* Top Champion Hero Card */}
       {topCP && (
@@ -117,26 +115,12 @@ const FullPartyLeaderboard = () => {
               (fullPartyCount / maxFullParties) * 100,
               100,
             );
-            const icon = WINNER_ICONS[index];
-            const numberWidth = index > 8 ? "w-7" : "w-4";
 
             return (
               <div key={cpName} className="flex flex-col gap-1.5 group">
                 <div className="flex justify-between items-center text-xs">
                   {/* Left: Rank & Name */}
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`text-sm min-[1820px]:text-lg font-mono font-bold text-slate-500 ${numberWidth}`}
-                    >
-                      {icon ? icon : `#${index + 1}`}
-                    </span>
-                    <span
-                      className="text-sm min-[1820px]:text-lg font-semibold text-slate-200
-                     group-hover:text-amber-400 transition"
-                    >
-                      {cpName}
-                    </span>
-                  </div>
+                  <CPNameItem cpName={cpName} index={index} />
 
                   {/* Right: Stats */}
                   <div className="flex items-center gap-3">
