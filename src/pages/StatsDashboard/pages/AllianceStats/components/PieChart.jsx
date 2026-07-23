@@ -45,7 +45,7 @@ const PieChartCustom = () => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    const currentItem = pareto[index];
+    const currentItem = randomizedData[index];
 
     return (
       <text
