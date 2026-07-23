@@ -1,5 +1,5 @@
+import SummaryCard from "../../../../../../components/SummaryCard/SummaryCard";
 import useAppStore from "../../../../../../store/useAppStore";
-import SummaryCard from "./SummaryCard";
 
 const SummaryCards = () => {
   const summaryData = useAppStore((state) => state.summaryData);
@@ -7,32 +7,21 @@ const SummaryCards = () => {
   if (!summaryData) return null;
 
   const {
-    total_epics_farmed,
-    unassigned_epics,
+    total_events,
     weekly_mvp_cp,
     peak_event_players,
     peak_event_label,
     weekly_avg_turnout,
   } = summaryData;
 
-  // Sub-text for the first card
-  const treasurySubtext =
-    unassigned_epics > 0 ? (
-      <span className="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20 font-medium">
-        ⚠️ {unassigned_epics} in Treasury
-      </span>
-    ) : (
-      <span className="text-emerald-400 font-medium">All items shared</span>
-    );
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full mb-8">
       {/* 1. Total Epics Farmed */}
       <SummaryCard
-        title="Total Epics Farmed"
+        title="Total Events"
         icon="💎"
-        value={total_epics_farmed}
-        subtext={treasurySubtext}
+        value={total_events}
+        subtext="Including Sieges"
         valueColor="text-sky-400"
       />
 

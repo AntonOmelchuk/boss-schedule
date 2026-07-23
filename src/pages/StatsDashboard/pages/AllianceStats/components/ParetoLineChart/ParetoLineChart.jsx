@@ -8,8 +8,8 @@ import {
   YAxis,
 } from "recharts";
 
-import InfoIcon from "../../../../../components/InfoIcon/InfoIcon";
-import useAppStore from "../../../../../store/useAppStore";
+import InfoIcon from "../../../../../../components/InfoIcon/InfoIcon";
+import useAppStore from "../../../../../../store/useAppStore";
 
 const ParetoLineChart = () => {
   const pareto = useAppStore((state) => state.statsData.pareto);

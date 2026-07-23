@@ -150,6 +150,16 @@ export const FARMED_EPIC_FILTERS = {
 export const SORT = {
   DESC: "desc",
   ASC: "asc",
+  SORTED: "sorted",
+  RANDOM: "random",
+  POINTS: "points",
+  PRIORITY: "priority",
+};
+
+export const WINNER_ICONS = {
+  0: "🥇",
+  1: "🥈",
+  2: "🥉",
 };
 
 // Map for epic from backend
