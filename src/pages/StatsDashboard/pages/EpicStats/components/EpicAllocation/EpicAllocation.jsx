@@ -10,8 +10,13 @@ import {
   YAxis,
 } from "recharts";
 
+import useMediaQuery from "../../../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../../../store/useAppStore";
-import { EPIC_COLORS, SORT } from "../../../../../../utils/constants";
+import {
+  BREAKPOINTS,
+  EPIC_COLORS,
+  SORT,
+} from "../../../../../../utils/constants";
 import { shuffleArray } from "../../../../../../utils/general";
 import CustomTooltip from "./CustomTooltip";
 import SortTabs from "./SortTabs";
@@ -19,6 +24,8 @@ import SortTabs from "./SortTabs";
 const EpicAllocation = () => {
   const epicData = useAppStore((state) => state.epicData);
   const [sortBy, setSortBy] = useState(SORT.EPICS_COUNT);
+
+  const isLargeDesktop = useMediaQuery(BREAKPOINTS.IS_LARGE_DESKTOP);
 
   // Format cp_distribution for Stacked Bar Chart
   const { chartData, uniqueEpics } = useMemo(() => {
@@ -41,9 +48,9 @@ const EpicAllocation = () => {
     // Sort logic
     let sortedData = [...data];
     if (sortBy === SORT.EPICS_COUNT) {
-      sortedData.sort((a, b) => b.total - a.total);
+      sortedData.sort((a, b) => a.total - b.total);
     } else if (sortBy === SORT.VALUE_GB) {
-      sortedData.sort((a, b) => b.totalGB - a.totalGB);
+      sortedData.sort((a, b) => a.totalGB - b.totalGB);
     } else if (sortBy === SORT.RANDOM) {
       sortedData = shuffleArray(sortedData);
     }
@@ -75,8 +82,9 @@ const EpicAllocation = () => {
             <XAxis
               dataKey="cp_name"
               stroke="#94a3b8"
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: isLargeDesktop ? 14 : 10 }}
               interval={0}
+              angle={12}
             />
             <YAxis
               yAxisId="left"
@@ -96,21 +104,19 @@ const EpicAllocation = () => {
               wrapperStyle={{ outline: "none" }}
               content={<CustomTooltip />}
             />
-            <Legend wrapperStyle={{ paddingTop: "10px", fontSize: "14px" }} />
+            <Legend wrapperStyle={{ fontSize: "14px" }} />
 
             {uniqueEpics.map((epic) => (
-              <>
-                <Bar
-                  key={epic}
-                  name={epic}
-                  yAxisId="left"
-                  dataKey={epic}
-                  maxBarSize={24}
-                  stackId="epics"
-                  fill={EPIC_COLORS[epic] || "#94a3b8"}
-                  radius={[2, 2, 0, 0]}
-                />
-              </>
+              <Bar
+                key={epic}
+                name={epic}
+                yAxisId="left"
+                dataKey={epic}
+                maxBarSize={30}
+                stackId="epics"
+                fill={EPIC_COLORS[epic] || "#94a3b8"}
+                radius={[2, 2, 0, 0]}
+              />
             ))}
             <Bar
               yAxisId="right"
@@ -118,7 +124,7 @@ const EpicAllocation = () => {
               name="Total Value (GB)"
               stackId="value"
               fill="#6A6E73"
-              maxBarSize={24}
+              maxBarSize={30}
               radius={[4, 4, 0, 0]}
             />
           </BarChart>

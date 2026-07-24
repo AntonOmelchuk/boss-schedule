@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { useMediaQuery } from "../../../../../../hooks/useMediaQuery";
+import useMediaQuery from "../../../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../../../store/useAppStore";
 import { BREAKPOINTS } from "../../../../../../utils/constants";
 import HeaderList from "../HeaderList/HeaderList";

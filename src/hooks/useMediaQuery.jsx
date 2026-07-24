@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useMediaQuery = (query) => {
+const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(() => {
     if (typeof window !== "undefined") {
       return window.matchMedia(query).matches;
@@ -14,7 +14,6 @@ export const useMediaQuery = (query) => {
     const media = window.matchMedia(query);
     const listener = () => setMatches(media.matches);
 
-    // Додаємо слухача змін медіа-запиту
     media.addEventListener("change", listener);
 
     return () => media.removeEventListener("change", listener);
@@ -22,3 +21,5 @@ export const useMediaQuery = (query) => {
 
   return matches;
 };
+
+export default useMediaQuery;

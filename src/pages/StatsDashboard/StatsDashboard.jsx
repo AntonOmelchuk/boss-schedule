@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import TitleWithWatermark from "../../components/TitleWithWatermark/TitleWithWatermark";
 import Watermark from "../../components/Watermark/Watermark";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import useMediaQuery from "../../hooks/useMediaQuery";
 import { BREAKPOINTS, DASHBOARD_TABS } from "../../utils/constants";
 import Tabs from "./components/Tabs";
 import AllianceStats from "./pages/AllianceStats/AllianceStats";

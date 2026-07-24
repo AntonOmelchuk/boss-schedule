@@ -66,8 +66,8 @@ const EpicFarmedTimeline = () => {
 
   return (
     <div
-      className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl p-6 shadow-xl flex
-    flex-col gap-6 w-full"
+      className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl p-1 md:p-6 shadow-xl flex
+        flex-col gap-6 w-full"
     >
       {/* Header & Controls */}
       <HeaderWithControl
@@ -83,12 +83,13 @@ const EpicFarmedTimeline = () => {
       />
 
       {/* Timeline List */}
-      <div className="max-h-200 overflow-y-auto pr-2 custom-scrollbar">
+      <div className="max-h-125 md:max-h-150 xl:max-h-200 overflow-y-auto pr-1 md:pr-2 custom-scrollbar">
         <div
-          className="relative pl-6 sm:pl-8 flex flex-col gap-6 before:absolute before:left-2.5 sm:before:left-3.5
-        before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-800"
+          className="relative pl-6 sm:pl-8 flex flex-col gap-3 md:gap-6 before:absolute
+            before:left-2.5 sm:before:left-3.5
+            before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-800"
         >
-          {filteredEvents.length === 0 ? (
+          {filteredEvents.length == 0 ? (
             <div className="text-center py-8 text-xs text-slate-500">
               No epic kill events found matching your criteria.
             </div>
