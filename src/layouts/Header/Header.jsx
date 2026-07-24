@@ -52,7 +52,7 @@ const Header = () => {
         {/* 1. BRAND / LOGO */}
         <BrandLogo />
         {/* 2. NAVIGATION LINKS */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-900/60 p-1 border border-slate-800 rounded-2xl">
+        <nav className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border border-slate-800 rounded-2xl">
           {NAV_CONFIG.map((item) => (
             <Tab
               key={item.id}
@@ -84,7 +84,7 @@ const Header = () => {
 
       {/* 4. MOBILE NAVIGATION BAR */}
       {!isStatisticsPage && (
-        <div className="md:hidden flex items-center justify-around border-t border-slate-800 p-2">
+        <div className="xl:hidden flex items-center justify-around border-t border-slate-800 p-2">
           {NAV_CONFIG.filter((item) => !item.hideOnMobile).map((item) => (
             <Tab
               key={item.id}

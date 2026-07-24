@@ -51,11 +51,13 @@ const TimerProgressBar = ({
           <div className="flex justify-between items-center text-xs font-semibold">
             <span className="text-slate-300 flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>{label}</span>
+              <span className="text-xs md:text-sm xl:text-base">{label}</span>
             </span>
             <div className="flex items-center gap-3 font-mono">
-              <span className="text-slate-500">{secondsLeft}s max</span>
-              <span className="text-sky-400 font-bold text-sm">
+              <span className="text-slate-500 text-xs md:text-sm xl:text-base">
+                {secondsLeft}s max
+              </span>
+              <span className="text-sky-400 font-bold text-xs md:text-sm xl:text-base">
                 {Math.min(100, Math.round(progress))}%
               </span>
             </div>

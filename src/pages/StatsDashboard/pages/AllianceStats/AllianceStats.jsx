@@ -3,7 +3,7 @@ import { useShallow } from "zustand/react/shallow";
 
 import Error from "../../../../components/Error/Error";
 import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgressBar";
-import { useMediaQuery } from "../../../../hooks/useMediaQuery";
+import useMediaQuery from "../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../store/useAppStore";
 import { BREAKPOINTS } from "../../../../utils/constants";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
@@ -13,7 +13,7 @@ import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLine
 import EventDeepDive from "./components/EventDeepDive/EventDeepDive";
 import FullPartyLeaderboard from "./components/FullPartyLeaderboard/FullPartyLeaderboard";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
-import ParetoLineChart from "./components/ParetoLineChart/ParetoLineChart";
+// import ParetoLineChart from "./components/ParetoLineChart/ParetoLineChart"; Turn Off atm
 import PerfomanceChart from "./components/PermomanceChart/PerfomanceChart";
 import SummaryCards from "./components/SummaryCards/SummaryCards";
 
@@ -65,7 +65,6 @@ const AllianceStats = () => {
         selectedEventLabel={selectedEvent}
         onSelectEvent={(eventLabel) => setSelectedEvent(eventLabel)}
       />
-      {isDesktop && <ParetoLineChart />}
     </div>
   );
 };

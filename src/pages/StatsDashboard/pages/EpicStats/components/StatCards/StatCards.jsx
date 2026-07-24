@@ -5,17 +5,13 @@ import Card from "./Card";
 import Header from "./Header";
 
 const StatCards = () => {
-  const { isLoading, summary, unassigned_loot } = useAppStore(
+  const { summary, unassigned_loot } = useAppStore(
     useShallow((state) => ({
       summary: state.epicData?.summary,
       unassigned_loot: state.epicData?.unassigned_loot,
       isLoading: state.isLoading,
     })),
   );
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
 
   if (!summary || !unassigned_loot) return null;
 
@@ -24,10 +20,10 @@ const StatCards = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-        p-6 shadow-xl flex flex-col gap-6"
+        p-2 md:p-4 xl:p-6 shadow-xl flex flex-col gap-6"
     >
       <Header />
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-4">
         <Card title="Total Epics Farmed" value={total_farmed} />
         <Card title="Shared to CPs" value={total_shared} />
 

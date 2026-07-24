@@ -1,11 +1,15 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
+import useMediaQuery from "../../../../../../hooks/useMediaQuery";
+import { BREAKPOINTS } from "../../../../../../utils/constants";
 import CustomLabel from "./CustomLabel";
 import CustomPieTooltip from "./CustomTooltip";
 
 const CustomPieChart = ({ chartData, totalFarmed }) => {
+  const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
+
   return (
-    <div className="w-full lg:w-1/2 flex flex-col items-center">
+    <div className="w-full lg:w-1/2 flex flex-1 xl:flex-none flex-col items-center">
       <h3 className="text-base font-bold text-slate-100 mb-2 self-start">
         Epic Bosses Share (%)
       </h3>
@@ -22,12 +26,15 @@ const CustomPieChart = ({ chartData, totalFarmed }) => {
               nameKey="name"
               cx="50%"
               cy="50%"
-              innerRadius={90}
-              outerRadius={140}
+              innerRadius={isDesktop ? 90 : 60}
+              outerRadius={isDesktop ? 140 : 90}
               paddingAngle={3}
               stroke="none"
               label={<CustomLabel />}
-              labelLine={{ stroke: "#475569", strokeWidth: 1.5 }}
+              labelLine={{
+                stroke: "#475569",
+                strokeWidth: isDesktop ? 1.5 : 0.5,
+              }}
             >
               {chartData.map((entry) => (
                 <Cell key={entry.name} fill={entry.fill} />
@@ -41,10 +48,10 @@ const CustomPieChart = ({ chartData, totalFarmed }) => {
         </ResponsiveContainer>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <span className="text-3xl font-extrabold text-slate-100">
+          <span className="text-2xl xl:text-3xl font-extrabold text-slate-100">
             {totalFarmed}
           </span>
-          <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
+          <span className="text-[10px] xl:text-base text-slate-400 font-medium uppercase tracking-wider">
             Total Epics
           </span>
         </div>

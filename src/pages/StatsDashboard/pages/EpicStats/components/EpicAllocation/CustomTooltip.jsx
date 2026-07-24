@@ -1,10 +1,9 @@
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload || !payload.length) return null;
 
-  const total = payload.reduce(
-    (sum, item) => sum + (Number(item.value) || 0),
-    0,
-  );
+  const total = payload.reduce((sum, item) => {
+    item.dataKey === "totalGB" ? sum : sum + (Number(item.value) || 0);
+  }, 0);
 
   return (
     <div

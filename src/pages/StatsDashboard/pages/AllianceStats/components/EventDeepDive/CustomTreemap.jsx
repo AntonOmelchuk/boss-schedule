@@ -10,7 +10,7 @@ const CustomTreemap = ({ cpBreakdown }) => {
   return (
     <div
       className="h-80 w-full lg:col-span-7 flex items-center justify-center
-         bg-slate-900/20 rounded-xl p-2 border border-slate-800/50"
+      bg-slate-900/20 rounded-xl p-2 border border-slate-800/50"
     >
       <ResponsiveContainer width="100%" height="100%">
         <Treemap
@@ -32,7 +32,7 @@ const CustomTreemap = ({ cpBreakdown }) => {
               marginBottom: "0.25rem",
             }}
             itemStyle={{
-              color: "#000",
+              color: "#fff",
               fontSize: "0.875rem",
               fontWeight: "600",
             }}

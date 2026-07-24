@@ -15,7 +15,7 @@ const Tabs = ({ setActiveTab, activeTab }) => {
   return (
     <>
       {/* 💻 DESKTOP TABS */}
-      <div className="hidden md:flex items-center gap-2 border-b border-slate-800 pb-3">
+      <div className="hidden xl:flex items-center gap-2 border-b border-slate-800 pb-3">
         <Tab
           onClickHandler={() => setActiveTab(DASHBOARD_TABS.ATTENDANCE)}
           isActive={activeTab === DASHBOARD_TABS.ATTENDANCE}
@@ -30,7 +30,7 @@ const Tabs = ({ setActiveTab, activeTab }) => {
 
       {/* 📱 MOBILE / TABLET BUTTON TRIGGER (< md) */}
       <div
-        className="md:hidden flex items-center justify-between bg-slate-900/60 border
+        className="xl:hidden flex items-center justify-between bg-slate-900/60 border
        border-slate-800 p-3 rounded-2xl"
       >
         <div className="flex items-center gap-2">
