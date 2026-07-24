@@ -31,7 +31,7 @@ const EpicStats = () => {
   }
 
   return (
-    <div className="w-full mt-16 flex flex-col gap-8">
+    <div className="w-full xl:mt-16 flex flex-col gap-8">
       <StatCards />
 
       <EpicTypesBreakdownChart />
