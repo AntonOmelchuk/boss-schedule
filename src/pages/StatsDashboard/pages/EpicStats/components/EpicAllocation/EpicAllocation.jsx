@@ -85,6 +85,9 @@ const EpicAllocation = () => {
               tick={{ fontSize: isLargeDesktop ? 14 : 10 }}
               interval={0}
               angle={12}
+              style={{
+                marginTop: "10px",
+              }}
             />
             <YAxis
               yAxisId="left"

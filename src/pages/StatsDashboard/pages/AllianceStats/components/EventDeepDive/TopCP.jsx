@@ -8,9 +8,9 @@ const TopCP = ({ name, value, totalPlayers }) => {
         <span className="truncate">{name}</span>
         <span
           className="text-xs bg-emerald-500/10 text-emerald-400 border
-                  border-emerald-500/20 px-2 py-1 rounded-lg shrink-0"
+          border-emerald-500/20 px-2 py-1 rounded-lg shrink-0"
         >
-          {value} pl. ({Math.round((value / totalPlayers) * 100)}%)
+          {value} pts. ({Math.round((value / totalPlayers) * 100)}%)
         </span>
       </div>
     </div>

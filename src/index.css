@@ -81,10 +81,6 @@ code {
   background: var(--code-bg);
 }
 
-@theme {
-  --wide: 1900px;
-}
-
 /* Custom Dark Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

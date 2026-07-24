@@ -99,11 +99,12 @@ const CPProgressLineChart = () => {
     >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 tracking-wide">
+          <h2 className="text-xl font-bold text-slate-100 tracking-wide text-left">
             CP Points Progress Timeline
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Cumulative growth of CP points over events
+            Note: Excludes full-party extra points and double-point event
+            modifiers (Sieges & High Epics).
           </p>
         </div>
 
