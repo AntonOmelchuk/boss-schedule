@@ -81,10 +81,6 @@ code {
   background: var(--code-bg);
 }
 
-@theme {
-  --wide: 1900px;
-}
-
 /* Custom Dark Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -102,4 +98,20 @@ code {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #475569; /* Slate-600 */
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-progress {
+  animation: progress 1.5s infinite ease-in-out;
 }

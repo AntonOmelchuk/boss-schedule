@@ -130,14 +130,14 @@ export const DASHBOARD_TABS = {
 };
 
 export const EPIC_COLORS = {
-  QueenAnt: "#f59e0b", // Amber / Warm Gold (Замість рожевого)
-  Orfen: "#38bdf8", // Sky Blue (Світло-блакитний)
-  Core: "#22d3ee", // Cyan / Ice (Крижаний ціан)
-  Zaken: "#10b981", // Emerald (Темно-зелений/смарагдовий)
-  Baium: "#f97316", // Flame Orange (Вогняно-помаранчевий)
-  Frintezza: "#64748b", // Slate / Crimson Silver (Стриманий темно-сталевий замість фіолетового)
-  Valakas: "#ef4444", // Deep Red (Вогняно-червоний top-tier)
-  Antharas: "#84cc16", // Toxic Lime (Токсично-зелений)
+  QueenAnt: "#C46100",
+  Orfen: "#06C",
+  Core: "#4CB140",
+  Zaken: "#005F60",
+  Baium: "#C58C00",
+  Frintezza: "#a14e9a",
+  Valakas: "#7D1007",
+  Antharas: "#8A8D90",
 };
 
 // 'all' | 'treasury' | 'shared'
@@ -150,6 +150,18 @@ export const FARMED_EPIC_FILTERS = {
 export const SORT = {
   DESC: "desc",
   ASC: "asc",
+  SORTED: "sorted",
+  RANDOM: "random",
+  POINTS: "points",
+  PRIORITY: "priority",
+  VALUE_GB: "gb",
+  EPICS_COUNT: "epics",
+};
+
+export const WINNER_ICONS = {
+  0: "🥇",
+  1: "🥈",
+  2: "🥉",
 };
 
 // Map for epic from backend
@@ -164,4 +176,41 @@ export const EPIC_NAME_TO_EVENT_TYPE = {
   Baium: EVENT_TYPES.Baium,
   Antharas: EVENT_TYPES.Antharas,
   Valakas: EVENT_TYPES.Valakas,
+};
+
+// Default breakpoints value for Tailwind CSS for useMediaQuery
+export const BREAKPOINTS = {
+  // Mobile & Tablet
+  IS_MOBILE: "(max-width: 767px)",
+  IS_TABLET: "(min-width: 768px) and (max-width: 1279px)",
+
+  // Desktop
+  IS_DESKTOP: "(min-width: 1280px)",
+  IS_LARGE_DESKTOP: "(min-width: 1800px)",
+
+  // Specific values(for min-width)
+  MIN_SM: "(min-width: 640px)",
+  MIN_MD: "(min-width: 768px)",
+  MIN_LG: "(min-width: 1024px)",
+  MIN_XL: "(min-width: 1280px)",
+  MIN_2XL: "(min-width: 1536px)",
+};
+
+// Main Navigation
+export const NAV_ITEMS = {
+  RESPAWN: "respawn",
+  SCHEDULE: "schedule",
+  STATISTICS: "statistics",
+};
+
+// Epic GB pirce in allinace
+export const EPIC_PRICES_GB = {
+  Core: 7,
+  Orfen: 15,
+  QA: 45,
+  Zaken: 50,
+  Frintezza: 72,
+  Baium: 100,
+  Antharas: 110,
+  Valakas: 200,
 };

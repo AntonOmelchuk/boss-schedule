@@ -2,21 +2,24 @@ import { useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import Error from "../../../../components/Error/Error";
-import Loader from "../../../../components/Loader/Loader";
+import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgressBar";
+import useMediaQuery from "../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../store/useAppStore";
+import { BREAKPOINTS } from "../../../../utils/constants";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
-import BarChartCustom from "./components/BarChart";
+import CPAvgOnlineMatrix from "./components/CPAvgOnlineMatrix/CPAvgOnlineMatrix";
 import CPConsistencyMatrix from "./components/CPConsistencyMatrix/CPConsistencyMatrix";
 import CPProgressLineChart from "./components/CPProgressLineChart/CPProgressLineChart";
 import EventDeepDive from "./components/EventDeepDive/EventDeepDive";
-import Leaderboard from "./components/Leaderboard";
-import ParetoLineChart from "./components/ParetoLineChart";
-import PieChartCustom from "./components/PieChart";
-import RadarChartCustom from "./components/RadarChart";
+import FullPartyLeaderboard from "./components/FullPartyLeaderboard/FullPartyLeaderboard";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
+// import ParetoLineChart from "./components/ParetoLineChart/ParetoLineChart"; Turn Off atm
+import PerfomanceChart from "./components/PermomanceChart/PerfomanceChart";
 import SummaryCards from "./components/SummaryCards/SummaryCards";
 
 const AllianceStats = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
   const { statsData, isLoading, error, fetchAllStatData } = useAppStore(
     useShallow((state) => ({
@@ -32,7 +35,7 @@ const AllianceStats = () => {
   }, [fetchAllStatData]);
 
   if (isLoading && !statsData.pareto.length) {
-    return <Loader title="Loading Alliance Analytics..." />;
+    return <TimerProgressBar label="Loading Alliance Analytics..." />;
   }
 
   if (error) {
@@ -40,25 +43,28 @@ const AllianceStats = () => {
   }
 
   return (
-    <div className="p-8 text-white min-h-screen">
+    <div className="md:p-8 text-white min-h-screen">
       <SummaryCards />
 
-      <div className="flex flex-wrap min-[1600px]:flex-nowrap gap-8 items-start justify-center">
+      <div className="grid grid-cols-1 min-[1240px]:grid-cols-2 min-[1700px]:grid-cols-3 gap-8 items-stretch w-full">
         <Leaderboard />
-        <PieChartCustom />
-        <RadarChartCustom />
+        <FullPartyLeaderboard />
+        <CPAvgOnlineMatrix />
       </div>
-      <BarChartCustom />
-      <ParetoLineChart />
-      <CPProgressLineChart />
-      <AllianceActivityComboChart
-        onEventClick={(eventLabel) => setSelectedEvent(eventLabel)}
-      />
+      {isDesktop && (
+        <>
+          <PerfomanceChart />
+          <CPConsistencyMatrix />
+          <CPProgressLineChart />
+          <AllianceActivityComboChart
+            onEventClick={(eventLabel) => setSelectedEvent(eventLabel)}
+          />
+        </>
+      )}
       <EventDeepDive
         selectedEventLabel={selectedEvent}
         onSelectEvent={(eventLabel) => setSelectedEvent(eventLabel)}
       />
-      <CPConsistencyMatrix />
     </div>
   );
 };

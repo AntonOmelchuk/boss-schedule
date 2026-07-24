@@ -1,5 +1,5 @@
-import useAppStore from "../../../store/useAppStore";
-import { CATEGORIES } from "../../../utils/constants";
+import useAppStore from "../../../../store/useAppStore";
+import { CATEGORIES } from "../../../../utils/constants";
 
 const FilterModal = ({ isOpen, onClose, t }) => {
   const { filters, toggleFilter, toggleAllFilters } = useAppStore();

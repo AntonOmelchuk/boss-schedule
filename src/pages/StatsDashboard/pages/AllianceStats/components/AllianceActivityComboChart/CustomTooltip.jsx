@@ -56,7 +56,7 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
         CP Breakdown:
       </div>
-      <div className="grid grid-cols-2 gap-x-2.5 gap-y-1 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+      <div className="grid grid-cols-2 gap-x-2.5 gap-y-1 pr-1 custom-scrollbar">
         {cpList.length > 0 ? (
           cpList.map((cp) => (
             <div

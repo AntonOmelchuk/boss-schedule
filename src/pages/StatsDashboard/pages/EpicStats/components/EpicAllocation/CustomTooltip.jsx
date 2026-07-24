@@ -1,10 +1,9 @@
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload || !payload.length) return null;
 
-  const total = payload.reduce(
-    (sum, item) => sum + (Number(item.value) || 0),
-    0,
-  );
+  const total = payload.reduce((sum, item) => {
+    return item.dataKey === "totalGB" ? sum : sum + (Number(item.value) || 0);
+  }, 0);
 
   return (
     <div
@@ -13,7 +12,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     >
       <div className="font-bold text-sm text-sky-400 border-b border-slate-700/60 pb-1 mb-2 flex justify-between">
         <span>{label}</span>
-        <span className="text-slate-300">Total: {total}</span>
+        <span className="text-slate-300">Total Epic: {total}</span>
       </div>
       <div className="flex flex-col gap-1 text-xs">
         {payload.map((item) => (

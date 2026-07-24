@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-import useFilterEvents from "../../hooks/useFilterEvents";
-import useTranslation from "../../hooks/useTranslation";
-import ArrowDownIcon from "../../svg/ArrowDownIcon";
-import FilterIcon from "../../svg/FilterIcon";
-import { LANGUAGES, TIME_FILTERS } from "../../utils/constants";
-import Button from "../UI/Button";
-import AllEventsItem from "./components/AllEventsItem";
-import Dropdown from "./components/Dropdown";
-import FilterModal from "./components/FilterModal"; // Path to your new FilterModal file
+import Button from "../../../../components/UI/Button";
+import useFilterEvents from "../../../../hooks/useFilterEvents";
+import useTranslation from "../../../../hooks/useTranslation";
+import ArrowDownIcon from "../../../../svg/ArrowDownIcon";
+import FilterIcon from "../../../../svg/FilterIcon";
+import { LANGUAGES, TIME_FILTERS } from "../../../../utils/constants";
+import AllEventsItem from "./AllEventsItem";
+import Dropdown from "./Dropdown";
+import FilterModal from "./FilterModal"; // Path to your new FilterModal file
 
 const AllEvents = () => {
   const { t, language } = useTranslation();

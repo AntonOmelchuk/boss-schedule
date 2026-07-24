@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 
-import allyLogo from "../../../assets/ally-logo.png";
-import Watermark from "../../../components/Watermark/Watermark";
+import TitleWithWatermark from "../../../components/TitleWithWatermark/TitleWithWatermark";
 import useTranslation from "../../../hooks/useTranslation";
 import { formatDateForZone } from "../../../utils/general";
 
-const DynamicTitle = ({ events }) => {
+const DynamicTitle = ({ events, size = "md" }) => {
   const { t, language } = useTranslation();
 
   const tableTitle = useMemo(() => {
@@ -20,7 +19,7 @@ const DynamicTitle = ({ events }) => {
     const startDateStr = formatDateForZone(firstEventIso, "UTC", language);
     const endDateStr = formatDateForZone(lastEventIso, "UTC", language);
 
-    // Якщо всі івенти в один і той самий день, пишемо просто цей день. Якщо дні різні — показуємо діапазон.
+    // If all events are at the same date -> write just this day, different -> date range
     const dateRange =
       startDateStr === endDateStr
         ? startDateStr
@@ -29,20 +28,7 @@ const DynamicTitle = ({ events }) => {
     return `The 3rd Side | ${t.sbScheduleFor} ${t.sbOn} ${dateRange}`;
   }, [events, language, t]);
 
-  return (
-    <div className="px-5 py-4 border-b border-slate-800/60 bg-slate-950/40 flex items-center justify-center">
-      <img
-        src={allyLogo}
-        alt="The 3rd Side Logo"
-        className="w-6 h-6 object-contain rounded-full filter drop-shadow-[0_0_8px_rgba(99,102,241,0.5)] mr-4"
-      />
-      <h2 className="text-lg font-black tracking-widest text-indigo-100 uppercase font-mono">
-        {tableTitle}
-      </h2>
-
-      <Watermark />
-    </div>
-  );
+  return <TitleWithWatermark title={tableTitle} size={size} />;
 };
 
 export default DynamicTitle;
