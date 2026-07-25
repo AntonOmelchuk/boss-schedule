@@ -92,7 +92,13 @@ const useAppStore = create(
           const res = await fetch(`${BASE_URL}/api/epics`);
 
           if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+            let errorMessage = `HTTP error! Status: ${res.status}`;
+            try {
+              const errorJson = await res.json();
+              if (errorJson.message) errorMessage = errorJson.message;
+            } catch {
+              throw new Error(errorMessage);
+            }
           }
 
           const json = await res.json();
@@ -107,12 +113,19 @@ const useAppStore = create(
           }
         } catch (err) {
           console.error("Error fetching epic data:", err);
-          set({ error: err.message, loadingEpics: false });
+
+          const extractedMessage =
+            typeof err === "string"
+              ? err
+              : err?.message ||
+                "Failed to fetch epic data. Please check your connection or CORS settings.";
+
+          set({ error: extractedMessage, loadingEpics: false });
         }
       },
     }),
     {
-      name: "tracker-storage", // Ключ для збереження стану в localStorage
+      name: "tracker-storage",
 
       // Important not: partialize save to localStorage only language and filters.
       // Events ignore because we always get data in real time

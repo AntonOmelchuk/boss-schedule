@@ -5,6 +5,7 @@ import TitleWithWatermark from "../../components/TitleWithWatermark/TitleWithWat
 import Watermark from "../../components/Watermark/Watermark";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { BREAKPOINTS, DASHBOARD_TABS } from "../../utils/constants";
+import Tabs from "./components/Tabs";
 import AllianceStats from "./pages/AllianceStats/AllianceStats";
 import EpicStats from "./pages/EpicStats/EpicStats";
 
@@ -24,6 +25,7 @@ const StatsDashboard = () => {
 
   return (
     <div className="min-h-screen text-slate-100 md:p-6 flex flex-col gap-6">
+      <Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
       {isMobile ? (
         <Watermark className="mx-auto" />
       ) : (

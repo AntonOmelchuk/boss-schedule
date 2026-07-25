@@ -243,3 +243,15 @@ export const getBossIcon = (bossName) => {
   const eventType = EPIC_NAME_TO_EVENT_TYPE[bossName] || bossName;
   return getEmojiIcon(eventType) || "💎";
 };
+
+/**
+ * Validate error from backend
+ */
+export const getErrorMessage = (err) => {
+  if (!err) return "An unknown error occurred";
+  if (typeof err === "string") return err;
+  if (typeof err === "object") {
+    return err.message || err.error || JSON.stringify(err);
+  }
+  return String(err);
+};

@@ -1,6 +1,6 @@
 const Error = ({ title, onClickHandler }) => {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen text-red-400">
+    <div className="flex flex-col justify-center items-center text-red-400">
       <p className="text-xl font-bold mb-2">⚠️ Failed to load data</p>
       <p className="text-sm text-slate-400">{title}</p>
       <button
