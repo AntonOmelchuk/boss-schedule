@@ -13,7 +13,7 @@ export default defineConfig({
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       manifest: {
         name: "Iron Gates",
-        short_name: "IronGates",
+        short_name: "Iron Gates",
         description: "Alliance statistics and party attendance scanner",
         theme_color: "#0f172a",
         background_color: "#020617",

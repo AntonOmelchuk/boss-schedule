@@ -32,6 +32,13 @@
   }
 }
 
+html,
+body {
+  background-color: #0f172a;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
