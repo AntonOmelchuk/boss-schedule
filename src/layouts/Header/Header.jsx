@@ -77,7 +77,10 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full border-b border-slate-800/80 bg-slate-950/10 backdrop-blur-md sticky top-0 z-40">
+    <header
+      className="pt-[env(safe-area-inset-top)] w-full border-b border-slate-800/80 bg-slate-950/10
+      backdrop-blur-md sticky top-0 z-40"
+    >
       <div className="max-w-7xl mx-auto px-1 sm:px-6 py-3 flex items-center justify-between gap-4">
         {/* 1. BRAND / LOGO */}
         <BrandLogo onClick={() => navigate("/")} />
