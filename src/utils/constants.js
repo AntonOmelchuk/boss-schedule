@@ -187,6 +187,7 @@ export const BREAKPOINTS = {
   // Desktop
   IS_DESKTOP: "(min-width: 1280px)",
   IS_LARGE_DESKTOP: "(min-width: 1800px)",
+  IS_WIDE_SCREEN: "(min-width: 2500px)",
 
   // Specific values(for min-width)
   MIN_SM: "(min-width: 640px)",

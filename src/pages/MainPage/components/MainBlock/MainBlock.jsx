@@ -55,7 +55,7 @@ const MainBlock = () => {
             <h2
               className={`text-xl md:text-3xl font-black tracking-wide text-slate-100 mt-2.5 capitalize ${titleClass}`}
             >
-              {name || "Loading..."}
+              {name || `${t.noInfo}`}
             </h2>
             {isOutPrime && <OutPrime withoutBorder />}
             {owner && (

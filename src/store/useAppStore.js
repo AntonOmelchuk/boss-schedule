@@ -19,6 +19,8 @@ const useAppStore = create(
       },
       events: [], // data from Firebase
 
+      selectedCPs: {},
+
       // Alliance Stats
       statsData: { pareto: [], summary: {} },
       timelineData: { current_snapshot: [], timeline: [] },
@@ -34,6 +36,10 @@ const useAppStore = create(
       setLanguage: (lang) => set({ language: lang }),
       setEvents: (events) => set({ events }),
       setTimeFilter: (timeFilter) => set({ timeFilter }),
+      setSelectedCPs: (selectedCPs) => {
+        console.log("selectedCPs: ", selectedCPs);
+        set({ selectedCPs });
+      },
 
       // Event filter
       toggleFilter: (key) =>
@@ -114,6 +120,7 @@ const useAppStore = create(
         language: state.language,
         filters: state.filters,
         timeFilter: state.timeFilter,
+        selectedCPs: state.selectedCPs,
       }),
     },
   ),

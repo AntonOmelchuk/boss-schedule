@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "recharts";
 
+import Button from "../../../../../../components/UI/Button";
 import useAppStore from "../../../../../../store/useAppStore";
 
 const CP_COLORS = [
@@ -35,7 +36,8 @@ const CPProgressLineChart = () => {
     (state) => state.timelineData?.timeline || [],
   );
 
-  const [selectedCPs, setSelectedCPs] = useState({});
+  const selectedCPs = useAppStore((state) => state.selectedCPs);
+  const setSelectedCPs = useAppStore((state) => state.setSelectedCPs);
 
   // List of all CP (Turn off system fields)
   const allCPNames = useMemo(() => {
@@ -81,7 +83,10 @@ const CPProgressLineChart = () => {
 
   // Checkbox handlers
   const toggleCP = (cpName) => {
-    setSelectedCPs((prev) => ({ ...prev, [cpName]: !prev[cpName] }));
+    setSelectedCPs({
+      ...selectedCPs,
+      [cpName]: !selectedCPs[cpName],
+    });
   };
 
   const selectAll = (status) => {
@@ -95,7 +100,7 @@ const CPProgressLineChart = () => {
   return (
     <div
       className="w-full mt-8 bg-slate-900/10 backdrop-blur-md border border-slate-800
-      rounded-2xl p-6 shadow-xl flex flex-col gap-6"
+        rounded-2xl p-6 shadow-xl flex flex-col gap-6"
     >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -110,18 +115,8 @@ const CPProgressLineChart = () => {
 
         {/* Buttons */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => selectAll(true)}
-            className="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
-          >
-            Select All
-          </button>
-          <button
-            onClick={() => selectAll(false)}
-            className="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
-          >
-            Deselect All
-          </button>
+          <Button onClick={() => selectAll(true)}>Select All</Button>
+          <Button onClick={() => selectAll(false)}>Deselect All</Button>
         </div>
       </div>
 
@@ -192,7 +187,7 @@ const CPProgressLineChart = () => {
                   isSelected
                     ? "bg-slate-800/80 border-slate-600 text-slate-200"
                     : "bg-slate-950/40 border-slate-800/60 text-slate-500 hover:text-slate-400"
-                }`}
+                } cursor-pointer`}
               >
                 <span
                   className="w-2.5 h-2.5 rounded-full"

@@ -1,8 +1,11 @@
 import logo from "../../assets/logo.png";
 
-const BrandLogo = () => {
+const BrandLogo = ({ onClick }) => {
   return (
-    <div className="flex items-center gap-3">
+    <button
+      onClick={onClick}
+      className="flex items-center gap-3 cursor-pointer hover:opacity-80"
+    >
       <img
         src={logo}
         alt="Iron Gates"
@@ -13,7 +16,7 @@ const BrandLogo = () => {
           Iron Gates
         </h1>
       </div>
-    </div>
+    </button>
   );
 };
 
