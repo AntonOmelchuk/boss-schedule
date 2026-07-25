@@ -22,8 +22,6 @@ const EpicStats = () => {
     })),
   );
 
-  console.log("error: ", error);
-
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
   useEffect(() => {
