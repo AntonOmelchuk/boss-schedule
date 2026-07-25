@@ -13,7 +13,7 @@ const Header = () => {
           Weekly Share Sync 💎
         </span>
       </div>
-      <p className="text-xs text-slate-400 mt-1">
+      <p className="text-xs min-[1880px]:text-xl text-slate-400 mt-1">
         Tracking alliance epic boss kills, treasury stock, and CP distribution
         priority
       </p>

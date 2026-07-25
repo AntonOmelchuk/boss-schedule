@@ -25,7 +25,7 @@ const AllEvents = () => {
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="text-base md:text-xl font-bold text-slate-200 hover:text-amber-500 flex items-center gap-2
-              select-none focus:outline-none transition-colors duration-200 uppercase pb-0.5 md:pb-0"
+              select-none focus:outline-none transition-colors duration-200 uppercase pb-0.5 md:pb-0 cursor-pointer"
           >
             {timeFilter === TIME_FILTERS.AllTime
               ? t.allEvents

@@ -4,9 +4,6 @@ import { SORT } from "../../../../../../utils/constants";
 const SortTabs = ({ setSortBy, sortBy }) => {
   return (
     <div className="flex justify-between">
-      <h3 className="text-xl font-bold text-slate-100">
-        Epic Items Received per CP
-      </h3>
       <div className="flex items-center gap-1 p-1 rounded-xl self-start sm:self-auto">
         <Tab
           onClickHandler={() => setSortBy(SORT.EPICS_COUNT)}
