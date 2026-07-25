@@ -9,6 +9,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "auto",
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       manifest: {
         name: "Iron Gates",
@@ -17,6 +18,8 @@ export default defineConfig({
         theme_color: "#0f172a",
         background_color: "#020617",
         display: "standalone",
+        start_url: "/",
+        scope: "/",
         icons: [
           {
             src: "pwa-192x192.png",
