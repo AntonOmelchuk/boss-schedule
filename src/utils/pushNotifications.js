@@ -1,3 +1,5 @@
+import { LANGUAGES } from "./constants";
+
 const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY;
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -20,7 +22,7 @@ function urlBase64ToUint8Array(base64String) {
  * @param {Object} alertsMap - Map of event IDs to alert settings, e.g. { "zaken": { "leadTimeMinutes": 30 } }
  * @param {string} language - Current app language, e.g. "uk" or "en"
  */
-export async function subscribeUserToPush(alertsMap, language = "en") {
+export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
   if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
     throw new Error(
       "Push notifications are not supported by this device or browser.",

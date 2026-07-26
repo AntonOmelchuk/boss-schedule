@@ -32,20 +32,22 @@ const AllEventsItem = ({
   const togglePushAlert = useAppStore((state) => state.togglePushAlert);
   const defaultLeadTime = useAppStore((state) => state.defaultLeadTime);
 
+  const alertData = pushAlerts[id];
+  const isAlertActive = !!alertData;
+
+  // Hide alert icon If respawn in 15min or less || respawn < leadTime
   const now = Date.now();
   const timeToSpawnMs = ts - now;
   const minutesToSpawn = Math.floor(timeToSpawnMs / (1000 * 60));
 
-  // If respawn in 15min or less -> hide alert icon
-  const shouldHideBell = minutesToSpawn < 15;
-
-  const alertData = pushAlerts[id];
-  const isAlertActive = !!alertData;
+  const effectiveLeadTime = alertData?.leadTimeMinutes ?? defaultLeadTime;
+  const shouldHideBell =
+    minutesToSpawn < 15 || minutesToSpawn <= effectiveLeadTime;
 
   const handleBellClick = async (e) => {
     e.stopPropagation();
 
-    // 1. Формуємо новий об'єкт алертів для перевірки та відправки
+    // 1. New allert
     const newAlerts = { ...pushAlerts };
     const isCurrentlyActive = !!newAlerts[id];
 
