@@ -1,4 +1,5 @@
 const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY;
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 /**
  * Converts URL-safe Base64 VAPID Key into Uint8Array required by PushManager
@@ -17,8 +18,9 @@ function urlBase64ToUint8Array(base64String) {
 /**
  * Requests push permission, registers device token and syncs alert preferences with FastAPI backend.
  * @param {Object} alertsMap - Map of event IDs to alert settings, e.g. { "zaken": { "leadTimeMinutes": 30 } }
+ * @param {string} language - Current app language, e.g. "uk" or "en"
  */
-export async function subscribeUserToPush(alertsMap) {
+export async function subscribeUserToPush(alertsMap, language = "en") {
   if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
     throw new Error(
       "Push notifications are not supported by this device or browser.",
@@ -51,13 +53,14 @@ export async function subscribeUserToPush(alertsMap) {
 
   const subJson = subscription.toJSON();
 
-  // 4. Send subscription keys & user selected alerts to FastAPI backend
-  const response = await fetch("/api/push/subscribe", {
+  // 4. Send subscription keys, language & user selected alerts to FastAPI backend
+  const response = await fetch(`${BASE_URL}/api/push/subscribe`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       endpoint: subJson.endpoint,
       keys: subJson.keys,
+      lang: language,
       alerts: alertsMap,
     }),
   });

@@ -1,11 +1,14 @@
 import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
 import OutPrime from "../../../../components/OutPrime/OutPrime";
+import useTranslation from "../../../../hooks/useTranslation";
 import useAppStore from "../../../../store/useAppStore";
 import { getDiplomacyConfig } from "../../../../utils/general";
+import { subscribeUserToPush } from "../../../../utils/pushNotifications";
 import AlertButton from "./AlertButton";
 
 const AllEventsItem = ({
   id,
+  ts,
   icon,
   name,
   owner,
@@ -23,18 +26,47 @@ const AllEventsItem = ({
     badgeIcon,
   } = config || {};
 
+  const { t, language } = useTranslation();
+
   const pushAlerts = useAppStore((state) => state.pushAlerts);
   const togglePushAlert = useAppStore((state) => state.togglePushAlert);
+  const defaultLeadTime = useAppStore((state) => state.defaultLeadTime);
+
+  const now = Date.now();
+  const timeToSpawnMs = ts - now;
+  const minutesToSpawn = Math.floor(timeToSpawnMs / (1000 * 60));
+
+  // If respawn in 15min or less -> hide alert icon
+  const shouldHideBell = minutesToSpawn < 15;
 
   const alertData = pushAlerts[id];
   const isAlertActive = !!alertData;
 
-  const handleBellClick = (e) => {
+  const handleBellClick = async (e) => {
     e.stopPropagation();
-    const success = togglePushAlert(id);
 
-    if (!success) {
-      alert("Максимум 5 активних сповіщень!");
+    // 1. Формуємо новий об'єкт алертів для перевірки та відправки
+    const newAlerts = { ...pushAlerts };
+    const isCurrentlyActive = !!newAlerts[id];
+
+    if (isCurrentlyActive) {
+      delete newAlerts[id];
+    } else {
+      if (Object.keys(newAlerts).length >= 5) {
+        alert(t.maxAlerts);
+        return;
+      }
+      newAlerts[id] = { leadTimeMinutes: defaultLeadTime };
+    }
+
+    try {
+      togglePushAlert(id);
+      await subscribeUserToPush(newAlerts, language);
+    } catch (err) {
+      console.error("Failed to sync push subscription:", err);
+      // Is user denied permissions for push-notification
+      togglePushAlert(id);
+      alert(`${t.error} ${err.message}`);
     }
   };
 
@@ -96,11 +128,13 @@ const AllEventsItem = ({
         </div>
 
         {/* PUSH ALERT BELL BUTTON (Top Right) */}
-        <AlertButton
-          isAlertActive={isAlertActive}
-          handleBellClick={handleBellClick}
-          leadTimeMinutes={alertData?.leadTimeMinutes}
-        />
+        {!shouldHideBell && (
+          <AlertButton
+            isAlertActive={isAlertActive}
+            handleBellClick={handleBellClick}
+            leadTimeMinutes={alertData?.leadTimeMinutes}
+          />
+        )}
       </div>
     </div>
   );
