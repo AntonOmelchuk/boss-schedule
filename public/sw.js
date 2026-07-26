@@ -1,3 +1,7 @@
+import { precacheAndRoute } from "workbox-precaching";
+
+precacheAndRoute(self.__WB_MANIFEST || []);
+
 // Listening for background push events from the browser Push API
 self.addEventListener("push", function (event) {
   if (!event.data) return;

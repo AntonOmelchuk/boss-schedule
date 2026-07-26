@@ -8,9 +8,15 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
+      strategies: "injectManifest",
+      srcDir: "public",
+      filename: "sw.js",
       registerType: "autoUpdate",
       injectRegister: "auto",
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
+      devOptions: {
+        enabled: true,
+      },
       manifest: {
         name: "Iron Gates",
         short_name: "Iron Gates",
