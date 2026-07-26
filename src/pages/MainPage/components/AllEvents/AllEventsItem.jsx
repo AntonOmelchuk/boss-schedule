@@ -1,8 +1,11 @@
 import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
 import OutPrime from "../../../../components/OutPrime/OutPrime";
+import useAppStore from "../../../../store/useAppStore";
 import { getDiplomacyConfig } from "../../../../utils/general";
+import AlertButton from "./AlertButton";
 
 const AllEventsItem = ({
+  id,
   icon,
   name,
   owner,
@@ -20,10 +23,25 @@ const AllEventsItem = ({
     badgeIcon,
   } = config || {};
 
+  const pushAlerts = useAppStore((state) => state.pushAlerts);
+  const togglePushAlert = useAppStore((state) => state.togglePushAlert);
+
+  const alertData = pushAlerts[id];
+  const isAlertActive = !!alertData;
+
+  const handleBellClick = (e) => {
+    e.stopPropagation();
+    const success = togglePushAlert(id);
+
+    if (!success) {
+      alert("Максимум 5 активних сповіщень!");
+    }
+  };
+
   return (
     <div
       className={`group relative rounded-xl p-px overflow-hidden transition-all duration-500 border
-         border-slate-800/50 ${glowClass}`}
+        border-slate-800/50 ${glowClass}`}
     >
       {/* Dynamic gradient */}
       <div
@@ -39,18 +57,20 @@ const AllEventsItem = ({
         className="bg-slate-900/95 backdrop-blur-xl rounded-xl p-4 relative z-10 flex
         items-center gap-4 w-full h-full text-left"
       >
+        {/* Icon Container */}
         <div
           className={`w-12 h-12 rounded-lg border flex items-center justify-center text-3xl shrink-0
-          shadow-inner group-hover:scale-105 duration-300 transition-transform ${iconBorder}`}
+            shadow-inner group-hover:scale-105 duration-300 transition-transform ${iconBorder}`}
         >
           {icon.length <= 3 ? (
             icon
           ) : (
-            <img src={icon} width={45} className="rounded-xl" />
+            <img src={icon} width={45} className="rounded-xl" alt={name} />
           )}
         </div>
 
-        <div className="flex-1 overflow-hidden min-w-0">
+        {/* Info Container */}
+        <div className="flex-1 overflow-hidden min-w-0 pr-6">
           <div className="flex items-center gap-2 flex-wrap">
             <h4
               className={`font-black text-lg tracking-wide capitalize truncate w-full ${titleClass}`}
@@ -74,6 +94,13 @@ const AllEventsItem = ({
             {spawnDate}
           </div>
         </div>
+
+        {/* PUSH ALERT BELL BUTTON (Top Right) */}
+        <AlertButton
+          isAlertActive={isAlertActive}
+          handleBellClick={handleBellClick}
+          leadTimeMinutes={alertData?.leadTimeMinutes}
+        />
       </div>
     </div>
   );
