@@ -11,7 +11,8 @@ const AlertButton = ({ handleBellClick, isAlertActive, leadTimeMinutes }) => {
   return (
     <button
       onClick={handleBellClick}
-      className={`absolute top-3 right-3 p-1.5 rounded-lg border transition-all duration-300 flex items-center gap-1
+      className={`hidden standalone:max-md:flex absolute top-3 right-3 p-1.5 rounded-lg border transition-all
+        duration-300 items-center gap-1
         ${activeStyles}`}
     >
       {/* Bell Icon */}
