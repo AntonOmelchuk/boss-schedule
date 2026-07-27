@@ -4,10 +4,12 @@ precacheAndRoute(self.__WB_MANIFEST || []);
 
 // Listening for background push events from the browser Push API
 self.addEventListener("push", function (event) {
+  console.log("📲 [SW DEBUG] Push event received on Android!", event);
   if (!event.data) return;
 
   try {
     const data = event.data.json();
+    console.log("📦 [SW DEBUG] Parsed JSON payload:", data);
     const title = data.title || "⚡ Boss Respawn Alert!";
 
     const options = {
@@ -22,7 +24,10 @@ self.addEventListener("push", function (event) {
         url: "/",
       },
     };
-
+    console.log(
+      "🔔 [SW DEBUG] Executing showNotification with options:",
+      options,
+    );
     event.waitUntil(self.registration.showNotification(title, options));
   } catch (err) {
     console.error("Error processing push event in SW:", err);
