@@ -1,5 +1,3 @@
-import PullToRefresh from "react-simple-pull-to-refresh";
-
 import bgImg from "../../assets/bg3.png";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../../utils/constants";
@@ -10,12 +8,8 @@ import MobileTabs from "../MobileTabs/MobileTabs";
 const MainLayout = ({ children }) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
-  const handleRefresh = async () => {
-    window.location.reload();
-  };
-
   return (
-    <PullToRefresh isPullable onRefresh={handleRefresh}>
+    <>
       <Header />
       <div
         className="min-h-screen flex flex-col text-slate-200 font-sans px-1 md:px-4"
@@ -30,7 +24,7 @@ const MainLayout = ({ children }) => {
         <main className="flex-1 w-full mx-auto p-1 md:p-6">{children}</main>
       </div>
       {isDesktop ? <Footer /> : <MobileTabs />}
-    </PullToRefresh>
+    </>
   );
 };
 

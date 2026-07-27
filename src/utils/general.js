@@ -255,3 +255,37 @@ export const getErrorMessage = (err) => {
   }
   return String(err);
 };
+
+/**
+ * Parse day and month from string
+ */
+const MONTHS_MAP = {
+  jan: 0,
+  feb: 1,
+  mar: 2,
+  apr: 3,
+  may: 4,
+  jun: 5,
+  jul: 6,
+  aug: 7,
+  sep: 8,
+  oct: 9,
+  nov: 10,
+  dec: 11,
+};
+
+export const parseShortDate = (dateStr) => {
+  if (!dateStr || typeof dateStr !== "string") return 0;
+
+  const parts = dateStr.trim().split("-");
+  if (parts.length < 2) return 0;
+
+  const day = parseInt(parts[0], 10);
+  const monthKey = parts[1].toLowerCase().slice(0, 3);
+  const month = MONTHS_MAP[monthKey];
+
+  if (isNaN(day) || month === undefined) return 0;
+
+  const currentYear = new Date().getFullYear();
+  return new Date(currentYear, month, day).getTime();
+};
