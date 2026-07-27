@@ -11,9 +11,13 @@ export function useIsPWA() {
 
     // 2. Check value for iOS Safari
     const isIOSPWA = window.navigator.standalone === true;
+    console.log(
+      "[DEBUG] window.navigator.standalone:",
+      window.navigator.standalone,
+    );
     // 3. Check for TWA (Trusted Web Activity на Android)
     const isTWA = document.referrer.includes("android-app://");
-
+    console.log("[DEBUG] document.referrer:", document.referrer);
     setIsPWA(matchMediaPWA || isIOSPWA || isTWA);
   }, []);
 

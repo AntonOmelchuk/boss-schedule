@@ -11,7 +11,7 @@ const AlertButton = ({ handleBellClick, isAlertActive, leadTimeMinutes }) => {
   return (
     <button
       onClick={handleBellClick}
-      className={`hidden standalone:max-md:flex absolute top-3 right-3 p-1.5 rounded-lg border transition-all
+      className={`hidden max-md:flex absolute top-3 right-3 p-1.5 rounded-lg border transition-all
         duration-300 items-center gap-1
         ${activeStyles}`}
     >
