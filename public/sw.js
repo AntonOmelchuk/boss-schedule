@@ -4,41 +4,43 @@ precacheAndRoute(self.__WB_MANIFEST || []);
 
 // Listening for background push events from the browser Push API
 self.addEventListener("push", function (event) {
-  console.log("📲 [SW DEBUG] Push event received on Android!", event);
-  if (!event.data) return;
+  console.log("📲 [SW DEBUG] Push event received!", event);
 
-  try {
-    const data = event.data.json();
-    console.log("📦 [SW DEBUG] Parsed JSON payload:", data);
-    const title = data.title || "⚡ Boss Respawn Alert!";
+  let title = "⚡ Boss Respawn Alert!";
+  let options = {
+    body: "An event is starting soon!",
+    icon: "/pwa-192x192.png",
+    badge: "/pwa-192x192.png",
+    vibrate: [200, 100, 200],
+    tag: "event-alert",
+    renotify: true,
+    data: {
+      url: "/",
+    },
+  };
 
-    const options = {
-      body: data.body || "An event is starting soon!",
-      icon: "/pwa-192x192.png",
-      badge: "/pwa-192x192.png",
-      vibrate: [200, 100, 200],
-      tag: data.eventId || "event-alert",
-      renotify: true,
-      data: {
-        eventId: data.eventId,
-        url: "/",
-      },
-    };
-    console.log(
-      "🔔 [SW DEBUG] Executing showNotification with options:",
-      options,
-    );
-    event.waitUntil(self.registration.showNotification(title, options));
-  } catch (err) {
-    console.error("Error processing push event in SW:", err);
+  if (event.data) {
+    try {
+      const data = event.data.json();
+      console.log("📦 [SW DEBUG] Parsed JSON payload:", data);
+      title = data.title || title;
+      options.body = data.body || options.body;
+      options.tag = data.eventId || options.tag;
+      options.data.eventId = data.eventId;
+    } catch {
+      console.warn("⚠️ [SW DEBUG] Payload text fallback:", event.data.text());
+      options.body = event.data.text();
+    }
   }
+
+  // ОБОВ'ЯЗКОВО для Android: waitUntil гарантує відображення сповіщення
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
 // Handling clicks on the notification banner
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
 
-  // Focus the PWA window if it's already open, or open a new one
   event.waitUntil(
     self.clients
       .matchAll({ type: "window", includeUncontrolled: true })
