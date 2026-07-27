@@ -15,20 +15,20 @@ const MobileTabs = () => {
 
   return (
     <div className="sticky bottom-0 z-90 flex items-center bg-slate-900 justify-around border-t border-slate-800 p-2">
-      {NAV_CONFIG.filter((item) => !item.hideOnMobile).map((item) => (
-        <Tab
-          key={item.id}
-          onClickHandler={() => navigate(item.path)}
-          isActive={
-            item.hasDropdown ? isStatisticsPage : pathname === item.path
-          }
-          title={item.title}
-          icon={<span className="text-base">{item.icon}</span>}
-          className="flex-col gap-1 text-[11px] font-bold px-3"
-          activeClassName={item.mobileActiveClass}
-          inactiveClassName="text-slate-500"
-        />
-      ))}
+      {NAV_CONFIG.filter((item) => !item.hideOnMobile).map(
+        ({ id, path, title, icon, hasDropdown, mobileActiveClass }) => (
+          <Tab
+            key={id}
+            onClickHandler={() => navigate(path)}
+            isActive={hasDropdown ? isStatisticsPage : pathname === path}
+            title={title}
+            icon={<span className="text-base">{icon}</span>}
+            className="flex-col gap-1 text-[11px] font-bold px-3"
+            activeClassName={mobileActiveClass}
+            inactiveClassName="text-slate-500"
+          />
+        ),
+      )}
     </div>
   );
 };
