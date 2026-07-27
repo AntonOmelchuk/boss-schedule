@@ -197,13 +197,6 @@ export const BREAKPOINTS = {
   MIN_2XL: "(min-width: 1536px)",
 };
 
-// Main Navigation
-export const NAV_ITEMS = {
-  RESPAWN: "respawn",
-  SCHEDULE: "schedule",
-  STATISTICS: "statistics",
-};
-
 // Epic GB pirce in allinace
 export const EPIC_PRICES_GB = {
   Core: 7,

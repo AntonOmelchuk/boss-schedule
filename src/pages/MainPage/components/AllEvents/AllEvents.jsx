@@ -68,11 +68,13 @@ const AllEvents = () => {
               },
             );
 
-            const { id, icon, name, enemy, owner, relation, isOutPrime } =
+            const { id, ts, icon, name, enemy, owner, relation, isOutPrime } =
               event;
 
             return (
               <AllEventsItem
+                id={id}
+                ts={ts}
                 key={id}
                 icon={icon}
                 name={name}

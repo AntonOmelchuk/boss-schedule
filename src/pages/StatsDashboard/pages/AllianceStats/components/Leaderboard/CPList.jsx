@@ -60,7 +60,7 @@ const CPList = ({ data, viewMode }) => {
                     <span className="font-bold text-amber-300 text-sm block">
                       {gb_pts_ratio ?? 0} ratio
                     </span>
-                    <span className="text-[10px] text-slate-400">
+                    <span className="text-[10px] xl:text-xs text-slate-400">
                       {points} pts total
                     </span>
                   </>

@@ -7,7 +7,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const useAppStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       // Initial state
       language: LANGUAGES.EN,
       timeFilter: TIME_FILTERS.AllTime,
@@ -32,14 +32,56 @@ const useAppStore = create(
       epicData: null,
       loadingEpics: false,
 
+      defaultLeadTime: 30, // Default lead time in minutes (for settings slider)
+      pushAlerts: {}, // Structure: { "zaken": { leadTimeMinutes: 30 } }
+
       // Actions
       setLanguage: (lang) => set({ language: lang }),
       setEvents: (events) => set({ events }),
       setTimeFilter: (timeFilter) => set({ timeFilter }),
-      setSelectedCPs: (selectedCPs) => {
-        console.log("selectedCPs: ", selectedCPs);
-        set({ selectedCPs });
+      setSelectedCPs: (selectedCPs) => set({ selectedCPs }),
+
+      // PUSH ALERTS ACTIONS
+      setDefaultLeadTime: (minutes) =>
+        set({ defaultLeadTime: Number(minutes) }),
+
+      /**
+       * Toggles push alert for a specific event with limit check (max 5)
+       * @returns {boolean} true if alert was toggled, false if limit was reached
+       */
+      togglePushAlert: (eventId, customLeadTime) => {
+        const { pushAlerts, defaultLeadTime } = get();
+        const leadTimeMinutes = customLeadTime || defaultLeadTime;
+
+        // If alert already active -> remove it
+        if (pushAlerts[eventId]) {
+          const updatedAlerts = { ...pushAlerts };
+          delete updatedAlerts[eventId];
+          set({ pushAlerts: updatedAlerts });
+          return true;
+        }
+
+        // Check limit (max 5 active alerts)
+        if (Object.keys(pushAlerts).length >= 5) {
+          return false; // Limit reached
+        }
+
+        // Add new alert
+        set({
+          pushAlerts: {
+            ...pushAlerts,
+            [eventId]: { leadTimeMinutes },
+          },
+        });
+        return true;
       },
+
+      removePushAlert: (eventId) =>
+        set((state) => {
+          const updatedAlerts = { ...state.pushAlerts };
+          delete updatedAlerts[eventId];
+          return { pushAlerts: updatedAlerts };
+        }),
 
       // Event filter
       toggleFilter: (key) =>
@@ -134,6 +176,8 @@ const useAppStore = create(
         filters: state.filters,
         timeFilter: state.timeFilter,
         selectedCPs: state.selectedCPs,
+        defaultLeadTime: state.defaultLeadTime,
+        pushAlerts: state.pushAlerts,
       }),
     },
   ),
