@@ -17,7 +17,7 @@ const MainBlock = () => {
     config;
 
   return (
-    <div className="relative mb-4 md:mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
+    <div className="relative my-4 md:mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
       <div
         className="absolute inset-[-150%] animate-spin"
         style={{
