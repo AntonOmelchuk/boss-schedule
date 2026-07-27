@@ -1,6 +1,5 @@
 import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
 import OutPrime from "../../../../components/OutPrime/OutPrime";
-import { useIsPWA } from "../../../../hooks/useIsPWA";
 import useTranslation from "../../../../hooks/useTranslation";
 import useAppStore from "../../../../store/useAppStore";
 import { getDiplomacyConfig } from "../../../../utils/general";
@@ -28,7 +27,6 @@ const AllEventsItem = ({
   } = config || {};
 
   const { t, language } = useTranslation();
-  const isPWA = useIsPWA();
 
   const pushAlerts = useAppStore((state) => state.pushAlerts);
   const togglePushAlert = useAppStore((state) => state.togglePushAlert);
@@ -132,7 +130,7 @@ const AllEventsItem = ({
         </div>
 
         {/* PUSH ALERT BELL BUTTON (Top Right) */}
-        {!shouldHideBell && isPWA && (
+        {!shouldHideBell && (
           <AlertButton
             isAlertActive={isAlertActive}
             handleBellClick={handleBellClick}
