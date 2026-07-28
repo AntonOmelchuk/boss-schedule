@@ -83,6 +83,35 @@ const useAppStore = create(
           return { pushAlerts: updatedAlerts };
         }),
 
+      cleanExpiredAlerts: (activeEventsList) => {
+        const { pushAlerts } = get();
+        const now = Date.now();
+        let hasChanges = false;
+        const updatedAlerts = { ...pushAlerts };
+
+        // Map with actual future events { [eventId]: timestamp }
+        const activeEventsMap = new Map(
+          activeEventsList.map((e) => [e.id, e.ts]),
+        );
+
+        Object.keys(updatedAlerts).forEach((eventId) => {
+          const eventTs = activeEventsMap.get(eventId);
+
+          // If there is not event among active || respawn time left
+          if (!eventTs || eventTs <= now) {
+            delete updatedAlerts[eventId];
+            hasChanges = true;
+          }
+        });
+
+        if (hasChanges) {
+          set({ pushAlerts: updatedAlerts });
+          console.log(
+            "🧹 [STORE CLEANUP] Removed expired epic alerts from local state.",
+          );
+        }
+      },
+
       // Event filter
       toggleFilter: (key) =>
         set((state) => ({
