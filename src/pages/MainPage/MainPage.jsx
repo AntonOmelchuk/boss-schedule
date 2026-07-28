@@ -5,7 +5,7 @@ import AllEvents from "./components/AllEvents/AllEvents";
 import MainBlock from "./components/MainBlock/MainBlock";
 
 const MainPage = () => {
-  const eventsData = useAppStore((state) => state.eventsData);
+  const eventsData = useAppStore((state) => state.events);
   const cleanExpiredAlerts = useAppStore((state) => state.cleanExpiredAlerts);
 
   useEffect(() => {

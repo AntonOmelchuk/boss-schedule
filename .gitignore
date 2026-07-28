@@ -27,3 +27,4 @@ dist-ssr
 .env*
 src/firebase_import.json
 Todo.md
+Bugs.md

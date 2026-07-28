@@ -101,12 +101,11 @@ const EpicFarmedTimeline = () => {
                 id,
                 epic_name,
                 farm_date,
-                status,
                 share_date,
+                is_shared,
                 assigned_cp,
               }) => {
                 const bossColor = EPIC_COLORS[epic_name] || "#64748b";
-                const isShared = status === FARMED_EPIC_FILTERS.SHARED;
 
                 return (
                   <TimelineItem
@@ -114,7 +113,7 @@ const EpicFarmedTimeline = () => {
                     name={epic_name}
                     farmDate={farm_date}
                     bossColor={bossColor}
-                    isShared={isShared}
+                    isShared={is_shared}
                     shareDate={share_date}
                     cp={assigned_cp}
                   />
