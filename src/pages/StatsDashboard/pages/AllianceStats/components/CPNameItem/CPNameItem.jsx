@@ -1,6 +1,6 @@
-import { WINNER_ICONS } from "../../../../../../utils/constants";
+import { SORT, WINNER_ICONS } from "../../../../../../utils/constants";
 
-const CPNameItem = ({ cpName, index }) => {
+const CPNameItem = ({ cpName, index, viewMode }) => {
   const icon = WINNER_ICONS[index];
 
   const numberWidth = index > 8 ? "w-5" : "w-4";
@@ -36,7 +36,7 @@ const CPNameItem = ({ cpName, index }) => {
       <span
         className={`text-xs md:text-sm min-[1820px]:text-lg font-mono font-bold text-slate-500 ${numberWidth}`}
       >
-        {icon ? icon : `#${index + 1}`}
+        {icon && viewMode !== SORT.PRIORITY ? icon : `#${index + 1}`}
       </span>
       <span className={`transition ${font} ${color}`}>{cpName}</span>
     </div>

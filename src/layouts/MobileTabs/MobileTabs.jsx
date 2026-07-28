@@ -14,7 +14,10 @@ const MobileTabs = () => {
   }
 
   return (
-    <div className="sticky bottom-0 z-90 flex items-center bg-slate-900 justify-around border-t border-slate-800 p-2">
+    <div
+      className="sticky bottom-0 z-90 pb-6 flex items-center bg-slate-900 justify-around border-t
+      border-slate-800 p-2"
+    >
       {NAV_CONFIG.filter((item) => !item.hideOnMobile).map(
         ({ id, path, title, icon, hasDropdown, mobileActiveClass }) => (
           <Tab

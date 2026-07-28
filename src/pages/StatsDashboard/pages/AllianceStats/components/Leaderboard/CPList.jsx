@@ -34,7 +34,11 @@ const CPList = ({ data, viewMode }) => {
               border-slate-700/40 hover:bg-slate-800 transition"
             >
               <div className="flex flexitems-center gap-3">
-                <CPNameItem cpName={cp_name} index={index} />
+                <CPNameItem
+                  cpName={cp_name}
+                  index={index}
+                  viewMode={viewMode}
+                />
                 {viewMode === SORT.POINTS && (
                   <div
                     className={`flex self-wrap text-left px-1 md:px-1.5 md:py-0.5 text-[8px] md:text-[10px] font-bold
