@@ -32,6 +32,13 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
     );
   }
 
+  if (!VAPID_PUBLIC_KEY) {
+    console.error("❌ [PUSH DEBUG] VITE_VAPID_PUBLIC_KEY is missing!");
+    throw new Error(
+      "VITE_VAPID_PUBLIC_KEY is not defined in environment variables.",
+    );
+  }
+
   // 1. Request notification permission from browser
   const permission = await Notification.requestPermission();
   console.log("🔑 [PUSH DEBUG] Notification permission status:", permission);
@@ -42,23 +49,30 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
   // 2. Obtain active Service Worker registration
   const registration = await navigator.serviceWorker.ready;
   console.log("👷 [PUSH DEBUG] Service Worker ready:", registration);
-  let subscription = await registration.pushManager.getSubscription();
-  console.log("🔍 [PUSH DEBUG] Existing subscription found:", subscription);
 
-  // 3. Generate new PushSubscription if absent
+  // 3. Get existing subscription or create new one safely
+  let subscription = await registration.pushManager.getSubscription();
+  console.log("🔍 [PUSH DEBUG] Existing subscription check:", subscription);
+
+  const convertedKey = urlBase64ToUint8Array(VAPID_PUBLIC_KEY);
+
+  // If no subscription exists, create a new one
   if (!subscription) {
     console.log("➕ [PUSH DEBUG] Creating new push subscription...");
-    if (!VAPID_PUBLIC_KEY) {
-      throw new Error(
-        "VITE_VAPID_PUBLIC_KEY is not defined in environment variables.",
-      );
+    try {
+      subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: convertedKey,
+      });
+      console.log("✅ [PUSH DEBUG] New subscription created successfully!");
+    } catch (subErr) {
+      console.error("❌ [PUSH DEBUG] Failed to subscribe pushManager:", subErr);
+      throw subErr;
     }
-    const convertedKey = urlBase64ToUint8Array(VAPID_PUBLIC_KEY);
-    subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: convertedKey,
-    });
-    console.log("✅ [PUSH DEBUG] New subscription created successfully!");
+  } else {
+    console.log(
+      "⚡ [PUSH DEBUG] Reusing existing active subscription endpoint.",
+    );
   }
 
   const subJson = subscription.toJSON();
@@ -67,6 +81,7 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
     "🌐 [PUSH DEBUG] Sending subscription to backend URL:",
     `${BASE_URL}/api/push/subscribe`,
   );
+
   // 4. Send subscription keys, language & user selected alerts to FastAPI backend
   const response = await fetch(`${BASE_URL}/api/push/subscribe`, {
     method: "POST",
@@ -78,6 +93,7 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
       alerts: alertsMap,
     }),
   });
+
   console.log("📡 [PUSH DEBUG] Backend HTTP response status:", response.status);
   if (!response.ok) {
     const errData = await response.json();
@@ -100,6 +116,11 @@ export async function getCurrentPushSubscription() {
   if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
     return null;
   }
-  const registration = await navigator.serviceWorker.ready;
-  return await registration.pushManager.getSubscription();
+  try {
+    const registration = await navigator.serviceWorker.ready;
+    return await registration.pushManager.getSubscription();
+  } catch (err) {
+    console.error("Failed to get current push subscription:", err);
+    return null;
+  }
 }
