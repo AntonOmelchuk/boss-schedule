@@ -187,6 +187,7 @@ export const BREAKPOINTS = {
   // Desktop
   IS_DESKTOP: "(min-width: 1280px)",
   IS_LARGE_DESKTOP: "(min-width: 1800px)",
+  IS_WIDE_SCREEN: "(min-width: 2500px)",
 
   // Specific values(for min-width)
   MIN_SM: "(min-width: 640px)",
@@ -194,13 +195,6 @@ export const BREAKPOINTS = {
   MIN_LG: "(min-width: 1024px)",
   MIN_XL: "(min-width: 1280px)",
   MIN_2XL: "(min-width: 1536px)",
-};
-
-// Main Navigation
-export const NAV_ITEMS = {
-  RESPAWN: "respawn",
-  SCHEDULE: "schedule",
-  STATISTICS: "statistics",
 };
 
 // Epic GB pirce in allinace

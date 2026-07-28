@@ -40,7 +40,7 @@ const StatCards = () => {
                 <span
                   key={idx}
                   className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20
-                 text-amber-300 border border-amber-500/30"
+                  text-amber-300 border border-amber-500/30"
                 >
                   {item.epic_name} ({item.farm_date})
                 </span>

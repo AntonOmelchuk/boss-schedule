@@ -66,7 +66,7 @@ export default function ScheduleBuilder() {
 
   return (
     <div className="text-slate-100 p-4 md:p-8 flex flex-col justify-start select-none">
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <Header
           tableRef={tableRef}
           showLocalTime={showLocalTime}

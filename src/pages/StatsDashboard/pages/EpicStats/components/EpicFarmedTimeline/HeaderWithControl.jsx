@@ -16,17 +16,19 @@ const HeaderWithControl = ({
   setSortOrder,
   sortOrder,
 }) => {
+  const filteredEventsLength = filteredEvents.length;
+
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
       <div>
-        <h3 className="text-sm xl:text-lg font-bold text-slate-100 flex items-center gap-2">
+        <h3 className="text-sm xl:text-lg font-bold text-slate-100 flex items-center">
           <span>📜 Epic Bosses Kill History</span>
           <span
-            className="text-[10px] md:text-xs xl:text-lg font-semibold px-2.5 py-0.5
+            className="text-[10px] md:text-xs xl:text-lg font-semibold px-2 py-0.5
               rounded-full bg-slate-800 text-sky-400 border
               border-slate-700"
           >
-            {filteredEvents.length} events
+            {filteredEventsLength} epic{filteredEventsLength > 1 ? "s" : ""}
           </span>
         </h3>
         <p className="text-xs xl:text-base text-slate-400 mt-0.5">

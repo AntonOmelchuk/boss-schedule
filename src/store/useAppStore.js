@@ -7,7 +7,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const useAppStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       // Initial state
       language: LANGUAGES.EN,
       timeFilter: TIME_FILTERS.AllTime,
@@ -18,6 +18,8 @@ const useAppStore = create(
         [CATEGORIES.Siege]: true,
       },
       events: [], // data from Firebase
+
+      selectedCPs: {},
 
       // Alliance Stats
       statsData: { pareto: [], summary: {} },
@@ -30,10 +32,56 @@ const useAppStore = create(
       epicData: null,
       loadingEpics: false,
 
+      defaultLeadTime: 30, // Default lead time in minutes (for settings slider)
+      pushAlerts: {}, // Structure: { "zaken": { leadTimeMinutes: 30 } }
+
       // Actions
       setLanguage: (lang) => set({ language: lang }),
       setEvents: (events) => set({ events }),
       setTimeFilter: (timeFilter) => set({ timeFilter }),
+      setSelectedCPs: (selectedCPs) => set({ selectedCPs }),
+
+      // PUSH ALERTS ACTIONS
+      setDefaultLeadTime: (minutes) =>
+        set({ defaultLeadTime: Number(minutes) }),
+
+      /**
+       * Toggles push alert for a specific event with limit check (max 5)
+       * @returns {boolean} true if alert was toggled, false if limit was reached
+       */
+      togglePushAlert: (eventId, customLeadTime) => {
+        const { pushAlerts, defaultLeadTime } = get();
+        const leadTimeMinutes = customLeadTime || defaultLeadTime;
+
+        // If alert already active -> remove it
+        if (pushAlerts[eventId]) {
+          const updatedAlerts = { ...pushAlerts };
+          delete updatedAlerts[eventId];
+          set({ pushAlerts: updatedAlerts });
+          return true;
+        }
+
+        // Check limit (max 5 active alerts)
+        if (Object.keys(pushAlerts).length >= 5) {
+          return false; // Limit reached
+        }
+
+        // Add new alert
+        set({
+          pushAlerts: {
+            ...pushAlerts,
+            [eventId]: { leadTimeMinutes },
+          },
+        });
+        return true;
+      },
+
+      removePushAlert: (eventId) =>
+        set((state) => {
+          const updatedAlerts = { ...state.pushAlerts };
+          delete updatedAlerts[eventId];
+          return { pushAlerts: updatedAlerts };
+        }),
 
       // Event filter
       toggleFilter: (key) =>
@@ -86,7 +134,13 @@ const useAppStore = create(
           const res = await fetch(`${BASE_URL}/api/epics`);
 
           if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+            let errorMessage = `HTTP error! Status: ${res.status}`;
+            try {
+              const errorJson = await res.json();
+              if (errorJson.message) errorMessage = errorJson.message;
+            } catch {
+              throw new Error(errorMessage);
+            }
           }
 
           const json = await res.json();
@@ -101,12 +155,19 @@ const useAppStore = create(
           }
         } catch (err) {
           console.error("Error fetching epic data:", err);
-          set({ error: err.message, loadingEpics: false });
+
+          const extractedMessage =
+            typeof err === "string"
+              ? err
+              : err?.message ||
+                "Failed to fetch epic data. Please check your connection or CORS settings.";
+
+          set({ error: extractedMessage, loadingEpics: false });
         }
       },
     }),
     {
-      name: "tracker-storage", // Ключ для збереження стану в localStorage
+      name: "tracker-storage",
 
       // Important not: partialize save to localStorage only language and filters.
       // Events ignore because we always get data in real time
@@ -114,6 +175,9 @@ const useAppStore = create(
         language: state.language,
         filters: state.filters,
         timeFilter: state.timeFilter,
+        selectedCPs: state.selectedCPs,
+        defaultLeadTime: state.defaultLeadTime,
+        pushAlerts: state.pushAlerts,
       }),
     },
   ),

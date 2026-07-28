@@ -6,6 +6,7 @@ import {
   FARMED_EPIC_FILTERS,
   SORT,
 } from "../../../../../../utils/constants";
+import { parseShortDate } from "../../../../../../utils/general";
 import HeaderWithControl from "./HeaderWithControl";
 import TimelineItem from "./TimelineItem/TimelineItem";
 
@@ -56,8 +57,9 @@ const EpicFarmedTimeline = () => {
 
     // Sort by desc/asc
     return [...result].sort((a, b) => {
-      const dateA = new Date(a.farm_date);
-      const dateB = new Date(b.farm_date);
+      const dateA = parseShortDate(a.farm_date);
+      const dateB = parseShortDate(b.farm_date);
+
       return sortOrder === SORT.DESC ? dateB - dateA : dateA - dateB;
     });
   }, [epicData, filterStatus, searchQuery, sortOrder]);

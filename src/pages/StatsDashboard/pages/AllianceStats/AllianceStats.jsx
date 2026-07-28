@@ -6,6 +6,7 @@ import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgr
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../store/useAppStore";
 import { BREAKPOINTS } from "../../../../utils/constants";
+import { getErrorMessage } from "../../../../utils/general";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
 import CPAvgOnlineMatrix from "./components/CPAvgOnlineMatrix/CPAvgOnlineMatrix";
 import CPConsistencyMatrix from "./components/CPConsistencyMatrix/CPConsistencyMatrix";
@@ -38,8 +39,10 @@ const AllianceStats = () => {
     return <TimerProgressBar label="Loading Alliance Analytics..." />;
   }
 
-  if (error) {
-    return <Error title={error} onClickHandler={fetchAllStatData} />;
+  if (error && !isLoading) {
+    return (
+      <Error title={getErrorMessage(error)} onClickHandler={fetchAllStatData} />
+    );
   }
 
   return (

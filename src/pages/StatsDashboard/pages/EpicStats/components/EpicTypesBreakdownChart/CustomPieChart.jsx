@@ -13,7 +13,7 @@ const CustomPieChart = ({ chartData, totalFarmed }) => {
       <h3 className="text-base font-bold text-slate-100 mb-2 self-start">
         Epic Bosses Share (%)
       </h3>
-      <p className="text-xs text-slate-400 mb-4 self-start">
+      <p className="text-xs min-[1800px]:text-base text-slate-400 mb-4 self-start">
         Distribution ratio of all farmed epic items
       </p>
 

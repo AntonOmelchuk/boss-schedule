@@ -19,13 +19,32 @@ import {
 } from "../../../../../../utils/constants";
 import { shuffleArray } from "../../../../../../utils/general";
 import CustomTooltip from "./CustomTooltip";
+import EpicPrices from "./EpicPrices";
 import SortTabs from "./SortTabs";
+
+const DEFAULT_EPIC_PRICES = {
+  Antharas: 110,
+  Baium: 100,
+  Core: 7,
+  Frintezza: 72,
+  Orfen: 15,
+  QueenAnt: 45,
+  Valakas: 200,
+  Zaken: 50,
+};
 
 const EpicAllocation = () => {
   const epicData = useAppStore((state) => state.epicData);
   const [sortBy, setSortBy] = useState(SORT.EPICS_COUNT);
+  const [isPricesHovered, setIsPricesHovered] = useState(false);
 
   const isLargeDesktop = useMediaQuery(BREAKPOINTS.IS_LARGE_DESKTOP);
+
+  const epicPrices = useMemo(() => {
+    return epicData?.prices && Object.keys(epicData.prices).length > 0
+      ? epicData.prices
+      : DEFAULT_EPIC_PRICES;
+  }, [epicData]);
 
   // Format cp_distribution for Stacked Bar Chart
   const { chartData, uniqueEpics } = useMemo(() => {
@@ -61,10 +80,24 @@ const EpicAllocation = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800
-        rounded-2xl p-6 shadow-xl flex flex-col gap-4"
+        rounded-2xl p-6 shadow-xl flex flex-col gap-4 relative"
     >
-      <SortTabs setSortBy={setSortBy} sortBy={sortBy} />
+      {/* Верхня панель */}
+      <div className="flex flex-wrap items-center justify-between gap-4 z-20">
+        <div className="flex items-center">
+          <h3 className="text-xl font-bold text-slate-100 mr-4">
+            Epic Items Received per CP
+          </h3>
+          <EpicPrices
+            epicPrices={epicPrices}
+            isPricesHovered={isPricesHovered}
+            setIsPricesHovered={setIsPricesHovered}
+          />
+        </div>
+        <SortTabs setSortBy={setSortBy} sortBy={sortBy} />
+      </div>
 
+      {/* CHART CONTAINER */}
       <div className="w-full h-96">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart

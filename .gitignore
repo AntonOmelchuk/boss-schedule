@@ -9,7 +9,7 @@ lerna-debug.log*
 package-lock.json
 
 node_modules
-dist
+*dist
 dist-ssr
 *.local
 
@@ -26,3 +26,4 @@ dist-ssr
 
 .env*
 src/firebase_import.json
+Todo.md

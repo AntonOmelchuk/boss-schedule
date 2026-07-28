@@ -4,12 +4,15 @@ import useAppStore from "../../../../../../store/useAppStore";
 import CPNameItem from "../CPNameItem/CPNameItem";
 import HeaderList from "../HeaderList/HeaderList";
 
+// Min visited events to be in top
+const MIN_EVENTS_THRESHOLD = 20;
+
 const CPAvgOnlineMatrix = () => {
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
 
-  // 1.Calculate avarage online for each CP
+  // 1. Calculate average online for each CP
   const cpOnlineData = useMemo(() => {
     if (!rawTimeline.length) return { list: [], maxOnline: 0 };
 
@@ -42,10 +45,25 @@ const CPAvgOnlineMatrix = () => {
       };
     });
 
-    // Sort from bigger to lower
-    list.sort((a, b) => b.avgOnline - a.avgOnline);
+    // 2. double sort
+    list.sort((a, b) => {
+      const aHasMinEvents = a.attendedEvents >= MIN_EVENTS_THRESHOLD;
+      const bHasMinEvents = b.attendedEvents >= MIN_EVENTS_THRESHOLD;
 
-    // Find the biggest onlline to calculate % width progress bar
+      // Compare CP by min events threshold
+      if (aHasMinEvents && !bHasMinEvents) return -1;
+      if (!aHasMinEvents && bHasMinEvents) return 1;
+
+      // 1st priority: avg online
+      if (b.avgOnline !== a.avgOnline) {
+        return b.avgOnline - a.avgOnline;
+      }
+
+      // 2nd priority: visited events
+      return b.attendedEvents - a.attendedEvents;
+    });
+
+    // max online for progress bar
     const maxOnline = Math.max(...list.map((item) => item.avgOnline), 1);
 
     return { list, maxOnline };
@@ -69,7 +87,7 @@ const CPAvgOnlineMatrix = () => {
       <div className="h-175 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar">
         {cpOnlineData.list.map(
           ({ cpName, avgOnline, attendedEvents }, index) => {
-            // % of line fill according to the strongest CP
+            // % from strongest CP
             const fillPercentage = Math.min(
               (avgOnline / cpOnlineData.maxOnline) * 100,
               100,
@@ -81,7 +99,8 @@ const CPAvgOnlineMatrix = () => {
                   <CPNameItem cpName={cpName} index={index} />
                   <div className="flex items-center gap-2">
                     <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-500">
-                      ({attendedEvents} events)
+                      ({attendedEvents}{" "}
+                      {attendedEvents === 1 ? "event" : "events"})
                     </span>
                     <span className="font-mono font-bold text-sky-400 text-xs md:text-sm min-[1820px]:text-lg">
                       {avgOnline}{" "}
@@ -95,7 +114,7 @@ const CPAvgOnlineMatrix = () => {
                 {/* Progress Bar Container */}
                 <div
                   className="w-full bg-slate-950/60 rounded-full h-2.5 p-0.5 border
-               border-slate-800/80 overflow-hidden"
+                  border-slate-800/80 overflow-hidden"
                 >
                   <div
                     className="bg-gradient-to-r from-sky-600 via-indigo-500 to-amber-500

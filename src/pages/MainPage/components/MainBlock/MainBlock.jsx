@@ -17,7 +17,7 @@ const MainBlock = () => {
     config;
 
   return (
-    <div className="relative mb-4 md:mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
+    <div className="relative my-4 md:mb-8 rounded-3xl p-0.5 overflow-hidden shadow-2xl">
       <div
         className="absolute inset-[-150%] animate-spin"
         style={{
@@ -55,7 +55,7 @@ const MainBlock = () => {
             <h2
               className={`text-xl md:text-3xl font-black tracking-wide text-slate-100 mt-2.5 capitalize ${titleClass}`}
             >
-              {name || "Loading..."}
+              {name || `${t.noInfo}`}
             </h2>
             {isOutPrime && <OutPrime withoutBorder />}
             {owner && (

@@ -17,6 +17,8 @@ export default {
     h: "Г",
     m: "ХВ",
     s: "С",
+    loading: "завантаження",
+    noInfo: "немає інформації",
     langToggle: "EN",
     pvpEvents: "PVP Івенти",
     outPrime: "Valhalla Прайм",
@@ -88,6 +90,17 @@ export default {
     sbShowLimit: "Показувати:",
     sbScheduleFor: "Розклад альянсу",
     sbOn: "на",
+
+    // Settings
+    settingsTitle: "Налаштування",
+    languageLabel: "Мова",
+    pushLeadTimeLabel: "Час сповіщення",
+    pushLeadTimeDesc:
+      "За скільки хвилин до респавну надсилати пуш-сповіщення при увімкненні сповіщень.",
+    minutesShort: "хв",
+    close: "Закрити",
+    error: "Помилка",
+    maxAlerts: "Максимум одночасно 5 сповіщень",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -105,6 +118,8 @@ export default {
     h: "H",
     m: "M",
     s: "S",
+    loading: "loading",
+    noInfo: "no information",
     langToggle: "УКР",
     pvpEvents: "PVP Events",
     outPrime: "Valhalla Prime",
@@ -172,5 +187,16 @@ export default {
     sbShowLimit: "Show:",
     sbScheduleFor: "Alliance Schedule",
     sbOn: "for",
+
+    // Settings
+    settingsTitle: "Settings",
+    languageLabel: "Language",
+    pushLeadTimeLabel: "Push Lead Time",
+    pushLeadTimeDesc:
+      "How many minutes before respawn to receive a push notification when enabling the alert.",
+    minutesShort: "min",
+    close: "Close",
+    error: "Error",
+    maxAlerts: "Max 5 alerts at one time",
   },
 };

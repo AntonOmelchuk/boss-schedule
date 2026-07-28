@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { DASHBOARD_TABS } from "../../../utils/constants";
 import MobileTabDrawer from "../mobile/MobileTabDrawer";
-import Tab from "./Tab";
 
 const TAB_LABELS = {
   [DASHBOARD_TABS.ATTENDANCE]: "📊 Attendance Analytics",
@@ -14,21 +13,6 @@ const Tabs = ({ setActiveTab, activeTab }) => {
 
   return (
     <>
-      {/* 💻 DESKTOP TABS */}
-      <div className="hidden xl:flex items-center gap-2 border-b border-slate-800 pb-3">
-        <Tab
-          onClickHandler={() => setActiveTab(DASHBOARD_TABS.ATTENDANCE)}
-          isActive={activeTab === DASHBOARD_TABS.ATTENDANCE}
-          title={TAB_LABELS[DASHBOARD_TABS.ATTENDANCE]}
-        />
-        <Tab
-          onClickHandler={() => setActiveTab(DASHBOARD_TABS.EPICS)}
-          isActive={activeTab === DASHBOARD_TABS.EPICS}
-          title={TAB_LABELS[DASHBOARD_TABS.EPICS]}
-        />
-      </div>
-
-      {/* 📱 MOBILE / TABLET BUTTON TRIGGER (< md) */}
       <div
         className="xl:hidden flex items-center justify-between bg-slate-900/60 border
        border-slate-800 p-3 rounded-2xl"
