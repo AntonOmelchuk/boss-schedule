@@ -12,7 +12,7 @@ const Header = () => {
   const { pathname, hash } = useLocation();
 
   const [isStatsHovered, setIsStatsHovered] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // 👈 Стейт для модалки
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const timeoutRef = useRef(null);
 
   const isStatisticsPage = pathname === "/statistics";
@@ -114,7 +114,7 @@ const Header = () => {
             })}
           </nav>
 
-          {/* 3. SETTINGS BUTTON (ШЕСТЕРНЯ) */}
+          {/* 3. SETTINGS BUTTON */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsSettingsOpen(true)}

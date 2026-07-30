@@ -11,10 +11,10 @@ const InfoBlock = ({ viewMode }) => {
     <>
       {viewMode === SORT.POINTS ? (
         <>
-          <p className="text-sm font-bold text-indigo-400 mb-1">
+          <p className="text-base font-bold text-indigo-400 mb-1">
             How Tiers Are Calculated:
           </p>
-          <p className="text-xs text-slate-300 leading-relaxed mb-2">
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
             Tiers are based on relative ranking (percentile):
           </p>
           <ul className="space-y-1.5 text-xs text-slate-400">
@@ -34,10 +34,10 @@ const InfoBlock = ({ viewMode }) => {
         </>
       ) : (
         <>
-          <p className="text-sm font-bold text-amber-400 mb-1">
+          <p className="text-base font-bold text-amber-400 mb-1">
             Priority Queue:
           </p>
-          <p className="text-xs leading-relaxed text-slate-300">
+          <p className="text-sm leading-relaxed text-slate-300">
             Sorted by GB/PTs ratio from lowest to highest. CPs at the top have
             accumulated the most points relative to received epics, making them
             top priority for the next drop.
@@ -50,7 +50,7 @@ const InfoBlock = ({ viewMode }) => {
   return (
     <>
       {/* 1. Desktop (Hover-tooltip) */}
-      <div className="hidden md:block relative group cursor-pointer">
+      <div className="hidden md:block relative group cursor-help">
         <InfoIcon />
         <div
           className="absolute right-0 top-8 w-72 z-20 bg-slate-950 border border-slate-700 p-3.5

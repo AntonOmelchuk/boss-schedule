@@ -69,7 +69,7 @@ const FullPartyLeaderboard = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-      p-1 md:p-6 shadow-xl flex flex-col gap-5 h-full"
+      p-2 md:p-4 shadow-xl flex flex-col gap-5 h-full"
     >
       {/* Header */}
       <HeaderList

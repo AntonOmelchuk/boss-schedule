@@ -74,7 +74,7 @@ const CPAvgOnlineMatrix = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-      p-1 md:p-6 shadow-xl flex flex-col gap-4 h-full min-[1240px]:col-span-2 min-[1700px]:col-span-1"
+      p-2 md:p-4 shadow-xl flex flex-col gap-4 h-full min-[1240px]:col-span-2 min-[1700px]:col-span-1"
     >
       {/* Header */}
       <HeaderList

@@ -27,13 +27,13 @@ const useFilterEvents = () => {
     const combined = [...events];
 
     PVP_EVENTS.forEach(({ name, time, type, category }) => {
-      // Замість одного івенту, створюємо об'єкт під КОЖЕН час із масиву
+      // Instead of a single event, create an object for EVERY time slot in the array
       time.forEach((timeString) => {
         combined.push({
-          // Робимо ID унікальним для кожної сесії (наприклад, "Multi Team Battle-18:00")
+          // Make the ID unique for each session (e.g., "Multi Team Battle-18:00")
           id: `${name}-${timeString}`,
           name,
-          // Рахуємо таймстамп конкретно для ЦІЄЇ сесії на сьогодні або завтра
+          // Calculate the timestamp specifically for THIS session today or tomorrow
           ts: getSingleEventTimestamp(timeString),
           category,
           type,
