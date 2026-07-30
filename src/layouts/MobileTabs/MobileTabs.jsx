@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import useTranslation from "../../hooks/useTranslation";
 import { NAV_CONFIG } from "../../utils/routes";
 
 const MobileTabs = () => {
   const navigate = useNavigate();
   const { pathname, hash } = useLocation();
+
+  const { t } = useTranslation();
 
   const isStatsRoute = pathname === "/statistics";
   const currentFullLocation = `${pathname}${hash}`;
@@ -63,7 +66,7 @@ const MobileTabs = () => {
       )}
 
       {visibleNavItems.map(
-        ({ id, path, title, icon, mobileActiveClass }, index) => {
+        ({ id, path, titleKey, icon, mobileActiveClass }, index) => {
           const isActive = index === activeIndex;
 
           return (
@@ -91,7 +94,7 @@ const MobileTabs = () => {
                     : "text-slate-500"
                 }`}
               >
-                {title}
+                {t[titleKey]}
               </span>
             </button>
           );

@@ -1,6 +1,10 @@
 import { useState } from "react";
 
+import useTranslation from "../../../hooks/useTranslation";
+
 const FeaturedBanner = ({ featuredVideo, onSelect }) => {
+  const { t } = useTranslation();
+
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
   if (!featuredVideo) return null;
@@ -53,7 +57,7 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
               className="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-widest
               bg-red-600 text-white shadow-md animate-pulse"
             >
-              ● Live Preview
+              ● {t.media.livePreview}
             </span>
             {date && (
               <span className="text-xs font-semibold text-amber-400 drop-shadow">
@@ -81,7 +85,7 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
               className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 text-white
                 font-bold text-sm shadow-xl shadow-red-950/50 flex items-center gap-2 transition-all cursor-pointer"
             >
-              <span>▶</span> Увімкнути зі звуком
+              <span>▶</span> {t.media.watchWithSound}
             </button>
           </div>
         </div>

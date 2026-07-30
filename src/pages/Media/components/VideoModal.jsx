@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
+import useTranslation from "../../../hooks/useTranslation";
+
 const VideoModal = ({ video, onClose }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") onClose();
@@ -10,6 +14,8 @@ const VideoModal = ({ video, onClose }) => {
   }, [onClose]);
 
   if (!video) return null;
+
+  const { id, title, description, date } = video;
 
   return (
     <div
@@ -27,7 +33,7 @@ const VideoModal = ({ video, onClose }) => {
         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800/80 bg-slate-950/40">
           <span className="text-xs font-bold uppercase tracking-widest text-red-500 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            Media Cinema Mode
+            {t.media.cinemaMode}
           </span>
           <button
             onClick={onClose}
@@ -41,8 +47,8 @@ const VideoModal = ({ video, onClose }) => {
         {/* Video Player Responsive Container */}
         <div className="relative w-full aspect-video bg-black">
           <iframe
-            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
-            title={video.title}
+            src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+            title={title}
             className="w-full h-full border-0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -53,21 +59,21 @@ const VideoModal = ({ video, onClose }) => {
         <div className="p-5 overflow-y-auto space-y-3 bg-slate-900">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-lg sm:text-xl font-bold text-slate-100">
-              {video.title}
+              {title}
             </h2>
-            {video.date && (
+            {date && (
               <span
                 className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400
-                border border-slate-700/60"
+                  border border-slate-700/60"
               >
-                {video.date}
+                {date}
               </span>
             )}
           </div>
 
-          {video.description && (
+          {description && (
             <p className="text-sm text-slate-400 leading-relaxed whitespace-pre-line">
-              {video.description}
+              {description}
             </p>
           )}
         </div>
