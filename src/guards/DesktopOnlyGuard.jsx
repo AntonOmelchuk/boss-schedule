@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 
+import DesktopFallback from "../components/DesktopFallback/DesktopFallback";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 /**
@@ -7,35 +8,21 @@ import useMediaQuery from "../hooks/useMediaQuery";
  *
  * @param {Object} props
  * @param {React.ReactNode} props.children - The target page component
- * @param {string} [props.redirectTo="/"] - Fallback path for non-desktop users
- * @param {boolean} [props.showFallbackUI=false] - Show custom UI instead of redirecting
+ * @param {string} [props.redirectTo="/"] - Fallback path if redirect mode is used
+ * @param {boolean} [props.showFallbackUI=true] - Show custom UI instead of hard redirecting
  */
 const DesktopOnlyGuard = ({
   children,
   redirectTo = "/",
-  showFallbackUI = false,
+  showFallbackUI = true,
 }) => {
-  // Check if viewport is smaller than desktop (1280px)
   const isBelowDesktop = useMediaQuery("(max-width: 1279px)");
 
   if (isBelowDesktop) {
-    // Option A: Custom Fallback UI for non-desktop screens
     if (showFallbackUI) {
-      return (
-        <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-6 gap-4">
-          <span className="text-4xl">💻</span>
-          <h2 className="text-xl font-bold text-slate-100">
-            Desktop Version Only
-          </h2>
-          <p className="text-sm text-slate-400 max-w-xs">
-            This page contains complex analytical tables and is optimized for
-            desktop viewports (1280px+) only.
-          </p>
-        </div>
-      );
+      return <DesktopFallback />;
     }
 
-    // Option B: Instant redirect back to fallback route
     return <Navigate to={redirectTo} replace />;
   }
 

@@ -124,7 +124,7 @@ const FullPartyLeaderboard = () => {
 
                   {/* Right: Stats */}
                   <div className="flex items-center gap-3">
-                    <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-500">
+                    <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400">
                       {fullPartyRate}% efficiency
                     </span>
                     <span
@@ -132,7 +132,7 @@ const FullPartyLeaderboard = () => {
                      min-w-13.75 text-right"
                     >
                       {fullPartyCount}{" "}
-                      <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400 font-normal">
+                      <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-300 font-normal">
                         / {totalAttended}
                       </span>
                     </span>

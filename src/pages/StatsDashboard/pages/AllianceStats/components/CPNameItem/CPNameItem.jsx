@@ -32,9 +32,9 @@ const CPNameItem = ({ cpName, index, viewMode }) => {
   const { font, color } = getItemStyles(index);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className={`flex items-center gap-${index < 9 ? 2 : 4}`}>
       <span
-        className={`text-sm min-[1820px]:text-lg font-mono font-bold text-slate-500 ${numberWidth}`}
+        className={`text-base min-[1820px]:text-lg font-mono font-bold text-slate-500 ${numberWidth}`}
       >
         {icon && viewMode !== SORT.PRIORITY ? icon : `#${index + 1}`}
       </span>
