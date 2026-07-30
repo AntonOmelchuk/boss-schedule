@@ -69,7 +69,7 @@ const FullPartyLeaderboard = () => {
   return (
     <div
       className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl
-      p-1 md:p-6 shadow-xl flex flex-col gap-5 h-full"
+      p-2 md:p-4 shadow-xl flex flex-col gap-5 h-full"
     >
       {/* Header */}
       <HeaderList
@@ -124,7 +124,7 @@ const FullPartyLeaderboard = () => {
 
                   {/* Right: Stats */}
                   <div className="flex items-center gap-3">
-                    <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-500">
+                    <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400">
                       {fullPartyRate}% efficiency
                     </span>
                     <span
@@ -132,7 +132,7 @@ const FullPartyLeaderboard = () => {
                      min-w-13.75 text-right"
                     >
                       {fullPartyCount}{" "}
-                      <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400 font-normal">
+                      <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-300 font-normal">
                         / {totalAttended}
                       </span>
                     </span>

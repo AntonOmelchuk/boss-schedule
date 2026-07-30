@@ -38,7 +38,7 @@ const CPList = ({ cpBreakdown, totalPlayers }) => {
                 backgroundColor: COLOR_PALETTE[idx % COLOR_PALETTE.length],
               }}
             />
-            <span className="font-medium text-slate-200 truncate">
+            <span className="text-sm md:text-base font-medium text-slate-200 truncate">
               {cp.name}
             </span>
           </div>

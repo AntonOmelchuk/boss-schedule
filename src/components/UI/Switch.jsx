@@ -6,13 +6,13 @@ const Switch = ({ onClick, isActive, firstItem, secondItem }) => {
       onClick={onClick}
     >
       <div
-        className={`flex-1 px-3 py-1 rounded-lg text-xs font-bold transition-all duration-300
+        className={`flex-1 px-3 py-1 uppercase rounded-lg text-xs font-bold transition-all duration-300
           ${isActive ? "bg-zinc-600 text-white shadow-md" : "text-slate-400 hover:text-slate-200"}`}
       >
         {firstItem}
       </div>
       <div
-        className={`flex-1 px-3 py-1 rounded-lg text-xs font-bold transition-all duration-300
+        className={`flex-1 px-3 py-1 uppercase rounded-lg text-xs font-bold transition-all duration-300
           ${!isActive ? "bg-zinc-700 text-white shadow-md" : "text-slate-400 hover:text-slate-200"}`}
       >
         {secondItem}

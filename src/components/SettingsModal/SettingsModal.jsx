@@ -1,20 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 import { version } from "../../../package.json";
+import { useIsPWA } from "../../hooks/useIsPWA";
 import useTranslation from "../../hooks/useTranslation";
-import useAppStore from "../../store/useAppStore";
-import { LANGUAGES } from "../../utils/constants";
-import Switch from "../UI/Switch";
+import AlertsSlider from "./AlertsSlider";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const SettingsModal = ({ isOpen, onClose }) => {
-  const { t, language, setLanguage } = useTranslation();
-
-  const { defaultLeadTime, setDefaultLeadTime } = useAppStore(
-    useShallow((state) => ({
-      defaultLeadTime: state.defaultLeadTime,
-      setDefaultLeadTime: state.setDefaultLeadTime,
-    })),
-  );
+  const { t, setLanguage } = useTranslation();
+  const isPWA = useIsPWA();
 
   if (!isOpen) return null;
 
@@ -43,65 +35,10 @@ const SettingsModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Section 1: Language Switcher */}
-        <div className="flex items-center">
-          <label className="text-left text-sm font-semibold text-slate-400 uppercase tracking-wider">
-            {t.languageLabel}
-          </label>
-          <div className="flex ml-auto">
-            <Switch
-              onClick={() =>
-                setLanguage(
-                  language === LANGUAGES.UA ? LANGUAGES.EN : LANGUAGES.UA,
-                )
-              }
-              firstItem="UA"
-              secondItem="EN"
-              isActive={language === LANGUAGES.UA}
-            />
-          </div>
-        </div>
+        <LanguageSwitcher setLanguage={setLanguage} />
 
         {/* Section 2: Default Push Notification Lead Time Slider */}
-        <div className="space-y-3 border-t border-slate-800/80 pt-4">
-          <div className="flex justify-between items-center">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              {t.pushLeadTimeLabel}
-            </label>
-            <span
-              className="text-sm font-black text-amber-400 bg-amber-500/10 border border-amber-500/20
-              px-2.5 py-1 rounded-lg"
-            >
-              {defaultLeadTime} {t.minutesShort || "хв"}
-            </span>
-          </div>
-
-          <p className="text-xs text-slate-400 leading-relaxed">
-            {t.pushLeadTimeDesc}
-          </p>
-
-          {/* Range Slider Control */}
-          <div className="pt-2 space-y-2">
-            <input
-              type="range"
-              min="5"
-              max="60"
-              step="5"
-              value={defaultLeadTime}
-              onChange={(e) => setDefaultLeadTime(Number(e.target.value))}
-              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500
-                focus:outline-none focus:ring-2 focus:ring-amber-500/30"
-            />
-
-            {/* Ticks Label */}
-            <div className="flex justify-between text-[10px] text-slate-500 font-bold px-1">
-              <span>5</span>
-              <span>15</span>
-              <span>30</span>
-              <span>45</span>
-              <span>60</span>
-            </div>
-          </div>
-        </div>
+        {isPWA && <AlertsSlider />}
 
         {/* Footer Close Button */}
         <div className="pt-2">
