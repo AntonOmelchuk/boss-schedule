@@ -1,14 +1,13 @@
-// src/pages/MediaPage.jsx
 import { useMemo, useState } from "react";
 
-import useYoutubeVideos from "../../../hooks/useYoutubeVideos";
-import VideoModal from "./VideoModal";
+import useYoutubeVideos from "../../hooks/useYoutubeVideos";
+import FeaturedBanner from "./components/FeaturedBanner";
+import VideoModal from "./components/VideoModal";
 
 const MediaPage = () => {
   const { videos, loading, error } = useYoutubeVideos();
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  // Обираємо перше (найновіше) відео для Головного Банера (Featured)
   const featuredVideo = useMemo(() => videos[0] || null, [videos]);
 
   return (
@@ -58,58 +57,10 @@ const MediaPage = () => {
 
       {/* FEATURED HERO BANNER (NETFLIX STYLE) */}
       {!loading && featuredVideo && (
-        <div
-          className="relative group rounded-3xl overflow-hidden border border-slate-800/80 bg-slate-900 shadow-2xl
-          transition-all duration-300"
-        >
-          <div className="relative aspect-video sm:aspect-[21/9] max-h-[420px] w-full overflow-hidden">
-            {/* Background Thumbnail with Dark Gradient Overlays */}
-            <img
-              src={`https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg`}
-              alt={featuredVideo.title}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700
-                ease-out"
-              onError={(e) => {
-                // Якщо навіть hqdefault заблоковано, ставимо mqdefault
-                e.currentTarget.onerror = null; // Запобігає нескінченній петлі
-                e.currentTarget.src = `https://img.youtube.com/vi/${featuredVideo.id}/mqdefault.jpg`;
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
-            <div
-              className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-transparent
-              hidden sm:block"
-            />
-
-            {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 p-5 sm:p-8 flex flex-col gap-3 max-w-2xl">
-              <span className="text-xs font-bold text-amber-400 tracking-wider uppercase flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-amber-400" />
-                Останній реліз • {featuredVideo.date}
-              </span>
-              <h2 className="text-xl sm:text-3xl font-black text-white leading-tight drop-shadow-md">
-                {featuredVideo.title}
-              </h2>
-              {featuredVideo.description && (
-                <p
-                  className="text-xs sm:text-sm text-slate-300 line-clamp-2 leading-relaxed opacity-90 hidden
-                  sm:block"
-                >
-                  {featuredVideo.description}
-                </p>
-              )}
-
-              <button
-                onClick={() => setSelectedVideo(featuredVideo)}
-                className="mt-2 self-start px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 active:scale-95
-                text-white font-bold text-sm shadow-lg shadow-red-950/50 flex items-center gap-2 transition-all
-                  cursor-pointer"
-              >
-                <span>▶</span> Дивитися зараз
-              </button>
-            </div>
-          </div>
-        </div>
+        <FeaturedBanner
+          featuredVideo={featuredVideo}
+          onSelect={setSelectedVideo}
+        />
       )}
 
       {/* VIDEO GRID */}
@@ -135,6 +86,10 @@ const MediaPage = () => {
                     alt={video.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500
                       ease-out opacity-90 group-hover:opacity-100"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+                    }}
                   />
                   <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors" />
 
@@ -142,7 +97,7 @@ const MediaPage = () => {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div
                       className="w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center
-                        pl-0.5shadow-xl scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all
+                        pl-0.5 shadow-xl scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all
                         duration-300"
                     >
                       ▶
