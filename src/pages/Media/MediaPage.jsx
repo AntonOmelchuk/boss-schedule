@@ -1,14 +1,15 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import useYoutubeVideos from "../../hooks/useYoutubeVideos";
 import FeaturedBanner from "./components/FeaturedBanner";
+import VideoItem from "./components/VideoItem";
 import VideoModal from "./components/VideoModal";
 
 const MediaPage = () => {
   const { videos, loading, error } = useYoutubeVideos();
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const featuredVideo = useMemo(() => videos[0] || null, [videos]);
+  const featuredVideo = videos.find((item) => item?.isForPreview);
 
   return (
     <div className="min-h-screen pb-16 space-y-8">
@@ -71,68 +72,18 @@ const MediaPage = () => {
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {videos.map((video) => (
-              <div
-                key={video.firebaseKey || video.id}
-                onClick={() => setSelectedVideo(video)}
-                className="group relative rounded-2xl bg-slate-900/80 border border-slate-800/80 overflow-hidden
-                  cursor-pointer hover:border-slate-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1
-                  flex flex-col justify-between"
-              >
-                {/* Card Thumbnail */}
-                <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
-                  <img
-                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
-                    alt={video.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500
-                      ease-out opacity-90 group-hover:opacity-100"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors" />
-
-                  {/* Hover Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div
-                      className="w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center
-                        pl-0.5 shadow-xl scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all
-                        duration-300"
-                    >
-                      ▶
-                    </div>
-                  </div>
-
-                  {/* Date badge */}
-                  {video.date && (
-                    <span
-                      className="absolute bottom-2 right-2 px-2 py-0.5 text-[10px] font-bold rounded bg-slate-950/80
-                      backdrop-blur-md text-slate-300 border border-slate-800"
-                    >
-                      {video.date}
-                    </span>
-                  )}
-                </div>
-
-                {/* Card Info */}
-                <div className="p-4 flex flex-col gap-1.5 flex-1 justify-between">
-                  <div>
-                    <h4
-                      className="text-lg font-bold text-slate-100 group-hover:text-amber-400 transition-colors
-                      line-clamp-2 text-left"
-                    >
-                      {video.title}
-                    </h4>
-                    {video.description && (
-                      <p className="text-left mt-1 text-base text-slate-400 line-clamp-2 leading-relaxed">
-                        {video.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
+            {videos.map((video) => {
+              const { id, title, description, date } = video;
+              return (
+                <VideoItem
+                  id={id}
+                  title={title}
+                  description={description}
+                  date={date}
+                  callback={() => setSelectedVideo(video)}
+                />
+              );
+            })}
           </div>
         </div>
       )}

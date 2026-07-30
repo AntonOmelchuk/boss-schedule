@@ -5,29 +5,30 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
 
   if (!featuredVideo) return null;
 
+  const { id, title, description, date } = featuredVideo;
+
   return (
     <div
       className="relative group rounded-3xl overflow-hidden border border-slate-800/80 bg-slate-950
       shadow-2xl transition-all duration-500"
     >
-      <div className="relative aspect-video sm:aspect-[21/9] max-h-[440px] w-full overflow-hidden">
+      <div className="relative aspect-video sm:aspect-21/9 max-h-110 w-full overflow-hidden">
         <img
-          src={`https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg`}
-          alt={featuredVideo.title}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+          src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg?v=${date || "1"}`}
+          alt={title}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-3000 ease-in-out ${
             isIframeLoaded ? "opacity-0" : "opacity-100"
           }`}
           onError={(e) => {
             e.currentTarget.onerror = null;
-            e.currentTarget.src = `https://img.youtube.com/vi/${featuredVideo.id}/mqdefault.jpg`;
+            e.currentTarget.src = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
           }}
         />
 
-        {/* 2. АВТОМАТИЧНИЙ ФОНОВИЙ YOUTUBE PLAYER */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <iframe
-            src={`https://www.youtube.com/embed/${featuredVideo.id}?autoplay=1&mute=1&controls=0&loop=1
-              &playlist=${featuredVideo.id}&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1`}
+            src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1
+              &playlist=${id}&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1`}
             title="Auto Preview"
             onLoad={() => setIsIframeLoaded(true)}
             className="w-[150%] h-[150%] absolute -top-[25%] -left-[25%] object-cover scale-125
@@ -54,23 +55,23 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
             >
               ● Live Preview
             </span>
-            {featuredVideo.date && (
+            {date && (
               <span className="text-xs font-semibold text-amber-400 drop-shadow">
-                • {featuredVideo.date}
+                • {date}
               </span>
             )}
           </div>
 
           <h2 className="text-xl sm:text-3xl font-black text-white leading-tight text-left drop-shadow-md">
-            {featuredVideo.title}
+            {title}
           </h2>
 
-          {featuredVideo.description && (
+          {description && (
             <p
               className="text-xs sm:text-sm text-slate-200 line-clamp-2 leading-relaxed hidden
-              sm:block text-left drop-shadow"
+                sm:block text-left drop-shadow"
             >
-              {featuredVideo.description}
+              {description}
             </p>
           )}
 
