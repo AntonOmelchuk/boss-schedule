@@ -12,7 +12,7 @@ const MainLayout = ({ children }) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
   // List of routes where mobile tabs SHOULD be visible
-  const showMobileTabsOnRoutes = ["/", "/statistics"];
+  const showMobileTabsOnRoutes = ["/", "/statistics", "/media"];
   const shouldShowTabs = showMobileTabsOnRoutes.includes(pathname);
 
   return (

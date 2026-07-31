@@ -5,12 +5,15 @@ import SettingsModal from "../../components/SettingsModal/SettingsModal";
 import SettingsIcon from "../../components/SVG/SettingsIcon";
 import BackButton from "../../components/UI/BackButton";
 import Tab from "../../components/UI/Tab";
+import useTranslation from "../../hooks/useTranslation";
 import { NAV_CONFIG } from "../../utils/routes";
 import BrandLogo from "./BrandLogo";
 
 const Header = () => {
   const navigate = useNavigate();
   const { pathname, hash } = useLocation();
+
+  const { t } = useTranslation();
 
   const [isStatsHovered, setIsStatsHovered] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -33,9 +36,9 @@ const Header = () => {
     <>
       <header
         className="pt-[env(safe-area-inset-top)] w-full border-b border-slate-800/80 bg-slate-950/10
-          backdrop-blur-md sticky top-0 z-40"
+          backdrop-blur-md sticky top-0 z-40 px-4"
       >
-        <div className="max-w-7xl mx-auto px-1 sm:px-6 py-3 flex items-center justify-between gap-4">
+        <div className="mx-auto px-1 sm:px-6 py-3 flex items-center justify-between gap-4">
           {/* 1. BRAND / LOGO OR BACK BUTTON ON MOBILE */}
           <div className="flex items-center gap-3">
             {isStatisticsPage && <BackButton />}
@@ -51,6 +54,8 @@ const Header = () => {
                   ? isStatisticsPage
                   : pathname === item.path;
 
+                const itemTitle = t[item.titleKey] || item.title;
+
                 if (item.hasDropdown) {
                   return (
                     <div
@@ -62,7 +67,7 @@ const Header = () => {
                       <Tab
                         onClickHandler={() => navigate(item.path)}
                         isActive={isActive}
-                        title={item.title}
+                        title={itemTitle}
                         icon={item.icon}
                         className="px-5 py-3 text-base font-bold rounded-xl cursor-pointer"
                         activeClassName={item.activeClass}
@@ -82,6 +87,9 @@ const Header = () => {
                                 (hash === subTab.hash ||
                                   (!hash && subTab.hash === "#points"));
 
+                              const subTabTitle =
+                                t[subTab.titleKey] || subTab.title;
+
                               return (
                                 <Tab
                                   key={subTab.id}
@@ -90,7 +98,7 @@ const Header = () => {
                                     setIsStatsHovered(false);
                                   }}
                                   isActive={isSubActive}
-                                  title={subTab.title}
+                                  title={subTabTitle}
                                   icon={subTab.icon}
                                   className="px-4 py-2.5 text-sm font-bold rounded-xl cursor-pointer justify-start"
                                   activeClassName={item.activeClass}
@@ -110,7 +118,7 @@ const Header = () => {
                     key={item.id}
                     onClickHandler={() => navigate(item.path)}
                     isActive={isActive}
-                    title={item.title}
+                    title={itemTitle}
                     icon={item.icon}
                     className="px-5 py-3 text-base font-bold rounded-xl"
                     activeClassName={item.activeClass}

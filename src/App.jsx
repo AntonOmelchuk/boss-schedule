@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 import MainPage from "./pages/MainPage/MainPage";
+import MediaPage from "./pages/Media/MediaPage";
 import NotFound from "./pages/NotFound/NotFound";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
@@ -86,6 +87,7 @@ function App() {
             }
           />
           <Route path="/statistics" element={<StatsDashboard />} />
+          <Route path="/media" element={<MediaPage />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
