@@ -51,7 +51,7 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
           pointer-events-none hidden sm:block z-10"
         />
 
-        <div className="absolute bottom-0 left-0 p-5 sm:p-8 flex flex-col gap-3 max-w-2xl z-20">
+        <div className="absolute bottom-0 left-0 p-5 sm:p-8 flex flex-col gap-1 md:gap-3 max-w-2xl z-20">
           <div className="flex items-center gap-2">
             <span
               className="px-2.5 py-0.5 rounded-md text-[8px] md:text-[10px] font-extrabold uppercase tracking-widest

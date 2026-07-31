@@ -82,8 +82,8 @@ const MobileTabs = () => {
               key={id}
               ref={(el) => (tabRefs.current[index] = el)}
               onClick={() => navigate(path)}
-              className="flex-1 h-full min-h-13 flex flex-col items-center justify-center gap-1
-                py-1 px-2 cursor-pointer transition-transform duration-200 active:scale-95"
+              className="flex-1 flex-col items-center justify-center
+                pt-2 cursor-pointer transition-transform duration-200 active:scale-95"
             >
               {/* Icon */}
               <span
@@ -93,14 +93,10 @@ const MobileTabs = () => {
               >
                 {icon}
               </span>
-
               {/* Title Label */}
               <span
-                className={`text-[11px] font-bold tracking-tight whitespace-nowrap transition-colors duration-200 ${
-                  isActive
-                    ? mobileActiveClass || "text-slate-100"
-                    : "text-slate-500"
-                }`}
+                className={`text-[11px] ml-1 font-bold tracking-tight whitespace-nowrap transition-colors duration-200
+                  ${isActive ? mobileActiveClass : "text-slate-500"}`}
               >
                 {t[titleKey] || title}
               </span>

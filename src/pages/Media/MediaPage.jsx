@@ -15,7 +15,7 @@ const MediaPage = () => {
   const featuredVideo = videos.find((item) => item?.isForPreview) || videos[0];
 
   return (
-    <div className="min-h-screen pb-16 space-y-8">
+    <div className="min-h-screen py-4 space-y-8">
       {/* PAGE HEADER */}
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
@@ -29,7 +29,9 @@ const MediaPage = () => {
             {t.media.title}
           </h1>
         </div>
-        <p className="max-md:mt-4 text-sm text-slate-400">{t.media.subtitle}</p>
+        <p className="max-md:mt-4 text-sm md:text-base text-slate-400">
+          {t.media.subtitle}
+        </p>
       </div>
 
       {/* ERROR STATE */}
