@@ -2,8 +2,10 @@ import { onValue, ref } from "firebase/database";
 import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 import MainPage from "./pages/MainPage/MainPage";
+import MediaPage from "./pages/Media/MediaPage";
 import NotFound from "./pages/NotFound/NotFound";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
@@ -75,8 +77,17 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/schedule" element={<ScheduleBuilder />} />
+          {/* 🔒 Protected route: redirected to "/" if opened on mobile */}
+          <Route
+            path="/schedule"
+            element={
+              <DesktopOnlyGuard redirectTo="/">
+                <ScheduleBuilder />
+              </DesktopOnlyGuard>
+            }
+          />
           <Route path="/statistics" element={<StatsDashboard />} />
+          <Route path="/media" element={<MediaPage />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>

@@ -24,7 +24,20 @@ export default {
     outPrime: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
 
-    // Tactical Filter Modal Translations (UA)
+    // Media Hub Translations
+    media: {
+      badge: "YouTube",
+      title: "Media Hub",
+      subtitle: "Епічні моменти з нашого YouTube-каналу",
+      errorLoading: "Помилка завантаження медіа:",
+      noVideos: "Наразі відео відсутні.",
+      allVideos: "Усі відео",
+      livePreview: "Live Preview",
+      watchWithSound: "Увімкнути зі звуком",
+      cinemaMode: "Режим Кінотеатру",
+    },
+
+    // Tactical Filter Modal Translations
     filtersTitle: "Фільтри",
     selectAll: "Увімкнути все",
     deselectAll: "Вимкнути все",
@@ -62,7 +75,7 @@ export default {
     sbDiscordServer: "Час Сервера",
     sbDiscordLocal: "Ваш Локальний Час",
 
-    // Локалізовані часові пояси (UA)
+    // Локалізовані часові пояси
     timezoneOptions: [
       { name: "Київ / Східна Європа (EEST)", value: "Europe/Kyiv" },
       { name: "Лондон / Західна Європа (BST)", value: "Europe/London" },
@@ -83,7 +96,7 @@ export default {
       { name: "Сан-Паулу / Бразилія (BRT)", value: "America/Sao_Paulo" },
     ],
 
-    // Screenshot Tool (UA)
+    // Screenshot Tool
     sbScreenshotBtn: "📸 Знімок",
     sbScreenshotSuccess: "✅ Збережено!",
     sbScreenshotProgress: "⏳ Малюємо...",
@@ -101,6 +114,13 @@ export default {
     close: "Закрити",
     error: "Помилка",
     maxAlerts: "Максимум одночасно 5 сповіщень",
+
+    navRespawn: "Респавн",
+    navSchedule: "Розклад",
+    navMedia: "Медіа",
+    navStatistics: "Статистика",
+    navDkpPoints: "DKP Очки",
+    navEpicStats: "Епік Стата",
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -125,7 +145,20 @@ export default {
     outPrime: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
 
-    // Tactical Filter Modal Translations (EN)
+    // Media Hub Translations
+    media: {
+      badge: "YouTube",
+      title: "Media Hub",
+      subtitle: "Epic moments from our YouTube channel",
+      errorLoading: "Error loading media:",
+      noVideos: "No videos available at the moment.",
+      allVideos: "All Videos",
+      livePreview: "Live Preview",
+      watchWithSound: "Watch with sound",
+      cinemaMode: "Media Cinema Mode",
+    },
+
+    // Tactical Filter Modal Translations
     filtersTitle: "Filters",
     selectAll: "Check All",
     deselectAll: "Check None",
@@ -162,7 +195,7 @@ export default {
     sbDiscordServer: "Server Time",
     sbDiscordLocal: "Your Local Time",
 
-    // Localized Timezones (EN)
+    // Localized Timezones
     timezoneOptions: [
       { name: "Kyiv / Eastern Europe (EEST)", value: "Europe/Kyiv" },
       { name: "London / Western Europe (BST)", value: "Europe/London" },
@@ -180,7 +213,7 @@ export default {
       { name: "Sao Paulo / Brazil (BRT)", value: "America/Sao_Paulo" },
     ],
 
-    // Screenshot Tool (EN)
+    // Screenshot Tool
     sbScreenshotBtn: "📸 Screenshot",
     sbScreenshotSuccess: "✅ Saved!",
     sbScreenshotProgress: "⏳ Capturing...",
@@ -198,5 +231,12 @@ export default {
     close: "Close",
     error: "Error",
     maxAlerts: "Max 5 alerts at one time",
+
+    navRespawn: "Respawn",
+    navSchedule: "Schedule",
+    navMedia: "Media Hub",
+    navStatistics: "Statistics",
+    navDkpPoints: "DKP Points",
+    navEpicStats: "Epic Stats",
   },
 };

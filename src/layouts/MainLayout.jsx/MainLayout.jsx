@@ -1,3 +1,5 @@
+import { useLocation } from "react-router-dom";
+
 import bgImg from "../../assets/bg3.png";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../../utils/constants";
@@ -6,7 +8,12 @@ import Header from "../Header/Header";
 import MobileTabs from "../MobileTabs/MobileTabs";
 
 const MainLayout = ({ children }) => {
+  const { pathname } = useLocation();
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
+
+  // List of routes where mobile tabs SHOULD be visible
+  const showMobileTabsOnRoutes = ["/", "/statistics", "/media"];
+  const shouldShowTabs = showMobileTabsOnRoutes.includes(pathname);
 
   return (
     <>
@@ -23,7 +30,9 @@ const MainLayout = ({ children }) => {
       >
         <main className="flex-1 w-full mx-auto p-1 md:p-6">{children}</main>
       </div>
-      {isDesktop ? <Footer /> : <MobileTabs />}
+
+      {/* Render Footer on Desktop, or MobileTabs ONLY on allowed routes for mobile */}
+      {isDesktop ? <Footer /> : shouldShowTabs && <MobileTabs />}
     </>
   );
 };

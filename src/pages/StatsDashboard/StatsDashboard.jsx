@@ -5,7 +5,7 @@ import TitleWithWatermark from "../../components/TitleWithWatermark/TitleWithWat
 import Watermark from "../../components/Watermark/Watermark";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { BREAKPOINTS, DASHBOARD_TABS } from "../../utils/constants";
-import Tabs from "./components/Tabs";
+// import Tabs from "./components/Tabs"; -> Unused, remove in future
 import AllianceStats from "./pages/AllianceStats/AllianceStats";
 import EpicStats from "./pages/EpicStats/EpicStats";
 
@@ -14,7 +14,7 @@ const StatsDashboard = () => {
   const [activeTab, setActiveTab] = useState(DASHBOARD_TABS.ATTENDANCE);
   const isMobile = useMediaQuery(BREAKPOINTS.IS_MOBILE);
 
-  // Tab sync with hash in URL (#points or #epic)
+  // Synchronize state with URL hash (#points or #epic)
   useEffect(() => {
     if (hash === "#epic") {
       setActiveTab(DASHBOARD_TABS.EPICS);
@@ -25,7 +25,6 @@ const StatsDashboard = () => {
 
   return (
     <div className="min-h-screen text-slate-100 md:p-6 flex flex-col gap-6">
-      <Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
       {isMobile ? (
         <Watermark className="mx-auto" />
       ) : (
@@ -35,6 +34,7 @@ const StatsDashboard = () => {
           className=""
         />
       )}
+
       {/* Dynamic Content */}
       <main className="w-full">
         {activeTab === DASHBOARD_TABS.ATTENDANCE && <AllianceStats />}
