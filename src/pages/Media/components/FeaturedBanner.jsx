@@ -54,13 +54,13 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
         <div className="absolute bottom-0 left-0 p-5 sm:p-8 flex flex-col gap-3 max-w-2xl z-20">
           <div className="flex items-center gap-2">
             <span
-              className="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-widest
+              className="px-2.5 py-0.5 rounded-md text-[8px] md:text-[10px] font-extrabold uppercase tracking-widest
               bg-red-600 text-white shadow-md animate-pulse"
             >
               ● {t.media.livePreview}
             </span>
             {date && (
-              <span className="text-xs font-semibold text-amber-400 drop-shadow">
+              <span className="text-[10px] md:text-xs font-semibold text-amber-400 drop-shadow">
                 • {date}
               </span>
             )}
@@ -82,8 +82,9 @@ const FeaturedBanner = ({ featuredVideo, onSelect }) => {
           <div className="flex items-center gap-3 mt-2">
             <button
               onClick={() => onSelect(featuredVideo)}
-              className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 text-white
-                font-bold text-sm shadow-xl shadow-red-950/50 flex items-center gap-2 transition-all cursor-pointer"
+              className="px-3 py-1.5 md:px-6 md:py-3 rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 text-white
+                font-bold text-xs md:text-sm shadow-xl shadow-red-950/50 flex items-center gap-2 transition-all
+                cursor-pointer"
             >
               <span>▶</span> {t.media.watchWithSound}
             </button>
