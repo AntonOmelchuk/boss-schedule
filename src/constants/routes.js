@@ -3,6 +3,7 @@ export const NAV_ITEMS = {
   RESPAWN: "respawn",
   SCHEDULE: "schedule",
   MEDIA: "media",
+  LOOT: "loot",
   STATISTICS: "statistics",
   STATISTICS_POINTS: "statistics_points",
   STATISTICS_EPIC: "statistics_epic",
@@ -45,6 +46,18 @@ export const NAV_CONFIG = [
 
     indicatorGradient: "from-red-600 via-red-500 to-rose-400",
     indicatorShadow: "shadow-[0_-2px_10px_rgba(239,68,68,0.7)]",
+  },
+  {
+    id: NAV_ITEMS.LOOT,
+    path: "/loot",
+    titleKey: "navLoot",
+    icon: "🎲",
+    activeClass:
+      "bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]",
+    mobileActiveClass: "text-purple-400",
+
+    indicatorGradient: "from-purple-600 via-purple-500 to-amber-400",
+    indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
   },
   {
     id: NAV_ITEMS.STATISTICS,

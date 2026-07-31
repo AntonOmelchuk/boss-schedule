@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { UPDATE_INTERVAL_MS } from "../utils/constants";
+import { UPDATE_INTERVAL_MS } from "../constants/general";
 
 /**
  * Custom hook to get the current timestamp updated at a specified interval.

@@ -3,9 +3,9 @@ import { useShallow } from "zustand/react/shallow";
 
 import Error from "../../../../components/Error/Error";
 import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgressBar";
+import { BREAKPOINTS } from "../../../../constants/general";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../store/useAppStore";
-import { BREAKPOINTS } from "../../../../utils/constants";
 import { getErrorMessage } from "../../../../utils/general";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
 import CPAvgOnlineMatrix from "./components/CPAvgOnlineMatrix/CPAvgOnlineMatrix";

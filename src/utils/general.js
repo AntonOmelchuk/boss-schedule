@@ -4,7 +4,7 @@ import {
   EPIC_NAME_TO_EVENT_TYPE,
   LANGUAGES,
   RELATION,
-} from "./constants";
+} from "../constants/general";
 
 /**
  * Retrieves the corresponding emoji icon for a given event type from the mapped dictionary.

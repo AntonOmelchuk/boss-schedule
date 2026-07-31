@@ -1,6 +1,6 @@
+import { LANGUAGES } from "../constants/general";
+import translations from "../constants/translations";
 import useAppStore from "../store/useAppStore";
-import { LANGUAGES } from "../utils/constants";
-import translations from "../utils/translations";
 
 /**
  * Custom hook to manage multi-language UI translations.

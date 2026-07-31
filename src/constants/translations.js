@@ -1,4 +1,4 @@
-import { LANGUAGES } from "./constants";
+import { LANGUAGES } from "./general";
 
 export default {
   [LANGUAGES.UA]: {
@@ -121,6 +121,35 @@ export default {
     navStatistics: "Статистика",
     navDkpPoints: "DKP Очки",
     navEpicStats: "Епік Стата",
+    navLoot: "Лут",
+
+    loot: {
+      navLoot: "Лут",
+      title: "Рандомайзер Луту",
+      subtitle: "Справедливий розподіл трофеїв між КП альянсу",
+      partiesTitle: "Учасники (КП)",
+      selectAll: "Всі",
+      deselectAll: "Жодного",
+      lootPickerTitle: "Вибір предмета",
+      lotsTitle: "Конструктор Лотів",
+      addLotBtn: "+ Додати Лот",
+      customItemPlaceholder: "Власний предмет / опис...",
+      runDistributionBtn: "🎲 Розіграти Лут",
+      simpleRandomizerBtn: "🔀 Перемішати КП",
+      resultsTitle: "Результати Розподілу",
+      winner: "Переможець",
+      lotHeader: "Лот",
+      itemsHeader: "Вміст",
+      rollHeader: "Випало (Кубик)",
+      completeBtn: "✅ Завершити та очистити",
+      completeConfirm:
+        "Це завершить поточний розподіл і очистить усі лоти. Продовжити?",
+      screenshotBtn: "📸 Знімок результатів",
+      mobileModeNotice:
+        "📱 Мобільний режим: доступна швидке перемішування списку КП",
+      rollingAnimation: "🎲 Кидаємо кубики...",
+      emptyLotNotice: "Додайте хоча б один предмет або текст у лот",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -238,5 +267,32 @@ export default {
     navStatistics: "Statistics",
     navDkpPoints: "DKP Points",
     navEpicStats: "Epic Stats",
+    navLoot: "Loot",
+
+    loot: {
+      title: "Loot Randomizer",
+      subtitle: "Fair alliance loot distribution system",
+      partiesTitle: "Participants (Parties)",
+      selectAll: "All",
+      deselectAll: "None",
+      lootPickerTitle: "Select Item",
+      lotsTitle: "Lots Builder",
+      addLotBtn: "+ Add Lot",
+      customItemPlaceholder: "Custom item / description...",
+      runDistributionBtn: "🎲 Roll Loot",
+      simpleRandomizerBtn: "🔀 Shuffle Parties",
+      resultsTitle: "Distribution Results",
+      winner: "Winner",
+      lotHeader: "Lot",
+      itemsHeader: "Items",
+      rollHeader: "Roll",
+      completeBtn: "✅ Complete & Clear",
+      completeConfirm:
+        "This will finish the current loot session and clear all lots. Continue?",
+      screenshotBtn: "📸 Take Screenshot",
+      mobileModeNotice: "📱 Mobile Mode: Quick party shuffle available",
+      rollingAnimation: "🎲 Rolling dice...",
+      emptyLotNotice: "Add at least one item or custom text to a lot",
+    },
   },
 };

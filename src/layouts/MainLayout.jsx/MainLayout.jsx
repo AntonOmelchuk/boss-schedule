@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
 
 import bgImg from "../../assets/bg3.png";
+import { BREAKPOINTS } from "../../constants/general";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { BREAKPOINTS } from "../../utils/constants";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MobileTabs from "../MobileTabs/MobileTabs";

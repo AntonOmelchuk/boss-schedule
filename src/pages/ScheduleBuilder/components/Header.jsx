@@ -1,7 +1,7 @@
 import { useState } from "react";
 
+import { MAKE_SCREENSHOT_STATUS } from "../../../constants/general";
 import useTranslation from "../../../hooks/useTranslation";
-import { MAKE_SCREENSHOT_STATUS } from "../../../utils/constants";
 import { takeScreenshot } from "../../../utils/scheduleBuilder";
 
 const Header = ({ tableRef }) => {

@@ -1,5 +1,5 @@
 import Tab from "../../../../../../components/UI/Tab";
-import { SORT } from "../../../../../../utils/constants";
+import { SORT } from "../../../../../../constants/general";
 
 const SortTabs = ({ setSortBy, sortBy }) => {
   return (

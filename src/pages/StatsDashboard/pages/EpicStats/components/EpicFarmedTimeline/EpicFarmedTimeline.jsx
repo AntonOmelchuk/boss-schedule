@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 
-import useAppStore from "../../../../../../store/useAppStore";
 import {
   EPIC_COLORS,
   FARMED_EPIC_FILTERS,
   SORT,
-} from "../../../../../../utils/constants";
+} from "../../../../../../constants/general";
+import useAppStore from "../../../../../../store/useAppStore";
 import { parseShortDate } from "../../../../../../utils/general";
 import HeaderWithControl from "./HeaderWithControl";
 import TimelineItem from "./TimelineItem/TimelineItem";

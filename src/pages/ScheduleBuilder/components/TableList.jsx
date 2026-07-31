@@ -1,7 +1,7 @@
 import BadgeOwner from "../../../components/BadgeOwner/BadgeOwner";
 import OutPrime from "../../../components/OutPrime/OutPrime";
+import { CATEGORIES_STYLE } from "../../../constants/general";
 import useTranslation from "../../../hooks/useTranslation";
-import { CATEGORIES_STYLE } from "../../../utils/constants";
 import {
   formatDateForZone,
   formatTimeForZone,

@@ -1,5 +1,5 @@
+import { LANGUAGES } from "../../constants/general";
 import useTranslation from "../../hooks/useTranslation";
-import { LANGUAGES } from "../../utils/constants";
 import Switch from "../UI/Switch";
 
 const LanguageSwitcher = ({ setLanguage }) => {

@@ -3,20 +3,21 @@ import * as htmlToImage from "html-to-image";
 import { MAKE_SCREENSHOT_STATUS } from "../constants/general";
 
 /**
- * Captures a visual snapshot of a DOM element specified by tableRef and triggers a file download.
- * Handles temporary hiding of flagged elements during generation and updates state indicators.
+ * Captures a visual snapshot of the loot distribution results DOM node and triggers a file download.
  * @param {React.RefObject<HTMLElement>} tableRef - React reference pointing to the DOM node to capture.
- * @param {Function} setScreenshotSuccess - State dispatch function updating the current capture status.
- * @returns {Promise<void>} A promise that resolves when the capture and download sequence completes.
+ * @param {Function} setScreenshotStatus - State dispatch function updating the current capture status.
  */
-export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
+const takeLootScreenshot = async (tableRef, setScreenshotStatus) => {
   if (!tableRef.current) return;
-  setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Progress);
+
+  if (setScreenshotStatus) {
+    setScreenshotStatus(MAKE_SCREENSHOT_STATUS.Progress);
+  }
 
   try {
     const element = tableRef.current;
 
-    // 1. Hide element which shouldn't be on screenshot (remove buttons)
+    // 1. Temporarily hide elements marked with data-html2canvas-ignore
     const ignoredElements = element.querySelectorAll(
       '[data-html2canvas-ignore="true"]',
     );
@@ -24,9 +25,10 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
       el.style.setProperty("display", "none", "important"),
     );
 
+    // 2. Render image using html-to-image
     const dataUrl = await htmlToImage.toPng(element, {
-      backgroundColor: "#020617", // (slate-950)
-      pixelRatio: 2, // Double quality
+      backgroundColor: "#020617", // slate-950
+      pixelRatio: 2, // Double image quality
       style: {
         backgroundColor: "#020617",
         color: "#f1f5f9",
@@ -42,19 +44,21 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
       },
     });
 
-    // 3. Make remove buttons visible again
+    // 3. Restore hidden elements
     ignoredElements.forEach((el) => el.style.removeProperty("display"));
 
-    // 4. start download the image
+    // 4. Download generated image
     const link = document.createElement("a");
     link.href = dataUrl;
-    link.download = `alliance-schedule-${new Date().toISOString().slice(0, 10)}.png`;
+    link.download = `Loot_Distribution_${new Date().toISOString().slice(0, 10)}.png`;
     link.click();
 
-    setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Success);
-    setTimeout(() => setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.None), 3000);
+    if (setScreenshotStatus) {
+      setScreenshotStatus(MAKE_SCREENSHOT_STATUS.Success);
+      setTimeout(() => setScreenshotStatus(MAKE_SCREENSHOT_STATUS.None), 3000);
+    }
   } catch (err) {
-    console.error("Error during capture:", err);
+    console.error("Error capturing loot results:", err);
 
     if (tableRef.current) {
       tableRef.current
@@ -62,7 +66,11 @@ export const takeScreenshot = async (tableRef, setScreenshotSuccess) => {
         .forEach((el) => el.style.removeProperty("display"));
     }
 
-    setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.Error);
-    setTimeout(() => setScreenshotSuccess(MAKE_SCREENSHOT_STATUS.None), 5000);
+    if (setScreenshotStatus) {
+      setScreenshotStatus(MAKE_SCREENSHOT_STATUS.Error);
+      setTimeout(() => setScreenshotStatus(MAKE_SCREENSHOT_STATUS.None), 5000);
+    }
   }
 };
+
+export default takeLootScreenshot;

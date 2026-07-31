@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 
+import { BREAKPOINTS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../../../store/useAppStore";
-import { BREAKPOINTS } from "../../../../../../utils/constants";
 import HeaderList from "../HeaderList/HeaderList";
 import CPList from "./CPList";
 import CustomTreemap from "./CustomTreemap";

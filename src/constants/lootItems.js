@@ -1,0 +1,171 @@
+export const LOOT_CATEGORIES = {
+  EPIC: "epic",
+  WEAPON: "weapon",
+  ARMOR: "armor",
+  ENCHANT: "enchant",
+  MISC: "misc",
+};
+
+export const LOOT_PRESETS = [
+  // Епік Біжутерія
+  {
+    id: "necklace_of_valakas",
+    name: "Necklace of Valakas",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "🐉",
+  },
+  {
+    id: "ring_of_antharas",
+    name: "Ring of Antharas",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "💎",
+  },
+  {
+    id: "zaken_earring",
+    name: "Zaken's Earring",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "🗡️",
+  },
+  {
+    id: "earring_of_orfen",
+    name: "Earring of Orfen",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "✨",
+  },
+  {
+    id: "ring_of_core",
+    name: "Ring of Core",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "💍",
+  },
+  {
+    id: "frintezza_necklace",
+    name: "Necklace of Frintezza",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "🎻",
+  },
+  {
+    id: "ring_of_baium",
+    name: "Ring of Baium",
+    category: LOOT_CATEGORIES.EPIC,
+    grade: "S",
+    icon: "⚡",
+  },
+
+  // S-Grade Зброя
+  {
+    id: "draconic_bow",
+    name: "Draconic Bow",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "🏹",
+  },
+  {
+    id: "angel_slayer",
+    name: "Angel Slayer",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "🗡️",
+  },
+  {
+    id: "arcana_mace",
+    name: "Arcana Mace",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "🔮",
+  },
+  {
+    id: "heaven_divider",
+    name: "Heaven's Divider",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "⚔️",
+  },
+  {
+    id: "dragon_hunter_axe",
+    name: "Dragon Hunter Axe",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "🪓",
+  },
+  {
+    id: "basalt_battlehammer",
+    name: "Basalt Battlehammer",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "🔨",
+  },
+  {
+    id: "demon_splinter",
+    name: "Demon Splinter",
+    category: LOOT_CATEGORIES.WEAPON,
+    grade: "S",
+    icon: "🥊",
+  },
+
+  // Заточки (Enchants)
+  {
+    id: "eas",
+    name: "EAS (Enchant Armor S)",
+    category: LOOT_CATEGORIES.ENCHANT,
+    grade: "S",
+    icon: "📜",
+    isStackable: true,
+  },
+  {
+    id: "ews",
+    name: "EWS (Enchant Weapon S)",
+    category: LOOT_CATEGORIES.ENCHANT,
+    grade: "S",
+    icon: "📜",
+    isStackable: true,
+  },
+  {
+    id: "beas",
+    name: "BEAS (Blessed Enchant Armor S)",
+    category: LOOT_CATEGORIES.ENCHANT,
+    grade: "S",
+    icon: "✨",
+    isStackable: true,
+  },
+  {
+    id: "bewes",
+    name: "BEWS (Blessed Enchant Weapon S)",
+    category: LOOT_CATEGORIES.ENCHANT,
+    grade: "S",
+    icon: "✨",
+    isStackable: true,
+  },
+
+  // Камінці / Інше (Misc)
+  {
+    id: "ls_76_high",
+    name: "Life Stone Grade 76 - High",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "S",
+    icon: "💎",
+    isStackable: true,
+  },
+  {
+    id: "ls_76_top",
+    name: "Life Stone Grade 76 - Top",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "S",
+    icon: "🌟",
+    isStackable: true,
+  },
+  {
+    id: "codex",
+    name: "Giant's Codex",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "A",
+    icon: "Book",
+    isStackable: true,
+  },
+];

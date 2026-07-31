@@ -1,7 +1,7 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
+import { BREAKPOINTS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
-import { BREAKPOINTS } from "../../../../../../utils/constants";
 import CustomLabel from "./CustomLabel";
 import CustomPieTooltip from "./CustomTooltip";
 
