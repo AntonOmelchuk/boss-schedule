@@ -87,7 +87,7 @@ const MobileTabs = () => {
             >
               <span
                 className={`text-lg leading-none transition-all duration-200 ${
-                  isActive ? "scale-120" : "text-slate-500 opacity-50"
+                  isActive ? "scale-110" : "text-slate-500 opacity-50"
                 }`}
               >
                 {icon}
