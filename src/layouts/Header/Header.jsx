@@ -36,18 +36,22 @@ const Header = () => {
     <>
       <header
         className="pt-[env(safe-area-inset-top)] w-full border-b border-slate-800/80 bg-slate-950/10
-          backdrop-blur-md sticky top-0 z-40 px-4"
+          backdrop-blur-md sticky top-0 z-40 px-4 md:px-8"
       >
-        <div className="mx-auto px-1 sm:px-6 py-3 flex items-center justify-between gap-4">
-          {/* 1. BRAND / LOGO OR BACK BUTTON ON MOBILE */}
-          <div className="flex items-center gap-3">
-            {isStatisticsPage && <BackButton />}
-            <BrandLogo onClick={() => navigate("/")} />
+        <div className="py-4 flex items-center justify-between w-full">
+          {/* 1. BRAND / LOGO */}
+          <div className="flex-1 flex items-center justify-start min-w-0">
+            <div className="flex items-center gap-3">
+              {isStatisticsPage && <BackButton />}
+              <BrandLogo onClick={() => navigate("/")} />
+            </div>
           </div>
 
           {/* 2. NAVIGATION LINKS */}
-          <nav className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border border-slate-800 rounded-2xl">
-            {/* Filter out mobile-only items for desktop header */}
+          <nav
+            className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border
+          border-slate-800 rounded-2xl shrink-0"
+          >
             {NAV_CONFIG.filter((item) => !item.showOnlyInStatsMobile).map(
               (item) => {
                 const isActive = item.hasDropdown
@@ -130,7 +134,7 @@ const Header = () => {
           </nav>
 
           {/* 3. SETTINGS BUTTON */}
-          <div className="flex items-center gap-2">
+          <div className="flex-1 flex items-center justify-end min-w-0">
             <button
               onClick={() => setIsSettingsOpen(true)}
               className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300

@@ -19,7 +19,7 @@ const MainLayout = ({ children }) => {
     <>
       <Header />
       <div
-        className="min-h-screen flex flex-col text-slate-200 font-sans px-1 md:px-4"
+        className="min-h-screen flex flex-col text-slate-200 font-sans"
         style={{
           backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
           backgroundSize: "cover",
@@ -28,7 +28,7 @@ const MainLayout = ({ children }) => {
           width: "100%",
         }}
       >
-        <main className="flex-1 w-full mx-auto p-1 md:p-6">{children}</main>
+        <main className="flex-1 w-full mx-auto p-2.5 md:p-8">{children}</main>
       </div>
 
       {/* Render Footer on Desktop, or MobileTabs ONLY on allowed routes for mobile */}
