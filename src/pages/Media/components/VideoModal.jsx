@@ -72,7 +72,7 @@ const VideoModal = ({ video, onClose }) => {
           </div>
 
           {description && (
-            <p className="text-sm text-slate-400 leading-relaxed whitespace-pre-line">
+            <p className="text-base text-slate-400 leading-relaxed whitespace-pre-line text-left">
               {description}
             </p>
           )}
