@@ -50,21 +50,22 @@ const MobileTabs = () => {
   }, [activeIndex, visibleNavItems.length]);
 
   const activeTabBorderStyles = `${
-    activeItem.indicatorGradient || "from-amber-400 via-sky-400 to-indigo-400"
+    activeItem?.indicatorGradient || "from-amber-400 via-sky-400 to-indigo-400"
   } ${
-    activeItem.indicatorShadow || "shadow-[0_-2px_8px_rgba(56,189,248,0.6)]"
+    activeItem?.indicatorShadow || "shadow-[0_-2px_8px_rgba(56,189,248,0.6)]"
   }`;
 
   return (
     <div
       ref={containerRef}
-      className="sticky bottom-0 z-50 w-full bg-slate-950 backdrop-blur-xl border-t border-slate-800
-        py-2 flex items-center justify-around shadow-2xl"
+      className="sticky bottom-0 z-50 w-full bg-slate-950/95 backdrop-blur-xl border-t border-slate-800
+        pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] flex items-center justify-around shadow-2xl"
     >
       {/* Dynamic Sliding Bottom Border Indicator */}
       {activeIndex !== -1 && activeItem && (
         <span
-          className={`absolute bottom-0 h-0.75 bg-gradient-to-r rounded-t-full transition-all
+          className={`absolute bottom-[env(safe-area-inset-bottom)] h-0.75 bg-gradient-to-r
+            rounded-t-full transition-all
             duration-300 ease-out pointer-events-none ${activeTabBorderStyles}`}
           style={{
             left: `${indicatorStyle.left}px`,
@@ -83,7 +84,7 @@ const MobileTabs = () => {
               ref={(el) => (tabRefs.current[index] = el)}
               onClick={() => navigate(path)}
               className="flex-1 flex flex-col items-center justify-center
-                pt-2 cursor-pointer transition-transform duration-200 active:scale-120"
+                pt-1 cursor-pointer transition-transform duration-200 active:scale-110"
             >
               <span
                 className={`text-lg leading-none transition-all duration-200 ${
