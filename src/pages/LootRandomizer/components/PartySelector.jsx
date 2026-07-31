@@ -1,9 +1,55 @@
+import { useEffect } from "react";
+
 import useTranslation from "../../../hooks/useTranslation";
 import { useLootStore } from "../../../store/useLootStore";
 
 const PartySelector = () => {
   const { t } = useTranslation();
-  const { parties, togglePartyActive, selectAllParties } = useLootStore();
+  const {
+    parties,
+    isLoadingParties,
+    partiesError,
+    fetchParties,
+    togglePartyActive,
+    selectAllParties,
+  } = useLootStore();
+
+  useEffect(() => {
+    fetchParties();
+  }, [fetchParties]);
+
+  if (isLoadingParties) {
+    return (
+      <div className="flex justify-center">
+        <div
+          className="w-100 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 text-center text-base text-amber-400
+          font-bold animate-pulse"
+        >
+          ⏳ Loading party list...
+        </div>
+      </div>
+    );
+  }
+
+  if (partiesError) {
+    return (
+      <div className="flex justify-center">
+        <div
+          className="w-100 bg-red-950/30 border border-red-500/30 rounded-2xl p-4 flex justify-between items-center
+          text-base text-red-400"
+        >
+          <span>⚠️ {partiesError}</span>
+          <button
+            onClick={fetchParties}
+            className="px-3 py-1 bg-red-600/20 hover:bg-red-600/40 rounded-lg font-bold border border-red-500/30
+              cursor-pointer"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const activeCount = parties.filter((p) => p.active).length;
 

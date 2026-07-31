@@ -1,19 +1,18 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+// const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BASE_URL = "http://localhost:8000";
+
 export const useLootStore = create(
   persist(
     (set, get) => ({
       // --- STATE ---
-      // Список КП (можна ініціалізувати або завантажувати з вашого бекенду)
-      parties: [
-        { id: "p1", name: "Party Alpha", active: true },
-        { id: "p2", name: "Party Bravo", active: true },
-        { id: "p3", name: "Party Charlie", active: true },
-        { id: "p4", name: "Party Delta", active: true },
-      ],
+      parties: [],
+      isLoadingParties: false,
+      partiesError: null,
 
-      // Конструктор лотів
+      // Lots builder state
       lots: [
         {
           id: `lot-${Date.now()}-1`,
@@ -22,14 +21,50 @@ export const useLootStore = create(
         },
       ],
 
-      // Результати розиграшу
-      results: [], // Array of { lotId, lotNumber, items, customText, winnerPartyId, winnerPartyName, rolls }
+      // Distribution results state
+      results: [],
       isRolling: false,
 
-      // Простий рандомайзер КП (для мобілок)
+      // Simple party randomizer state (mobile mode)
       shuffledParties: [],
 
-      // --- ACTIONS: Parties ---
+      /**
+       * Fetch party list from backend API
+       */
+      fetchParties: async () => {
+        set({ isLoadingParties: true, partiesError: null });
+
+        try {
+          const response = await fetch(`${BASE_URL}/api/cp-list`);
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch parties: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          const currentParties = get().parties;
+
+          // Preserve previous active checkbox states if party already exists in local storage
+          const updatedParties = data.map((fetchedParty) => {
+            const existingParty = currentParties.find(
+              (p) => p.name === fetchedParty.name,
+            );
+            return {
+              ...fetchedParty,
+              active: existingParty !== undefined ? existingParty.active : true,
+            };
+          });
+
+          set({ parties: updatedParties, isLoadingParties: false });
+        } catch (error) {
+          console.error("Error loading parties:", error);
+          set({
+            partiesError: error.message || "Failed to load party list",
+            isLoadingParties: false,
+          });
+        }
+      },
+
       setParties: (partiesList) =>
         set({
           parties: partiesList.map((p) => ({
@@ -51,7 +86,7 @@ export const useLootStore = create(
         })),
 
       // --- ACTIONS: Lots Builder ---
-      // Додати новий порожній лот
+
       addLot: () =>
         set((state) => ({
           lots: [
@@ -64,11 +99,9 @@ export const useLootStore = create(
           ],
         })),
 
-      // Видалити лот за ID
       removeLot: (lotId) =>
         set((state) => {
           const filtered = state.lots.filter((l) => l.id !== lotId);
-          // Завжди тримаємо хоча б один порожній лот
           return {
             lots:
               filtered.length > 0
@@ -77,7 +110,6 @@ export const useLootStore = create(
           };
         }),
 
-      // Додати предмет у лот (якщо вже є — збільшує counter)
       addItemToLot: (lotId, presetItem) =>
         set((state) => {
           const updatedLots = state.lots.map((lot) => {
@@ -103,7 +135,7 @@ export const useLootStore = create(
             return { ...lot, items: updatedItems };
           });
 
-          // Перевіряємо, чи це був останній лот. Якщо так — автостворюємо наступний порожній
+          // Automatically append new empty lot if current target is the last lot
           const isLastLot = state.lots[state.lots.length - 1].id === lotId;
           if (isLastLot) {
             updatedLots.push({
@@ -116,7 +148,6 @@ export const useLootStore = create(
           return { lots: updatedLots };
         }),
 
-      // Змінити кількість предмета (+1 / -1)
       updateItemCount: (lotId, itemId, delta) =>
         set((state) => ({
           lots: state.lots.map((lot) => {
@@ -134,7 +165,6 @@ export const useLootStore = create(
           }),
         })),
 
-      // Видалити предмет із лоту
       removeItemFromLot: (lotId, itemId) =>
         set((state) => ({
           lots: state.lots.map((lot) => {
@@ -143,7 +173,6 @@ export const useLootStore = create(
           }),
         })),
 
-      // Оновити кастомний текст лоту
       updateLotCustomText: (lotId, text) =>
         set((state) => ({
           lots: state.lots.map((lot) =>
@@ -153,14 +182,12 @@ export const useLootStore = create(
 
       // --- ACTIONS: Randomizer Logic ---
 
-      // 1. Повний розподіл Лотів (Кубики + Раунди + Обмеження перемог)
       runLootDistribution: () => {
         const { parties, lots } = get();
         const activeParties = parties.filter((p) => p.active);
 
         if (activeParties.length === 0) return;
 
-        // Фільтруємо лише непорожні лоти
         const validLots = lots.filter(
           (l) => l.items.length > 0 || l.customText.trim() !== "",
         );
@@ -168,18 +195,17 @@ export const useLootStore = create(
 
         set({ isRolling: true });
 
-        // Генерація розиграшу з паузою для анімації (2 секунди)
+        // Simulate rolling animation delay
         setTimeout(() => {
-          let pool = [...activeParties]; // Пул доступних КП у поточному раунді
+          let pool = [...activeParties];
           const calculatedResults = [];
 
           validLots.forEach((lot, index) => {
-            // Якщо пул спорожнився (всі КП вже отримали по 1 лоту), оновлюємо пул для наступного раунду
+            // Reset round pool if all active parties received a lot
             if (pool.length === 0) {
               pool = [...activeParties];
             }
 
-            // Робимо кидок кубика (1-100) для кожного КП з актуального пулу
             const rolls = {};
             let highestRoll = -1;
             let winner = null;
@@ -194,7 +220,7 @@ export const useLootStore = create(
               }
             });
 
-            // Виключаємо переможця з пулу кандидатів до наступного раунду
+            // Exclude winner from pool for remaining lots in current round
             pool = pool.filter((p) => p.id !== winner.id);
 
             calculatedResults.push({
@@ -204,7 +230,7 @@ export const useLootStore = create(
               customText: lot.customText,
               winnerPartyId: winner.id,
               winnerPartyName: winner.name,
-              rolls, // Об'єкт { partyId: rollValue }
+              rolls,
             });
           });
 
@@ -212,7 +238,6 @@ export const useLootStore = create(
         }, 2000);
       },
 
-      // 2. Простий рандомайзер списка КП (для мобілок)
       shuffleParties: () => {
         const { parties } = get();
         const activeParties = parties.filter((p) => p.active);
@@ -220,7 +245,7 @@ export const useLootStore = create(
         set({ isRolling: true });
 
         setTimeout(() => {
-          // Алгоритм Фішера-Йейтса для чесного перемішування
+          // Fisher-Yates shuffle algorithm
           const shuffled = [...activeParties];
           for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -231,7 +256,6 @@ export const useLootStore = create(
         }, 1500);
       },
 
-      // 3. Завершити процес і очистити все (Done / Clear)
       resetLootSharing: () =>
         set({
           lots: [{ id: `lot-${Date.now()}`, items: [], customText: "" }],
@@ -241,7 +265,7 @@ export const useLootStore = create(
         }),
     }),
     {
-      name: "alliance-loot-storage", // ключ у localStorage
+      name: "alliance-loot-storage",
       partialize: (state) => ({
         lots: state.lots,
         results: state.results,

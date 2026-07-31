@@ -8,7 +8,6 @@ import SimplePartyRandomizer from "./components/SimplePartyRandomizer";
 const LootRandomizerPage = () => {
   const { t } = useTranslation();
   const { runLootDistribution, isRolling } = useLootStore();
-  console.log("t: ", t);
   return (
     <div className="min-h-screen pb-16 space-y-6">
       {/* PAGE HEADER */}

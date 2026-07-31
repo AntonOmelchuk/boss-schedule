@@ -6,9 +6,9 @@ const SimplePartyRandomizer = () => {
   const { shuffledParties, shuffleParties, isRolling } = useLootStore();
 
   return (
-    <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
+    <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4 w-full">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider">
+        <h3 className="text-base font-bold text-slate-200 uppercase tracking-wider">
           🔀 {t.loot.simpleRandomizerBtn}
         </h3>
         <button
@@ -23,19 +23,23 @@ const SimplePartyRandomizer = () => {
 
       {shuffledParties.length > 0 && (
         <div className="space-y-2">
-          <span className="text-xs text-slate-400 font-semibold">
-            Випадкова черга КП:
+          <span className="text-sm text-slate-400 font-semibold">
+            {t.loot?.randomQueueTitle || "Random party order:"}
           </span>
-          <div className="grid grid-cols-1 gap-2">
+
+          <div className="columns-2 md:columns-3 xl:columns-6 gap-2 space-y-2">
             {shuffledParties.map((party, index) => (
               <div
                 key={party.id}
-                className="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800"
+                className="break-inside-avoid flex items-center justify-start p-2 rounded-xl bg-slate-950 border
+                  border-slate-800"
               >
-                <span className="font-bold text-amber-400 text-sm">
+                <span className="font-bold text-amber-400 text-sm mr-2">
                   #{index + 1}
                 </span>
-                <span className="font-bold text-slate-200">{party.name}</span>
+                <span className="font-bold text-slate-200 text-xs text-left truncate">
+                  {party.name}
+                </span>
               </div>
             ))}
           </div>
