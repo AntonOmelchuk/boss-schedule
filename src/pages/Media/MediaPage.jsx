@@ -29,7 +29,7 @@ const MediaPage = () => {
             {t.media.title}
           </h1>
         </div>
-        <p className="text-sm text-slate-400">{t.media.subtitle}</p>
+        <p className="max-md:mt-4 text-sm text-slate-400">{t.media.subtitle}</p>
       </div>
 
       {/* ERROR STATE */}
