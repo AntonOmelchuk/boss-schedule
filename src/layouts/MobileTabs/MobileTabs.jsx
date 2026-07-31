@@ -42,7 +42,7 @@ const MobileTabs = () => {
     const activeTab = tabRefs.current[activeIndex];
 
     if (activeTab) {
-      const width = activeTab.offsetWidth * 0.75;
+      const width = activeTab.offsetWidth * 0.9;
       const left = activeTab.offsetLeft + (activeTab.offsetWidth - width) / 2;
 
       setIndicatorStyle({ left, width });
@@ -59,7 +59,7 @@ const MobileTabs = () => {
     <div
       ref={containerRef}
       className="sticky bottom-0 z-50 w-full bg-slate-950 backdrop-blur-xl border-t border-slate-800
-        px-2 pt-1 pb-4 flex items-center justify-around shadow-2xl"
+        py-2 flex items-center justify-around shadow-2xl"
     >
       {/* Dynamic Sliding Bottom Border Indicator */}
       {activeIndex !== -1 && activeItem && (
@@ -82,21 +82,19 @@ const MobileTabs = () => {
               key={id}
               ref={(el) => (tabRefs.current[index] = el)}
               onClick={() => navigate(path)}
-              className="flex-1 flex-col items-center justify-center
-                pt-2 cursor-pointer transition-transform duration-200 active:scale-95"
+              className="flex-1 flex flex-col items-center justify-center
+                pt-2 cursor-pointer transition-transform duration-200 active:scale-120"
             >
-              {/* Icon */}
               <span
                 className={`text-lg leading-none transition-all duration-200 ${
-                  isActive ? "scale-110" : "text-slate-500 opacity-70"
+                  isActive ? "scale-120" : "text-slate-500 opacity-50"
                 }`}
               >
                 {icon}
               </span>
-              {/* Title Label */}
               <span
-                className={`text-[11px] ml-1 font-bold tracking-tight whitespace-nowrap transition-colors duration-200
-                  ${isActive ? mobileActiveClass : "text-slate-500"}`}
+                className={`text-[11px] font-bold tracking-tight whitespace-nowrap transition-colors duration-200
+                  ${isActive ? mobileActiveClass : "text-slate-700"}`}
               >
                 {t[titleKey] || title}
               </span>
