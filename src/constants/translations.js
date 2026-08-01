@@ -23,6 +23,8 @@ export default {
     pvpEvents: "PVP Івенти",
     outPrime: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
+    retry: "Спробувати ще",
+    loadingPartyList: "Завантаження списку КП",
 
     // Media Hub Translations
     media: {
@@ -181,6 +183,8 @@ export default {
     pvpEvents: "PVP Events",
     outPrime: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
+    retry: "Retry",
+    loadingPartyList: "Loading party list",
 
     // Media Hub Translations
     media: {

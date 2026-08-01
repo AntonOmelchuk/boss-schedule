@@ -99,35 +99,45 @@ const LootBuilder = () => {
                     </span>
                   )}
 
-                  {lot.items.map((item) => (
+                  {lot.items.map(({ id, name, icon, count }) => (
                     <div
-                      key={item.id}
-                      className="flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-2 py-1
+                      key={id}
+                      className="relative group flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-2 py-1
                         rounded-lg text-xs"
                     >
-                      <img src={item.icon} className="w-5 h-5 rounded-sm" />
-                      <span className="font-semibold text-slate-200">
-                        {item.name}
-                      </span>
+                      {/* Custom Animated Tooltip */}
+                      <div
+                        className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center
+                          justify-center bg-slate-950 text-amber-300 text-xs font-extrabold px-2 py-1 rounded-md border
+                          border-amber-500/30 shadow-lg whitespace-nowrap z-30 pointer-events-none transition-all"
+                      >
+                        {name}
+                      </div>
+
+                      <img
+                        src={icon}
+                        alt={name}
+                        className="w-5 h-5 rounded-sm object-contain"
+                      />
 
                       {/* Counter */}
                       <div className="flex items-center gap-1 ml-1 bg-slate-950 rounded px-1 border border-slate-800">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            updateItemCount(lot.id, item.id, -1);
+                            updateItemCount(lot.id, id, -1);
                           }}
                           className="text-slate-400 hover:text-amber-400 font-bold text-xs px-1"
                         >
                           -
                         </button>
                         <span className="font-extrabold text-amber-400 text-xs">
-                          {item.count}
+                          {count}
                         </span>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            updateItemCount(lot.id, item.id, 1);
+                            updateItemCount(lot.id, id, 1);
                           }}
                           className="text-slate-400 hover:text-amber-400 font-bold text-xs px-1"
                         >
@@ -138,7 +148,7 @@ const LootBuilder = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          removeItemFromLot(lot.id, item.id);
+                          removeItemFromLot(lot.id, id);
                         }}
                         className="text-slate-500 hover:text-red-400 ml-1 font-bold text-xs"
                       >

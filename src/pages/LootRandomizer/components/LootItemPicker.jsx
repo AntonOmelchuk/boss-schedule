@@ -5,10 +5,12 @@ import useTranslation from "../../../hooks/useTranslation";
 
 const LootItemPicker = ({ onSelectItem }) => {
   const { t } = useTranslation();
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState(
+    LOOT_CATEGORIES.WEAPON_S,
+  );
 
   const categories = [
-    { id: "all", label: t.loot?.catAll },
+    // { id: "all", label: t.loot?.catAll }, // Hide atm to save some space
     {
       id: LOOT_CATEGORIES.WEAPON_S,
       label: `⚔️ S ${t.loot?.catWeapon}`,
@@ -27,15 +29,14 @@ const LootItemPicker = ({ onSelectItem }) => {
     },
     {
       id: LOOT_CATEGORIES.JEWELRY,
-      label: `💍 S ${t.loot?.catJew}`,
+      label: `💍 ${t.loot?.catJew}`,
     },
     { id: LOOT_CATEGORIES.MISC, label: `💎 ${t.loot?.catMisc}` },
   ];
 
-  const filteredItems =
-    selectedCategory === "all"
-      ? LOOT_PRESETS
-      : LOOT_PRESETS.filter((i) => i.category === selectedCategory);
+  const filteredItems = LOOT_PRESETS.filter(
+    (i) => i.category === selectedCategory,
+  );
 
   return (
     <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
@@ -67,7 +68,7 @@ const LootItemPicker = ({ onSelectItem }) => {
 
       {/* Preset items grid */}
       <div
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 max-h-56 overflow-y-auto
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 max-h-56 overflow-y-auto
         pr-1 custom-scrollbar"
       >
         {filteredItems.map((item) => (

@@ -28,7 +28,7 @@ const LootRandomizerPage = () => {
 
       <PartySelector />
 
-      <div className="hidden sm:block space-y-6">
+      <div className="hidden xl:block space-y-6">
         <LootBuilder />
 
         <div className="flex justify-center">
@@ -46,7 +46,7 @@ const LootRandomizerPage = () => {
         <LootResults />
       </div>
 
-      <div className="lg:hidden space-y-4">
+      <div className="xl:hidden space-y-4">
         <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs">
           {t.loot.mobileModeNotice}
         </div>
