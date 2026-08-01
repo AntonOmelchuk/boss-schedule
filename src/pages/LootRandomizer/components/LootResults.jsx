@@ -90,12 +90,12 @@ const LootResults = () => {
         ref={tableRef}
         className="p-5 rounded-2xl border border-slate-800 bg-slate-950 shadow-2xl space-y-4 w-full"
       >
-        <div className="border-b border-slate-800 pb-3 flex justify-between items-center">
-          <span className="text-xs font-black text-amber-500 uppercase tracking-widest">
+        <div className="border-b border-slate-800 pb-3 flex items-center">
+          <span className="text-base font-black text-amber-500 uppercase tracking-widest">
             ⚔️ {t.loot.allianceLootDistributionResult}
           </span>
-          <span className="text-[10px] text-slate-500 font-semibold">
-            {new Date().toLocaleDateString()}
+          <span className="text-xs text-slate-300 font-semibold pl-4">
+            ({new Date().toLocaleDateString()})
           </span>
         </div>
 
@@ -111,6 +111,12 @@ const LootResults = () => {
               <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
                 <span className="font-black text-amber-400 text-xs uppercase tracking-wider truncate">
                   {t.loot.lotHeader} #{res.lotNumber}
+                </span>
+                <span
+                  className="px-2 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400
+                  font-bold text-xs truncate"
+                >
+                  {res.winnerPartyName}
                 </span>
               </div>
 
@@ -135,19 +141,6 @@ const LootResults = () => {
                     {res.customText}
                   </span>
                 )}
-              </div>
-
-              {/* Winner Party badge */}
-              <div className="pt-2 border-t border-slate-800/60 flex items-center justify-between gap-1">
-                <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider shrink-0">
-                  {t.loot.winner}
-                </span>
-                <span
-                  className="px-2 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400
-                  font-bold text-xs truncate"
-                >
-                  {res.winnerPartyName}
-                </span>
               </div>
             </div>
           ))}

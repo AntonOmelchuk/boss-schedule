@@ -17,7 +17,7 @@ const LootRandomizerPage = () => {
             className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider
             bg-amber-500 text-slate-950 shadow-sm shadow-amber-900/50"
           >
-            Loot
+            {t.navLoot}
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-100 tracking-tight">
             {t.loot.title}
