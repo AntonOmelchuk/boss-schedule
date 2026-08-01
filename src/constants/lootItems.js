@@ -25,6 +25,20 @@ import maBootsIcon from "../assets/loot/armorS/maBoots.png";
 import maGlovesIcon from "../assets/loot/armorS/maGloves.png";
 import maHelmetIcon from "../assets/loot/armorS/maHelmet.png";
 import maRobeIcon from "../assets/loot/armorS/maRobe.png";
+import ttEarringIcon from "../assets/loot/jewelry/ttEarring.png";
+import ttNecklaseIcon from "../assets/loot/jewelry/ttNecklase.png";
+import ttRingIcon from "../assets/loot/jewelry/ttRing.png";
+import beaaIcon from "../assets/loot/misc/beaa.png";
+import beasIcon from "../assets/loot/misc/beas.png";
+import bewaIcon from "../assets/loot/misc/bewa.png";
+import bewsIcon from "../assets/loot/misc/bews.png";
+import eaaIcon from "../assets/loot/misc/eaa.png";
+import easIcon from "../assets/loot/misc/eas.png";
+import ewaIcon from "../assets/loot/misc/ewa.png";
+import ewsIcon from "../assets/loot/misc/ews.png";
+import lsHigh76Icon from "../assets/loot/misc/lsHigh76.png";
+import lsTop76Icon from "../assets/loot/misc/lsTop76.png";
+import manuscriptIcon from "../assets/loot/misc/manuscript.png";
 import darkLegionEdgeIcon from "../assets/loot/weaponA/darkLegionEdge.png";
 import dragonGrinderIcon from "../assets/loot/weaponA/dragonGrinder.png";
 import dualAIcon from "../assets/loot/weaponA/dualA.png";
@@ -50,6 +64,7 @@ export const LOOT_CATEGORIES = {
   WEAPON_A: "weapon-a",
   ARMOR_S: "armor-s",
   ARMOR_A: "armor-a",
+  JEWELRY: "jewelry",
   ENCHANT: "enchant",
   MISC: "misc",
 };
@@ -426,48 +441,96 @@ export const LOOT_PRESETS = [
     grade: "A",
     icon: mjArmorIcon,
   },
+  //============================================
+  //            Jewelry
+  //============================================
+  {
+    id: "tt_necklase",
+    name: "Tateossian Necklase",
+    category: LOOT_CATEGORIES.JEWELRY,
+    grade: "S",
+    icon: ttNecklaseIcon,
+  },
+  {
+    id: "tt_earring",
+    name: "Tateossian Earring",
+    category: LOOT_CATEGORIES.JEWELRY,
+    grade: "S",
+    icon: ttEarringIcon,
+  },
+  {
+    id: "tt_ring",
+    name: "Tateossian Ring",
+    category: LOOT_CATEGORIES.JEWELRY,
+    grade: "S",
+    icon: ttRingIcon,
+  },
 
   //============================================
   //            Misc & Enchants
   //============================================
   {
-    id: "eas",
-    name: "EAS (Enchant Armor S)",
-    category: LOOT_CATEGORIES.ENCHANT,
+    id: "bews",
+    name: "BEWS (Blessed Enchant Weapon S)",
+    category: LOOT_CATEGORIES.MISC,
     grade: "S",
-    icon: "📜",
+    icon: bewsIcon,
     isStackable: true,
   },
   {
     id: "ews",
     name: "EWS (Enchant Weapon S)",
-    category: LOOT_CATEGORIES.ENCHANT,
+    category: LOOT_CATEGORIES.MISC,
     grade: "S",
-    icon: "📜",
+    icon: ewsIcon,
     isStackable: true,
   },
   {
     id: "beas",
     name: "BEAS (Blessed Enchant Armor S)",
-    category: LOOT_CATEGORIES.ENCHANT,
-    grade: "S",
-    icon: "✨",
-    isStackable: true,
-  },
-  {
-    id: "bewes",
-    name: "BEWS (Blessed Enchant Weapon S)",
-    category: LOOT_CATEGORIES.ENCHANT,
-    grade: "S",
-    icon: "✨",
-    isStackable: true,
-  },
-  {
-    id: "ls_76_high",
-    name: "Life Stone Grade 76 - High",
     category: LOOT_CATEGORIES.MISC,
     grade: "S",
-    icon: "💎",
+    icon: beasIcon,
+    isStackable: true,
+  },
+  {
+    id: "eas",
+    name: "EAS (Enchant Armor S)",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "S",
+    icon: easIcon,
+    isStackable: true,
+  },
+  {
+    id: "bewa",
+    name: "BEWA (Blessed Enchant Weapon A)",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "A",
+    icon: bewaIcon,
+    isStackable: true,
+  },
+  {
+    id: "ewa",
+    name: "EWA (Enchant Weapon A)",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "A",
+    icon: ewaIcon,
+    isStackable: true,
+  },
+  {
+    id: "beaa",
+    name: "BEAA (Blessed Enchant Armor A)",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "A",
+    icon: beaaIcon,
+    isStackable: true,
+  },
+  {
+    id: "eaa",
+    name: "EAA (Enchant Armor A)",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "A",
+    icon: eaaIcon,
     isStackable: true,
   },
   {
@@ -475,15 +538,23 @@ export const LOOT_PRESETS = [
     name: "Life Stone Grade 76 - Top",
     category: LOOT_CATEGORIES.MISC,
     grade: "S",
-    icon: "🌟",
+    icon: lsTop76Icon,
     isStackable: true,
   },
   {
-    id: "codex",
-    name: "Giant's Codex",
+    id: "ls_76_high",
+    name: "Life Stone Grade 76 - High",
     category: LOOT_CATEGORIES.MISC,
-    grade: "A",
-    icon: "📖",
+    grade: "S",
+    icon: lsHigh76Icon,
+    isStackable: true,
+  },
+  {
+    id: "manuscript",
+    name: "Ancient Book",
+    category: LOOT_CATEGORIES.MISC,
+    grade: "S",
+    icon: manuscriptIcon,
     isStackable: true,
   },
 ];

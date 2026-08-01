@@ -25,6 +25,10 @@ const LootItemPicker = ({ onSelectItem }) => {
       id: LOOT_CATEGORIES.ARMOR_A,
       label: `🛡️ A ${t.loot?.catArmor}`,
     },
+    {
+      id: LOOT_CATEGORIES.JEWELRY,
+      label: `💍 S ${t.loot?.catJew}`,
+    },
     { id: LOOT_CATEGORIES.MISC, label: `💎 ${t.loot?.catMisc}` },
   ];
 
