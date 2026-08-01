@@ -92,7 +92,7 @@ const LootResults = () => {
       >
         <div className="border-b border-slate-800 pb-3 flex justify-between items-center">
           <span className="text-xs font-black text-amber-500 uppercase tracking-widest">
-            ⚔️ Alliance Loot Distribution Result
+            ⚔️ {t.loot.allianceLootDistributionResult}
           </span>
           <span className="text-[10px] text-slate-500 font-semibold">
             {new Date().toLocaleDateString()}
@@ -110,29 +110,25 @@ const LootResults = () => {
               {/* Header: Lot number and Roll value */}
               <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
                 <span className="font-black text-amber-400 text-xs uppercase tracking-wider truncate">
-                  {t.loot.lotHeader || "Лот"} #{res.lotNumber}
-                </span>
-                <span
-                  className="font-black text-amber-400 text-xs bg-amber-500/10 px-2 py-0.5 rounded-md border
-                  border-amber-500/20 shrink-0"
-                >
-                  🎲 {res.rolls[res.winnerPartyId]}
+                  {t.loot.lotHeader} #{res.lotNumber}
                 </span>
               </div>
 
               {/* Items List */}
               <div className="flex flex-wrap gap-1.5 my-1">
                 {res.items.map((i) => (
-                  <span
-                    key={i.id}
-                    className="bg-slate-950 px-2 py-0.5 rounded-md border border-slate-800/80 text-slate-200 text-xs
-                      font-semibold"
-                  >
-                    {i.icon} {i.name}{" "}
-                    {i.count > 1 && (
-                      <strong className="text-amber-400">x{i.count}</strong>
-                    )}
-                  </span>
+                  <div className="flex bg-slate-950 px-1 py-0.5 rounded-md border border-slate-800/80">
+                    <img src={i.icon} className="w-4 h-4 rounded-sm" />
+                    <span
+                      key={i.id}
+                      className="text-slate-200 text-xs font-semibold pl-1"
+                    >
+                      {i.name}{" "}
+                      {i.count > 1 && (
+                        <strong className="text-amber-400">x{i.count}</strong>
+                      )}
+                    </span>
+                  </div>
                 ))}
                 {res.customText && (
                   <span className="italic text-slate-400 text-xs">

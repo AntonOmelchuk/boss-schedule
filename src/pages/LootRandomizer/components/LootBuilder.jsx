@@ -17,12 +17,43 @@ const LootBuilder = () => {
   } = useLootStore();
 
   const [targetLotId, setTargetLotId] = useState(lots[0]?.id || null);
+  const [dragOverLotId, setDragOverLotId] = useState(null);
 
   // Active lot for adding items by click
   const activeLotId =
     targetLotId && lots.some((l) => l.id === targetLotId)
       ? targetLotId
       : lots[lots.length - 1]?.id;
+
+  const handleDragOver = (e, lotId) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+    if (dragOverLotId !== lotId) {
+      setDragOverLotId(lotId);
+    }
+  };
+
+  const handleDragLeave = (e, lotId) => {
+    e.preventDefault();
+    if (dragOverLotId === lotId) {
+      setDragOverLotId(null);
+    }
+  };
+
+  const handleDrop = (e, lotId) => {
+    e.preventDefault();
+    setDragOverLotId(null);
+    try {
+      const rawData = e.dataTransfer.getData("application/json");
+      if (rawData) {
+        const item = JSON.parse(rawData);
+        addItemToLot(lotId, item);
+        setTargetLotId(lotId);
+      }
+    } catch (err) {
+      console.error("Failed to drop item:", err);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -50,15 +81,21 @@ const LootBuilder = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {lots.map((lot, index) => {
             const isActiveLot = lot.id === activeLotId;
+            const isDragOver = lot.id === dragOverLotId;
 
             return (
               <div
                 key={lot.id}
                 onClick={() => setTargetLotId(lot.id)}
+                onDragOver={(e) => handleDragOver(e, lot.id)}
+                onDragLeave={(e) => handleDragLeave(e, lot.id)}
+                onDrop={(e) => handleDrop(e, lot.id)}
                 className={`p-4 rounded-2xl border transition-all flex flex-col gap-3 relative cursor-pointer ${
-                  isActiveLot
-                    ? "bg-slate-900/90 border-amber-500/50 shadow-lg shadow-amber-500/5 ring-1 ring-amber-500/30"
-                    : "bg-slate-900/40 border-slate-800 hover:border-slate-700"
+                  isDragOver
+                    ? "bg-amber-500/20 border-amber-400 shadow-xl shadow-amber-500/10 ring-2 ring-amber-400"
+                    : isActiveLot
+                      ? "bg-slate-900/90 border-amber-500/50 shadow-lg shadow-amber-500/5 ring-1 ring-amber-500/30"
+                      : "bg-slate-900/40 border-slate-800 hover:border-slate-700"
                 }`}
               >
                 {/* Lot title */}
@@ -94,8 +131,10 @@ const LootBuilder = () => {
                   border-slate-800/80"
                 >
                   {lot.items.length === 0 && !lot.customText && (
-                    <span className="text-xs text-slate-500 italic m-auto">
-                      {t.loot.emptyLotNotice}
+                    <span className="text-xs text-slate-500 italic m-auto pointer-events-none">
+                      {isDragOver
+                        ? "Скиньте предмет сюди!"
+                        : t.loot.emptyLotNotice}
                     </span>
                   )}
 

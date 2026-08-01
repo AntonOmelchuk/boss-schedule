@@ -10,7 +10,6 @@ const LootItemPicker = ({ onSelectItem }) => {
   );
 
   const categories = [
-    // { id: "all", label: t.loot?.catAll }, // Hide atm to save some space
     {
       id: LOOT_CATEGORIES.WEAPON_S,
       label: `⚔️ S ${t.loot?.catWeapon}`,
@@ -38,14 +37,19 @@ const LootItemPicker = ({ onSelectItem }) => {
     (i) => i.category === selectedCategory,
   );
 
+  const handleDragStart = (e, item) => {
+    e.dataTransfer.setData("application/json", JSON.stringify(item));
+    e.dataTransfer.effectAllowed = "copy";
+  };
+
   return (
-    <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+    <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3 select-none">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
           <span>📦</span> {t.loot.lootPickerTitle}
         </h3>
         <span className="text-[11px] text-slate-400">
-          {t.loot?.itemPickerHint}
+          {t.loot?.itemPickerHint || "Клікніть або перетягніть предмет у лот"}
         </span>
       </div>
 
@@ -74,13 +78,19 @@ const LootItemPicker = ({ onSelectItem }) => {
         {filteredItems.map((item) => (
           <button
             key={item.id}
+            draggable
+            onDragStart={(e) => handleDragStart(e, item)}
             onClick={() => onSelectItem(item)}
             className="flex items-center gap-2 p-2 rounded-xl bg-slate-950/60 border border-slate-800/80
-              hover:border-amber-500/50 hover:bg-slate-800/50 transition-all text-left cursor-pointer group"
+              hover:border-amber-500/50 hover:bg-slate-800/50 transition-all text-left cursor-grab
+              active:cursor-grabbing group"
           >
             <span className="text-lg leading-none group-hover:scale-110 transition-transform">
-              {/* {item.icon} */}
-              <img src={item.icon} className="w-10 h-10 rounded-sm" />
+              <img
+                src={item.icon}
+                alt={item.name}
+                className="w-10 h-10 rounded-sm object-contain"
+              />
             </span>
             <div className="flex flex-col min-w-0">
               <span className="text-xs font-bold text-slate-200 group-hover:text-amber-300 truncate">
