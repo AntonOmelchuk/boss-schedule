@@ -8,17 +8,24 @@ const LootItemPicker = ({ onSelectItem }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const categories = [
-    { id: "all", label: t.loot?.catAll || "All" },
-    { id: LOOT_CATEGORIES.EPIC, label: `👑 ${t.loot?.catEpic || "Epic"}` },
+    { id: "all", label: t.loot?.catAll },
     {
-      id: LOOT_CATEGORIES.WEAPON,
-      label: `⚔️ ${t.loot?.catWeapon || "Weapon"}`,
+      id: LOOT_CATEGORIES.WEAPON_S,
+      label: `⚔️ S ${t.loot?.catWeapon}`,
     },
     {
-      id: LOOT_CATEGORIES.ENCHANT,
-      label: `📜 ${t.loot?.catEnchant || "Scrolls"}`,
+      id: LOOT_CATEGORIES.WEAPON_A_TOP,
+      label: `⚔️ Top-A ${t.loot?.catWeapon}`,
     },
-    { id: LOOT_CATEGORIES.MISC, label: `💎 ${t.loot?.catMisc || "Misc/LS"}` },
+    {
+      id: LOOT_CATEGORIES.ARMOR_S,
+      label: `🛡️ S ${t.loot?.catArmor}`,
+    },
+    {
+      id: LOOT_CATEGORIES.ARMOR_A,
+      label: `🛡️ A ${t.loot?.catArmor}`,
+    },
+    { id: LOOT_CATEGORIES.MISC, label: `💎 ${t.loot?.catMisc}` },
   ];
 
   const filteredItems =
@@ -33,8 +40,7 @@ const LootItemPicker = ({ onSelectItem }) => {
           <span>📦</span> {t.loot.lootPickerTitle}
         </h3>
         <span className="text-[11px] text-slate-400">
-          {t.loot?.itemPickerHint ||
-            "Click an item to add it to the active lot"}
+          {t.loot?.itemPickerHint}
         </span>
       </div>
 
@@ -68,7 +74,8 @@ const LootItemPicker = ({ onSelectItem }) => {
               hover:border-amber-500/50 hover:bg-slate-800/50 transition-all text-left cursor-pointer group"
           >
             <span className="text-lg leading-none group-hover:scale-110 transition-transform">
-              {item.icon}
+              {/* {item.icon} */}
+              <img src={item.icon} className="w-10 h-10 rounded-sm" />
             </span>
             <div className="flex flex-col min-w-0">
               <span className="text-xs font-bold text-slate-200 group-hover:text-amber-300 truncate">

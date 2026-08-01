@@ -123,6 +123,8 @@ export default {
     navEpicStats: "Епік Стата",
     navLoot: "Лут",
 
+    active: "Активгий",
+
     loot: {
       navLoot: "Лут",
       title: "Рандомайзер Луту",
@@ -149,6 +151,11 @@ export default {
         "📱 Мобільний режим: доступна швидке перемішування списку КП",
       rollingAnimation: "🎲 Кидаємо кубики...",
       emptyLotNotice: "Додайте хоча б один предмет або текст у лот",
+      catAll: "Всі",
+      catWeapon: "Зброя",
+      catArmor: "Шмот",
+      catMisc: "Різне",
+      itemPickerHint: "Клікни на айтем, щоб додати його до активного лоту",
     },
   },
   [LANGUAGES.EN]: {
@@ -269,6 +276,8 @@ export default {
     navEpicStats: "Epic Stats",
     navLoot: "Loot",
 
+    active: "Active",
+
     loot: {
       title: "Loot Randomizer",
       subtitle: "Fair alliance loot distribution system",
@@ -293,6 +302,11 @@ export default {
       mobileModeNotice: "📱 Mobile Mode: Quick party shuffle available",
       rollingAnimation: "🎲 Rolling dice...",
       emptyLotNotice: "Add at least one item or custom text to a lot",
+      catAll: "All",
+      catWeapon: "Weapon",
+      catArmor: "Armor",
+      catMisc: "Misc",
+      itemPickerHint: "Click an item to add it to the active lot",
     },
   },
 };

@@ -144,7 +144,7 @@ const LootResults = () => {
               {/* Winner Party badge */}
               <div className="pt-2 border-t border-slate-800/60 flex items-center justify-between gap-1">
                 <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider shrink-0">
-                  {t.loot.winner || "Переможець"}
+                  {t.loot.winner}
                 </span>
                 <span
                   className="px-2 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400

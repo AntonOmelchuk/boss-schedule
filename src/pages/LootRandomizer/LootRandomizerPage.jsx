@@ -46,7 +46,7 @@ const LootRandomizerPage = () => {
         <LootResults />
       </div>
 
-      <div className="space-y-4">
+      <div className="lg:hidden space-y-4">
         <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs">
           {t.loot.mobileModeNotice}
         </div>

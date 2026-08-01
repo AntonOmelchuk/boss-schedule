@@ -67,10 +67,10 @@ const LootBuilder = () => {
                     className="text-xs font-black text-amber-400 uppercase tracking-widest flex
                     items-center gap-1.5"
                   >
-                    Лот #{index + 1}
+                    {t.loot.lotHeader} #{index + 1}
                     {isActiveLot && (
                       <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500 text-slate-950 font-bold">
-                        Активний
+                        {t.active}
                       </span>
                     )}
                   </span>
@@ -90,12 +90,12 @@ const LootBuilder = () => {
 
                 {/* Lots items */}
                 <div
-                  className="flex flex-wrap gap-2 min-h-[42px] p-2 bg-slate-950/60 rounded-xl border
+                  className="flex flex-wrap gap-2 min-h-10.5 p-2 bg-slate-950/60 rounded-xl border
                   border-slate-800/80"
                 >
                   {lot.items.length === 0 && !lot.customText && (
                     <span className="text-xs text-slate-500 italic m-auto">
-                      Порожньо (клікайте на предмети вище)
+                      {t.loot.emptyLotNotice}
                     </span>
                   )}
 
@@ -105,7 +105,7 @@ const LootBuilder = () => {
                       className="flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-2 py-1
                         rounded-lg text-xs"
                     >
-                      <span>{item.icon}</span>
+                      <img src={item.icon} className="w-5 h-5 rounded-sm" />
                       <span className="font-semibold text-slate-200">
                         {item.name}
                       </span>
@@ -155,7 +155,7 @@ const LootBuilder = () => {
                   onChange={(e) => updateLotCustomText(lot.id, e.target.value)}
                   placeholder={t.loot.customItemPlaceholder}
                   className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-1.5 text-xs
-                    text-slate-200 focus:outline-none focus:border-amber-500/50 transition-colors"
+                  text-slate-200 focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
               </div>
             );
