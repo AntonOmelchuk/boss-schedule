@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
-import { PVP_EVENTS } from "../data";
+import { PVP_EVENTS } from "../constants/eventData";
+import { TIME_FILTERS } from "../constants/general";
 import useAppStore from "../store/useAppStore";
-import { TIME_FILTERS } from "../utils/constants";
 import { getEmojiIcon, getSingleEventTimestamp } from "../utils/general";
 import useCurrentTime from "./useCurrentTime";
 

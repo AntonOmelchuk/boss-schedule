@@ -1,7 +1,9 @@
+import { useMemo } from "react";
 import { useShallow } from "zustand/shallow";
 
 import useAppStore from "../../../../../../store/useAppStore";
 import Card from "./Card";
+import GroupedCard from "./GroupedCard";
 import Header from "./Header";
 
 const StatCards = () => {
@@ -12,6 +14,23 @@ const StatCards = () => {
       isLoading: state.isLoading,
     })),
   );
+
+  // Count same epic
+  const groupedLoot = useMemo(() => {
+    if (!unassigned_loot || unassigned_loot.length === 0) return [];
+
+    const map = new Map();
+
+    unassigned_loot.forEach((item) => {
+      const name = item.epic_name;
+      if (!map.has(name)) {
+        map.set(name, { name, count: 0 });
+      }
+      map.get(name).count += 1;
+    });
+
+    return Array.from(map.values());
+  }, [unassigned_loot]);
 
   if (!summary || !unassigned_loot) return null;
 
@@ -27,26 +46,21 @@ const StatCards = () => {
         <Card title="Total Epics Farmed" value={total_farmed} />
         <Card title="Shared to CPs" value={total_shared} />
 
-        <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 relative overflow-hidden">
-          <span className="text-xs text-amber-300 uppercase font-semibold">
-            In Treasury (Awaiting Share)
-          </span>
-          <div className="text-3xl font-extrabold text-amber-400 mt-1">
-            {unassigned_count}
-          </div>
-          {unassigned_loot.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {unassigned_loot.map((item, idx) => (
-                <span
-                  key={idx}
-                  className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20
-                  text-amber-300 border border-amber-500/30"
-                >
-                  {item.epic_name} ({item.farm_date})
-                </span>
-              ))}
+        {/* Treasury Card */}
+        <div
+          className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 relative overflow-hidden
+          flex flex-col justify-between"
+        >
+          <div>
+            <span className="text-base text-amber-300 uppercase font-semibold">
+              In Treasury (Awaiting Share)
+            </span>
+            <div className="text-3xl font-extrabold text-amber-400 mt-1">
+              {unassigned_count}
             </div>
-          )}
+          </div>
+
+          {groupedLoot.length > 0 && <GroupedCard groupedLoot={groupedLoot} />}
         </div>
       </div>
     </div>

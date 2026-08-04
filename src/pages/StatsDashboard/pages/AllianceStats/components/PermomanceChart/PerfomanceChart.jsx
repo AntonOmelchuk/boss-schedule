@@ -11,8 +11,8 @@ import {
 } from "recharts";
 
 import Tab from "../../../../../../components/UI/Tab";
+import { SORT } from "../../../../../../constants/general";
 import useAppStore from "../../../../../../store/useAppStore";
-import { SORT } from "../../../../../../utils/constants";
 import { shuffleArray } from "../../../../../../utils/general";
 
 const COLORS = [

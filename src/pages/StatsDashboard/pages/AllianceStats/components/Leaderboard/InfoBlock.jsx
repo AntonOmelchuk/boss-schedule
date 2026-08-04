@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import InfoIcon from "../../../../../../components/InfoIcon/InfoIcon";
-import { SORT } from "../../../../../../utils/constants";
+import { SORT } from "../../../../../../constants/general";
 
 const InfoBlock = ({ viewMode }) => {
   const [isOpenMobile, setIsOpenMobile] = useState(false);

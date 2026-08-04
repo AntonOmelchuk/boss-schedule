@@ -1,4 +1,4 @@
-import { SORT, WINNER_ICONS } from "../../../../../../utils/constants";
+import { SORT, WINNER_ICONS } from "../../../../../../constants/general";
 
 const CPNameItem = ({ cpName, index, viewMode }) => {
   const icon = WINNER_ICONS[index];

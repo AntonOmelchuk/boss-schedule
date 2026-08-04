@@ -2,8 +2,10 @@ import { onValue, ref } from "firebase/database";
 import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import { EVENT_TYPES } from "./constants/general";
 import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
+import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
 import MediaPage from "./pages/Media/MediaPage";
 import NotFound from "./pages/NotFound/NotFound";
@@ -11,7 +13,6 @@ import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
-import { EVENT_TYPES } from "./utils/constants";
 import {
   checkIsOutPrime,
   getEmojiIcon,
@@ -88,6 +89,7 @@ function App() {
           />
           <Route path="/statistics" element={<StatsDashboard />} />
           <Route path="/media" element={<MediaPage />} />
+          <Route path="/loot" element={<LootRandomizerPage />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>

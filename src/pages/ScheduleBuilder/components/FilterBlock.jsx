@@ -1,6 +1,6 @@
+import { CATEGORIES_STYLE } from "../../../constants/general";
 import useFilterEvents from "../../../hooks/useFilterEvents";
 import useTranslation from "../../../hooks/useTranslation";
-import { CATEGORIES_STYLE } from "../../../utils/constants";
 import CountSelector from "./CountSelector";
 
 const FilterBlock = ({

@@ -1,10 +1,9 @@
-# 🛡️ Eternal Respawn — Clan Management & Epic Boss Tracker
+# 🛡️ Iron Gates — Alliance Management & Epic Boss Tracker
 
-> **Eternal Respawn** is a modern web application designed for gaming clans (tailored for Lineage 2 and MMORPG communities) to track clan statistics, Pareto charts, timelines, epic boss respawns, drop distributions, and automated real-time Web Push notifications.
+> **Iron Gates** is a modern web application designed for gaming clans (tailored for Lineage 2 and MMORPG communities) to track clan statistics, Pareto charts, timelines, epic boss respawns, drop distributions, and automated real-time Web Push notifications.
 
 🌐 **Live Applications:**
 
-- **Frontend (Netlify):** https://eternal-respawn.netlify.app
 - **Frontend (Vercel):** https://iron-gates.vercel.app
 - **Backend Repository:** https://github.com/AntonOmelchuk/alliance-analytics
 
@@ -24,7 +23,7 @@
 
 ## ⚙️ Core Features
 
-1. **Clan Analytics & CP Stats:** Processes CSV sheets to analyze clan member activities, Pareto distribution, and drop shares.
+1. **Alliance Analytics & CP Stats:** Processes CSV sheets to analyze clan member activities, Pareto distribution, and drop shares.
 2. **Timeline & Epic Tracker:** Real-time tracking of Epic Boss respawns (Queen Ant, Zaken, Baium, Valakas, Antharas, etc.) and daily PvP events (Multi Team Battle, Capture The Base, Death Match, Epic Boss Challenge).
 3. **Automated Web Push Notifications:**
    - Background `AsyncIOScheduler` worker checking respawn timers every minute.

@@ -10,13 +10,13 @@ import {
   YAxis,
 } from "recharts";
 
-import useMediaQuery from "../../../../../../hooks/useMediaQuery";
-import useAppStore from "../../../../../../store/useAppStore";
 import {
   BREAKPOINTS,
   EPIC_COLORS,
   SORT,
-} from "../../../../../../utils/constants";
+} from "../../../../../../constants/general";
+import useMediaQuery from "../../../../../../hooks/useMediaQuery";
+import useAppStore from "../../../../../../store/useAppStore";
 import { shuffleArray } from "../../../../../../utils/general";
 import CustomTooltip from "./CustomTooltip";
 import EpicPrices from "./EpicPrices";

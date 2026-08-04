@@ -1,0 +1,222 @@
+import { useState } from "react";
+
+import useTranslation from "../../../hooks/useTranslation";
+import { useLootStore } from "../../../store/useLootStore";
+import LootItemPicker from "./LootItemPicker";
+
+const LootBuilder = () => {
+  const { t } = useTranslation();
+  const {
+    lots,
+    addLot,
+    removeLot,
+    addItemToLot,
+    updateItemCount,
+    removeItemFromLot,
+    updateLotCustomText,
+  } = useLootStore();
+
+  const [targetLotId, setTargetLotId] = useState(lots[0]?.id || null);
+  const [dragOverLotId, setDragOverLotId] = useState(null);
+
+  // Active lot for adding items by click
+  const activeLotId =
+    targetLotId && lots.some((l) => l.id === targetLotId)
+      ? targetLotId
+      : lots[lots.length - 1]?.id;
+
+  const handleDragOver = (e, lotId) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+    if (dragOverLotId !== lotId) {
+      setDragOverLotId(lotId);
+    }
+  };
+
+  const handleDragLeave = (e, lotId) => {
+    e.preventDefault();
+    if (dragOverLotId === lotId) {
+      setDragOverLotId(null);
+    }
+  };
+
+  const handleDrop = (e, lotId) => {
+    e.preventDefault();
+    setDragOverLotId(null);
+    try {
+      const rawData = e.dataTransfer.getData("application/json");
+      if (rawData) {
+        const item = JSON.parse(rawData);
+        addItemToLot(lotId, item);
+        setTargetLotId(lotId);
+      }
+    } catch (err) {
+      console.error("Failed to drop item:", err);
+    }
+  };
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+      {/* LEFT COLUMN: STICKY ITEM PICKER (5 cols on desktop) */}
+      <div className="lg:col-span-4 lg:sticky lg:top-4 min-[2520px]:col-span-2 z-10">
+        <LootItemPicker
+          activeLotId={activeLotId}
+          onSelectItem={(item) => addItemToLot(activeLotId, item)}
+        />
+      </div>
+
+      {/* RIGHT COLUMN: SCROLLABLE LOTS BUILDER (7 cols on desktop) */}
+      <div className="lg:col-span-8 min-[2520px]:col-span-10 space-y-3">
+        {/* Header */}
+        <div className="flex items-center justify-between bg-slate-900/40 p-3 rounded-2xl border border-slate-800">
+          <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <span>🎁</span> {t.loot.lotsTitle} ({lots.length})
+          </h3>
+          <button
+            onClick={addLot}
+            className="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30
+              hover:bg-amber-500/30 font-bold text-xs transition-all cursor-pointer"
+          >
+            {t.loot.addLotBtn}
+          </button>
+        </div>
+
+        {/* Scrollable Container for up to 24+ Lots */}
+        <div
+          className="max-h-[calc(100vh-220px)] grid grid-cols-3 min-[2520px]:grid-cols-4 overflow-y-auto pr-1.5
+          space-y-3 custom-scrollbar"
+        >
+          {lots.map((lot, index) => {
+            const isActiveLot = lot.id === activeLotId;
+            const isDragOver = lot.id === dragOverLotId;
+
+            return (
+              <div
+                key={lot.id}
+                onClick={() => setTargetLotId(lot.id)}
+                onDragOver={(e) => handleDragOver(e, lot.id)}
+                onDragLeave={(e) => handleDragLeave(e, lot.id)}
+                onDrop={(e) => handleDrop(e, lot.id)}
+                className={`p-4 rounded-2xl border transition-all flex flex-col gap-3 relative cursor-pointer ${
+                  isDragOver
+                    ? "bg-amber-500/20 border-amber-400 shadow-xl shadow-amber-500/10 ring-2 ring-amber-400"
+                    : isActiveLot
+                      ? "bg-slate-900/95 border-amber-500/50 shadow-lg shadow-amber-500/5 ring-1 ring-amber-500/30"
+                      : "bg-slate-900/40 border-slate-800 hover:border-slate-700"
+                }`}
+              >
+                {/* Lot Header */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black text-amber-400 uppercase tracking-widest flex items-center gap-2">
+                    {t.loot.lotHeader} #{index + 1}
+                    {isActiveLot && (
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500 text-slate-950 font-bold">
+                        {t.active}
+                      </span>
+                    )}
+                  </span>
+                  {lots.length > 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeLot(lot.id);
+                      }}
+                      className="text-slate-500 hover:text-red-400 text-xs font-bold p-1 transition-colors"
+                      title="Видалити лот"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                {/* Items Container inside Lot */}
+                <div
+                  className="flex flex-wrap gap-2 min-h-12 p-2.5 bg-slate-950/60 rounded-xl border
+                  border-slate-800/80 items-center"
+                >
+                  {lot.items.length === 0 && !lot.customText && (
+                    <span className="text-xs text-slate-500 italic m-auto pointer-events-none">
+                      {isDragOver
+                        ? "Скиньте предмет сюди!"
+                        : t.loot.emptyLotNotice}
+                    </span>
+                  )}
+
+                  {lot.items.map(({ id, name, icon, count }) => (
+                    <div
+                      key={id}
+                      className="relative group flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-2 py-1
+                        rounded-lg text-xs"
+                    >
+                      {/* Tooltip */}
+                      <div
+                        className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center
+                          justify-center bg-slate-950 text-amber-300 text-xs font-extrabold px-2 py-1 rounded-md border
+                          border-amber-500/30 shadow-lg whitespace-nowrap z-30 pointer-events-none transition-all"
+                      >
+                        {name}
+                      </div>
+
+                      <img
+                        src={icon}
+                        alt={name}
+                        className="w-5 h-5 rounded-sm object-contain"
+                      />
+
+                      {/* Counter */}
+                      <div className="flex items-center gap-1 ml-1 bg-slate-950 rounded px-1 border border-slate-800">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateItemCount(lot.id, id, -1);
+                          }}
+                          className="text-slate-400 hover:text-amber-400 font-bold text-xs px-1"
+                        >
+                          -
+                        </button>
+                        <span className="font-extrabold text-amber-400 text-xs">
+                          {count}
+                        </span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateItemCount(lot.id, id, 1);
+                          }}
+                          className="text-slate-400 hover:text-amber-400 font-bold text-xs px-1"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeItemFromLot(lot.id, id);
+                        }}
+                        className="text-slate-500 hover:text-red-400 ml-1 font-bold text-xs"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Custom Item Text Input */}
+                <input
+                  type="text"
+                  value={lot.customText}
+                  onChange={(e) => updateLotCustomText(lot.id, e.target.value)}
+                  placeholder={t.loot.customItemPlaceholder}
+                  className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-1.5 text-xs
+                  text-slate-200 focus:outline-none focus:border-amber-500/50 transition-colors"
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LootBuilder;

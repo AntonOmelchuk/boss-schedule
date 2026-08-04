@@ -1,5 +1,5 @@
+import { BREAKPOINTS, EPIC_COLORS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
-import { BREAKPOINTS, EPIC_COLORS } from "../../../../../../utils/constants";
 
 const DistributionItem = ({ name, total, epicByType, lastShareDate }) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);

@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import Button from "../../../../components/UI/Button";
+import { LANGUAGES, TIME_FILTERS } from "../../../../constants/general";
 import useFilterEvents from "../../../../hooks/useFilterEvents";
 import useTranslation from "../../../../hooks/useTranslation";
 import ArrowDownIcon from "../../../../svg/ArrowDownIcon";
 import FilterIcon from "../../../../svg/FilterIcon";
-import { LANGUAGES, TIME_FILTERS } from "../../../../utils/constants";
 import AllEventsItem from "./AllEventsItem";
 import Dropdown from "./Dropdown";
 import FilterModal from "./FilterModal"; // Path to your new FilterModal file

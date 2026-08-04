@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import Tab from "../../../../../../components/UI/Tab";
+import { SORT } from "../../../../../../constants/general";
 import useAppStore from "../../../../../../store/useAppStore";
-import { SORT } from "../../../../../../utils/constants";
 import CPList from "./CPList";
 import InfoBlock from "./InfoBlock";
 

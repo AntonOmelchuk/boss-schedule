@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { DASHBOARD_TABS } from "../../../utils/constants";
+import { DASHBOARD_TABS } from "../../../constants/general";
 import MobileTabDrawer from "../mobile/MobileTabDrawer";
 
 const TAB_LABELS = {

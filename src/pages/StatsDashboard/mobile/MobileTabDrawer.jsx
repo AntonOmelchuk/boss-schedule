@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { DASHBOARD_TABS } from "../../../utils/constants";
+import { DASHBOARD_TABS } from "../../../constants/general";
 import TabItem from "./TabItem";
 
 const TAB_OPTIONS = [

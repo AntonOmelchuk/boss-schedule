@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { NAV_CONFIG } from "../../constants/routes";
 import useTranslation from "../../hooks/useTranslation";
-import { NAV_CONFIG } from "../../utils/routes";
 
 const MobileTabs = () => {
   const navigate = useNavigate();

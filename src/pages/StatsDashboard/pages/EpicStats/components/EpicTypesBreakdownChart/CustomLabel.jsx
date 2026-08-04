@@ -1,5 +1,5 @@
+import { BREAKPOINTS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
-import { BREAKPOINTS } from "../../../../../../utils/constants";
 
 const CustomLabel = ({ cx, cy, midAngle, outerRadius, name, value, fill }) => {
   const isMobile = useMediaQuery(BREAKPOINTS.IS_MOBILE);

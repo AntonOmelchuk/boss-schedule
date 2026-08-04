@@ -1,4 +1,4 @@
-import { LANGUAGES } from "./constants";
+import { LANGUAGES } from "./general";
 
 export default {
   [LANGUAGES.UA]: {
@@ -23,6 +23,8 @@ export default {
     pvpEvents: "PVP Івенти",
     outPrime: "Valhalla Прайм",
     todaysEventsOption: "Події на сьогодні",
+    retry: "Спробувати ще",
+    loadingPartyList: "Завантаження списку КП",
 
     // Media Hub Translations
     media: {
@@ -121,6 +123,44 @@ export default {
     navStatistics: "Статистика",
     navDkpPoints: "DKP Очки",
     navEpicStats: "Епік Стата",
+    navLoot: "Лут",
+
+    active: "Активгий",
+
+    loot: {
+      navLoot: "Лут",
+      title: "Рандомайзер Луту",
+      subtitle: "Справедливий розподіл трофеїв між КП альянсу",
+      partiesTitle: "Учасники (КП)",
+      selectAll: "Всі",
+      deselectAll: "Жодного",
+      lootPickerTitle: "Вибір предмета",
+      lotsTitle: "Конструктор Лотів",
+      addLotBtn: "+ Додати Лот",
+      customItemPlaceholder: "Власний предмет / опис...",
+      runDistributionBtn: "🎲 Розіграти Лут",
+      simpleRandomizerBtn: "🔀 Перемішати КП",
+      resultsTitle: "Результати Розподілу",
+      allianceLootDistributionResult: "Результат розподілу луту альянсу",
+      winner: "Переможець",
+      lotHeader: "Лот",
+      itemsHeader: "Вміст",
+      rollHeader: "Випало (Кубик)",
+      completeBtn: "✅ Завершити та очистити",
+      completeConfirm:
+        "Це завершить поточний розподіл і очистить усі лоти. Продовжити?",
+      screenshotBtn: "📸 Знімок результатів",
+      mobileModeNotice:
+        "📱 Мобільний режим: доступна швидке перемішування списку КП",
+      rollingAnimation: "🎲 Кидаємо кубики...",
+      emptyLotNotice: "Додайте хоча б один предмет або текст у лот",
+      catAll: "Всі",
+      catWeapon: "Зброя",
+      catArmor: "Шмот",
+      catMisc: "Різне",
+      catJew: "Біжа",
+      itemPickerHint: "Клікни на айтем, щоб додати його до активного лоту",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -144,6 +184,8 @@ export default {
     pvpEvents: "PVP Events",
     outPrime: "Valhalla Prime",
     todaysEventsOption: "Today's Events",
+    retry: "Retry",
+    loadingPartyList: "Loading party list",
 
     // Media Hub Translations
     media: {
@@ -238,5 +280,41 @@ export default {
     navStatistics: "Statistics",
     navDkpPoints: "DKP Points",
     navEpicStats: "Epic Stats",
+    navLoot: "Loot",
+
+    active: "Active",
+
+    loot: {
+      title: "Loot Randomizer",
+      subtitle: "Fair alliance loot distribution system",
+      partiesTitle: "Participants (Parties)",
+      selectAll: "All",
+      deselectAll: "None",
+      lootPickerTitle: "Select Item",
+      lotsTitle: "Lots Builder",
+      addLotBtn: "+ Add Lot",
+      customItemPlaceholder: "Custom item / description...",
+      runDistributionBtn: "🎲 Roll Loot",
+      simpleRandomizerBtn: "🔀 Shuffle Parties",
+      resultsTitle: "Distribution Results",
+      allianceLootDistributionResult: "Alliance Loot Distribution Result",
+      winner: "Winner",
+      lotHeader: "Lot",
+      itemsHeader: "Items",
+      rollHeader: "Roll",
+      completeBtn: "✅ Complete & Clear",
+      completeConfirm:
+        "This will finish the current loot session and clear all lots. Continue?",
+      screenshotBtn: "📸 Take Screenshot",
+      mobileModeNotice: "📱 Mobile Mode: Quick party shuffle available",
+      rollingAnimation: "🎲 Rolling dice...",
+      emptyLotNotice: "Add at least one item or custom text to a lot",
+      catAll: "All",
+      catWeapon: "Weapon",
+      catArmor: "Armor",
+      catMisc: "Misc",
+      catJew: "Jewelry",
+      itemPickerHint: "Click an item to add it to the active lot",
+    },
   },
 };
