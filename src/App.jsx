@@ -72,6 +72,36 @@ function App() {
     return () => unsubscribe();
   }, [setEvents]);
 
+  const removePushAlert = useAppStore((state) => state.removePushAlert);
+  const cleanExpiredAlerts = useAppStore((state) => state.cleanExpiredAlerts);
+  const events = useAppStore((state) => state.events);
+
+  // PUSH-NOTIFICATIONS Listener in real time
+  useEffect(() => {
+    const pushChannel = new BroadcastChannel("push-alerts-channel");
+
+    pushChannel.onmessage = (event) => {
+      if (event.data && event.data.type === "PUSH_ALERT_RECEIVED") {
+        const targetEventId = event.data.eventId;
+
+        if (targetEventId) {
+          removePushAlert(targetEventId);
+        }
+      }
+    };
+
+    return () => {
+      pushChannel.close();
+    };
+  }, [removePushAlert]);
+
+  // Clean outdated alertes when events list change
+  useEffect(() => {
+    if (events && events.length > 0) {
+      cleanExpiredAlerts(events);
+    }
+  }, [events, cleanExpiredAlerts]);
+
   return (
     <BrowserRouter>
       <MainLayout>
