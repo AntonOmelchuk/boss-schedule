@@ -1,4 +1,4 @@
-import { CATEGORIES, EVENT_TYPES } from "./utils/constants";
+import { CATEGORIES, EVENT_TYPES } from "./general";
 
 export const PVP_EVENTS = [
   {

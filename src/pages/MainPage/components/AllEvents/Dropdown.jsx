@@ -1,6 +1,6 @@
+import { TIME_FILTERS } from "../../../../constants/general";
 import useFilterEvents from "../../../../hooks/useFilterEvents";
 import useTranslation from "../../../../hooks/useTranslation";
-import { TIME_FILTERS } from "../../../../utils/constants";
 import DropdownButton from "./DropdownButton";
 
 const Dropdown = ({ setIsDropdownOpen }) => {

@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import TitleWithWatermark from "../../components/TitleWithWatermark/TitleWithWatermark";
 import Watermark from "../../components/Watermark/Watermark";
+import { BREAKPOINTS, DASHBOARD_TABS } from "../../constants/general";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { BREAKPOINTS, DASHBOARD_TABS } from "../../utils/constants";
 // import Tabs from "./components/Tabs"; -> Unused, remove in future
 import AllianceStats from "./pages/AllianceStats/AllianceStats";
 import EpicStats from "./pages/EpicStats/EpicStats";

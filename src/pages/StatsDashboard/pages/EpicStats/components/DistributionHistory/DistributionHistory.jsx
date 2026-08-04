@@ -1,6 +1,6 @@
+import { BREAKPOINTS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../../../store/useAppStore";
-import { BREAKPOINTS } from "../../../../../../utils/constants";
 import DistributionItem from "./DistributionItem";
 import TableHeaderItem from "./TableHeaderItem";
 

@@ -1,5 +1,5 @@
 import Tab from "../../../../../../components/UI/Tab";
-import { FARMED_EPIC_FILTERS, SORT } from "../../../../../../utils/constants";
+import { FARMED_EPIC_FILTERS, SORT } from "../../../../../../constants/general";
 
 const FILTER_OPTIONS = [
   FARMED_EPIC_FILTERS.ALL,

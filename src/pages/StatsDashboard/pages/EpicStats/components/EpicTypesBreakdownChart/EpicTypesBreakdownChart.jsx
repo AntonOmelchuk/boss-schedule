@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
+import { BREAKPOINTS, EPIC_COLORS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
 import useAppStore from "../../../../../../store/useAppStore";
-import { BREAKPOINTS, EPIC_COLORS } from "../../../../../../utils/constants";
 import CustomBarChart from "./CustomBarChart";
 import CustomPieChart from "./CustomPieChart";
 

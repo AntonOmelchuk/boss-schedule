@@ -1,4 +1,4 @@
-import { SORT } from "../../../../../../utils/constants";
+import { SORT } from "../../../../../../constants/general";
 import CPNameItem from "../CPNameItem/CPNameItem";
 
 const CPList = ({ data, viewMode }) => {

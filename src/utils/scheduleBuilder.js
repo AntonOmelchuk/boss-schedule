@@ -1,6 +1,6 @@
 import * as htmlToImage from "html-to-image";
 
-import { MAKE_SCREENSHOT_STATUS } from "./constants";
+import { MAKE_SCREENSHOT_STATUS } from "../constants/general";
 
 /**
  * Captures a visual snapshot of a DOM element specified by tableRef and triggers a file download.

@@ -1,4 +1,4 @@
-import { LANGUAGES } from "./constants";
+import { LANGUAGES } from "../constants/general";
 
 const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY;
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";

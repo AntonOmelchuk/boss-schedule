@@ -1,4 +1,4 @@
-import { EPIC_COLORS } from "../../../../../../utils/constants";
+import { EPIC_COLORS } from "../../../../../../constants/general";
 
 const GroupedCard = ({ groupedLoot }) => {
   return (

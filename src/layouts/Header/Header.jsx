@@ -5,8 +5,8 @@ import SettingsModal from "../../components/SettingsModal/SettingsModal";
 import SettingsIcon from "../../components/SVG/SettingsIcon";
 import BackButton from "../../components/UI/BackButton";
 import Tab from "../../components/UI/Tab";
+import { NAV_CONFIG } from "../../constants/routes";
 import useTranslation from "../../hooks/useTranslation";
-import { NAV_CONFIG } from "../../utils/routes";
 import BrandLogo from "./BrandLogo";
 
 const Header = () => {
@@ -57,7 +57,6 @@ const Header = () => {
                 const isActive = item.hasDropdown
                   ? isStatisticsPage
                   : pathname === item.path;
-
                 const itemTitle = t[item.titleKey] || item.title;
 
                 if (item.hasDropdown) {
