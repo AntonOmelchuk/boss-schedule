@@ -18,6 +18,7 @@ import {
   getEmojiIcon,
   getNextWeeklyEvent,
 } from "./utils/general";
+import { isRecurringPvpEvent } from "./utils/pushNotifications";
 
 function App() {
   const setEvents = useAppStore((state) => state.setEvents);
@@ -72,6 +73,45 @@ function App() {
 
     return () => unsubscribe();
   }, [setEvents]);
+
+  const removePushAlert = useAppStore((state) => state.removePushAlert);
+  const cleanExpiredAlerts = useAppStore((state) => state.cleanExpiredAlerts);
+  const events = useAppStore((state) => state.events);
+
+  // PUSH-NOTIFICATIONS Listener in real time
+  useEffect(() => {
+    const pushChannel = new BroadcastChannel("push-alerts-channel");
+
+    pushChannel.onmessage = (event) => {
+      if (event.data && event.data.type === "PUSH_ALERT_RECEIVED") {
+        const targetEventId = event.data.eventId;
+
+        if (targetEventId) {
+          if (!isRecurringPvpEvent(targetEventId)) {
+            console.log(
+              `🧹 [PWA] Removing dynamic alert '${targetEventId}' from UI`,
+            );
+            removePushAlert(targetEventId);
+          } else {
+            console.log(
+              `🔄 [PWA] Keeping recurring PVP alert '${targetEventId}' active in UI`,
+            );
+          }
+        }
+      }
+    };
+
+    return () => {
+      pushChannel.close();
+    };
+  }, [removePushAlert]);
+
+  // Clean outdated alertes when events list change
+  useEffect(() => {
+    if (events && events.length > 0) {
+      cleanExpiredAlerts(events);
+    }
+  }, [events, cleanExpiredAlerts]);
 
   return (
     <BrowserRouter>

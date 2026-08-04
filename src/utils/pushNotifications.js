@@ -124,3 +124,27 @@ export async function getCurrentPushSubscription() {
     return null;
   }
 }
+
+/**
+ * Check if events is a regular PvP-Event (MTB, CTB, DM, EBC)
+ * @param {string} eventId - ID or event name
+ * @returns {boolean}
+ */
+export const isRecurringPvpEvent = (eventId) => {
+  if (!eventId) return false;
+
+  const idLower = String(eventId).toLowerCase();
+
+  const pvpKeywords = [
+    "capture the base",
+    "ctb",
+    "death match",
+    "dm",
+    "epic boss challenge",
+    "ebc",
+    "multi team battle",
+    "mtb",
+  ];
+
+  return pvpKeywords.some((keyword) => idLower.includes(keyword));
+};
