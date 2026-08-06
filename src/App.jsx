@@ -1,9 +1,10 @@
 import { onValue, ref } from "firebase/database";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { EVENT_TYPES } from "./constants/general";
 import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
+import MaintenanceGuard from "./guards/MaintenanceGuard";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
@@ -22,6 +23,36 @@ import {
 function App() {
   const setEvents = useAppStore((state) => state.setEvents);
 
+  // State for handling system maintenance mode
+  const [maintenanceStatus, setMaintenanceStatus] = useState(false);
+
+  // 1. Listen for maintenance status from Firebase Realtime DB
+  useEffect(() => {
+    const statusRef = ref(db, "system_status");
+
+    const unsubscribe = onValue(
+      statusRef,
+      (snapshot) => {
+        try {
+          const data = snapshot.val();
+          if (data && data.is_maintenance) {
+            setMaintenanceStatus(true);
+          } else {
+            setMaintenanceStatus(false);
+          }
+        } catch (err) {
+          console.error("Failed to parse maintenance status:", err);
+        }
+      },
+      (error) => {
+        console.error("Firebase maintenance listener error:", error);
+      },
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  // 2. Listen for regroups / event timers
   useEffect(() => {
     const regroupsRef = ref(db, "regroups");
 
@@ -75,25 +106,28 @@ function App() {
 
   return (
     <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/* 🔒 Protected route: redirected to "/" if opened on mobile */}
-          <Route
-            path="/schedule"
-            element={
-              <DesktopOnlyGuard redirectTo="/">
-                <ScheduleBuilder />
-              </DesktopOnlyGuard>
-            }
-          />
-          <Route path="/statistics" element={<StatsDashboard />} />
-          <Route path="/media" element={<MediaPage />} />
-          <Route path="/loot" element={<LootRandomizerPage />} />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/404" replace />} />
-        </Routes>
-      </MainLayout>
+      {/* Global Maintenance Guard Overlay (handles full or route-specific locking) */}
+      <MaintenanceGuard maintenanceStatus={maintenanceStatus}>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            {/* 🔒 Protected route: redirected to "/" if opened on mobile */}
+            <Route
+              path="/schedule"
+              element={
+                <DesktopOnlyGuard redirectTo="/">
+                  <ScheduleBuilder />
+                </DesktopOnlyGuard>
+              }
+            />
+            <Route path="/statistics" element={<StatsDashboard />} />
+            <Route path="/media" element={<MediaPage />} />
+            <Route path="/loot" element={<LootRandomizerPage />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+          </Routes>
+        </MainLayout>
+      </MaintenanceGuard>
     </BrowserRouter>
   );
 }

@@ -161,6 +161,17 @@ export default {
       catJew: "Біжа",
       itemPickerHint: "Клікни на айтем, щоб додати його до активного лоту",
     },
+
+    // Maintenance Mode Translations
+    maintenance: {
+      title: "Технічні роботи",
+      subtitle:
+        "Наразі ми оновлюємо систему та базу даних для покращення роботи застосунку.",
+      description:
+        "Застосунок тимчасово недоступний. Будь ласка, завітайте трохи пізніше.",
+      routeRestricted:
+        "Цей розділ тимчасово перебуває на технічному обслуговуванні.",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -315,6 +326,17 @@ export default {
       catMisc: "Misc",
       catJew: "Jewelry",
       itemPickerHint: "Click an item to add it to the active lot",
+    },
+
+    // Maintenance Mode Translations
+    maintenance: {
+      title: "Under Maintenance",
+      subtitle:
+        "We are currently updating our system and database to serve you better.",
+      description:
+        "The application is temporarily unavailable. Please check back shortly.",
+      routeRestricted:
+        "This section is currently undergoing scheduled maintenance.",
     },
   },
 };
