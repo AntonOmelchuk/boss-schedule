@@ -12,28 +12,29 @@ const MainLayout = ({ children }) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
   // List of routes where mobile tabs SHOULD be visible
-  const showMobileTabsOnRoutes = ["/", "/statistics", "/media"];
+  const showMobileTabsOnRoutes = ["/", "/statistics", "/media", "/loot"];
   const shouldShowTabs = showMobileTabsOnRoutes.includes(pathname);
 
   return (
-    <>
+    <div
+      className="min-h-screen flex flex-col text-slate-200 font-sans"
+      style={{
+        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        width: "100%",
+      }}
+    >
+      {/* 1. Header inside min-h-screen container */}
       <Header />
-      <div
-        className="min-h-screen flex flex-col text-slate-200 font-sans"
-        style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          width: "100%",
-        }}
-      >
-        <main className="flex-1 w-full mx-auto p-2.5 md:p-8">{children}</main>
-      </div>
 
-      {/* Render Footer on Desktop, or MobileTabs ONLY on allowed routes for mobile */}
+      {/* 2. Main content takes all available free space */}
+      <main className="flex-1 w-full mx-auto p-2.5 md:p-8">{children}</main>
+
+      {/* 3. Footer automatically snaps to the bottom if space allows */}
       {isDesktop ? <Footer /> : shouldShowTabs && <MobileTabs />}
-    </>
+    </div>
   );
 };
 
