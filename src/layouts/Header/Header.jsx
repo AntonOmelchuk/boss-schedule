@@ -2,18 +2,22 @@ import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import SettingsModal from "../../components/SettingsModal/SettingsModal";
-import SettingsIcon from "../../components/SVG/SettingsIcon";
 import BackButton from "../../components/UI/BackButton";
 import Tab from "../../components/UI/Tab";
 import { NAV_CONFIG } from "../../constants/routes";
 import useTranslation from "../../hooks/useTranslation";
+import useAuthStore from "../../store/useAuthStore";
 import BrandLogo from "./BrandLogo";
+import DiscordAuthButton from "./DiscordAuthButton";
+import UserIcon from "./UserIcon";
 
 const Header = () => {
   const navigate = useNavigate();
   const { pathname, hash } = useLocation();
 
   const { t } = useTranslation();
+
+  const { user, isAuthenticated } = useAuthStore();
 
   const [isStatsHovered, setIsStatsHovered] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -50,7 +54,7 @@ const Header = () => {
           {/* 2. NAVIGATION LINKS */}
           <nav
             className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border
-          border-slate-800 rounded-2xl shrink-0"
+            border-slate-800 rounded-2xl shrink-0"
           >
             {NAV_CONFIG.filter((item) => !item.showOnlyInStatsMobile).map(
               (item) => {
@@ -134,15 +138,11 @@ const Header = () => {
 
           {/* 3. SETTINGS BUTTON */}
           <div className="flex-1 flex items-center justify-end min-w-0">
-            <button
-              onClick={() => setIsSettingsOpen(true)}
-              className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300
-                hover:text-amber-400 hover:border-slate-700 hover:bg-slate-800/80 transition-all duration-200
-                flex items-center justify-center cursor-pointer shadow-inner active:scale-95"
-              title="Settings"
-            >
-              <SettingsIcon />
-            </button>
+            {isAuthenticated ? (
+              <UserIcon user={user} setIsSettingsOpen={setIsSettingsOpen} />
+            ) : (
+              <DiscordAuthButton />
+            )}
           </div>
         </div>
       </header>

@@ -125,7 +125,7 @@ export default {
     navEpicStats: "Епік Стата",
     navLoot: "Лут",
 
-    active: "Активгий",
+    active: "Активний",
 
     loot: {
       navLoot: "Лут",
@@ -170,7 +170,44 @@ export default {
       description:
         "Застосунок тимчасово недоступний. Будь ласка, завітайте трохи пізніше.",
       routeRestricted:
-        "Цей розділ тимчасово перебуває на технічному обслуговуванні.",
+        "Цей розділ тимчасово перебуває на техничному обслуговуванні.",
+      status: "Тривають техничні роботи",
+    },
+
+    // Auth & Profile Translations
+    login: "Логін",
+    loginViaDiscord: "Увійти через Discord",
+    loginDescription:
+      "Увійдіть через Discord для доступу до АФК-чеків та налаштування профілю.",
+    logout: "Вийти",
+    authenticating: "Авторизація через Discord...",
+    authErrorTitle: "Помилка авторизації",
+    authCodeMissing: "Код авторизації відсутній.",
+    authFailed: "Не вдалося авторизуватися.",
+    backToHome: "На головну",
+    profileTitle: "Профіль користувача",
+    charNameLabel: "Ігровий нік (Character)",
+    charNamePlaceholder: "Введіть нікнейм...",
+    cpNameLabel: "Назва КП (Party)",
+    cpNamePlaceholder: "Введіть назву КП...",
+    editProfile: "Змінити нік або КП",
+    cancel: "Скасувати",
+    saveChanges: "Зберегти зміни",
+    savedSuccess: "Збережено!",
+    createdBy: "Створено",
+
+    // Onboarding Translations
+    onboarding: {
+      welcomeTitle: "Вітаємо в Альянсі!",
+      welcomeSubtitle: "Оберіть своє КП та ігровий нікнейм.",
+      step1Label: "1. Оберіть ваше КП (Party)",
+      selectCpPlaceholder: "-- Оберіть КП зі списку --",
+      step2Label: "2. Оберіть ваш ігровий нік (Character)",
+      selectCharPlaceholder: "-- Оберіть свій нікнейм --",
+      loadingPlayers: "Завантаження списку гравців КП...",
+      noPlayersFound: "Гравців не знайдено (Введіть вручну у налаштуваннях)",
+      submitBtn: "Підтвердити та увійти",
+      saving: "Збереження...",
     },
   },
   [LANGUAGES.EN]: {
@@ -337,6 +374,43 @@ export default {
         "The application is temporarily unavailable. Please check back shortly.",
       routeRestricted:
         "This section is currently undergoing scheduled maintenance.",
+      status: "Maintenance Mode Active",
+    },
+
+    // Auth & Profile Translations
+    login: "Login",
+    loginViaDiscord: "Login via Discord",
+    loginDescription:
+      "Log in with Discord to enable AFK checks and customize your profile.",
+    logout: "Log Out",
+    authenticating: "Authenticating via Discord...",
+    authErrorTitle: "Authentication Error",
+    authCodeMissing: "Authorization code is missing.",
+    authFailed: "Authentication failed.",
+    backToHome: "Back to Home",
+    profileTitle: "User Profile",
+    charNameLabel: "Character Name",
+    charNamePlaceholder: "Enter your ingame nick...",
+    cpNameLabel: "CP Name",
+    cpNamePlaceholder: "Enter your CP name...",
+    editProfile: "Edit Nickname / CP",
+    cancel: "Cancel",
+    saveChanges: "Save Changes",
+    savedSuccess: "Saved!",
+    createdBy: "Created by",
+
+    // Onboarding Translations
+    onboarding: {
+      welcomeTitle: "Welcome to the Alliance!",
+      welcomeSubtitle: "Select your CP and in-game character name.",
+      step1Label: "1. Select your CP (Party)",
+      selectCpPlaceholder: "-- Select CP from list --",
+      step2Label: "2. Select your Character Name",
+      selectCharPlaceholder: "-- Select your nickname --",
+      loadingPlayers: "Loading party members list...",
+      noPlayersFound: "No players found (Enter manually in settings)",
+      submitBtn: "Confirm & Enter",
+      saving: "Saving...",
     },
   },
 };
