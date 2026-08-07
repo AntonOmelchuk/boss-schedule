@@ -3,7 +3,7 @@ import { useShallow } from "zustand/shallow";
 import useTranslation from "../../hooks/useTranslation";
 import useAppStore from "../../store/useAppStore";
 
-const SLIDER_VALUES = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+const SLIDER_VALUES = [5, 15, 30, 45, 60];
 
 const AlertsSlider = () => {
   const { defaultLeadTime, setDefaultLeadTime } = useAppStore(

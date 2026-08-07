@@ -6,10 +6,12 @@ import { EVENT_TYPES } from "./constants/general";
 import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 import MaintenanceGuard from "./guards/MaintenanceGuard";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
+import AuthCallbackPage from "./pages/AuthCallbackPage";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
 import MediaPage from "./pages/Media/MediaPage";
 import NotFound from "./pages/NotFound/NotFound";
+import OnboardingPage from "./pages/OnboardingPage/OnboardingPage";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
 import { db } from "./services/firebase";
@@ -123,6 +125,8 @@ function App() {
             <Route path="/statistics" element={<StatsDashboard />} />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/loot" element={<LootRandomizerPage />} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
+            <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
