@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { EVENT_TYPES } from "./constants/general";
+import AdminRouteGuard from "./guards/AdminRouteGuard";
 import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 import MaintenanceGuard from "./guards/MaintenanceGuard";
+import { useAuthSync } from "./hooks/useAuthSync";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
+import AdminPage from "./pages/AdminPage/AdminPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
@@ -23,6 +26,8 @@ import {
 } from "./utils/general";
 
 function App() {
+  useAuthSync();
+
   const setEvents = useAppStore((state) => state.setEvents);
 
   // State for handling system maintenance mode
@@ -120,6 +125,14 @@ function App() {
                 <DesktopOnlyGuard redirectTo="/">
                   <ScheduleBuilder />
                 </DesktopOnlyGuard>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <AdminRouteGuard redirectTo="/">
+                  <AdminPage />
+                </AdminRouteGuard>
               }
             />
             <Route path="/statistics" element={<StatsDashboard />} />

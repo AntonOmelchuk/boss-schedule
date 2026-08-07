@@ -13,14 +13,9 @@ const UserIcon = ({ setIsSettingsOpen, user }) => {
         className="w-6 h-6 rounded-full border border-amber-500/40"
       />
       <div className="flex flex-col text-left leading-none">
-        <span className="text-xs font-bold text-white">
+        <span className="text-sm font-bold text-white">
           {user?.char_name || user?.username}
         </span>
-        {user?.cp_name && (
-          <span className="text-[10px] text-amber-400 font-medium">
-            [{user.cp_name}]
-          </span>
-        )}
       </div>
     </button>
   );
