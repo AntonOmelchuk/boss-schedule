@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import useTranslation from "../../hooks/useTranslation";
 import { db } from "../../services/firebase";
 import useAuthStore from "../../store/useAuthStore";
+import Header from "./components/Header";
+import SelectCP from "./components/SelectCP";
+import SelectNickname from "./components/SelectNickname";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -103,57 +106,21 @@ const OnboardingPage = () => {
     <div className="min-h-[80vh] flex items-center justify-center p-4">
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-6">
         {/* Header */}
-        <div className="text-center space-y-2">
-          <div
-            className="inline-flex p-3 bg-amber-500/10 rounded-full border
-            border-amber-500/20 text-amber-400 text-2xl"
-          >
-            ⚔️
-          </div>
-          <h2 className="text-xl font-bold text-white">
-            {t.onboarding?.welcomeTitle || "Вітаємо в Альянсі!"}
-          </h2>
-          <p className="text-xs text-slate-400">
-            {t.onboarding?.welcomeSubtitle ||
-              "Для доступу до АФК-чеків та статистики оберіть своє КП та ігровий нікнейм."}
-          </p>
-        </div>
+        <Header />
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Step 1: Select CP */}
-          <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1.5">
-              {t.onboarding?.step1Label || "1. Оберіть ваше КП (Party)"}
-            </label>
-            <select
-              value={selectedCp}
-              onChange={handleCpChange}
-              disabled={loadingCps}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white
-                focus:outline-none focus:border-amber-500 transition cursor-pointer disabled:opacity-50"
-              required
-            >
-              <option value="">
-                {t.onboarding?.selectCpPlaceholder ||
-                  "-- Оберіть КП зі списку --"}
-              </option>
-              {cpList.map((cp) => {
-                const cpName = typeof cp === "string" ? cp : cp.name || cp.id;
-                return (
-                  <option key={cpName} value={cpName}>
-                    {cpName}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-
+          <SelectCP
+            cpList={cpList}
+            selectedCp={selectedCp}
+            loadingCps={loadingCps}
+            handleCpChange={handleCpChange}
+          />
           {/* Step 2: Select Player Nickname */}
           {selectedCp && (
             <div className="animate-fadeIn">
               <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                {t.onboarding?.step2Label ||
-                  "2. Оберіть ваш ігровий нік (Character)"}
+                {t.onboarding?.step2Label}
               </label>
 
               {loadingPlayers ? (
@@ -162,36 +129,14 @@ const OnboardingPage = () => {
                   rounded-xl text-xs text-amber-400 font-medium animate-pulse"
                 >
                   <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                  <span>
-                    {t.onboarding?.loadingPlayers ||
-                      "Завантаження списку гравців..."}
-                  </span>
+                  <span>{t.onboarding?.loadingPlayers}</span>
                 </div>
               ) : (
-                <select
-                  value={selectedChar}
-                  onChange={(e) => setSelectedChar(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white
-                    focus:outline-none focus:border-amber-500 transition cursor-pointer"
-                  required
-                >
-                  <option value="">
-                    {t.onboarding?.selectCharPlaceholder ||
-                      "-- Оберіть свій нікнейм --"}
-                  </option>
-                  {playerList.length > 0 ? (
-                    playerList.map((player) => (
-                      <option key={player} value={player}>
-                        {player}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="" disabled>
-                      {t.onboarding?.noPlayersFound ||
-                        "Гравців не знайдено в таблиці КП"}
-                    </option>
-                  )}
-                </select>
+                <SelectNickname
+                  playerList={playerList}
+                  selectedChar={selectedChar}
+                  setSelectedChar={setSelectedChar}
+                />
               )}
             </div>
           )}
@@ -204,9 +149,7 @@ const OnboardingPage = () => {
             disabled:text-slate-500 font-bold text-xs rounded-xl shadow-lg transition cursor-pointer
               disabled:cursor-not-allowed"
           >
-            {isSubmitting
-              ? t.onboarding?.saving || "Збереження..."
-              : t.onboarding?.submitBtn || "Підтвердити та увійти"}
+            {isSubmitting ? t.onboarding?.saving : t.onboarding?.submitBtn}
           </button>
         </form>
       </div>
