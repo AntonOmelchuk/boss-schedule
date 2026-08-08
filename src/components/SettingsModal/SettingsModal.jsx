@@ -1,9 +1,9 @@
-import { version } from "../../../package.json";
 import { DISCORD_AUTH_URL } from "../../constants/auth";
 import { useIsPWA } from "../../hooks/useIsPWA";
 import useTranslation from "../../hooks/useTranslation";
 import useAuthStore from "../../store/useAuthStore";
 import AlertsSlider from "./AlertsSlider";
+import DeveloperCredits from "./DeveloperCredits";
 import LanguageSwitcher from "./LanguageSwitcher";
 import RoleBadge from "./RoleBadge";
 
@@ -21,7 +21,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm
-      animate-fadeIn"
+        animate-fadeIn"
     >
       <div
         className="bg-slate-900 border border-slate-800 text-slate-200 rounded-2xl w-full max-w-md p-5
@@ -60,7 +60,6 @@ const SettingsModal = ({ isOpen, onClose }) => {
                     <span className="text-sm text-left font-bold text-amber-400">
                       {user.char_name || user.username}
                     </span>
-                    {/* Використовуємо новий RoleBadge */}
                     <RoleBadge role={user.role} size="sm" />
                   </div>
                   <span className="text-[10px] text-slate-500 text-left font-mono">
@@ -118,19 +117,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
         {isPWA && <AlertsSlider />}
 
         {/* Section 4: App & Developer Credits */}
-        <div
-          className="bg-slate-950/60 rounded-xl p-3 border border-slate-800/80 flex items-center justify-between
-          text-xs"
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400">{t.createdBy}</span>
-            <span className="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold">
-              toBe
-            </span>
-          </div>
-          <span className="text-slate-500 font-mono">v{version}</span>
-        </div>
-
+        <DeveloperCredits />
         {/* Footer Close Button */}
         <div className="pt-1">
           <button
