@@ -5,6 +5,7 @@ import useTranslation from "../../hooks/useTranslation";
 import useAuthStore from "../../store/useAuthStore";
 import AlertsSlider from "./AlertsSlider";
 import LanguageSwitcher from "./LanguageSwitcher";
+import RoleBadge from "./RoleBadge";
 
 const SettingsModal = ({ isOpen, onClose }) => {
   const { t, setLanguage } = useTranslation();
@@ -54,9 +55,16 @@ const SettingsModal = ({ isOpen, onClose }) => {
                   alt="Avatar"
                   className="w-10 h-10 rounded-full border border-amber-500/40"
                 />
-                <div className="flex flex-col">
-                  <span className="text-sm text-left font-bold text-amber-400">
-                    {user.char_name || user.username}
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-left font-bold text-amber-400">
+                      {user.char_name || user.username}
+                    </span>
+                    {/* Використовуємо новий RoleBadge */}
+                    <RoleBadge role={user.role} size="sm" />
+                  </div>
+                  <span className="text-[10px] text-slate-500 text-left font-mono">
+                    @{user.username}
                   </span>
                 </div>
               </div>
@@ -107,7 +115,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
         <LanguageSwitcher setLanguage={setLanguage} />
 
         {/* Section 3: Default Push Notification Lead Time Slider */}
-        {!isPWA && <AlertsSlider />}
+        {isPWA && <AlertsSlider />}
 
         {/* Section 4: App & Developer Credits */}
         <div
