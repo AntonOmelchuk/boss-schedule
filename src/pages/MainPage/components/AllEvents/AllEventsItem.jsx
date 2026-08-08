@@ -109,7 +109,7 @@ const AllEventsItem = ({
         <div className="flex-1 overflow-hidden min-w-0 pr-6">
           <div className="flex items-center gap-2 flex-wrap">
             <h4
-              className={`font-black text-lg tracking-wide capitalize truncate w-full ${titleClass}`}
+              className={`font-black text-base md:text-lg tracking-wide capitalize truncate w-full ${titleClass}`}
             >
               {name}
             </h4>
