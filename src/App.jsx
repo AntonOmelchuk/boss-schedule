@@ -10,6 +10,7 @@ import { useAuthSync } from "./hooks/useAuthSync";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
+import CpManagementPage from "./pages/CpManagement/CpManagementPage";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
 import MediaPage from "./pages/Media/MediaPage";
@@ -138,6 +139,7 @@ function App() {
             <Route path="/statistics" element={<StatsDashboard />} />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/loot" element={<LootRandomizerPage />} />
+            <Route path="/cp-management" element={<CpManagementPage />} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/404" element={<NotFound />} />

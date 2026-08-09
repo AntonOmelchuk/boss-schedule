@@ -1,3 +1,6 @@
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 import {
   CATEGORIES,
   EMOJI_MAP,
@@ -288,4 +291,8 @@ export const parseShortDate = (dateStr) => {
 
   const currentYear = new Date().getFullYear();
   return new Date(currentYear, month, day).getTime();
+};
+
+export const cn = (...inputs) => {
+  return twMerge(clsx(inputs));
 };
