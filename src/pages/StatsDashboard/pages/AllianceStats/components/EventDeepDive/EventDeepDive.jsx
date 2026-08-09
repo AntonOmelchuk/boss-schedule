@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { BREAKPOINTS } from "../../../../../../constants/general";
 import useMediaQuery from "../../../../../../hooks/useMediaQuery";
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 import HeaderList from "../HeaderList/HeaderList";
 import CPList from "./CPList";
@@ -9,6 +10,8 @@ import CustomTreemap from "./CustomTreemap";
 import KeyMetrics from "./KeyMetrics";
 
 const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
+  const { t } = useTranslation();
+
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
@@ -60,8 +63,8 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
         <HeaderList
           icon="🔬"
-          title="Event Deep Dive"
-          text="Detailed attendance breakdown & MVP CP for a specific raid or siege"
+          title={t.eventDeepDive.title}
+          text={t.eventDeepDive.subtitle}
         />
 
         {/* Dropdown */}

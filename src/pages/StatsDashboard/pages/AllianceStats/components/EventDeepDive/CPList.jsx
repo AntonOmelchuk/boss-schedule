@@ -1,3 +1,5 @@
+import useTranslation from "../../../../../../hooks/useTranslation";
+
 const COLOR_PALETTE = [
   "#38bdf8",
   "#34d399",
@@ -17,13 +19,16 @@ const COLOR_PALETTE = [
 ];
 
 const CPList = ({ cpBreakdown, totalPlayers }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-1.5 xl:col-span-2 max-h-80 overflow-y-auto pr-1 custom-scrollbar">
       <span
         className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1
           sticky top-0 bg-slate-900/90 py-1 z-10"
       >
-        Party Breakdown ({cpBreakdown.length} CPs present):
+        {t.eventDeepDive.partyBreakdownTitle} ({cpBreakdown.length}{" "}
+        {t.eventDeepDive.cpsPresent}):
       </span>
       {cpBreakdown.map((cp, idx) => (
         <div

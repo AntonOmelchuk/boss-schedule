@@ -34,7 +34,7 @@ const MediaPage = () => {
       {/* SKELETON LOADING STATE */}
       {loading && (
         <div className="space-y-6 animate-pulse">
-          <div className="w-full aspect-[21/9] max-h-[380px] bg-slate-800/60 rounded-3xl" />
+          <div className="w-full aspect-21/9 max-h-95 bg-slate-800/60 rounded-3xl" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[1, 2, 3].map((n) => (
               <div key={n} className="h-64 bg-slate-800/40 rounded-2xl" />

@@ -11,17 +11,20 @@ import {
   YAxis,
 } from "recharts";
 
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 import CustomTooltip from "./CustomTooltip";
 
 const MOVING_AVERAGE_WINDOW = 5;
 
 const AllianceActivityComboChart = ({ onEventClick }) => {
+  const { t } = useTranslation();
+
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
 
-  // 1. Отримуємо всі назви КП
+  // 1. Get all CPs
   const allCPNames = useMemo(() => {
     if (!rawTimeline.length) return [];
     const systemKeys = ["date", "action", "event_label", "total_players"];
@@ -30,14 +33,14 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
     );
   }, [rawTimeline]);
 
-  // 2. Підготовка даних
+  // 2. Prepare data
   const chartData = useMemo(() => {
     if (!rawTimeline.length) return [];
 
     return rawTimeline.map((entry, index, array) => {
       const totalPlayers = Number(entry.total_players) || 0;
 
-      // Розрахунок Moving Average за останні N подій
+      // calculate Moving Average for the last N events
       const startIdx = Math.max(0, index - MOVING_AVERAGE_WINDOW + 1);
       const windowEntries = array.slice(startIdx, index + 1);
       const sumPlayers = windowEntries.reduce(
@@ -54,7 +57,7 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
         avg_players: avgPlayers,
       };
 
-      // Прокидаємо кількість людей кожної КП в об'єкт для CustomTooltip
+      // Throw players amount for each КП in object for CustomTooltip
       allCPNames.forEach((cp) => {
         row[cp] = Number(entry[cp]) || 0;
       });
@@ -72,18 +75,18 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
     >
       <div>
         <h2 className="text-xl font-bold text-slate-100 tracking-wide">
-          Alliance Attendance & Moving Average Trend
+          {t.allianceActivityComboChart.title}
         </h2>
         <span
           className="text-xs uppercase font-semibold px-2 py-0.5 rounded-full bg-sky-500/10
          text-sky-400 border border-sky-500/20"
         >
-          Click bar to Deep Dive 💡
+          {t.allianceActivityComboChart.badge}
         </span>
         <p className="text-xs text-slate-400 mt-1">
-          Total event attendance with 5-event moving average line.{" "}
+          {t.allianceActivityComboChart.subtitle}{" "}
           <strong className="text-slate-300 font-medium">
-            Click on any event bar to inspect CP breakdown below.
+            {t.allianceActivityComboChart.subtitleHighlight}
           </strong>
         </p>
       </div>
@@ -116,7 +119,7 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
               stroke="#94a3b8"
               tick={{ fontSize: 12 }}
               label={{
-                value: "Total Attendance",
+                value: t.allianceActivityComboChart.yAxisLabel,
                 angle: -90,
                 position: "insideLeft",
                 fill: "#94a3b8",
@@ -131,7 +134,7 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
 
             <Bar
               dataKey="total_players"
-              name="Total Attendance"
+              name={t.allianceActivityComboChart.barName}
               radius={[4, 4, 0, 0]}
               barSize={20}
               style={{ cursor: "pointer" }}
@@ -152,7 +155,7 @@ const AllianceActivityComboChart = ({ onEventClick }) => {
             <Line
               type="monotone"
               dataKey="avg_players"
-              name="5-Event Avg Trend"
+              name={t.allianceActivityComboChart.lineName}
               stroke="#fbbf24"
               strokeWidth={3}
               dot={false}

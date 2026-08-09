@@ -1,4 +1,8 @@
+import useTranslation from "../../../../../../hooks/useTranslation";
+
 const CustomTooltip = ({ active, payload }) => {
+  const { t } = useTranslation();
+
   if (!active || !payload || !payload.length) return null;
 
   const data = payload[0].payload;
@@ -13,21 +17,27 @@ const CustomTooltip = ({ active, payload }) => {
       </div>
       <div className="flex flex-col gap-1.5 text-xs">
         <div className="flex justify-between">
-          <span className="text-slate-400">Attendance Rate:</span>
+          <span className="text-slate-400">
+            {t.cpConsistencyMatrix.attendanceRate}
+          </span>
           <span className="font-bold text-emerald-400">
             {data.attendanceRate}%
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-400">Events Attended:</span>
+          <span className="text-slate-400">
+            {t.cpConsistencyMatrix.eventsAttended}
+          </span>
           <span className="font-semibold text-slate-200">
             {data.attendedEvents} / {data.totalEvents}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-400">Avg Party Online:</span>
+          <span className="text-slate-400">
+            {t.cpConsistencyMatrix.avgPartyOnline}
+          </span>
           <span className="font-semibold text-amber-400">
-            ~{data.avgOnline} players
+            ~{data.avgOnline} {t.cpConsistencyMatrix.playersSuffix}
           </span>
         </div>
       </div>

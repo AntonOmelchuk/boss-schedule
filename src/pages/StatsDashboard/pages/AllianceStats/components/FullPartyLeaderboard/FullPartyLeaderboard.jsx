@@ -1,10 +1,12 @@
 import { useMemo } from "react";
 
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 import CPNameItem from "../CPNameItem/CPNameItem";
 import HeaderList from "../HeaderList/HeaderList";
 
 const FullPartyLeaderboard = () => {
+  const { t } = useTranslation();
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
@@ -47,7 +49,7 @@ const FullPartyLeaderboard = () => {
       };
     });
 
-    // Sort: Full pt amout || Full Party Rate (%) = (events amount with Full PT / events amount) x 100
+    // Sort: Full pt amount || Full Party Rate (%) = (events amount with Full PT / events amount) x 100
     stats.sort(
       (a, b) =>
         b.fullPartyCount - a.fullPartyCount ||
@@ -74,8 +76,8 @@ const FullPartyLeaderboard = () => {
       {/* Header */}
       <HeaderList
         icon="👑"
-        title="Full Party (9/9) Leaderboard"
-        text="Ranking CPs by total number of fully assembled 9-man squads"
+        title={t.fullPartyLeaderboard.title}
+        text={t.fullPartyLeaderboard.subtitle}
       />
 
       {/* Top Champion Hero Card */}
@@ -88,7 +90,7 @@ const FullPartyLeaderboard = () => {
             <span className="text-xs md:text-3xl">🏆</span>
             <div>
               <span className="text-xs uppercase font-bold text-amber-400 tracking-wider block">
-                Most Disciplined Squad
+                {t.fullPartyLeaderboard.championLabel}
               </span>
               <h4 className="text-sm md:text-base font-extrabold text-slate-100">
                 {topCP.cpName}
@@ -97,11 +99,7 @@ const FullPartyLeaderboard = () => {
           </div>
           <div className="text-right">
             <span className="text-sm md:text-xl font-black text-amber-400 font-mono block">
-              {topCP.fullPartyCount}x{" "}
-              <span className="text-sm md:text-lg font-normal">Full</span>
-            </span>
-            <span className="text-sm min-[1820px]:text-lg text-slate-400">
-              {topCP.fullPartyRate}% of their events
+              {topCP.fullPartyCount}x {t.fullPartyLeaderboard.fullText}
             </span>
           </div>
         </div>
@@ -125,7 +123,7 @@ const FullPartyLeaderboard = () => {
                   {/* Right: Stats */}
                   <div className="flex items-center gap-3">
                     <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400">
-                      {fullPartyRate}% efficiency
+                      {fullPartyRate}% {t.fullPartyLeaderboard?.efficiencyText}
                     </span>
                     <span
                       className="font-mono font-bold text-amber-400 text-xs md:text-sm min-[1820px]:text-lg

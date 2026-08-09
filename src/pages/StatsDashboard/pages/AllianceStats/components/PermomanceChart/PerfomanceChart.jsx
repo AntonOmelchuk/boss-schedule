@@ -12,6 +12,7 @@ import {
 
 import Tab from "../../../../../../components/UI/Tab";
 import { SORT } from "../../../../../../constants/general";
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 import { shuffleArray } from "../../../../../../utils/general";
 
@@ -25,7 +26,8 @@ const COLORS = [
 ];
 
 const PerfomanceChart = () => {
-  const pareto = useAppStore((state) => state.statsData.pareto);
+  const { t } = useTranslation();
+  const pareto = useAppStore((state) => state.statsData?.pareto);
 
   const [viewMode, setViewMode] = useState(SORT.SORTED);
 
@@ -41,16 +43,16 @@ const PerfomanceChart = () => {
 
   return (
     <div className="h-150 mt-8 bg-slate-900/30 p-6 rounded-xl border border-slate-700">
-      <h3 className="text-xl mb-6">Performance</h3>
+      <h3 className="text-xl mb-6">{t.performanceChart.title}</h3>
       <div className="flex justify-end items-center p-1 rounded-xl">
         <Tab
-          title="📊 Sorted"
+          title={t.performanceChart.tabSorted}
           isActive={viewMode === SORT.SORTED}
           onClickHandler={() => setViewMode(SORT.SORTED)}
           className="px-2 py-1"
         />
         <Tab
-          title="🎲 Random"
+          title={t.performanceChart.tabRandom}
           isActive={viewMode === SORT.RANDOM}
           onClickHandler={() => setViewMode(SORT.RANDOM)}
           className="px-2 py-1"

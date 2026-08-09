@@ -1,7 +1,9 @@
 import SummaryCard from "../../../../../../components/SummaryCard/SummaryCard";
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 
 const SummaryCards = () => {
+  const { t } = useTranslation();
   const summaryData = useAppStore((state) => state.summaryData);
 
   if (!summaryData) return null;
@@ -18,39 +20,39 @@ const SummaryCards = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full mb-8">
       {/* 1. Total Epics Farmed */}
       <SummaryCard
-        title="Total Events"
+        title={t.summaryCards.totalEventsTitle}
         icon="💎"
         value={total_events}
-        subtext="Including Sieges"
+        subtext={t.summaryCards.totalEventsSubtext}
         valueColor="text-sky-400"
       />
 
       {/* 2. Weekly MVP CP */}
       <SummaryCard
-        title="Weekly MVP CP"
+        title={t.summaryCards.mvpCpTitle}
         icon="🔥"
         value={weekly_mvp_cp}
-        subtext="Top contributor past 10 events"
+        subtext={t.summaryCards?.mvpCpSubtext}
         valueColor="text-emerald-400"
       />
 
       {/* 3. Peak Event Record */}
       <SummaryCard
-        title="Peak Event Record"
+        title={t.summaryCards.peakRecordTitle}
         icon="🏆"
         value={peak_event_players}
-        valueUnit="players"
+        valueUnit={t.summaryCards.peakRecordUnit}
         subtext={<span title={peak_event_label}>{peak_event_label}</span>}
         valueColor="text-purple-400"
       />
 
       {/* 4. Weekly Avg Turnout */}
       <SummaryCard
-        title="Weekly Avg Turnout"
+        title={t.summaryCards.avgTurnoutTitle}
         icon="⚔️"
         value={weekly_avg_turnout}
-        valueUnit="avg/event"
-        subtext="Recent activity trend"
+        valueUnit={t.summaryCards.avgTurnoutUnit}
+        subtext={t.summaryCards.avgTurnoutSubtext}
         valueColor="text-amber-400"
       />
     </div>
