@@ -1,4 +1,8 @@
+import useTranslation from "../../../../../../hooks/useTranslation";
+
 const CustomTooltip = ({ active, payload, label }) => {
+  const { t } = useTranslation();
+
   if (!active || !payload || !payload.length) return null;
 
   const data = payload[0].payload; // All data from current event
@@ -17,6 +21,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     .map((cpName) => ({ name: cpName, count: Number(data[cpName]) }))
     .sort((a, b) => b.count - a.count);
 
+  const isAboveAvg = data.total_players >= data.avg_players;
+
   return (
     <div
       className="bg-slate-900/95 border border-slate-700/80 p-4 rounded-xl shadow-2xl
@@ -26,35 +32,29 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="border-b border-slate-700/60 pb-2 mb-2 flex items-center justify-between gap-4">
         <span className="font-bold text-sm text-slate-100">{label}</span>
         <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-sky-400 font-semibold border border-slate-700">
-          Total: {data.total_players}
+          {t.allianceActivityComboChart.tooltipTotal}: {data.total_players}
         </span>
       </div>
 
       {/* Online and compare with average value */}
       <div className="flex justify-between text-xs mb-3 px-1 text-slate-400">
         <span>
-          5-Event Avg:{" "}
+          {t.allianceActivityComboChart.tooltipAvg}:{" "}
           <strong className="text-amber-400">{data.avg_players}</strong>
         </span>
         <span>
-          Status:{" "}
-          <strong
-            className={
-              data.total_players >= data.avg_players
-                ? "text-emerald-400"
-                : "text-rose-400"
-            }
-          >
-            {data.total_players >= data.avg_players
-              ? "▲ Above Avg"
-              : "▼ Below Avg"}
+          {t.allianceActivityComboChart.tooltipStatus}:{" "}
+          <strong className={isAboveAvg ? "text-emerald-400" : "text-rose-400"}>
+            {isAboveAvg
+              ? t.allianceActivityComboChart.tooltipAboveAvg
+              : t.allianceActivityComboChart.tooltipBelowAvg}
           </strong>
         </span>
       </div>
 
       {/* CP List */}
       <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
-        CP Breakdown:
+        {t.allianceActivityComboChart.tooltipCpBreakdown}:
       </div>
       <div className="grid grid-cols-2 gap-x-2.5 gap-y-1 pr-1 custom-scrollbar">
         {cpList.length > 0 ? (
@@ -77,7 +77,7 @@ const CustomTooltip = ({ active, payload, label }) => {
           ))
         ) : (
           <span className="text-slate-500 italic col-span-2 text-xs">
-            No CP data available
+            {t.allianceActivityComboChart.tooltipNoData}
           </span>
         )}
       </div>

@@ -1,7 +1,9 @@
 import { SORT } from "../../../../../../constants/general";
+import useTranslation from "../../../../../../hooks/useTranslation";
 import CPNameItem from "../CPNameItem/CPNameItem";
 
 const CPList = ({ data, viewMode }) => {
+  const { t } = useTranslation();
   const getTier = (index, total) => {
     if (total === 0)
       return { label: "B", color: "text-slate-400 bg-slate-800" };
@@ -65,7 +67,7 @@ const CPList = ({ data, viewMode }) => {
                       {gb_pts_ratio ?? 0} ratio
                     </span>
                     <span className="text-[10px] xl:text-xs text-slate-400">
-                      {points} pts total
+                      {points} {t.leaderboard.ptsTotal}
                     </span>
                   </>
                 )}

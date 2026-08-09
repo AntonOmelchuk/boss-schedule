@@ -11,6 +11,7 @@ import {
 } from "recharts";
 
 import Button from "../../../../../../components/UI/Button";
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 
 const CP_COLORS = [
@@ -32,6 +33,7 @@ const CP_COLORS = [
 ];
 
 const CPProgressLineChart = () => {
+  const { t } = useTranslation();
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
@@ -105,18 +107,21 @@ const CPProgressLineChart = () => {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-100 tracking-wide text-left">
-            CP Points Progress Timeline
+            {t.cpProgressLineChart.title}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Note: Excludes full-party extra points and double-point event
-            modifiers (Sieges & High Epics).
+            {t.cpProgressLineChart.note}
           </p>
         </div>
 
         {/* Buttons */}
         <div className="flex items-center gap-2">
-          <Button onClick={() => selectAll(true)}>Select All</Button>
-          <Button onClick={() => selectAll(false)}>Deselect All</Button>
+          <Button onClick={() => selectAll(true)}>
+            {t.cpProgressLineChart.selectAll}
+          </Button>
+          <Button onClick={() => selectAll(false)}>
+            {t.cpProgressLineChart.deselectAll}
+          </Button>
         </div>
       </div>
 
@@ -172,7 +177,7 @@ const CPProgressLineChart = () => {
       {/* Checkbox */}
       <div className="pt-4 border-t border-slate-800/80">
         <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-3">
-          Filter Party Groups:
+          {t.cpProgressLineChart.filterLabel}
         </span>
         <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto pr-2 custom-scrollbar">
           {allCPNames.map((cp, idx) => {

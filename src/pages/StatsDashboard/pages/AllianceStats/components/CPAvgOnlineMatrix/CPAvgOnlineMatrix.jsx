@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 import CPNameItem from "../CPNameItem/CPNameItem";
 import HeaderList from "../HeaderList/HeaderList";
@@ -8,9 +9,17 @@ import HeaderList from "../HeaderList/HeaderList";
 const MIN_EVENTS_THRESHOLD = 20;
 
 const CPAvgOnlineMatrix = () => {
+  const { t } = useTranslation();
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
+
+  // Helper forplural forms of events count
+  const getEventsLabel = (count) => {
+    if (count === 1) return t.cpAvgOnlineMatrix.eventOne;
+    if (count >= 2 && count <= 4) return t.cpAvgOnlineMatrix.eventsFew;
+    return t.cpAvgOnlineMatrix.eventsMany;
+  };
 
   // 1. Calculate average online for each CP
   const cpOnlineData = useMemo(() => {
@@ -45,7 +54,7 @@ const CPAvgOnlineMatrix = () => {
       };
     });
 
-    // 2. double sort
+    // 2. Double sort
     list.sort((a, b) => {
       const aHasMinEvents = a.attendedEvents >= MIN_EVENTS_THRESHOLD;
       const bHasMinEvents = b.attendedEvents >= MIN_EVENTS_THRESHOLD;
@@ -63,7 +72,7 @@ const CPAvgOnlineMatrix = () => {
       return b.attendedEvents - a.attendedEvents;
     });
 
-    // max online for progress bar
+    // Max online for progress bar
     const maxOnline = Math.max(...list.map((item) => item.avgOnline), 1);
 
     return { list, maxOnline };
@@ -79,8 +88,8 @@ const CPAvgOnlineMatrix = () => {
       {/* Header */}
       <HeaderList
         icon="⚡️"
-        title="CP Average Online Capacity"
-        text="Average active members per event across all clan activities"
+        title={t.cpAvgOnlineMatrix.title}
+        text={t.cpAvgOnlineMatrix.subtitle}
       />
 
       {/* List of Bars */}
@@ -99,13 +108,12 @@ const CPAvgOnlineMatrix = () => {
                   <CPNameItem cpName={cpName} index={index} />
                   <div className="flex items-center gap-2">
                     <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-500">
-                      ({attendedEvents}{" "}
-                      {attendedEvents === 1 ? "event" : "events"})
+                      ({attendedEvents} {getEventsLabel(attendedEvents)})
                     </span>
                     <span className="font-mono font-bold text-sky-400 text-xs md:text-sm min-[1820px]:text-lg">
                       {avgOnline}{" "}
                       <span className="text-xs md:text-sm min-[1820px]:text-lg text-slate-400 font-normal">
-                        pts/event
+                        {t.cpAvgOnlineMatrix.ptsPerEvent}
                       </span>
                     </span>
                   </div>

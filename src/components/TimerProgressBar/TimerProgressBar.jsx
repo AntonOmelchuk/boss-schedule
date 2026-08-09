@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 
+import useTranslation from "../../hooks/useTranslation";
+
 const TimerProgressBar = ({
   maxTimeSeconds = 45,
   isLoading = true,
   onComplete,
   label,
 }) => {
+  const { t } = useTranslation();
+
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -45,7 +49,7 @@ const TimerProgressBar = ({
       <div className="w-full max-w-md">
         <div
           className="w-full bg-slate-900/40 border border-slate-800 rounded-2xl p-5
-        backdrop-blur-md flex flex-col gap-3 shadow-xl"
+            backdrop-blur-md flex flex-col gap-3 shadow-xl"
         >
           {/* Top Details */}
           <div className="flex justify-between items-center text-xs font-semibold">
@@ -55,7 +59,8 @@ const TimerProgressBar = ({
             </span>
             <div className="flex items-center gap-3 font-mono">
               <span className="text-slate-500 text-xs md:text-sm xl:text-base">
-                {secondsLeft}s max
+                {secondsLeft}
+                {t.sec} {t.max}
               </span>
               <span className="text-sky-400 font-bold text-xs md:text-sm xl:text-base">
                 {Math.min(100, Math.round(progress))}%

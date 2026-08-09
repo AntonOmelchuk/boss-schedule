@@ -10,10 +10,12 @@ import {
   YAxis,
 } from "recharts";
 
+import useTranslation from "../../../../../../hooks/useTranslation";
 import useAppStore from "../../../../../../store/useAppStore";
 import CustomTooltip from "./CustomTooltip";
 
 const CPConsistencyMatrix = () => {
+  const { t } = useTranslation();
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
@@ -59,7 +61,7 @@ const CPConsistencyMatrix = () => {
       };
     });
 
-    // 3. Sort from more active to less || if equal -> sort by avarage online
+    // 3. Sort from more active to less || if equal -> sort by average online
     return stats.sort(
       (a, b) =>
         b.attendanceRate - a.attendanceRate || b.avgOnline - a.avgOnline,
@@ -78,18 +80,17 @@ const CPConsistencyMatrix = () => {
       <div>
         <div className="flex items-center gap-2">
           <h2 className="text-xl font-bold text-slate-100 tracking-wide">
-            CP Attendance Consistency Rate (%)
+            {t.cpConsistencyMatrix.title}
           </h2>
           <span
             className="text-sm uppercase font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10
            text-emerald-400 border border-emerald-500/20"
           >
-            Reliability Matrix 📊
+            {t.cpConsistencyMatrix.badge}
           </span>
         </div>
         <p className="text-3 text-slate-400 mt-1">
-          Percentage of all alliance events attended by each CP (Sorted by
-          activity)
+          {t.cpConsistencyMatrix.subtitle}
         </p>
       </div>
 
@@ -131,12 +132,12 @@ const CPConsistencyMatrix = () => {
 
             <Bar
               dataKey="attendanceRate"
-              name="Attendance Rate"
+              name={t.cpConsistencyMatrix.attendanceRateName}
               radius={[0, 4, 4, 0]}
               barSize={20}
             >
               {matrixData.map((entry, index) => {
-                // Dynamic color depens on activity:
+                // Dynamic color depends on activity:
                 // > 80% — green, 50-80% — blue, < 50% — red/orange
                 let color = "#f87171"; // Red
                 if (entry.attendanceRate >= 80)

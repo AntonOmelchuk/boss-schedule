@@ -5,6 +5,7 @@ import Error from "../../../../components/Error/Error";
 import TimerProgressBar from "../../../../components/TimerProgressBar/TimerProgressBar";
 import { BREAKPOINTS } from "../../../../constants/general";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
+import useTranslation from "../../../../hooks/useTranslation";
 import useAppStore from "../../../../store/useAppStore";
 import { getErrorMessage } from "../../../../utils/general";
 import AllianceActivityComboChart from "./components/AllianceActivityComboChart/AllianceActivityComboChart";
@@ -19,6 +20,8 @@ import PerfomanceChart from "./components/PermomanceChart/PerfomanceChart";
 import SummaryCards from "./components/SummaryCards/SummaryCards";
 
 const AllianceStats = () => {
+  const { t } = useTranslation();
+
   const [selectedEvent, setSelectedEvent] = useState(null);
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
@@ -36,7 +39,7 @@ const AllianceStats = () => {
   }, [fetchAllStatData]);
 
   if (isLoading && !statsData.pareto.length) {
-    return <TimerProgressBar label="Loading Alliance Analytics..." />;
+    return <TimerProgressBar label={t.loadingAllianceAnalytics} />;
   }
 
   if (error && !isLoading) {

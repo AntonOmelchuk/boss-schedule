@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { LANGUAGES } from "./general";
 
 export default {
@@ -17,6 +18,8 @@ export default {
     h: "Г",
     m: "ХВ",
     s: "С",
+    sec: "cек",
+    max: "макс.",
     loading: "Завантаження",
     noInfo: "Немає інформації",
     langToggle: "EN",
@@ -126,6 +129,7 @@ export default {
     navLoot: "Лут",
 
     active: "Активний",
+    loadingAllianceAnalytics: "Завантаження аналітики альянсу...",
 
     loot: {
       navLoot: "Лут",
@@ -264,6 +268,110 @@ export default {
       deleteClanConfirm: "Ви дійсно бажаєте видалити цей клан?",
       noCpsInClan: "Перетягніть КП сюди",
     },
+
+    infoBlock: {
+      ariaLabel: "Показати інформацію",
+      headerTitle: "Інформація",
+      tierCalcTitle: "Як розраховуються рівень:",
+      tierCalcSubtitle: "Рівні базуються на відносному рейтингу (перцентилі):",
+      sTierDesc: "Топ 15% за показниками",
+      aTierDesc: "Наступні 40% (15% – 55%)",
+      bTierDesc: "Решта КП (55% – 100%)",
+      priorityTitle: "Пріоритет черги:",
+      priorityDesc:
+        "Сортування за співвідношенням GB/PTs від найнижчого до найвищого. КП у топі накопичили найбільше балів відносно отриманого епіку, тому мають найвищий пріоритет на наступний дроп.",
+    },
+
+    summaryCards: {
+      totalEventsTitle: "Всього Івентів",
+      totalEventsSubtext: "Включаючи облоги",
+      mvpCpTitle: "MVP КП Тижня",
+      mvpCpSubtext: "Топ за останні 10 івентів",
+      peakRecordTitle: "Рекорд Відвідуваності",
+      peakRecordUnit: "гравців",
+      avgTurnoutTitle: "Середня Явка Тижня",
+      avgTurnoutUnit: "сер./івент",
+      avgTurnoutSubtext: "Тренд активності",
+    },
+
+    leaderboard: {
+      allianceRosterTitle: "Склад Альянсу",
+      priorityQueueTitle: "Черга Пріоритету",
+      tabByPoints: "За балами",
+      tabByRatio: "За відношенням GB/PTs",
+      ptsTotal: "балів загалом",
+    },
+
+    fullPartyLeaderboard: {
+      title: "Лідерборд Фулл Паті (9/9)",
+      subtitle: "Рейтинг КП за загальною кількістю повністю зібраних паті",
+      championLabel: "Найдисциплінованіше КП",
+      fullText: "Фулл Паті",
+      ofEventsText: "від своїх івентів",
+      efficiencyText: "ефективність",
+    },
+
+    cpAvgOnlineMatrix: {
+      title: "Середня Чисельність КП",
+      subtitle: "Середня кількість активних гравців на івент за весь час",
+      eventOne: "івент",
+      eventsFew: "івенти",
+      eventsMany: "івентів",
+      ptsPerEvent: "балів/івент",
+    },
+
+    performanceChart: {
+      title: "Продуктивність",
+      tabSorted: "📊 Відсортовано",
+      tabRandom: "🎲 Випадково",
+    },
+
+    cpConsistencyMatrix: {
+      title: "Стабільність Відвідуваності КП (%)",
+      badge: "Матриця Надійності 📊",
+      subtitle:
+        "Відсоток усіх івентів альянсу, відвіданих кожною КП (відсортовано за активністю)",
+      attendanceRateName: "Відсоток відвідуваності",
+      attendanceRate: "Відсоток відвідуваності:",
+      eventsAttended: "Відвідано івентів:",
+      avgPartyOnline: "Сер. онлайн паті:",
+      playersSuffix: "гравців",
+    },
+
+    cpProgressLineChart: {
+      title: "Динаміка Набору Балів КП",
+      note: "Примітка: Не враховує додаткові бали за фулл паті та подвійні множники івентів (Облоги та Хай Епік).",
+      selectAll: "Обрати Всі",
+      deselectAll: "Прибрати Всі",
+      filterLabel: "Фільтр Груп КП:",
+    },
+
+    allianceActivityComboChart: {
+      title: "Відвідуваність Альянсу та Тренд Середнього Значення",
+      badge: "Клікни на бар для деталізації 💡",
+      subtitle:
+        "Загальна відвідуваність івентів із лінією ковзного середнього за 5 івентів.",
+      subtitleHighlight:
+        "Натисніть на бар будь-якого івенту, щоб переглянути детальну інформацію нижче.",
+      yAxisLabel: "Загальна Відвідуваність",
+      barName: "Загальна Відвідуваність",
+      lineName: "Тренд 5 івентів",
+      tooltipTotal: "Всього",
+      tooltipAvg: "Сер. за 5 івентів",
+      tooltipStatus: "Статус",
+      tooltipAboveAvg: "▲ Вище сер.",
+      tooltipBelowAvg: "▼ Нижче сер.",
+      tooltipCpBreakdown: "Розподіл по КП",
+      tooltipNoData: "Дані по КП відсутні",
+    },
+
+    eventDeepDive: {
+      title: "Детальний Аналіз Івенту",
+      subtitle:
+        "Детальна розкладка відвідуваності та MVP КП для конкретного рейду чи облоги",
+      partyBreakdownTitle: "Розподіл за КП",
+      cpsPresent: "КП присутні",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -281,6 +389,8 @@ export default {
     h: "H",
     m: "M",
     s: "S",
+    sec: "S",
+    max: "max",
     loading: "Loading",
     noInfo: "no information",
     langToggle: "УКР",
@@ -386,6 +496,7 @@ export default {
     navLoot: "Loot",
 
     active: "Active",
+    loadingAllianceAnalytics: "Loading Alliance Analytics...",
 
     loot: {
       title: "Loot Randomizer",
@@ -520,6 +631,109 @@ export default {
       notesPlaceholder: "Notes...",
       deleteClanConfirm: "Are you sure you want to delete this clan?",
       noCpsInClan: "Drag CPs here",
+    },
+
+    infoBlock: {
+      ariaLabel: "Show info",
+      headerTitle: "Information",
+      tierCalcTitle: "How Tiers Are Calculated:",
+      tierCalcSubtitle: "Tiers are based on relative ranking (percentile):",
+      sTierDesc: "Top 15% performers",
+      aTierDesc: "Next 40% (15% – 55%)",
+      bTierDesc: "Remaining CPs (55% – 100%)",
+      priorityTitle: "Priority Queue:",
+      priorityDesc:
+        "Sorted by GB/PTs ratio from lowest to highest. CPs at the top have accumulated the most points relative to received epics, making them top priority for the next drop.",
+    },
+
+    summaryCards: {
+      totalEventsTitle: "Total Events",
+      totalEventsSubtext: "Including Sieges",
+      mvpCpTitle: "Weekly MVP CP",
+      mvpCpSubtext: "Top contributor past 10 events",
+      peakRecordTitle: "Peak Event Record",
+      peakRecordUnit: "players",
+      avgTurnoutTitle: "Weekly Avg Turnout",
+      avgTurnoutUnit: "avg/event",
+      avgTurnoutSubtext: "Recent activity trend",
+    },
+
+    leaderboard: {
+      allianceRosterTitle: "Alliance Roster",
+      priorityQueueTitle: "Priority Queue",
+      tabByPoints: "By Points",
+      tabByRatio: "By GB/PTs Ratio",
+      ptsTotal: "pts total",
+    },
+
+    fullPartyLeaderboard: {
+      title: "Full Party (9/9) Leaderboard",
+      subtitle: "Ranking CPs by total number of fully assembled 9-man squads",
+      championLabel: "Most Disciplined Squad",
+      fullText: "Full Party",
+      ofEventsText: "of their events",
+      efficiencyText: "efficiency",
+    },
+
+    cpAvgOnlineMatrix: {
+      title: "CP Average Online Capacity",
+      subtitle: "Average active members per event across all clan activities",
+      eventOne: "event",
+      eventsFew: "events",
+      eventsMany: "events",
+      ptsPerEvent: "pts/event",
+    },
+
+    performanceChart: {
+      title: "Performance",
+      tabSorted: "📊 Sorted",
+      tabRandom: "🎲 Random",
+    },
+
+    cpConsistencyMatrix: {
+      title: "CP Attendance Consistency Rate (%)",
+      badge: "Reliability Matrix 📊",
+      subtitle:
+        "Percentage of all alliance events attended by each CP (Sorted by activity)",
+      attendanceRateName: "Attendance Rate",
+      attendanceRate: "Attendance Rate:",
+      eventsAttended: "Events Attended:",
+      avgPartyOnline: "Avg Party Online:",
+      playersSuffix: "players",
+    },
+
+    cpProgressLineChart: {
+      title: "CP Points Progress Timeline",
+      note: "Note: Excludes full-party extra points and double-point event modifiers (Sieges & High Epics).",
+      selectAll: "Select All",
+      deselectAll: "Deselect All",
+      filterLabel: "Filter Party Groups:",
+    },
+
+    allianceActivityComboChart: {
+      title: "Alliance Attendance & Moving Average Trend",
+      badge: "Click bar to Deep Dive 💡",
+      subtitle: "Total event attendance with 5-event moving average line.",
+      subtitleHighlight:
+        "Click on any event bar to inspect CP breakdown below.",
+      yAxisLabel: "Total Attendance",
+      barName: "Total Attendance",
+      lineName: "5-Event Avg Trend",
+      tooltipTotal: "Total",
+      tooltipAvg: "5-Event Avg",
+      tooltipStatus: "Status",
+      tooltipAboveAvg: "▲ Above Avg",
+      tooltipBelowAvg: "▼ Below Avg",
+      tooltipCpBreakdown: "CP Breakdown",
+      tooltipNoData: "No CP data available",
+    },
+
+    eventDeepDive: {
+      title: "Event Deep Dive",
+      subtitle:
+        "Detailed attendance breakdown & MVP CP for a specific raid or siege",
+      partyBreakdownTitle: "Party Breakdown",
+      cpsPresent: "CPs present",
     },
   },
 };
