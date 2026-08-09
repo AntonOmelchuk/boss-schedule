@@ -1,3 +1,4 @@
+import PageBadgeTitle from "../../components/UI/PageBadgeTitle";
 import useTranslation from "../../hooks/useTranslation";
 import { useLootStore } from "../../store/useLootStore";
 import LootBuilder from "./components/LootBuilder";
@@ -9,22 +10,13 @@ const LootRandomizerPage = () => {
   const { t } = useTranslation();
   const { runLootDistribution, isRolling } = useLootStore();
   return (
-    <div className="min-h-screen pb-16 space-y-6">
-      {/* PAGE HEADER */}
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2">
-          <span
-            className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider
-            bg-amber-500 text-slate-950 shadow-sm shadow-amber-900/50"
-          >
-            {t.navLoot}
-          </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-100 tracking-tight">
-            {t.loot.title}
-          </h1>
-        </div>
-        <p className="text-sm text-slate-400">{t.loot.subtitle}</p>
-      </div>
+    <div className="min-h-screen pb-16 space-y-6 py-4">
+      <PageBadgeTitle
+        badgeText={t.navLoot}
+        title={t.loot.title}
+        subTitle={t.loot.subtitle}
+        bgColor="bg-amber-500"
+      />
 
       <PartySelector />
 

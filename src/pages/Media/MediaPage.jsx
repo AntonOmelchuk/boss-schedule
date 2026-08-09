@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import PageBadgeTitle from "../../components/UI/PageBadgeTitle";
 import useTranslation from "../../hooks/useTranslation";
 import useYoutubeVideos from "../../hooks/useYoutubeVideos";
 import FeaturedBanner from "./components/FeaturedBanner";
@@ -16,23 +17,12 @@ const MediaPage = () => {
 
   return (
     <div className="min-h-screen py-4 space-y-8">
-      {/* PAGE HEADER */}
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2">
-          <span
-            className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-red-600
-            text-white shadow-sm shadow-red-900/50"
-          >
-            {t.media.badge}
-          </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-100 tracking-tight">
-            {t.media.title}
-          </h1>
-        </div>
-        <p className="max-md:mt-4 text-sm md:text-base text-slate-400">
-          {t.media.subtitle}
-        </p>
-      </div>
+      <PageBadgeTitle
+        badgeText={t.media.badge}
+        title={t.media.title}
+        subTitle={t.media.subtitle}
+        bgColor="bg-red-600"
+      />
 
       {/* ERROR STATE */}
       {error && (
