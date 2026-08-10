@@ -25,6 +25,7 @@ export const SelectFilter = ({
   options = [],
   defaultOptionLabel = null,
   className = "",
+  disabled,
 }) => {
   const safeOptions = Array.isArray(options) ? options : [];
 
@@ -32,6 +33,7 @@ export const SelectFilter = ({
     <select
       value={value}
       onChange={onChange}
+      disabled={disabled}
       className={`bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none
         focus:border-amber-500 cursor-pointer ${className}`}
     >

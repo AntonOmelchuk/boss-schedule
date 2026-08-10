@@ -127,6 +127,9 @@ export default {
     navDkpPoints: "DKP Очки",
     navEpicStats: "Епік Стата",
     navLoot: "Лут",
+    navAlliance: "Аллі Утиліти",
+    navLootRandomizer: "Рандомайзер луту",
+    navAllianceClans: "Склад кланів",
 
     active: "Активний",
     loadingAllianceAnalytics: "Завантаження аналітики альянсу...",
@@ -219,11 +222,13 @@ export default {
       title: "Адмін-панель Альянсу",
       subtitle:
         "Керування складом, перевірки присутності та налаштування системи",
-      tabProof: "Proof Checker & Audit",
+      tabProof: "Перевірка та аудит підтверджень",
       tabUsers: "Гравці та Акаунти",
       tabCps: "Список КП",
       tabSystem: "Статус Системи",
       tabTimers: "Таймери / Респаун",
+      noAccess: "У вас немає доступу до адмін-панелі",
+
       users: {
         searchPlaceholder: "Пошук за ніком, КП, Discord user чи ID...",
         filterAllRoles: "Всі ролі",
@@ -555,6 +560,9 @@ export default {
     navDkpPoints: "DKP Points",
     navEpicStats: "Epic Stats",
     navLoot: "Loot",
+    navAlliance: "Ally Tools",
+    navLootRandomizer: "Loot Randomizer",
+    navAllianceClans: "Clan Management",
 
     active: "Active",
     loadingAllianceAnalytics: "Loading Alliance Analytics...",
@@ -649,6 +657,7 @@ export default {
       tabCps: "CP List",
       tabSystem: "System Status",
       tabTimers: "Timers / Respawn",
+      noAccess: "You do not have access to the admin panel",
       users: {
         searchPlaceholder: "Search by character, CP, Discord user or ID...",
         filterAllRoles: "All Roles",
