@@ -429,6 +429,9 @@ export default {
       noEventsFound:
         "На зображенні не вдалося розпізнати жодного боса із бази даних.",
       selectedArea: "Обрана область",
+      selectFileBtn: "Обрати файл",
+      fileSelected: "Файл обрано",
+      fileNotSelected: "Файл не обрано",
     },
   },
   [LANGUAGES.EN]: {
@@ -850,6 +853,9 @@ export default {
       noEventsFound:
         "Could not recognize any known bosses from DB in this image.",
       selectedArea: "Selected Area",
+      selectFileBtn: "Select file",
+      fileSelected: "File selected",
+      fileNotSelected: "No file selected",
     },
   },
 };

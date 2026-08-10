@@ -3,6 +3,7 @@ import Cropper from "react-cropper";
 
 import useTranslation from "../../../hooks/useTranslation";
 import { cn } from "../../../utils/general";
+import UploadImageInput from "./UploadImageInput";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -60,15 +61,7 @@ const OCRImageUploader = ({
         📷 {t.respawnAdmin.ocrCardTitle}
       </h2>
 
-      <input
-        type="file"
-        accept="image/*"
-        lang="en"
-        onChange={handleImageChange}
-        className="text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0
-          file:text-xs file:font-semibold file:bg-slate-800 file:text-sky-400
-          hover:file:bg-slate-700 cursor-pointer"
-      />
+      <UploadImageInput image={image} handleImageChange={handleImageChange} />
 
       {image && (
         <div className="flex flex-col gap-4">
