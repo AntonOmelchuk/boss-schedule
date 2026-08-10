@@ -60,8 +60,11 @@ const Header = () => {
               (item) =>
                 !item.showOnlyInStatsMobile && !item.showOnlyInAllianceMobile,
             ).map((item) => {
+              const itemBasePath = item.path.split("#")[0]; // "/alliance/loot" -> "/alliance/loot" || "/statistics"
+              const parentSegment = itemBasePath.split("/")[1]; // "alliance" || "statistics"
+
               const isActive = item.hasDropdown
-                ? pathname === item.path.split("#")[0]
+                ? pathname.startsWith(`/${parentSegment}`)
                 : pathname === item.path;
 
               const itemTitle = t[item.titleKey] || item.title;
@@ -94,11 +97,12 @@ const Header = () => {
                           backdrop-blur-xl flex flex-col gap-1"
                         >
                           {item.subTabs?.map((subTab) => {
-                            const isSubActive =
-                              pathname === item.path.split("#")[0] &&
-                              (hash === subTab.hash ||
-                                (!hash &&
-                                  subTab.hash === item.subTabs[0]?.hash));
+                            const isSubActive = subTab.hash
+                              ? pathname === itemBasePath &&
+                                (hash === subTab.hash ||
+                                  (!hash &&
+                                    subTab.hash === item.subTabs[0]?.hash))
+                              : pathname === subTab.path;
 
                             const subTabTitle =
                               t[subTab.titleKey] || subTab.title;
