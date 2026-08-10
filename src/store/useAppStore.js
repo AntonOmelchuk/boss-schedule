@@ -106,9 +106,6 @@ const useAppStore = create(
 
         if (hasChanges) {
           set({ pushAlerts: updatedAlerts });
-          console.log(
-            "🧹 [STORE CLEANUP] Removed expired epic alerts from local state.",
-          );
         }
       },
 

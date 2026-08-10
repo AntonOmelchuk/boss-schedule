@@ -1,7 +1,9 @@
 export const ROLES = {
   ADMIN: "ADMIN",
-  OFFICER: "OFFICER",
-  SCOUT: "SCOUT",
+  CO_ADMIN: "CO_ADMIN",
+  ALLY_GENERAL: "ALLY_GENERAL",
+  RAID_CALLER: "RAID_CALLER",
+  CP_LEADER: "CP_LEADER",
   MEMBER: "MEMBER",
 };
 
@@ -14,16 +16,29 @@ export const ROLE_BADGE_CONFIG = {
     className:
       "bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-amber-500/10",
   },
-  [ROLES.OFFICER]: {
-    label: "OFFICER",
+  [ROLES.CO_ADMIN]: {
+    label: "CO-ADMIN",
+    icon: "🤝",
+    className:
+      "bg-purple-500/20 text-purple-400 border-purple-500/40 shadow-purple-500/10",
+  },
+  [ROLES.ALLY_GENERAL]: {
+    label: "ALLY GENERAL",
+    icon: "⭐️",
+    className:
+      "bg-indigo-500/20 text-indigo-400 border-indigo-500/40 shadow-indigo-500/10",
+  },
+  [ROLES.RAID_CALLER]: {
+    label: "RAID CALLER",
+    icon: "📢",
+    className:
+      "bg-rose-500/20 text-rose-400 border-rose-500/40 shadow-rose-500/10",
+  },
+  [ROLES.CP_LEADER]: {
+    label: "CP LEADER",
     icon: "⚔️",
     className:
       "bg-emerald-500/20 text-emerald-400 border-emerald-500/40 shadow-emerald-500/10",
-  },
-  [ROLES.SCOUT]: {
-    label: "SCOUT",
-    icon: "👁️",
-    className: "bg-sky-500/20 text-sky-400 border-sky-500/40 shadow-sky-500/10",
   },
   [ROLES.MEMBER]: {
     label: "MEMBER",

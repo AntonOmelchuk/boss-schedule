@@ -3,7 +3,9 @@ import { useEffect, useMemo, useState } from "react";
 import Loader from "../../components/UI/Loader";
 import PageBadgeTitle from "../../components/UI/PageBadgeTitle";
 import { PARTY_TYPES_LIST } from "../../constants/partyTypes";
+import { ROLES } from "../../constants/roles";
 import useTranslation from "../../hooks/useTranslation";
+import useAuthStore from "../../store/useAuthStore";
 import useCPStore from "../../store/useCPStore";
 import AmountBadge from "./components/AmountBadge";
 import ClanCrest from "./components/ClanCrest";
@@ -13,8 +15,13 @@ import TypeCountItem from "./components/TypeCountItem";
 
 const UNASSIGNED_KEY = "unassigned";
 
+const ALLOWED_EDIT_ROLES = [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_GENERAL];
+
 const CpManagementPage = () => {
   const { t } = useTranslation();
+  const { user } = useAuthStore();
+
+  const canEdit = ALLOWED_EDIT_ROLES.includes(user?.role);
 
   const {
     cpList,
@@ -114,17 +121,20 @@ const CpManagementPage = () => {
 
   // Drag and Drop Event Handlers
   const handleDragStart = (e, cpName) => {
+    if (!canEdit) return;
     setDraggedCp(cpName);
     e.dataTransfer.setData("text/plain", cpName);
     e.dataTransfer.effectAllowed = "move";
   };
 
   const handleDragOver = (e) => {
+    if (!canEdit) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
   };
 
   const handleDrop = async (e, targetClanId) => {
+    if (!canEdit) return;
     e.preventDefault();
     const cpName = e.dataTransfer.getData("text/plain") || draggedCp;
     if (!cpName) return;
@@ -134,11 +144,13 @@ const CpManagementPage = () => {
   };
 
   const handleAddClanPrompt = () => {
+    if (!canEdit) return;
     const clanName = prompt(t.cps.addClanPrompt);
     if (clanName) addClan(clanName);
   };
 
   const handleDeleteClanConfirm = (clanId) => {
+    if (!canEdit) return;
     if (confirm(t.cps.deleteClanConfirm)) deleteClan(clanId);
   };
 
@@ -162,6 +174,7 @@ const CpManagementPage = () => {
         <Header
           totalAllianceStats={totalAllianceStats}
           handleAddClan={handleAddClanPrompt}
+          canEdit={canEdit}
         />
       </div>
 
@@ -184,8 +197,8 @@ const CpManagementPage = () => {
           return (
             <div
               key={id}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, id)}
+              onDragOver={canEdit ? handleDragOver : undefined}
+              onDrop={canEdit ? (e) => handleDrop(e, id) : undefined}
               className={`shrink-0 bg-slate-900 border ${
                 isUnassigned
                   ? "w-80 sm:w-135 md:w-180 border-slate-800/80 bg-slate-950/40"
@@ -213,7 +226,7 @@ const CpManagementPage = () => {
                     playersCount={playersCount}
                   />
 
-                  {!isUnassigned && (
+                  {!isUnassigned && canEdit && (
                     <button
                       onClick={() => handleDeleteClanConfirm(id)}
                       className="text-slate-500 hover:text-red-400 text-xs transition cursor-pointer p-0.5"
@@ -260,6 +273,7 @@ const CpManagementPage = () => {
                       cpData={cpMetaMap[cpName] || {}}
                       onUpdateMeta={updateCpMeta}
                       onDragStart={handleDragStart}
+                      canEdit={canEdit}
                     />
                   ))
                 ) : (

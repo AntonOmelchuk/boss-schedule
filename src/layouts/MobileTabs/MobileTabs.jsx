@@ -11,6 +11,7 @@ const MobileTabs = () => {
   const { t } = useTranslation();
 
   const isStatsRoute = pathname === "/statistics";
+  const isAllianceRoute = pathname.startsWith("/alliance");
   const currentFullLocation = `${pathname}${hash}`;
 
   const containerRef = useRef(null);
@@ -18,21 +19,34 @@ const MobileTabs = () => {
 
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
-  // Filter items based on whether user is currently viewing Statistics page
+  // Filter items based on whether user is currently viewing Statistics or Alliance pages
   const visibleNavItems = NAV_CONFIG.filter((item) => {
     if (isStatsRoute) {
       return item.showOnlyInStatsMobile;
     }
-    return !item.hideOnMobile && !item.showOnlyInStatsMobile;
+    if (isAllianceRoute) {
+      return item.showOnlyInAllianceMobile;
+    }
+    return (
+      !item.hideOnMobile &&
+      !item.showOnlyInStatsMobile &&
+      !item.showOnlyInAllianceMobile
+    );
   });
 
   // Calculate active tab index
-  const activeIndex = visibleNavItems.findIndex((item) =>
-    isStatsRoute
-      ? currentFullLocation === item.path ||
+  const activeIndex = visibleNavItems.findIndex((item) => {
+    if (isStatsRoute) {
+      return (
+        currentFullLocation === item.path ||
         (item.path.endsWith("#points") && !hash)
-      : pathname === item.path,
-  );
+      );
+    }
+    if (isAllianceRoute) {
+      return pathname === item.path || currentFullLocation === item.path;
+    }
+    return pathname === item.path;
+  });
 
   // Get active item config for dynamic styling
   const activeItem = visibleNavItems[activeIndex];

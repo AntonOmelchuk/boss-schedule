@@ -3,7 +3,9 @@ export const NAV_ITEMS = {
   RESPAWN: "respawn",
   SCHEDULE: "schedule",
   MEDIA: "media",
-  LOOT: "loot",
+  ALLIANCE: "alliance",
+  ALLIANCE_LOOT: "alliance_loot",
+  ALLIANCE_CLANS: "alliance_clans",
   STATISTICS: "statistics",
   STATISTICS_POINTS: "statistics_points",
   STATISTICS_EPIC: "statistics_epic",
@@ -47,18 +49,46 @@ export const NAV_CONFIG = [
     indicatorGradient: "from-red-600 via-red-500 to-rose-400",
     indicatorShadow: "shadow-[0_-2px_10px_rgba(239,68,68,0.7)]",
   },
+  // --- Dropdown: ALLIANCE ---
   {
-    id: NAV_ITEMS.LOOT,
-    path: "/loot",
-    titleKey: "navLoot",
-    icon: "🎲",
+    id: NAV_ITEMS.ALLIANCE,
+    path: "/alliance/loot",
+    titleKey: "navAlliance",
+    icon: "🛠️",
     activeClass:
       "bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]",
     mobileActiveClass: "text-purple-400",
+    hasDropdown: true,
+    subTabs: [
+      {
+        id: "loot",
+        path: "/alliance/loot",
+        hash: "#loot",
+        titleKey: "navLootRandomizer",
+        icon: "🎲",
+      },
+      {
+        id: "clans",
+        path: "/alliance/clans",
+        hash: "#clans",
+        titleKey: "navAllianceClans",
+        icon: "🛡️",
+        hideOnMobile: true,
+      },
+    ],
+  },
+  {
+    id: NAV_ITEMS.ALLIANCE_LOOT,
+    path: "/alliance/loot",
+    titleKey: "navLootRandomizer",
+    icon: "🎲",
+    mobileActiveClass: "text-purple-400",
+    showOnlyInAllianceMobile: true,
 
     indicatorGradient: "from-purple-600 via-purple-500 to-amber-400",
     indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
   },
+  // --- Dropdown: STATISTICS ---
   {
     id: NAV_ITEMS.STATISTICS,
     path: "/statistics#points",
@@ -108,3 +138,11 @@ export const NAV_CONFIG = [
     indicatorShadow: "shadow-[0_-2px_10px_rgba(16,185,129,0.7)]",
   },
 ];
+
+export const ADMIN_TAB_KEYS = {
+  PROOF: "proof",
+  USERS: "users",
+  CPS: "cps",
+  TIMERS: "timers",
+  SYSTEM: "system",
+};

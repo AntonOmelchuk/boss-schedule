@@ -138,8 +138,15 @@ function App() {
             />
             <Route path="/statistics" element={<StatsDashboard />} />
             <Route path="/media" element={<MediaPage />} />
-            <Route path="/loot" element={<LootRandomizerPage />} />
-            <Route path="/cp-management" element={<CpManagementPage />} />
+            <Route path="/alliance/loot" element={<LootRandomizerPage />} />
+            <Route
+              path="alliance/clans"
+              element={
+                <DesktopOnlyGuard redirectTo="/">
+                  <CpManagementPage />
+                </DesktopOnlyGuard>
+              }
+            />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/404" element={<NotFound />} />

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { ROLES } from "../../constants/roles";
+import { ADMIN_TAB_KEYS } from "../../constants/routes";
 import useTranslation from "../../hooks/useTranslation";
 import useAuthStore from "../../store/useAuthStore";
 import TabButton from "./components/TabButton";
@@ -10,21 +11,76 @@ import RespawnModule from "./modules/RespawnModule";
 import SystemStatusModule from "./modules/SystemStatusModule";
 import UsersModule from "./modules/UsersModule";
 
-const TAB_KEYS = {
-  PROOF: "proof",
-  USERS: "users",
-  CPS: "cps",
-  TIMERS: "timers",
-  SYSTEM: "system",
-};
+const ADMIN_TABS = [
+  {
+    key: ADMIN_TAB_KEYS.PROOF,
+    labelKey: "tabProof",
+    icon: "📸",
+    component: ProofCheckerModule,
+    allowedRoles: [
+      ROLES.ADMIN,
+      ROLES.CO_ADMIN,
+      ROLES.ALLY_GENERAL,
+      ROLES.RAID_CALLER,
+    ],
+  },
+  {
+    key: ADMIN_TAB_KEYS.TIMERS,
+    labelKey: "tabTimers",
+    icon: "⏳",
+    component: RespawnModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
+  },
+  {
+    key: ADMIN_TAB_KEYS.USERS,
+    labelKey: "tabUsers",
+    icon: "👥",
+    component: UsersModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_GENERAL],
+  },
+  {
+    key: ADMIN_TAB_KEYS.CPS,
+    labelKey: "tabCps",
+    icon: "🏰",
+    component: CpManagementModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_GENERAL],
+  },
+  {
+    key: ADMIN_TAB_KEYS.SYSTEM,
+    labelKey: "tabSystem",
+    icon: "🚨",
+    component: SystemStatusModule,
+    allowedRoles: [ROLES.ADMIN],
+  },
+];
 
 const AdminPage = () => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
-  const [activeTab, setActiveTab] = useState(TAB_KEYS.PROOF);
 
-  const isAdmin = user?.role === ROLES.ADMIN;
-  const isOfficer = user?.role === ROLES.OFFICER || isAdmin;
+  // 1. Filter only allowed tabs for role
+  const availableTabs = useMemo(() => {
+    if (!user?.role) return [];
+    return ADMIN_TABS.filter((tab) => tab.allowedRoles.includes(user.role));
+  }, [user?.role]);
+
+  // 2. Default tab — 1st from available
+  const [activeTabKey, setActiveTabKey] = useState(
+    () => availableTabs[0]?.key || "",
+  );
+
+  // 3. Find current active tab
+  const currentTab =
+    availableTabs.find((tab) => tab.key === activeTabKey) || availableTabs[0];
+  const ActiveComponent = currentTab?.component;
+
+  if (availableTabs.length === 0) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-12 text-center text-slate-400">
+        🔒 {t.admin.noAccess}
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
@@ -54,59 +110,20 @@ const AdminPage = () => {
 
       {/* Navigation Tabs */}
       <div className="flex items-center gap-2 border-b border-slate-800 overflow-x-auto pb-2 scrollbar-none">
-        {isOfficer && (
+        {availableTabs.map((tab) => (
           <TabButton
-            active={activeTab === TAB_KEYS.PROOF}
-            onClick={() => setActiveTab(TAB_KEYS.PROOF)}
-            icon="📸"
-            label={t.admin.tabProof}
+            key={tab.key}
+            active={activeTabKey === tab.key}
+            onClick={() => setActiveTabKey(tab.key)}
+            icon={tab.icon}
+            label={t.admin[tab.labelKey]}
           />
-        )}
-
-        {isOfficer && (
-          <TabButton
-            active={activeTab === TAB_KEYS.TIMERS}
-            onClick={() => setActiveTab(TAB_KEYS.TIMERS)}
-            icon="⏳"
-            label={t.admin.tabTimers}
-          />
-        )}
-
-        {isOfficer && (
-          <TabButton
-            active={activeTab === TAB_KEYS.USERS}
-            onClick={() => setActiveTab(TAB_KEYS.USERS)}
-            icon="👥"
-            label={t.admin.tabUsers}
-          />
-        )}
-
-        {isOfficer && (
-          <TabButton
-            active={activeTab === TAB_KEYS.CPS}
-            onClick={() => setActiveTab(TAB_KEYS.CPS)}
-            icon="🏰"
-            label={t.admin.tabCps}
-          />
-        )}
-
-        {isAdmin && (
-          <TabButton
-            active={activeTab === TAB_KEYS.SYSTEM}
-            onClick={() => setActiveTab(TAB_KEYS.SYSTEM)}
-            icon="🚨"
-            label={t.admin.tabSystem}
-          />
-        )}
+        ))}
       </div>
 
       {/* Active Tab Module Content */}
       <div className="animate-fadeIn">
-        {activeTab === TAB_KEYS.PROOF && <ProofCheckerModule />}
-        {activeTab === TAB_KEYS.TIMERS && <RespawnModule />}
-        {activeTab === TAB_KEYS.USERS && <UsersModule />}
-        {activeTab === TAB_KEYS.CPS && <CpManagementModule />}
-        {activeTab === TAB_KEYS.SYSTEM && <SystemStatusModule />}
+        {ActiveComponent && <ActiveComponent />}
       </div>
     </div>
   );

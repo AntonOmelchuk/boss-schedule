@@ -4,8 +4,6 @@ precacheAndRoute(self.__WB_MANIFEST || []);
 
 // Listening for background push events from the browser Push API
 self.addEventListener("push", function (event) {
-  console.log("📲 [SW DEBUG] Push event received!", event);
-
   let title = "⚡ Boss Respawn Alert!";
   let options = {
     body: "An event is starting soon!",
@@ -22,7 +20,7 @@ self.addEventListener("push", function (event) {
   if (event.data) {
     try {
       const data = event.data.json();
-      console.log("📦 [SW DEBUG] Parsed JSON payload:", data);
+
       title = data.title || title;
       options.body = data.body || options.body;
       options.tag = data.eventId || options.tag;
