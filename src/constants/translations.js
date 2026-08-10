@@ -372,6 +372,35 @@ export default {
       partyBreakdownTitle: "Розподіл за КП",
       cpsPresent: "КП присутні",
     },
+
+    afkCheck: {
+      panelTitle: "Панель Фіксації Присутності",
+      panelSubtitle:
+        "Швидке підтвердження участі гравців для Керівництва та Рейд-лідерів",
+      launchTitle: "Створити підтвердження",
+      eventNameLabel: "Назва івенту",
+      customEventPlaceholder: "Введіть назву івенту",
+      durationLabel: "Час на підтвердження (хвилини)",
+      requireCodeLabel: "Вимагати 4-значний голосовий код",
+      secretCodePlaceholder: "Авто-генерація, якщо порожньо",
+      startCheckBtn: "Розпочати підтвердження",
+      stopCheckBtn: "Зупинити",
+      clearCheckBtn: "Очистити",
+      liveStatusTitle: "Статус підтвердження",
+      activeBadge: "Активно",
+      timeLeftLabel: "Залишилось часу",
+      confirmedPlayersLabel: "Підтверджені учасники",
+      voiceCodeLabel: "Голосовий код підтвердження:",
+      confirmedMembersHeader: "Склад присутніх:",
+      waitingResponses: "Очікування підтверджень від гравців...",
+      noActiveCheck:
+        'Немає активного збору підтверджень. Натисніть "Розпочати підтвердження".',
+      enterEventAlert: "Будь ласка, оберіть або введіть назву івенту!",
+      accessDeniedTitle: "Доступ обмежено",
+      accessDeniedMessage:
+        "Розпочинати збір підтверджень можуть лише Raid Caller, Ally Head або Ally General.",
+      minutesSuffix: "хв",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -734,6 +763,35 @@ export default {
         "Detailed attendance breakdown & MVP CP for a specific raid or siege",
       partyBreakdownTitle: "Party Breakdown",
       cpsPresent: "CPs present",
+    },
+
+    afkCheck: {
+      panelTitle: "Attendance Confirmation Panel",
+      panelSubtitle:
+        "Quick presence confirmation for Raid Callers and Alliance Leadership",
+      launchTitle: "Create Confirmation",
+      eventNameLabel: "Event Name",
+      customEventPlaceholder: "Enter custom event title",
+      durationLabel: "Time Allowed (Minutes)",
+      requireCodeLabel: "Require 4-digit voice code",
+      secretCodePlaceholder: "Auto-generated if empty",
+      startCheckBtn: "Start Attendance Call",
+      stopCheckBtn: "Stop Call",
+      clearCheckBtn: "Clear",
+      liveStatusTitle: "Confirmation Status",
+      activeBadge: "Active",
+      timeLeftLabel: "Time Left",
+      confirmedPlayersLabel: "Confirmed Attendees",
+      voiceCodeLabel: "Voice Secret Code:",
+      confirmedMembersHeader: "Confirmed Members:",
+      waitingResponses: "Waiting for player confirmations...",
+      noActiveCheck:
+        'No active confirmation call. Click "Start Attendance Call" to begin.',
+      enterEventAlert: "Please enter or select an event name!",
+      accessDeniedTitle: "Access Denied",
+      accessDeniedMessage:
+        "Only Raid Callers, Ally Heads, or Ally Generals can start an attendance call.",
+      minutesSuffix: "m",
     },
   },
 };
