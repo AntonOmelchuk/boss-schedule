@@ -123,12 +123,12 @@ const LootResults = () => {
               {/* Items List */}
               <div className="flex flex-wrap gap-1.5 my-1">
                 {res.items.map((i) => (
-                  <div className="flex bg-slate-950 px-1 py-0.5 rounded-md border border-slate-800/80">
+                  <div
+                    key={i.id}
+                    className="flex bg-slate-950 px-1 py-0.5 rounded-md border border-slate-800/80"
+                  >
                     <img src={i.icon} className="w-4 h-4 rounded-sm" />
-                    <span
-                      key={i.id}
-                      className="text-slate-200 text-xs font-semibold pl-1"
-                    >
+                    <span className="text-slate-200 text-xs font-semibold pl-1">
                       {i.name}{" "}
                       {i.count > 1 && (
                         <strong className="text-amber-400">x{i.count}</strong>
