@@ -211,7 +211,7 @@ const ProofCheckerModule = () => {
   if (!isAllowedToManage) {
     return (
       <div
-        className="p-8 max-w-lg mx-auto text-center bg-slate-900 border border-slate-800 rounded-2xl
+        className="p-8 max-w-7xl mx-auto text-center bg-slate-900 border border-slate-800 rounded-2xl
         shadow-xl mt-12 space-y-3"
       >
         <span className="text-4xl">🚫</span>
@@ -226,7 +226,7 @@ const ProofCheckerModule = () => {
   }
 
   return (
-    <div className="p-4 md:p-6 max-w-4xl mx-auto flex flex-col gap-6">
+    <div className="p-4 md:p-6 max-w-7xl mx-auto flex flex-col gap-6">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div>

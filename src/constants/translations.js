@@ -223,6 +223,7 @@ export default {
       tabUsers: "Гравці та Акаунти",
       tabCps: "Список КП",
       tabSystem: "Статус Системи",
+      tabTimers: "Таймери / Респаун",
       users: {
         searchPlaceholder: "Пошук за ніком, КП, Discord user чи ID...",
         filterAllRoles: "Всі ролі",
@@ -400,6 +401,34 @@ export default {
       accessDeniedMessage:
         "Розпочинати збір підтверджень можуть лише Raid Caller, Ally Head або Ally General.",
       minutesSuffix: "хв",
+    },
+
+    respawnAdmin: {
+      title: "Управління Часом Респауну",
+      subtitle: "Оновлення таймерів босів, замків та CH у базі даних (UTC-0)",
+      ocrCardTitle: "📷 OCR Розпізнавання із Зображення",
+      ocrDropzoneText: "Перетягніть скріншот сюди або натисніть для вибору",
+      ocrProcessing: "Парсинг зображення...",
+      manualCardTitle: "✏️ Ручне Введення та Редагування",
+      selectEventLabel: "Оберіть івент",
+      dateTimeLabel: "Дата та Час Респауну (UTC-0)",
+      currentRespawnLabel: "Поточний респаун у базі:",
+      timestampSecondsLabel: "Timestamp (секунди):",
+      saveBtn: "Зберегти в базу",
+      savingBtn: "Збереження...",
+      successAlert: "Час респауну успішно оновлено!",
+      ocrFoundMatch: "Знайдено збіг:",
+      ocrNoMatch:
+        "Текст розпізнано, але не вдалося автоматично співставити івент. Оберіть вручну.",
+      cropModalTitle: "✂️ Обріжте область зі списком босів",
+      cropConfirmBtn: "Розпізнати обрану область",
+      cropCancelBtn: "Скасувати",
+      parsedResultsTitle: "📋 Знайдені боси у списку:",
+      applyAllBtn: "Зберегти всі знайдені таймери в базу",
+      applySelectedBtn: "Зберегти обране в базу",
+      noEventsFound:
+        "На зображенні не вдалося розпізнати жодного боса із бази даних.",
+      selectedArea: "Обрана область",
     },
   },
   [LANGUAGES.EN]: {
@@ -616,6 +645,7 @@ export default {
       tabUsers: "Players & Accounts",
       tabCps: "CP List",
       tabSystem: "System Status",
+      tabTimers: "Timers / Respawn",
       users: {
         searchPlaceholder: "Search by character, CP, Discord user or ID...",
         filterAllRoles: "All Roles",
@@ -792,6 +822,34 @@ export default {
       accessDeniedMessage:
         "Only Raid Callers, Ally Heads, or Ally Generals can start an attendance call.",
       minutesSuffix: "m",
+    },
+
+    respawnAdmin: {
+      title: "Respawn Time Management",
+      subtitle: "Update boss, siege, and CH timers in the database (UTC-0)",
+      ocrCardTitle: "📷 OCR Image Recognition",
+      ocrDropzoneText: "Drag & drop a screenshot here or click to browse",
+      ocrProcessing: "Parsing image...",
+      manualCardTitle: "✏️ Manual Entry & Editing",
+      selectEventLabel: "Select Event",
+      dateTimeLabel: "Respawn Date & Time (UTC-0)",
+      currentRespawnLabel: "Current DB Respawn:",
+      timestampSecondsLabel: "Timestamp (seconds):",
+      saveBtn: "Save to Database",
+      savingBtn: "Saving...",
+      successAlert: "Respawn time successfully updated!",
+      ocrFoundMatch: "Found match:",
+      ocrNoMatch:
+        "Text recognized, but event couldn't be auto-matched. Please select manually.",
+      cropModalTitle: "✂️ Crop area with boss list",
+      cropConfirmBtn: "Recognize Selected Area",
+      cropCancelBtn: "Cancel",
+      parsedResultsTitle: "📋 Found bosses in list:",
+      applyAllBtn: "Save All Found Timers to DB",
+      applySelectedBtn: "Save Selected to DB",
+      noEventsFound:
+        "Could not recognize any known bosses from DB in this image.",
+      selectedArea: "Selected Area",
     },
   },
 };

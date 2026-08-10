@@ -6,6 +6,7 @@ import useAuthStore from "../../store/useAuthStore";
 import TabButton from "./components/TabButton";
 import CpManagementModule from "./modules/CpManagementModule";
 import ProofCheckerModule from "./modules/ProofCheckerModule";
+import RespawnModule from "./modules/RespawnModule";
 import SystemStatusModule from "./modules/SystemStatusModule";
 import UsersModule from "./modules/UsersModule";
 
@@ -64,6 +65,15 @@ const AdminPage = () => {
 
         {isOfficer && (
           <TabButton
+            active={activeTab === TAB_KEYS.TIMERS}
+            onClick={() => setActiveTab(TAB_KEYS.TIMERS)}
+            icon="⏳"
+            label={t.admin.tabTimers}
+          />
+        )}
+
+        {isOfficer && (
+          <TabButton
             active={activeTab === TAB_KEYS.USERS}
             onClick={() => setActiveTab(TAB_KEYS.USERS)}
             icon="👥"
@@ -93,6 +103,7 @@ const AdminPage = () => {
       {/* Active Tab Module Content */}
       <div className="animate-fadeIn">
         {activeTab === TAB_KEYS.PROOF && <ProofCheckerModule />}
+        {activeTab === TAB_KEYS.TIMERS && <RespawnModule />}
         {activeTab === TAB_KEYS.USERS && <UsersModule />}
         {activeTab === TAB_KEYS.CPS && <CpManagementModule />}
         {activeTab === TAB_KEYS.SYSTEM && <SystemStatusModule />}
