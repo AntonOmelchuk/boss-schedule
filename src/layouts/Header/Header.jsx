@@ -16,23 +16,23 @@ const Header = () => {
   const { pathname, hash } = useLocation();
 
   const { t } = useTranslation();
-
   const { user, isAuthenticated } = useAuthStore();
 
-  const [isStatsHovered, setIsStatsHovered] = useState(false);
+  const [hoveredDropdownId, setHoveredDropdownId] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const timeoutRef = useRef(null);
 
-  const isStatisticsPage = pathname === "/statistics";
+  const showBackButton =
+    pathname.startsWith("/statistics") || pathname.startsWith("/alliance");
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (itemId) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setIsStatsHovered(true);
+    setHoveredDropdownId(itemId);
   };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setIsStatsHovered(false);
+      setHoveredDropdownId(null);
     }, 150);
   };
 
@@ -46,7 +46,7 @@ const Header = () => {
           {/* 1. BRAND / LOGO */}
           <div className="flex-1 flex items-center justify-start min-w-0">
             <div className="flex items-center gap-3">
-              {isStatisticsPage && <BackButton />}
+              {showBackButton && <BackButton />}
               <BrandLogo onClick={() => navigate("/")} />
             </div>
           </div>
@@ -56,84 +56,89 @@ const Header = () => {
             className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border
             border-slate-800 rounded-2xl shrink-0"
           >
-            {NAV_CONFIG.filter((item) => !item.showOnlyInStatsMobile).map(
-              (item) => {
-                const isActive = item.hasDropdown
-                  ? isStatisticsPage
-                  : pathname === item.path;
-                const itemTitle = t[item.titleKey] || item.title;
+            {NAV_CONFIG.filter(
+              (item) =>
+                !item.showOnlyInStatsMobile && !item.showOnlyInAllianceMobile,
+            ).map((item) => {
+              const isActive = item.hasDropdown
+                ? pathname === item.path.split("#")[0]
+                : pathname === item.path;
 
-                if (item.hasDropdown) {
-                  return (
-                    <div
-                      key={item.id}
-                      className="relative"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <Tab
-                        onClickHandler={() => navigate(item.path)}
-                        isActive={isActive}
-                        title={itemTitle}
-                        icon={item.icon}
-                        className="px-5 py-3 text-base font-bold rounded-xl cursor-pointer"
-                        activeClassName={item.activeClass}
-                        inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
-                      />
+              const itemTitle = t[item.titleKey] || item.title;
 
-                      {/* POPUP DROPDOWN WITH SUB-TABS */}
-                      {isStatsHovered && (
-                        <div className="absolute top-full left-0 pt-2 w-52 z-50">
-                          <div
-                            className="bg-slate-900/95 border border-slate-800 rounded-2xl p-1.5 shadow-2xl
-                            backdrop-blur-xl flex flex-col gap-1"
-                          >
-                            {item.subTabs?.map((subTab) => {
-                              const isSubActive =
-                                isStatisticsPage &&
-                                (hash === subTab.hash ||
-                                  (!hash && subTab.hash === "#points"));
-
-                              const subTabTitle =
-                                t[subTab.titleKey] || subTab.title;
-
-                              return (
-                                <Tab
-                                  key={subTab.id}
-                                  onClickHandler={() => {
-                                    navigate(subTab.path);
-                                    setIsStatsHovered(false);
-                                  }}
-                                  isActive={isSubActive}
-                                  title={subTabTitle}
-                                  icon={subTab.icon}
-                                  className="px-4 py-2.5 text-sm font-bold rounded-xl cursor-pointer justify-start"
-                                  activeClassName={item.activeClass}
-                                  inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
-                                />
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
+              if (item.hasDropdown) {
+                const isDropdownOpen = hoveredDropdownId === item.id;
 
                 return (
-                  <Tab
+                  <div
                     key={item.id}
-                    onClickHandler={() => navigate(item.path)}
-                    isActive={isActive}
-                    title={itemTitle}
-                    icon={item.icon}
-                    className="px-5 py-3 text-base font-bold rounded-xl"
-                    activeClassName={item.activeClass}
-                    inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
-                  />
+                    className="relative"
+                    onMouseEnter={() => handleMouseEnter(item.id)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <Tab
+                      onClickHandler={() => navigate(item.path)}
+                      isActive={isActive}
+                      title={itemTitle}
+                      icon={item.icon}
+                      className="px-5 py-3 text-base font-bold rounded-xl cursor-pointer"
+                      activeClassName={item.activeClass}
+                      inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
+                    />
+
+                    {/* POPUP DROPDOWN WITH SUB-TABS */}
+                    {isDropdownOpen && (
+                      <div className="absolute top-full left-0 pt-2 w-52 z-50">
+                        <div
+                          className="bg-slate-900/95 border border-slate-800 rounded-2xl p-1.5 shadow-2xl
+                          backdrop-blur-xl flex flex-col gap-1"
+                        >
+                          {item.subTabs?.map((subTab) => {
+                            const isSubActive =
+                              pathname === item.path.split("#")[0] &&
+                              (hash === subTab.hash ||
+                                (!hash &&
+                                  subTab.hash === item.subTabs[0]?.hash));
+
+                            const subTabTitle =
+                              t[subTab.titleKey] || subTab.title;
+
+                            return (
+                              <Tab
+                                key={subTab.id}
+                                onClickHandler={() => {
+                                  navigate(subTab.path);
+                                  setHoveredDropdownId(null);
+                                }}
+                                isActive={isSubActive}
+                                title={subTabTitle}
+                                icon={subTab.icon}
+                                className="px-4 py-2.5 text-sm font-bold rounded-xl cursor-pointer justify-start"
+                                activeClassName={item.activeClass}
+                                inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 );
-              },
-            )}
+              }
+
+              return (
+                <Tab
+                  key={item.id}
+                  onClickHandler={() => navigate(item.path)}
+                  isActive={isActive}
+                  title={itemTitle}
+                  icon={item.icon}
+                  className="px-5 py-3 text-base font-bold rounded-xl"
+                  activeClassName={item.activeClass}
+                  inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
+                />
+              );
+            })}
           </nav>
 
           {/* 3. SETTINGS BUTTON */}

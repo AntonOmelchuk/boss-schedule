@@ -1,9 +1,10 @@
 import { onValue, ref, update } from "firebase/database";
 import { useEffect, useMemo, useState } from "react";
 
-import { ROLES_LIST } from "../../../constants/roles";
+import { ROLES, ROLES_LIST } from "../../../constants/roles";
 import useTranslation from "../../../hooks/useTranslation";
 import { db } from "../../../services/firebase";
+import useAuthStore from "../../../store/useAuthStore";
 import {
   AnomalyBadge,
   PaginationBar,
@@ -15,6 +16,9 @@ const ITEMS_PER_PAGE = 10;
 
 const UsersModule = () => {
   const { t } = useTranslation();
+  const { user: currentUser } = useAuthStore();
+
+  const canEditUsers = currentUser?.role === ROLES.ADMIN;
 
   const [usersMap, setUsersMap] = useState({});
   const [cpListKeys, setCpListKeys] = useState([]);
@@ -95,6 +99,8 @@ const UsersModule = () => {
   }, [filteredUsers, currentPage]);
 
   const handleUpdateUserField = async (discordId, field, value) => {
+    if (!canEditUsers) return;
+
     try {
       await update(ref(db, `users/${discordId}`), {
         [field]: value,
@@ -261,7 +267,8 @@ const UsersModule = () => {
                           }
                           options={cpListKeys}
                           defaultOptionLabel=""
-                          className="py-1 px-2 text-slate-200"
+                          disabled={!canEditUsers}
+                          className="py-1 px-2 text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         />
                       </td>
 
@@ -278,7 +285,9 @@ const UsersModule = () => {
                           }
                           options={ROLES_LIST}
                           defaultOptionLabel=""
-                          className="py-1 px-2 font-semibold text-amber-400"
+                          disabled={!canEditUsers}
+                          className="py-1 px-2 font-semibold text-amber-400 disabled:opacity-50
+                            disabled:cursor-not-allowed"
                         />
                       </td>
 

@@ -41,46 +41,33 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
 
   // 1. Request notification permission from browser
   const permission = await Notification.requestPermission();
-  console.log("🔑 [PUSH DEBUG] Notification permission status:", permission);
+
   if (permission !== "granted") {
     throw new Error("Notification permission was denied by user.");
   }
 
   // 2. Obtain active Service Worker registration
   const registration = await navigator.serviceWorker.ready;
-  console.log("👷 [PUSH DEBUG] Service Worker ready:", registration);
 
   // 3. Get existing subscription or create new one safely
   let subscription = await registration.pushManager.getSubscription();
-  console.log("🔍 [PUSH DEBUG] Existing subscription check:", subscription);
 
   const convertedKey = urlBase64ToUint8Array(VAPID_PUBLIC_KEY);
 
   // If no subscription exists, create a new one
   if (!subscription) {
-    console.log("➕ [PUSH DEBUG] Creating new push subscription...");
     try {
       subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: convertedKey,
       });
-      console.log("✅ [PUSH DEBUG] New subscription created successfully!");
     } catch (subErr) {
       console.error("❌ [PUSH DEBUG] Failed to subscribe pushManager:", subErr);
       throw subErr;
     }
-  } else {
-    console.log(
-      "⚡ [PUSH DEBUG] Reusing existing active subscription endpoint.",
-    );
   }
 
   const subJson = subscription.toJSON();
-  console.log("📄 [PUSH DEBUG] Subscription payload JSON:", subJson);
-  console.log(
-    "🌐 [PUSH DEBUG] Sending subscription to backend URL:",
-    `${BASE_URL}/api/push/subscribe`,
-  );
 
   // 4. Send subscription keys, language & user selected alerts to FastAPI backend
   const response = await fetch(`${BASE_URL}/api/push/subscribe`, {
@@ -94,7 +81,6 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
     }),
   });
 
-  console.log("📡 [PUSH DEBUG] Backend HTTP response status:", response.status);
   if (!response.ok) {
     const errData = await response.json();
     console.error(

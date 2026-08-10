@@ -4,7 +4,7 @@ import useTranslation from "../../../hooks/useTranslation";
 import HeaderInfoItem from "./HeaderInfoItem";
 import TypeCountItem from "./TypeCountItem";
 
-const Header = ({ totalAllianceStats, handleAddClan }) => {
+const Header = ({ totalAllianceStats, handleAddClan, canEdit }) => {
   const { t } = useTranslation();
   const { totalClans, totalCps, totalPlayers, partyTypesCount } =
     totalAllianceStats;
@@ -36,12 +36,14 @@ const Header = ({ totalAllianceStats, handleAddClan }) => {
             );
           })}
         </div>
-        <Button
-          onClick={handleAddClan}
-          className="bg-amber-500 text-slate-950 ml-auto"
-        >
-          <span className="text-sm">+ {t.cps?.addClanBtn}</span>
-        </Button>
+        {canEdit && (
+          <Button
+            onClick={handleAddClan}
+            className="bg-amber-500 text-slate-950 ml-auto"
+          >
+            <span className="text-sm">+ {t.cps?.addClanBtn}</span>
+          </Button>
+        )}
       </div>
     </div>
   );

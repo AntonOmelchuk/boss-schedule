@@ -8,10 +8,11 @@ import LiveStatus from "../components/LiveStatus";
 import ProofForm from "../components/ProofForm";
 
 const ALLOWED_LEADERSHIP_ROLES = [
+  "ADMIN",
+  "CO_ADMIN",
   "ALLY_HEAD",
   "ALLY_GENERAL",
   "RAID_CALLER",
-  "ADMIN",
 ];
 
 // Helper to safely parse events list from Firebase snapshot
