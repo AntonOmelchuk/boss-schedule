@@ -12,17 +12,6 @@ import {
 } from "../../../utils/respawnHelper";
 import OCRImageUploader from "../components/OCRImageUploader";
 
-// import useTranslation from "../../../hooks/useTranslation";
-// import { db } from "../../../services/firebase";
-// import { cn } from "../../../utils/cn";
-// import {
-//   dateToUtcInputString,
-//   formatSecondsToUtcString,
-//   parseOcrBossList,
-//   utcInputStringToSeconds,
-// } from "../../../utils/respawnHelpers";
-// import OCRImageUploader from "./OCRImageUploader";
-
 const RespawnModule = () => {
   const { t } = useTranslation();
 
@@ -64,8 +53,12 @@ const RespawnModule = () => {
   }, [selectedKey, eventsDb]);
 
   // Handle OCR text and parse boss list
-  const handleOcrParsedText = (extractedText) => {
-    const results = parseOcrBossList(extractedText, eventsDb);
+  const handleOcrParsedText = (data) => {
+    // Check if backend returned structured array or legacy raw string
+    const results = Array.isArray(data)
+      ? data
+      : parseOcrBossList(data, eventsDb);
+
     setParsedResults(results);
 
     if (results.length > 0) {

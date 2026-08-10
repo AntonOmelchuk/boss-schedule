@@ -81,17 +81,26 @@ export const getCroppedImg = (imageSrc, pixelCrop) => {
 export const parseOcrBossList = (text, eventsDb) => {
   if (!text || !eventsDb) return [];
 
+  // If backend already returned array of parsed objects, pass it through
+  if (Array.isArray(text)) {
+    return text;
+  }
+
+  // Ensure input is a string before calling split
+  if (typeof text !== "string") {
+    return [];
+  }
+
   const lines = text.split("\n");
   const foundResults = [];
 
   const dateTimeRegex =
-    /(\d{1,2})[./-](\d{1,2})[./-](\d{4})\s+(\d{1,2}):(\d{2})/;
+    /(\d{1,2})[.s/-](\d{1,2})[.s/-](\d{2,4})\s+(\d{1,2})[:;.s](\d{2})/;
 
   lines.forEach((line) => {
     const cleanLine = line.trim();
     if (!cleanLine) return;
 
-    // Check if line contains any boss name from DB
     Object.keys(eventsDb).forEach((dbKey) => {
       const eventObj = eventsDb[dbKey];
       const eventName = (eventObj.event || dbKey).toLowerCase();
@@ -102,7 +111,9 @@ export const parseOcrBossList = (text, eventsDb) => {
         if (match) {
           const day = Number(match[1]);
           const month = Number(match[2]) - 1;
-          const year = Number(match[3]);
+          let year = Number(match[3]);
+          if (year < 100) year += 2000;
+
           const hours = Number(match[4]);
           const minutes = Number(match[5]);
 
@@ -110,11 +121,6 @@ export const parseOcrBossList = (text, eventsDb) => {
 
           if (!isNaN(utcTimestamp)) {
             const timestampSeconds = Math.floor(utcTimestamp / 1000);
-
-            // Prevent duplicate entries for the same boss in the same run
-            const existingIdx = foundResults.findIndex(
-              (r) => r.dbKey === dbKey,
-            );
 
             const resultItem = {
               dbKey,
@@ -124,6 +130,9 @@ export const parseOcrBossList = (text, eventsDb) => {
               utcInputString: dateToUtcInputString(new Date(utcTimestamp)),
             };
 
+            const existingIdx = foundResults.findIndex(
+              (r) => r.dbKey === dbKey,
+            );
             if (existingIdx !== -1) {
               foundResults[existingIdx] = resultItem;
             } else {
