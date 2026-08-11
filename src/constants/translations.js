@@ -130,6 +130,7 @@ export default {
     navAlliance: "Аллі Утиліти",
     navLootRandomizer: "Рандомайзер луту",
     navAllianceClans: "Склад кланів",
+    navAfkProof: "AFK Чекер",
 
     active: "Активний",
     loadingAllianceAnalytics: "Завантаження аналітики альянсу...",
@@ -438,6 +439,34 @@ export default {
       fileSelected: "Файл обрано",
       fileNotSelected: "Файл не обрано",
     },
+
+    afkChecker: {
+      formTitle: "Підтвердження присутності",
+      formSubtitle: "Вкажіть вашу КП та нікнейм для реєстрації присутніх",
+      nicknameLabel: "Ігровий Нікнейм",
+      typeManuallyBtn: "Ввести вручну ✏️",
+      selectFromListBtn: "Вибрати зі списку 📋",
+      customNamePlaceholder: "Введіть ваш точний нікнейм",
+      confirmPresenceBtn: "Підтвердити присутність",
+      submitting: "Збереження...",
+      alreadyConfirmedTitle: "Присутність підтверджено!",
+      alreadyConfirmedSubtitle:
+        "Ви вже успішно відмітилися у цьому AFK Чекері.",
+      fillAllFieldsError: "Будь ласка, заповніть всі обов'язкові поля.",
+      submitFailedError: "Помилка при збереженні. Спробуйте ще раз.",
+      badgeText: "PROOF CHECKER",
+      pageTitle: "Перевірка Присутності",
+      pageSubtitle:
+        "Підтвердіть вашу присутність на події для фіксації DKP/Статистики",
+      loadingCheckStatus: "Завантаження стану перевірки...",
+      noActiveCheckTitle: "Активних перевірок не знайдено",
+      noActiveCheckSubtitle:
+        "Наразі немає активного AFK Чекеру або час його дії вичерпано.",
+      secretCodeLabel: "Секретний код",
+      secretCodePlaceholder: "Введіть 4-значний код",
+      invalidSecretCode:
+        "Невірний секретний код. Перевірте значення та спробуйте ще раз.",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -563,6 +592,7 @@ export default {
     navAlliance: "Ally Tools",
     navLootRandomizer: "Loot Randomizer",
     navAllianceClans: "Clan Management",
+    navAfkProof: "AFK Checker",
 
     active: "Active",
     loadingAllianceAnalytics: "Loading Alliance Analytics...",
@@ -865,6 +895,32 @@ export default {
       selectFileBtn: "Select file",
       fileSelected: "File selected",
       fileNotSelected: "No file selected",
+    },
+
+    afkChecker: {
+      formTitle: "Confirm Presence",
+      formSubtitle: "Select your CP and character name to confirm AFK status",
+      nicknameLabel: "Character Name",
+      typeManuallyBtn: "Type manually ✏️",
+      selectFromListBtn: "Select from list 📋",
+      customNamePlaceholder: "Type your exact character name",
+      confirmPresenceBtn: "Confirm Presence",
+      submitting: "Saving...",
+      alreadyConfirmedTitle: "Presence Confirmed!",
+      alreadyConfirmedSubtitle:
+        "You have already recorded your presence for this check.",
+      fillAllFieldsError: "Please fill in all required fields.",
+      submitFailedError: "Failed to submit presence. Please try again.",
+      badgeText: "PROOF CHECKER",
+      pageTitle: "AFK Presence Check",
+      pageSubtitle: "Confirm your presence at the event to record DKP/Stats",
+      loadingCheckStatus: "Loading check status...",
+      noActiveCheckTitle: "No Active Checks Found",
+      noActiveCheckSubtitle:
+        "There is no active AFK Check right now or it has expired.",
+      secretCodeLabel: "Secret Code",
+      secretCodePlaceholder: "Enter 4-digit code",
+      invalidSecretCode: "Invalid secret code. Please check and try again.",
     },
   },
 };
