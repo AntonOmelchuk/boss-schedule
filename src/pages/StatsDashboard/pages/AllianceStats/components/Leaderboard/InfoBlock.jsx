@@ -55,7 +55,7 @@ const InfoBlock = ({ viewMode }) => {
       <div className="hidden md:block relative group cursor-help">
         <InfoIcon />
         <div
-          className="absolute right-0 top-8 w-72 z-30 bg-slate-950 border border-slate-700 p-3.5
+          className="absolute right-0 top-8 w-72 z-90 bg-slate-950 border border-slate-700 p-3.5
             rounded-xl shadow-2xl text-xs text-slate-300 opacity-0 invisible group-hover:opacity-100
             group-hover:visible transition-all duration-200 pointer-events-none"
         >
@@ -75,7 +75,7 @@ const InfoBlock = ({ viewMode }) => {
         </button>
 
         {isOpenMobile && (
-          <div className="fixed inset-0 z-50 flex items-end justify-center">
+          <div className="fixed inset-0 z-99 flex items-end justify-center">
             {/* Backdrop */}
             <div
               onClick={() => setIsOpenMobile(false)}
@@ -85,7 +85,7 @@ const InfoBlock = ({ viewMode }) => {
             {/* Mobile Bottom Sheet Container with extra bottom padding for mobile tabs */}
             <div
               className="relative z-10 w-full max-w-md bg-slate-900 border-t border-slate-800
-                rounded-t-3xl p-6 pb-25 shadow-2xl flex flex-col gap-4 max-h-[85vh]
+                rounded-t-3xl p-6 pb-10 shadow-2xl flex flex-col gap-4 max-h-[85vh]
                 animate-in slide-in-from-bottom duration-200"
             >
               {/* Mobile Header */}
