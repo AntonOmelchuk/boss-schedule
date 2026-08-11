@@ -62,7 +62,7 @@ const AfkProofPage = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto py-8 px-4 space-y-6">
+    <div className="py-4 space-y-8">
       <PageBadgeTitle
         badgeText={t.afkChecker?.badgeText}
         title={t.afkChecker?.pageTitle}
@@ -70,19 +70,21 @@ const AfkProofPage = () => {
         bgColor="bg-amber-500"
       />
 
-      {!activeCheck || !activeCheck.is_active ? (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-3 shadow-xl">
-          <span className="text-4xl">⏳</span>
-          <h3 className="text-base font-bold text-white">
-            {t.afkChecker?.noActiveCheckTitle}
-          </h3>
-          <p className="text-xs text-slate-400 leading-relaxed">
-            {t.afkChecker?.noActiveCheckSubtitle}
-          </p>
-        </div>
-      ) : (
-        <ProofAfkSubmitForm activeCheck={activeCheck} isExpired={isExpired} />
-      )}
+      <div className="max-w-xl mx-auto py-8 px-4 space-y-6">
+        {!activeCheck || !activeCheck.is_active ? (
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-3 shadow-xl">
+            <span className="text-4xl">⏳</span>
+            <h3 className="text-base font-bold text-white">
+              {t.afkChecker?.noActiveCheckTitle}
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              {t.afkChecker?.noActiveCheckSubtitle}
+            </p>
+          </div>
+        ) : (
+          <ProofAfkSubmitForm activeCheck={activeCheck} isExpired={isExpired} />
+        )}
+      </div>
     </div>
   );
 };

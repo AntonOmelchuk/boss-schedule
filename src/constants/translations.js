@@ -447,7 +447,11 @@ export default {
       typeManuallyBtn: "Ввести вручну ✏️",
       selectFromListBtn: "Вибрати зі списку 📋",
       customNamePlaceholder: "Введіть ваш точний нікнейм",
+      systemReady: "Система готова",
+      loggedIn: "Авторизовано",
+      noCharSet: "Персонаж не вказаний",
       confirmPresenceBtn: "Підтвердити присутність",
+      confirmedAs: "Підтверджено як",
       submitting: "Збереження...",
       alreadyConfirmedTitle: "Присутність підтверджено!",
       alreadyConfirmedSubtitle:
@@ -461,7 +465,7 @@ export default {
       loadingCheckStatus: "Завантаження стану перевірки...",
       noActiveCheckTitle: "Активних перевірок не знайдено",
       noActiveCheckSubtitle:
-        "Наразі немає активного AFK Чекеру або час його дії вичерпано.",
+        "Наразі немає активної перевірки присутності. Тримайте сторінку відкритою під час рейду.",
       secretCodeLabel: "Секретний код",
       secretCodePlaceholder: "Введіть 4-значний код",
       invalidSecretCode:
@@ -904,7 +908,11 @@ export default {
       typeManuallyBtn: "Type manually ✏️",
       selectFromListBtn: "Select from list 📋",
       customNamePlaceholder: "Type your exact character name",
+      systemReady: "System Ready",
+      loggedIn: "Authorized",
+      noCharSet: "Character not set",
       confirmPresenceBtn: "Confirm Presence",
+      confirmedAs: "Confirmed as",
       submitting: "Saving...",
       alreadyConfirmedTitle: "Presence Confirmed!",
       alreadyConfirmedSubtitle:
@@ -914,13 +922,15 @@ export default {
       badgeText: "PROOF CHECKER",
       pageTitle: "AFK Presence Check",
       pageSubtitle: "Confirm your presence at the event to record DKP/Stats",
-      loadingCheckStatus: "Loading check status...",
-      noActiveCheckTitle: "No Active Checks Found",
-      noActiveCheckSubtitle:
-        "There is no active AFK Check right now or it has expired.",
       secretCodeLabel: "Secret Code",
       secretCodePlaceholder: "Enter 4-digit code",
       invalidSecretCode: "Invalid secret code. Please check and try again.",
+      expiredError: "This AFK check has expired.",
+      expiredButtonText: "Time Expired ⏳",
+      loadingCheckStatus: "Checking system status...",
+      noActiveCheckTitle: "No Active Proof Check",
+      noActiveCheckSubtitle:
+        "There is no ongoing attendance verification. Keep this page open during TS raids.",
     },
   },
 };

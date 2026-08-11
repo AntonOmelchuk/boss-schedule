@@ -11,9 +11,10 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
   const { t } = useTranslation();
-  const { user } = useAuthStore();
+  const { user, isAuthenticated } = useAuthStore();
 
-  const { id, event_name, expires_at, secret_code } = activeCheck || {};
+  const { id, event_name, expires_at, secret_code, duration_seconds } =
+    activeCheck || {};
 
   const [selectedCp, setSelectedCp] = useState(user?.cp_name || "");
   const [selectedChar, setSelectedChar] = useState(user?.char_name || "");
@@ -50,7 +51,7 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
     return () => clearInterval(interval);
   }, [expires_at]);
 
-  // Prevent duplicate submissions via localStorage
+  // Check localStorage for duplicate submissions
   useEffect(() => {
     const cleanup = initCpData();
     if (id) {
@@ -75,18 +76,17 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
     fetchPlayersForCp(cpName);
   };
 
-  // React 19 Action invoking Python Backend
   const submitProofAction = async () => {
     if (secondsLeft <= 0 || initialExpired) {
-      return { error: t.afkChecker?.expiredError, success: false };
+      return { error: t.afkChecker.expiredError, success: false };
     }
 
     if (!selectedCp || !selectedChar) {
-      return { error: t.afkChecker?.fillAllFieldsError, success: false };
+      return { error: t.afkChecker.fillAllFieldsError, success: false };
     }
 
-    if (secret_code && inputCode.trim() !== secret_code) {
-      return { error: t.afkChecker?.invalidSecretCode, success: false };
+    if (secret_code && inputCode.trim() !== String(secret_code).trim()) {
+      return { error: t.afkChecker.invalidSecretCode, success: false };
     }
 
     try {
@@ -113,7 +113,7 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
 
       if (!response.ok) {
         return {
-          error: resData.detail || t.afkChecker?.submitFailedError,
+          error: resData.detail || t.afkChecker.submitFailedError,
           success: false,
         };
       }
@@ -124,7 +124,7 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
       return { error: null, success: true };
     } catch (err) {
       console.error("Failed to submit AFK proof:", err);
-      return { error: t.afkChecker?.submitFailedError, success: false };
+      return { error: t.afkChecker.submitFailedError, success: false };
     }
   };
 
@@ -137,17 +137,40 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
   );
 
   const isFormDisabled = isPending || secondsLeft <= 0 || initialExpired;
+  const totalDuration = duration_seconds || 60;
+  const timerPercentage = Math.min(
+    100,
+    Math.max(0, (secondsLeft / totalDuration) * 100),
+  );
 
   if (hasAlreadyConfirmed) {
     return (
-      <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6 text-center space-y-2 shadow-xl">
-        <span className="text-3xl">✅</span>
-        <h3 className="text-sm font-bold text-emerald-400">
-          {t.afkChecker?.alreadyConfirmedTitle}
-        </h3>
-        <p className="text-xs text-slate-400">
-          {t.afkChecker?.alreadyConfirmedSubtitle}
-        </p>
+      <div
+        className="bg-slate-900 border border-emerald-500/30 rounded-2xl p-6 text-center space-y-3 shadow-2xl
+          animate-fadeIn"
+      >
+        <div
+          className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center
+          justify-center mx-auto text-2xl"
+        >
+          ✅
+        </div>
+        <div>
+          <h3 className="text-base font-bold text-emerald-400">
+            {t.afkChecker.alreadyConfirmedTitle}
+          </h3>
+          <p className="text-xs text-slate-400 mt-1">
+            {t.afkChecker.alreadyConfirmedSubtitle}
+          </p>
+        </div>
+
+        {/* User Badge readout */}
+        <div className="pt-3 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-center gap-1.5">
+          <span>{t.afkChecker.confirmedAs}:</span>
+          <strong className="text-amber-400 font-bold">
+            {selectedChar} ({selectedCp})
+          </strong>
+        </div>
       </div>
     );
   }
@@ -155,19 +178,37 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
   return (
     <form
       action={formAction}
-      className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5 shadow-2xl"
+      className="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 space-y-5 shadow-2xl relative overflow-hidden
+        animate-fadeIn"
     >
-      {/* Event Header */}
-      <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
+      {/* Animated Top Timer Progress Bar */}
+      <div
+        className="absolute top-0 left-0 h-1.5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300
+          transition-all duration-1000 ease-linear"
+        style={{ width: `${timerPercentage}%` }}
+      />
+
+      {/* Header & Status Indicator */}
+      <div className="border-b border-slate-800 pb-3 flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <span>📸</span> {event_name || t.afkChecker?.formTitle}
+          <div className="flex items-center gap-2 mb-1">
+            <span
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[10px] font-black tracking-widest
+              text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full uppercase"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              {t.afkChecker.systemReady}
+            </span>
+          </div>
+          <h2 className="text-lg font-extrabold text-white flex items-center gap-2">
+            <span>⚡</span> {event_name || t.afkChecker.formTitle}
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">
-            {t.afkChecker?.formSubtitle}
+            {t.afkChecker.formSubtitle}
           </p>
         </div>
 
+        {/* Countdown Badge */}
         {expires_at && (
           <div
             className={`px-3 py-1.5 rounded-xl border font-mono text-xs font-bold flex items-center gap-1.5 shrink-0 ${
@@ -182,6 +223,39 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
         )}
       </div>
 
+      {/* Logged in User Card */}
+      {isAuthenticated && user ? (
+        <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <img
+              src={
+                user.avatar_url ||
+                "https://cdn.discordapp.com/embed/avatars/0.png"
+              }
+              alt="avatar"
+              className="w-9 h-9 rounded-full border border-slate-700 shrink-0"
+            />
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs font-bold text-white truncate">
+                {user.username}
+              </span>
+              <span className="text-[10px] text-amber-400 font-semibold truncate">
+                {user.char_name
+                  ? `${user.char_name} (${user.cp_name || "—"})`
+                  : t.afkChecker.noCharSet}
+              </span>
+            </div>
+          </div>
+          <span
+            className="text-[10px] font-mono text-slate-500 uppercase px-2 py-1 bg-slate-900 border border-slate-800
+            rounded-md shrink-0"
+          >
+            {t.afkChecker.loggedIn}
+          </span>
+        </div>
+      ) : null}
+
+      {/* Error Message Display */}
       {actionState.error && (
         <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-400 font-medium">
           {actionState.error}
@@ -198,16 +272,17 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
             type="text"
             value={inputCode}
             onChange={(e) => setInputCode(e.target.value)}
-            placeholder={t.afkChecker?.secretCodePlaceholder}
+            placeholder={t.afkChecker.secretCodePlaceholder}
             disabled={isFormDisabled}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-amber-400
-              font-mono font-bold focus:outline-none focus:border-amber-500 transition disabled:opacity-50"
+            className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-amber-400
+              font-mono font-bold focus:outline-none focus:border-amber-500 transition disabled:opacity-50 text-center
+              tracking-widest text-sm"
             required
           />
         </div>
       )}
 
-      {/* Identity Controls Form */}
+      {/* Identity Controls Form (CP & Character Picker) */}
       <UserIdentityForm
         cpList={cpList}
         selectedCp={selectedCp}
@@ -224,19 +299,20 @@ const ProofAfkSubmitForm = ({ activeCheck, isExpired: initialExpired }) => {
       <button
         type="submit"
         disabled={!selectedCp || !selectedChar || isFormDisabled}
-        className="w-full py-3 bg-amber-500 hover:bg-amber-600 disabled:bg-slate-800 text-slate-950
-          disabled:text-slate-500 font-bold text-xs rounded-xl shadow-lg transition cursor-pointer
-          disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400
+          disabled:from-slate-800 disabled:to-slate-800 text-slate-950 disabled:text-slate-500 font-black text-xs
+          rounded-xl shadow-lg transition cursor-pointer disabled:cursor-not-allowed flex items-center justify-center
+          gap-2 transform active:scale-95 uppercase tracking-wider"
       >
         {isPending && (
           <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
         )}
         <span>
           {secondsLeft <= 0 || initialExpired
-            ? t.afkChecker?.expiredButtonText
+            ? t.afkChecker.expiredButtonText
             : isPending
-              ? t.afkChecker?.submitting
-              : t.afkChecker?.confirmPresenceBtn}
+              ? t.afkChecker.submitting
+              : t.afkChecker.confirmPresenceBtn}
         </span>
       </button>
     </form>
