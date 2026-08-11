@@ -20,8 +20,9 @@ const ADMIN_TABS = [
     allowedRoles: [
       ROLES.ADMIN,
       ROLES.CO_ADMIN,
-      ROLES.ALLY_GENERAL,
+      ROLES.ALLY_HEAD,
       ROLES.RAID_CALLER,
+      ROLES.ALLY_GENERAL,
     ],
   },
   {
@@ -36,14 +37,24 @@ const ADMIN_TABS = [
     labelKey: "tabUsers",
     icon: "👥",
     component: UsersModule,
-    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_GENERAL],
+    allowedRoles: [
+      ROLES.ADMIN,
+      ROLES.CO_ADMIN,
+      ROLES.ALLY_HEAD,
+      ROLES.ALLY_GENERAL,
+    ],
   },
   {
     key: ADMIN_TAB_KEYS.CPS,
     labelKey: "tabCps",
     icon: "🏰",
     component: CpManagementModule,
-    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_GENERAL],
+    allowedRoles: [
+      ROLES.ADMIN,
+      ROLES.CO_ADMIN,
+      ROLES.ALLY_HEAD,
+      ROLES.ALLY_GENERAL,
+    ],
   },
   {
     key: ADMIN_TAB_KEYS.SYSTEM,
