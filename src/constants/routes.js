@@ -6,6 +6,7 @@ export const NAV_ITEMS = {
   ALLIANCE: "alliance",
   ALLIANCE_LOOT: "alliance_loot",
   ALLIANCE_CLANS: "alliance_clans",
+  ALLIANCE_PROOF: "alliance_proof",
   STATISTICS: "statistics",
   STATISTICS_POINTS: "statistics_points",
   STATISTICS_EPIC: "statistics_epic",
@@ -49,7 +50,7 @@ export const NAV_CONFIG = [
     indicatorGradient: "from-red-600 via-red-500 to-rose-400",
     indicatorShadow: "shadow-[0_-2px_10px_rgba(239,68,68,0.7)]",
   },
-  // --- Dropdown: ALLIANCE ---
+  // --- Dropdown: ALLIANCE / TOOLS ---
   {
     id: NAV_ITEMS.ALLIANCE,
     path: "/alliance/loot",
@@ -63,20 +64,25 @@ export const NAV_CONFIG = [
       {
         id: "loot",
         path: "/alliance/loot",
-        hash: "#loot",
         titleKey: "navLootRandomizer",
         icon: "🎲",
       },
       {
+        id: "proof",
+        path: "/alliance/proof",
+        titleKey: "navAfkProof",
+        icon: "📸",
+      },
+      {
         id: "clans",
         path: "/alliance/clans",
-        hash: "#clans",
         titleKey: "navAllianceClans",
         icon: "🛡️",
         hideOnMobile: true,
       },
     ],
   },
+  // Mobile sub-tabs for Alliance / Tools
   {
     id: NAV_ITEMS.ALLIANCE_LOOT,
     path: "/alliance/loot",
@@ -87,6 +93,17 @@ export const NAV_CONFIG = [
 
     indicatorGradient: "from-purple-600 via-purple-500 to-amber-400",
     indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
+  },
+  {
+    id: NAV_ITEMS.ALLIANCE_PROOF,
+    path: "/alliance/proof",
+    titleKey: "navAfkProof",
+    icon: "📸",
+    mobileActiveClass: "text-amber-400",
+    showOnlyInAllianceMobile: true,
+
+    indicatorGradient: "from-amber-500 via-yellow-400 to-amber-300",
+    indicatorShadow: "shadow-[0_-2px_10px_rgba(245,158,11,0.7)]",
   },
   // --- Dropdown: STATISTICS ---
   {

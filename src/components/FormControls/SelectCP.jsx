@@ -1,4 +1,4 @@
-import useTranslation from "../../../hooks/useTranslation";
+import useTranslation from "../../hooks/useTranslation";
 
 const SelectCP = ({ selectedCp, handleCpChange, loadingCps, cpList }) => {
   const { t } = useTranslation();

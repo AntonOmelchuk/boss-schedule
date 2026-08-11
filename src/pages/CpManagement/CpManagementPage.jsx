@@ -15,7 +15,12 @@ import TypeCountItem from "./components/TypeCountItem";
 
 const UNASSIGNED_KEY = "unassigned";
 
-const ALLOWED_EDIT_ROLES = [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_GENERAL];
+const ALLOWED_EDIT_ROLES = [
+  ROLES.ADMIN,
+  ROLES.CO_ADMIN,
+  ROLES.ALLY_HEAD,
+  ROLES.ALLY_GENERAL,
+];
 
 const CpManagementPage = () => {
   const { t } = useTranslation();

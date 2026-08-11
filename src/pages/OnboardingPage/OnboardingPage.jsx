@@ -2,13 +2,13 @@ import { ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import SelectCP from "../../components/FormControls/SelectCP";
+import SelectNickname from "../../components/FormControls/SelectNickname";
 import useTranslation from "../../hooks/useTranslation";
 import { db } from "../../services/firebase";
 import useAuthStore from "../../store/useAuthStore";
 import useCPStore from "../../store/useCPStore";
 import Header from "./components/Header";
-import SelectCP from "./components/SelectCP";
-import SelectNickname from "./components/SelectNickname";
 
 const OnboardingPage = () => {
   const { t } = useTranslation();

@@ -9,6 +9,7 @@ import MaintenanceGuard from "./guards/MaintenanceGuard";
 import { useAuthSync } from "./hooks/useAuthSync";
 import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 import AdminPage from "./pages/AdminPage/AdminPage";
+import AfkProofPage from "./pages/AfkProofPage/AfkProofPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import CpManagementPage from "./pages/CpManagement/CpManagementPage";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
@@ -139,6 +140,7 @@ function App() {
             <Route path="/statistics" element={<StatsDashboard />} />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/alliance/loot" element={<LootRandomizerPage />} />
+            <Route path="/alliance/proof" element={<AfkProofPage />} />
             <Route
               path="alliance/clans"
               element={
