@@ -296,3 +296,10 @@ export const parseShortDate = (dateStr) => {
 export const cn = (...inputs) => {
   return twMerge(clsx(inputs));
 };
+
+export const formatTimeRemaining = (seconds) => {
+  if (seconds <= 0) return "00:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+};

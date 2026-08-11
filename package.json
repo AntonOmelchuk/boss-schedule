@@ -1,7 +1,7 @@
 {
   "name": "boss-schedule",
   "private": true,
-  "version": "1.12.9",
+  "version": "1.13.11",
   "type": "module",
   "scripts": {
     "dev": "vite --host",

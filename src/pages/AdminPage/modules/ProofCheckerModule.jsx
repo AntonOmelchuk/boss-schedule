@@ -67,14 +67,19 @@ const ProofCheckerModule = () => {
     return () => unsubscribe();
   }, []);
 
-  // 3. Subscribe to live responses for the active check
+  // 3. Subscribe to live responses directly from proof_history node
   useEffect(() => {
-    if (!activeCheck?.id) return;
+    if (!activeCheck?.event_date || !activeCheck?.event_name) {
+      setResponses([]);
+      return;
+    }
 
-    const responsesRef = ref(db, `proof_responses/${activeCheck.id}`);
+    const historyKey = `${activeCheck.event_date}_${activeCheck.event_name}`;
+    const responsesRef = ref(db, `proof_history/${historyKey}/responses`);
 
     const unsubscribe = onValue(responsesRef, (snapshot) => {
       const data = snapshot.val();
+      console.log("data: ", data);
       if (data) {
         setResponses(Object.values(data));
       } else {
@@ -83,7 +88,7 @@ const ProofCheckerModule = () => {
     });
 
     return () => unsubscribe();
-  }, [activeCheck?.id]);
+  }, [activeCheck?.event_date, activeCheck?.event_name]);
 
   // 4. Timer countdown and auto-complete when timer expires
   useEffect(() => {
@@ -166,7 +171,7 @@ const ProofCheckerModule = () => {
       // 1. Set active check
       await set(ref(db, "active_proof_check"), checkData);
 
-      // 2. Initialize history record
+      // 2. Initialize history record with initiator's response
       await set(
         ref(
           db,
@@ -178,12 +183,6 @@ const ProofCheckerModule = () => {
             [initiatorResponse.discord_id]: initiatorResponse,
           },
         },
-      );
-
-      // 3. Auto-add initiator to live responses
-      await set(
-        ref(db, `proof_responses/${proofId}/${initiatorResponse.discord_id}`),
-        initiatorResponse,
       );
     } catch (err) {
       console.error("Error starting proof check:", err);
