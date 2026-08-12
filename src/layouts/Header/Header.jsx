@@ -22,8 +22,7 @@ const Header = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const timeoutRef = useRef(null);
 
-  const showBackButton =
-    pathname.startsWith("/statistics") || pathname.startsWith("/alliance");
+  const showBackButton = pathname.startsWith("/statistics");
 
   const handleMouseEnter = (itemId) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
