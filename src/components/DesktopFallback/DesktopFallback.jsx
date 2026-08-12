@@ -28,8 +28,8 @@ const DesktopFallback = () => {
           Desktop Only Page
         </h2>
         <p className="text-sm text-slate-400 leading-relaxed">
-          This page contains complex schedules and detailed stats optimized
-          exclusively for screen widths of{" "}
+          This page contains complex content optimized exclusively for screen
+          widths of{" "}
           <span className="text-amber-400 font-semibold">1280px+</span>.
         </p>
       </div>

@@ -57,8 +57,7 @@ const Header = () => {
             border-slate-800 rounded-2xl shrink-0"
           >
             {NAV_CONFIG.filter(
-              (item) =>
-                !item.showOnlyInStatsMobile && !item.showOnlyInAllianceMobile,
+              (item) => !item.showOnlyInStatsMobile && !item.onlyMobile,
             ).map((item) => {
               const itemBasePath = item.path.split("#")[0]; // "/alliance/loot" -> "/alliance/loot" || "/statistics"
               const parentSegment = itemBasePath.split("/")[1]; // "alliance" || "statistics"
