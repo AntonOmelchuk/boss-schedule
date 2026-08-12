@@ -19,6 +19,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import OnboardingPage from "./pages/OnboardingPage/OnboardingPage";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
+import TournamentPage from "./pages/TournamentPage/TournamentPage";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
 import {
@@ -141,6 +142,7 @@ function App() {
             <Route path="/media" element={<MediaPage />} />
             <Route path="/alliance/proof" element={<AfkProofPage />} />
             <Route path="/alliance/loot" element={<LootRandomizerPage />} />
+            <Route path="/alliance/tournament" element={<TournamentPage />} />
             <Route
               path="alliance/clans"
               element={

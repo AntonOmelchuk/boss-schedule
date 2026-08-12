@@ -9,6 +9,11 @@ import {
   RELATION,
 } from "../constants/general";
 
+export const isDevelopment =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  import.meta.env.DEV;
+
 /**
  * Retrieves the corresponding emoji icon for a given event type from the mapped dictionary.
  * Falls back to a default combat sword emoji if the type is unknown or missing.
