@@ -22,8 +22,7 @@ const Header = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const timeoutRef = useRef(null);
 
-  const showBackButton =
-    pathname.startsWith("/statistics") || pathname.startsWith("/alliance");
+  const showBackButton = pathname.startsWith("/statistics");
 
   const handleMouseEnter = (itemId) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -57,8 +56,7 @@ const Header = () => {
             border-slate-800 rounded-2xl shrink-0"
           >
             {NAV_CONFIG.filter(
-              (item) =>
-                !item.showOnlyInStatsMobile && !item.showOnlyInAllianceMobile,
+              (item) => !item.showOnlyInStatsMobile && !item.onlyMobile,
             ).map((item) => {
               const itemBasePath = item.path.split("#")[0]; // "/alliance/loot" -> "/alliance/loot" || "/statistics"
               const parentSegment = itemBasePath.split("/")[1]; // "alliance" || "statistics"

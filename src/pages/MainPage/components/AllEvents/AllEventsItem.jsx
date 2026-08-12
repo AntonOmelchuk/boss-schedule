@@ -3,6 +3,7 @@ import OutPrime from "../../../../components/OutPrime/OutPrime";
 import { useIsPWA } from "../../../../hooks/useIsPWA";
 import useTranslation from "../../../../hooks/useTranslation";
 import useAppStore from "../../../../store/useAppStore";
+import useAuthStore from "../../../../store/useAuthStore";
 import { getDiplomacyConfig } from "../../../../utils/general";
 import { subscribeUserToPush } from "../../../../utils/pushNotifications";
 import AlertButton from "./AlertButton";
@@ -33,6 +34,8 @@ const AllEventsItem = ({
   const pushAlerts = useAppStore((state) => state.pushAlerts);
   const togglePushAlert = useAppStore((state) => state.togglePushAlert);
   const defaultLeadTime = useAppStore((state) => state.defaultLeadTime);
+
+  const { user } = useAuthStore();
 
   const alertData = pushAlerts[id];
   const isAlertActive = !!alertData;
@@ -65,7 +68,7 @@ const AllEventsItem = ({
 
     try {
       togglePushAlert(id);
-      await subscribeUserToPush(newAlerts, language);
+      await subscribeUserToPush(newAlerts, language, user?.discord_id || null);
     } catch (err) {
       console.error("Failed to sync push subscription:", err);
       // Is user denied permissions for push-notification

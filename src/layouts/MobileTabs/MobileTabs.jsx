@@ -11,7 +11,7 @@ const MobileTabs = () => {
   const { t } = useTranslation();
 
   const isStatsRoute = pathname === "/statistics";
-  const isAllianceRoute = pathname.startsWith("/alliance");
+
   const currentFullLocation = `${pathname}${hash}`;
 
   const containerRef = useRef(null);
@@ -24,9 +24,7 @@ const MobileTabs = () => {
     if (isStatsRoute) {
       return item.showOnlyInStatsMobile;
     }
-    if (isAllianceRoute) {
-      return item.showOnlyInAllianceMobile;
-    }
+
     return (
       !item.hideOnMobile &&
       !item.showOnlyInStatsMobile &&
@@ -42,9 +40,7 @@ const MobileTabs = () => {
         (item.path.endsWith("#points") && !hash)
       );
     }
-    if (isAllianceRoute) {
-      return pathname === item.path || currentFullLocation === item.path;
-    }
+
     return pathname === item.path;
   });
 

@@ -7,6 +7,7 @@ import { ROLES } from "../../constants/roles";
 import useTranslation from "../../hooks/useTranslation";
 import useAuthStore from "../../store/useAuthStore";
 import useCPStore from "../../store/useCPStore";
+import { cn } from "../../utils/general";
 import AmountBadge from "./components/AmountBadge";
 import ClanCrest from "./components/ClanCrest";
 import CpCard from "./components/CPCard";
@@ -204,11 +205,12 @@ const CpManagementPage = () => {
               key={id}
               onDragOver={canEdit ? handleDragOver : undefined}
               onDrop={canEdit ? (e) => handleDrop(e, id) : undefined}
-              className={`shrink-0 bg-slate-900 border ${
+              className={cn(
+                "shrink-0 bg-slate-900 border rounded-2xl p-3.5 space-y-3 flex flex-col min-h-55 transition-all",
                 isUnassigned
-                  ? "w-80 sm:w-135 md:w-180 border-slate-800/80 bg-slate-950/40"
-                  : "w-72 min-[2300px]:w-135 border-slate-800"
-              } rounded-2xl p-3.5 space-y-3 flex flex-col shadow-xl min-h-55 transition-all`}
+                  ? "w-80 border-slate-800/80 bg-slate-950/40 shadow-xl"
+                  : "w-96 flex-1 min-w-75 border-slate-800 shadow-xl",
+              )}
             >
               {/* Column Header Main */}
               <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 px-1">
@@ -220,7 +222,7 @@ const CpManagementPage = () => {
                       {isUnassigned ? "📦" : "🏰"}
                     </span>
                   )}
-                  <h3 className="font-bold text-base text-white truncate">
+                  <h3 className="font-bold text-xs min-[1800px]:text-base text-white truncate">
                     {name}
                   </h3>
                 </div>
@@ -266,8 +268,8 @@ const CpManagementPage = () => {
               <div
                 className={`flex-1 items-start ${
                   isUnassigned
-                    ? "grid grid-cols-1 sm:grid-cols-2 min-[1800px]:grid-cols-3 gap-2.5"
-                    : "space-y-2.5 min-[2300px]:space-y-0 min-[2300px]:grid min-[2300px]:grid-cols-2 min-[2300px]:gap-2"
+                    ? "grid grid-cols-1 gap-2.5"
+                    : "grid grid-cols-1 sm:grid-cols-2 gap-2.5"
                 }`}
               >
                 {column.cps.length > 0 ? (
@@ -284,7 +286,7 @@ const CpManagementPage = () => {
                 ) : (
                   <div
                     className="col-span-full h-28 border-2 border-dashed border-slate-800/60 rounded-xl flex
-                      items-center justify-center text-xs text-slate-500"
+                      items-center justify-center text-[10px] min-[1800px]:text-xs text-slate-500"
                   >
                     {t.cps.noCpsInClan}
                   </div>

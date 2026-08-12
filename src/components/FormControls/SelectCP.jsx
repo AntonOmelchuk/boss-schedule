@@ -11,7 +11,7 @@ const SelectCP = ({ selectedCp, handleCpChange, loadingCps, cpList }) => {
         value={selectedCp}
         onChange={handleCpChange}
         disabled={loadingCps}
-        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white
+        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white
           focus:outline-none focus:border-amber-500 transition cursor-pointer disabled:opacity-50"
         required
       >

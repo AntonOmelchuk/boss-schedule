@@ -58,14 +58,15 @@ export const NAV_CONFIG = [
     icon: "🛠️",
     activeClass:
       "bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]",
-    mobileActiveClass: "text-purple-400",
     hasDropdown: true,
+    hideOnMobile: true,
     subTabs: [
       {
         id: "loot",
         path: "/alliance/loot",
         titleKey: "navLootRandomizer",
         icon: "🎲",
+        hideOnMobile: true,
       },
       {
         id: "proof",
@@ -82,28 +83,19 @@ export const NAV_CONFIG = [
       },
     ],
   },
-  // Mobile sub-tabs for Alliance / Tools
-  {
-    id: NAV_ITEMS.ALLIANCE_LOOT,
-    path: "/alliance/loot",
-    titleKey: "navLootRandomizer",
-    icon: "🎲",
-    mobileActiveClass: "text-purple-400",
-    showOnlyInAllianceMobile: true,
-
-    indicatorGradient: "from-purple-600 via-purple-500 to-amber-400",
-    indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
-  },
+  // Mobile tab for Proof Checker
   {
     id: NAV_ITEMS.ALLIANCE_PROOF,
     path: "/alliance/proof",
     titleKey: "navAfkProof",
     icon: "📸",
-    mobileActiveClass: "text-amber-400",
-    showOnlyInAllianceMobile: true,
+    activeClass:
+      "bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]",
+    mobileActiveClass: "text-purple-400",
+    onlyMobile: true,
 
-    indicatorGradient: "from-amber-500 via-yellow-400 to-amber-300",
-    indicatorShadow: "shadow-[0_-2px_10px_rgba(245,158,11,0.7)]",
+    indicatorGradient: "from-purple-600 via-fuchsia-500 to-pink-400",
+    indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
   },
   // --- Dropdown: STATISTICS ---
   {

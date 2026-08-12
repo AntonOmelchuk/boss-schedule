@@ -21,8 +21,13 @@ function urlBase64ToUint8Array(base64String) {
  * Requests push permission, registers device token and syncs alert preferences with FastAPI backend.
  * @param {Object} alertsMap - Map of event IDs to alert settings, e.g. { "zaken": { "leadTimeMinutes": 30 } }
  * @param {string} language - Current app language, e.g. "uk" or "en"
+ * * @param {string|null} discordId - Optional discordId if user is authenticated
  */
-export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
+export async function subscribeUserToPush(
+  alertsMap,
+  language = LANGUAGES.EN,
+  discordId = null,
+) {
   if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
     console.error(
       "❌ [PUSH DEBUG] Push messaging is not supported in this browser.",
@@ -78,6 +83,7 @@ export async function subscribeUserToPush(alertsMap, language = LANGUAGES.EN) {
       keys: subJson.keys,
       lang: language,
       alerts: alertsMap,
+      discord_id: discordId,
     }),
   });
 

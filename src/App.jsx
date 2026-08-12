@@ -139,8 +139,8 @@ function App() {
             />
             <Route path="/statistics" element={<StatsDashboard />} />
             <Route path="/media" element={<MediaPage />} />
-            <Route path="/alliance/loot" element={<LootRandomizerPage />} />
             <Route path="/alliance/proof" element={<AfkProofPage />} />
+            <Route path="/alliance/loot" element={<LootRandomizerPage />} />
             <Route
               path="alliance/clans"
               element={
