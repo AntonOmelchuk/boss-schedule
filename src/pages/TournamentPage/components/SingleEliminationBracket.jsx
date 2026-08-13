@@ -1,176 +1,170 @@
+import {
+  createTheme,
+  SingleEliminationBracket as GLootSingleBracket,
+  SVGViewer,
+} from "@g-loot/react-tournament-brackets";
 import { useMemo } from "react";
 
 import useTranslation from "../../../hooks/useTranslation";
+import useWindowSize from "../../../hooks/useWindowSize";
+import { cn } from "../../../utils/general";
+import { formatSingleMatchesForGLoot } from "../../../utils/tournamentGenerator";
 
-/**
- * Tournament Bracket tree view inspired by @g-loot/react-tournament-brackets.
- */
+const customTheme = createTheme({
+  textColor: { main: "#f8fafc", highlighted: "#10b981", dark: "#94a3b8" },
+  matchBackground: { wonColor: "#064e3b", lostColor: "#0f172a" },
+  score: {
+    background: { wonColor: "#059669", lostColor: "#1e293b" },
+    text: { highlightedWonColor: "#7BF59D", highlightedLostColor: "#FB7E94" },
+  },
+  border: {
+    color: "#334155",
+    highlightedColor: "#10b981",
+  },
+  connectorColor: "rgba(51, 65, 85, 0.4)",
+  connectorColorHighlight: "#10b981",
+  svgBackground: "#020617",
+});
+
 const SingleEliminationBracket = ({
   matches = [],
-  byes = [],
   onScoreUpdate,
   canManage,
 }) => {
   const { t } = useTranslation();
+  const [width, height] = useWindowSize();
 
-  const rounds = useMemo(() => {
-    const grouped = {};
-    matches.forEach((match) => {
-      const r = match.round || 1;
-      if (!grouped[r]) grouped[r] = [];
-      grouped[r].push(match);
-    });
-    return Object.entries(grouped).sort(([a], [b]) => Number(a) - Number(b));
+  const finalWidth = Math.max(width - 80, 900);
+  const finalHeight = Math.max(height - 250, 650);
+
+  const formattedMatches = useMemo(() => {
+    return formatSingleMatchesForGLoot(matches);
   }, [matches]);
 
-  const totalRoundsCount = rounds.length;
-
-  const getRoundTitle = (roundNum) => {
-    if (roundNum === totalRoundsCount)
-      return t.tournament?.finalRound || "Фінал 🏆";
-    if (roundNum === totalRoundsCount - 1)
-      return t.tournament?.semiFinalRound || "Півфінал";
-    if (roundNum === totalRoundsCount - 2)
-      return t.tournament?.quarterFinalRound || "Чвертьфінал";
-    return `${t.tournament?.roundLabel || "Раунд"} ${roundNum}`;
-  };
+  if (!formattedMatches || formattedMatches.length === 0) return null;
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4 overflow-x-auto">
+    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4 relative">
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <h3 className="text-sm font-bold text-white flex items-center gap-2">
-          <span>🌳</span>{" "}
-          {t.tournament?.bracketTitle || "Турнірна Сітка (Playoffs)"}
+          <span className="text-xl">🏆</span>{" "}
+          {t.tournament.singleBracketTitle || "Сітка (Single Elimination)"}
         </h3>
-
-        {byes.length > 0 && (
-          <div className="text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-xl">
-            <span>✨ {t.tournament?.byeNotice || "Авто-прохід"}: </span>
-            <strong className="font-extrabold">{byes.join(", ")}</strong>
-          </div>
-        )}
       </div>
 
-      {/* Bracket Tree Row Container */}
-      <div className="flex items-stretch gap-12 min-w-212.5 py-6 overflow-x-auto">
-        {rounds.map(([roundNumStr, roundMatches], roundIdx) => {
-          const roundNum = Number(roundNumStr);
-          const isLastRound = roundIdx === totalRoundsCount - 1;
+      <div className="w-full bg-slate-950/90 rounded-xl p-4 relative">
+        <GLootSingleBracket
+          matches={formattedMatches}
+          options={{
+            style: {
+              roundHeader: {
+                backgroundColor: "transparent",
+                fontColor: "#94a3b8",
+              },
+              connectorColor: "#fff",
+              connectorColorHighlight: "#10b981",
+            },
+          }}
+          matchComponent={({ match }) => {
+            const isDone = match.state === "DONE";
 
-          return (
-            <div
-              key={roundNum}
-              className="flex-1 flex flex-col justify-between min-w-55"
-            >
-              {/* Round Header Badge */}
-              <div className="text-center mb-6">
-                <span
-                  className="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-slate-950 border
-                  border-slate-800 text-amber-400"
+            return (
+              <div className="relative group my-1">
+                <div
+                  className="bg-slate-900/90 border border-slate-700/80 rounded-xl shadow-xl transition-all
+                  duration-300 hover:border-emerald-500/60"
                 >
-                  {getRoundTitle(roundNum)}
-                </span>
-              </div>
+                  <div
+                    className="bg-slate-950/80 px-3 py-1 border-b border-slate-800 text-[10px] font-bold
+                    text-slate-400 flex justify-between items-center"
+                  >
+                    <span>{match.name}</span>
+                    {isDone && (
+                      <span className="text-emerald-400 text-[9px]">
+                        ● FINISHED
+                      </span>
+                    )}
+                  </div>
 
-              {/* Match Cards Bracket Tree Stack */}
-              <div className="flex-1 flex flex-col justify-around gap-6 relative">
-                {roundMatches.map((match) => {
-                  const isFinished = match.status === "FINISHED";
+                  <div className="divide-y divide-slate-800/60">
+                    {match.participants.map((p, idx) => {
+                      const isWinner = p.isWinner;
+                      const isBye = p.name === "BYE";
+                      const isTbd = p.name === "TBD";
 
-                  return (
-                    <div
-                      key={match.id}
-                      className="relative flex items-center my-auto"
-                    >
-                      {/* Match Node Card */}
-                      <div
-                        className={`w-full rounded-xl border p-2.5 space-y-1.5 transition shadow-xl relative z-10 ${
-                          isFinished
-                            ? "bg-slate-950 border-slate-800"
-                            : "bg-slate-950 border-amber-500/40 shadow-amber-500/5"
-                        }`}
-                      >
-                        {/* Team 1 */}
+                      const isClickable =
+                        canManage && !isDone && !isBye && !isTbd;
+
+                      const handleParticipantClick = () => {
+                        if (!isClickable) return;
+
+                        const score1 = idx === 0 ? 1 : 0;
+                        const score2 = idx === 0 ? 0 : 1;
+                        onScoreUpdate(match.id, score1, score2);
+                      };
+
+                      return (
                         <div
-                          className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg border transition ${
-                            match.winner === match.team1
-                              ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 font-extrabold"
-                              : "bg-slate-900/80 border-slate-800 text-slate-200"
-                          }`}
+                          key={p.id || idx}
+                          onClick={handleParticipantClick}
+                          className={cn(
+                            "flex items-center justify-between px-3 p-1.5 text-xs transition-all duration-300",
+                            isWinner &&
+                              "bg-gradient-to-r from-emerald-950/80 to-slate-900 text-emerald-300 " +
+                                "font-extrabold border-l-4 border-emerald-500 " +
+                                "shadow-[inset_0_0_12px_rgba(16,185,129,0.15)]",
+                            (isBye || isTbd) && "text-slate-600 italic",
+                            !isWinner &&
+                              !isBye &&
+                              !isTbd &&
+                              "text-slate-300 font-medium",
+                            isClickable &&
+                              "cursor-pointer hover:bg-emerald-500/10 hover:text-emerald-400",
+                          )}
                         >
-                          <span className="text-xs truncate max-w-32.5">
-                            {match.team1 || "—"}
-                          </span>
-                          {canManage ? (
-                            <input
-                              type="number"
-                              value={match.score1}
-                              onChange={(e) =>
-                                onScoreUpdate(
-                                  match.id,
-                                  parseInt(e.target.value) || 0,
-                                  match.score2,
-                                )
-                              }
-                              className="w-7 text-center bg-slate-950 border border-slate-700 rounded text-xs font-mono
-                                font-bold text-amber-400 focus:outline-none"
-                            />
-                          ) : (
-                            <span className="font-mono text-xs font-bold text-amber-400">
-                              {match.score1}
+                          <div className="flex items-center gap-2 truncate pr-2">
+                            {isWinner && (
+                              <span className="text-emerald-400 text-xs">
+                                🏆
+                              </span>
+                            )}
+                            <span className="truncate">
+                              {isBye ? t.tournament.byeNotice : p.name}
+                            </span>
+                          </div>
+
+                          {p.resultText && (
+                            <span
+                              className={cn(
+                                "text-[10px] font-black px-1.5 py-0.5 rounded",
+                                isWinner
+                                  ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                                  : "bg-slate-800 text-slate-500",
+                              )}
+                            >
+                              {p.resultText}
                             </span>
                           )}
                         </div>
-
-                        {/* Team 2 */}
-                        <div
-                          className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg border transition ${
-                            match.winner === match.team2
-                              ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 font-extrabold"
-                              : "bg-slate-900/80 border-slate-800 text-slate-200"
-                          }`}
-                        >
-                          <span className="text-xs truncate max-w-32.5">
-                            {match.team2 || "—"}
-                          </span>
-                          {canManage ? (
-                            <input
-                              type="number"
-                              value={match.score2}
-                              onChange={(e) =>
-                                onScoreUpdate(
-                                  match.id,
-                                  match.score1,
-                                  parseInt(e.target.value) || 0,
-                                )
-                              }
-                              className="w-7 text-center bg-slate-950 border border-slate-700 rounded text-xs font-mono
-                                font-bold text-amber-400 focus:outline-none"
-                            />
-                          ) : (
-                            <span className="font-mono text-xs font-bold text-amber-400">
-                              {match.score2}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Right Branch Bracket Connector Line */}
-                      {!isLastRound && (
-                        <div className="absolute left-full top-1/2 w-12 h-px bg-slate-700 z-0 pointer-events-none">
-                          <div
-                            className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full
-                          bg-amber-500"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }}
+          svgWrapper={({ children, ...props }) => (
+            <SVGViewer
+              width={finalWidth}
+              height={finalHeight}
+              background={customTheme.svgBackground}
+              SVGBackground={customTheme.svgBackground}
+              {...props}
+            >
+              {children}
+            </SVGViewer>
+          )}
+        />
       </div>
     </div>
   );

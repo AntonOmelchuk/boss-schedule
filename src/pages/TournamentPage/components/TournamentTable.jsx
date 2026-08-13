@@ -1,12 +1,8 @@
-// src/pages/TournamentPage/components/TournamentTable.jsx
 import { useRef, useState } from "react";
 
 import useTranslation from "../../../hooks/useTranslation";
 import takeTournamentScreenshot from "../../../utils/tournamentScreenshot";
 
-/**
- * Football-style standings table for Round Robin tournament format with screenshot export.
- */
 const TournamentTable = ({ participants = [], matches = [] }) => {
   const { t } = useTranslation();
   const captureRef = useRef(null);
@@ -86,7 +82,7 @@ const TournamentTable = ({ participants = [], matches = [] }) => {
     >
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <h3 className="text-sm font-bold text-white flex items-center gap-2">
-          <span>🏆</span> {t.tournament?.standingsTitle}
+          <span>🏆</span> {t.tournament.standingsTitle}
         </h3>
 
         {/* Screenshot export button (ignored during capture via attribute) */}
@@ -100,8 +96,8 @@ const TournamentTable = ({ participants = [], matches = [] }) => {
           <span>📸</span>
           <span>
             {isCapturing
-              ? t.tournament?.savingScreenshot
-              : t.tournament?.exportScreenshotBtn}
+              ? t.tournament.savingScreenshot
+              : t.tournament.exportScreenshotBtn}
           </span>
         </button>
       </div>
@@ -110,16 +106,16 @@ const TournamentTable = ({ participants = [], matches = [] }) => {
         <thead className="bg-slate-950 text-slate-400 font-bold uppercase border-b border-slate-800">
           <tr>
             <th className="py-2.5 px-3">#</th>
-            <th className="py-2.5 px-3">{t.tournament?.teamHeader}</th>
-            <th className="py-2.5 px-2 text-center">{t.tournament?.pHeader}</th>
-            <th className="py-2.5 px-2 text-center">{t.tournament?.wHeader}</th>
-            <th className="py-2.5 px-2 text-center">{t.tournament?.dHeader}</th>
-            <th className="py-2.5 px-2 text-center">{t.tournament?.lHeader}</th>
+            <th className="py-2.5 px-3">{t.tournament.teamHeader}</th>
+            <th className="py-2.5 px-2 text-center">{t.tournament.pHeader}</th>
+            <th className="py-2.5 px-2 text-center">{t.tournament.wHeader}</th>
+            <th className="py-2.5 px-2 text-center">{t.tournament.dHeader}</th>
+            <th className="py-2.5 px-2 text-center">{t.tournament.lHeader}</th>
             <th className="py-2.5 px-2 text-center">
-              {t.tournament?.diffHeader}
+              {t.tournament.diffHeader}
             </th>
             <th className="py-2.5 px-3 text-center text-amber-400">
-              {t.tournament?.ptsHeader}
+              {t.tournament.ptsHeader}
             </th>
           </tr>
         </thead>

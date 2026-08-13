@@ -515,6 +515,8 @@ export default {
       finalRound: "Фінал 🏆",
       semiFinalRound: "Півфінал",
       quarterFinalRound: "Чвертьфінал",
+      singleBracketTitle: "Сітка (Single Elimination)",
+      screenshotError: "Не вдалося згенерувати скріншот.",
     },
   },
   [LANGUAGES.EN]: {
@@ -1021,6 +1023,8 @@ export default {
       finalRound: "Finals 🏆",
       semiFinalRound: "Semi-Finals",
       quarterFinalRound: "Quarter-Finals",
+      singleBracketTitle: "Single Elimination Bracket",
+      screenshotError: "Failed to generate screenshot.",
     },
   },
 };

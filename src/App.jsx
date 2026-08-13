@@ -142,12 +142,19 @@ function App() {
             <Route path="/media" element={<MediaPage />} />
             <Route path="/alliance/proof" element={<AfkProofPage />} />
             <Route path="/alliance/loot" element={<LootRandomizerPage />} />
-            <Route path="/alliance/tournament" element={<TournamentPage />} />
             <Route
               path="alliance/clans"
               element={
                 <DesktopOnlyGuard redirectTo="/">
                   <CpManagementPage />
+                </DesktopOnlyGuard>
+              }
+            />
+            <Route
+              path="alliance/tournament"
+              element={
+                <DesktopOnlyGuard redirectTo="/">
+                  <TournamentPage />
                 </DesktopOnlyGuard>
               }
             />
