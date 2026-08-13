@@ -19,6 +19,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import OnboardingPage from "./pages/OnboardingPage/OnboardingPage";
 import ScheduleBuilder from "./pages/ScheduleBuilder/ScheduleBuilder";
 import StatsDashboard from "./pages/StatsDashboard/StatsDashboard";
+import TournamentPage from "./pages/TournamentPage/TournamentPage";
 import { db } from "./services/firebase";
 import useAppStore from "./store/useAppStore";
 import {
@@ -146,6 +147,14 @@ function App() {
               element={
                 <DesktopOnlyGuard redirectTo="/">
                   <CpManagementPage />
+                </DesktopOnlyGuard>
+              }
+            />
+            <Route
+              path="alliance/tournament"
+              element={
+                <DesktopOnlyGuard redirectTo="/">
+                  <TournamentPage />
                 </DesktopOnlyGuard>
               }
             />

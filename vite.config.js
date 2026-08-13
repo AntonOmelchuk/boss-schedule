@@ -16,6 +16,7 @@ export default defineConfig({
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       devOptions: {
         enabled: true,
+        type: "module",
       },
       manifest: {
         name: "Iron Gates",
@@ -48,4 +49,12 @@ export default defineConfig({
     }),
   ],
   base: "/",
+  optimizeDeps: {
+    include: [
+      "react-is",
+      "styled-components",
+      "react-svg-pan-zoom",
+      "@g-loot/react-tournament-brackets",
+    ],
+  },
 });
