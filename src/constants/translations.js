@@ -279,7 +279,7 @@ export default {
     infoBlock: {
       ariaLabel: "Показати інформацію",
       headerTitle: "Інформація",
-      tierCalcTitle: "Як розраховуються рівень:",
+      tierCalcTitle: "Як розраховуються рівні:",
       tierCalcSubtitle: "Рівні базуються на відносному рейтингу (перцентилі):",
       sTierDesc: "Топ 15% за показниками",
       aTierDesc: "Наступні 40% (15% – 55%)",
