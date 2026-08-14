@@ -32,7 +32,6 @@ const useAuthStore = create(
 
           const data = await response.json();
 
-          // 🔑 Авторизуємо клієнтський Firebase SDK
           if (data.token) {
             const auth = getAuth();
             await signInWithCustomToken(auth, data.token);
