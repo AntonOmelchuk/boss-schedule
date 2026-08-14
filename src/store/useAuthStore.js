@@ -1,3 +1,4 @@
+import { getAuth, signInWithCustomToken, signOut } from "firebase/auth";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -6,19 +7,13 @@ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const useAuthStore = create(
   persist(
     (set, get) => ({
-      user: null, // { discord_id, username, avatar_url, char_name, cp_name, role, is_setup_complete }
+      user: null,
       token: null,
       isAuthenticated: false,
       isAuthenticating: false,
       authError: null,
 
-      /**
-       * Exchanges Discord authorization code for user data & access token
-       * @param {string} code - OAuth2 code from Discord callback
-       * @returns {Promise<Object>} Returns user object on success
-       */
       loginWithDiscord: async (code) => {
-        // Prevent duplicate simultaneous requests
         if (get().isAuthenticating) return null;
 
         set({ isAuthenticating: true, authError: null });
@@ -35,7 +30,12 @@ const useAuthStore = create(
             throw new Error(errData.detail || "Authentication failed");
           }
 
-          const data = await response.json(); // { status, user, token }
+          const data = await response.json();
+
+          if (data.token) {
+            const auth = getAuth();
+            await signInWithCustomToken(auth, data.token);
+          }
 
           set({
             user: data.user,
@@ -69,18 +69,25 @@ const useAuthStore = create(
           user: state.user ? { ...state.user, ...updatedFields } : null,
         })),
 
-      logout: () =>
+      logout: async () => {
+        try {
+          const auth = getAuth();
+          await signOut(auth);
+        } catch (e) {
+          console.error("Firebase SignOut error:", e);
+        }
+
         set({
           user: null,
           token: null,
           isAuthenticated: false,
           authError: null,
           isAuthenticating: false,
-        }),
+        });
+      },
     }),
     {
-      name: "auth_storage", // Key in LocalStorage
-      // Persist only necessary session fields (ignore temporary UI states)
+      name: "auth_storage",
       partialize: (state) => ({
         user: state.user,
         token: state.token,
