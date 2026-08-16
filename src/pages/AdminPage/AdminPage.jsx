@@ -6,6 +6,7 @@ import useTranslation from "../../hooks/useTranslation";
 import useAuthStore from "../../store/useAuthStore";
 import TabButton from "./components/TabButton";
 import CpManagementModule from "./modules/CpManagementModule";
+import PrimeTimeModule from "./modules/PrimeTimeModule";
 import ProofCheckerModule from "./modules/ProofCheckerModule";
 import RespawnModule from "./modules/RespawnModule";
 import SystemStatusModule from "./modules/SystemStatusModule";
@@ -30,6 +31,13 @@ const ADMIN_TABS = [
     labelKey: "tabTimers",
     icon: "⏳",
     component: RespawnModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
+  },
+  {
+    key: "PRIME_TIME",
+    labelKey: "tabPrimeTime",
+    icon: "⏰",
+    component: PrimeTimeModule,
     allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
   },
   {

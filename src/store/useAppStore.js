@@ -34,8 +34,9 @@ const useAppStore = create(
 
       defaultLeadTime: 30, // Default lead time in minutes (for settings slider)
       pushAlerts: {}, // Structure: { "zaken": { leadTimeMinutes: 30 } }
-
+      primeTime: { from: "07:00", to: "23:00" },
       // Actions
+      setPrimeTime: (primeTime) => set({ primeTime }),
       setLanguage: (lang) => set({ language: lang }),
       setEvents: (events) => set({ events }),
       setTimeFilter: (timeFilter) => set({ timeFilter }),

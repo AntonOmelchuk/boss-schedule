@@ -155,18 +155,36 @@ export const getNextWeeklyEvent = (dayOfWeek, timeStr) => {
 };
 
 /**
- * Evaluates whether an event qualifies for the "out of prime time" category (late-night active window restrictions).
- * Identifies if the event category is Epic and if its scheduled time falls between 23:00 and 6:00 AM UTC.
+ * Evaluates whether an event qualifies for the "out of prime time" category.
+ * Checks if the event category is Epic and if its scheduled UTC time falls OUTSIDE the prime time window.
+ *
  * @param {string} category - The type of event category.
  * @param {number} ts - Event target execution timestamp in milliseconds.
- * @returns {boolean} True if the event triggers Out prime warnings, otherwise false.
+ * @param {Object} primeTime - Prime time window from Firebase { from: "07:00", to: "23:00" } in UTC.
+ * @returns {boolean} True if the event triggers Out Prime warnings, otherwise false.
  */
-export const checkIsOutPrime = (category, ts) =>
-  category === CATEGORIES.Epic &&
-  (() => {
-    const hours = new Date(ts).getUTCHours();
-    return hours >= 22 || hours < 6;
-  })();
+export const checkIsOutPrime = (
+  category,
+  ts,
+  primeTime = { from: "07:00", to: "23:00" },
+) => {
+  if (category !== CATEGORIES.Epic || !ts || !primeTime) return false;
+
+  const eventDate = new Date(ts);
+  const eventMinutes = eventDate.getUTCHours() * 60 + eventDate.getUTCMinutes();
+
+  const [fromH, fromM] = (primeTime.from || "07:00").split(":").map(Number);
+  const [toH, toM] = (primeTime.to || "23:00").split(":").map(Number);
+
+  const startMinutes = fromH * 60 + fromM;
+  const endMinutes = toH * 60 + toM;
+
+  if (startMinutes <= endMinutes) {
+    return eventMinutes < startMinutes || eventMinutes >= endMinutes;
+  }
+
+  return eventMinutes < startMinutes && eventMinutes >= endMinutes;
+};
 
 /**
  * Formats time (HH:MM) for a specific timezone.
