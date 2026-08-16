@@ -228,6 +228,7 @@ export default {
       tabCps: "Список КП",
       tabSystem: "Статус Системи",
       tabTimers: "Таймери / Респаун",
+      tabPrimeTime: "Прайм Тайм",
       noAccess: "У вас немає доступу до адмін-панелі",
 
       users: {
@@ -251,6 +252,17 @@ export default {
         noUsersFound: "Гравців за вашим запитом не знайдено",
         prevPage: "Назад",
         nextPage: "Вперед",
+      },
+      primeTime: {
+        title: "Налаштування Prime Time",
+        description:
+          "Визначте діапазон прайм-тайму в UTC+0. Події поза цим часом вважатимуться Out Prime.",
+        fromLabel: "Початок (UTC):",
+        toLabel: "Кінець (UTC):",
+        saveButton: "Зберегти Prime Time",
+        saving: "Збереження...",
+        saveSuccess: "Успішно оновлено!",
+        saveError: "Помилка при збереженні!",
       },
     },
 
@@ -738,6 +750,7 @@ export default {
       tabCps: "CP List",
       tabSystem: "System Status",
       tabTimers: "Timers / Respawn",
+      tabPrimeTime: "Prime Time",
       noAccess: "You do not have access to the admin panel",
       users: {
         searchPlaceholder: "Search by character, CP, Discord user or ID...",
@@ -760,6 +773,17 @@ export default {
         noUsersFound: "No players found matching your query",
         prevPage: "Prev",
         nextPage: "Next",
+      },
+      primeTime: {
+        title: "Prime Time Settings",
+        description:
+          "Define the prime time window in UTC+0. Events outside this range will be marked as Out Prime.",
+        fromLabel: "Start Time (UTC):",
+        toLabel: "End Time (UTC):",
+        saveButton: "Save Prime Time",
+        saving: "Saving...",
+        saveSuccess: "Successfully updated!",
+        saveError: "Failed to save settings!",
       },
     },
 

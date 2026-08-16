@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -28,13 +29,24 @@ import {
   getNextWeeklyEvent,
 } from "./utils/general";
 
+const checkFirebaseStatus = () => {
+  const currentUser = getAuth().currentUser;
+  console.log("🔍 [DEBUG SESSION] Current Firebase User:", currentUser);
+  console.log("🔍 [DEBUG SESSION] Current auth.uid:", currentUser?.uid);
+};
+
 function App() {
   useAuthSync();
 
   const setEvents = useAppStore((state) => state.setEvents);
+  const setPrimeTime = useAppStore((state) => state.setPrimeTime);
 
   // State for handling system maintenance mode
   const [maintenanceStatus, setMaintenanceStatus] = useState(false);
+
+  useEffect(() => {
+    checkFirebaseStatus();
+  }, []);
 
   // 1. Listen for maintenance status from Firebase Realtime DB
   useEffect(() => {
@@ -69,6 +81,12 @@ function App() {
     const unsubscribe = onValue(regroupsRef, (snapshot) => {
       const data = snapshot.val() || {};
       const eventsData = data.events || {};
+      console.log("data: ", data.prime_time);
+      // Отримуємо prime_time з бази (якщо немає — фолбек на 07:00 - 23:00)
+      const dbPrimeTime = data.prime_time || { from: "07:00", to: "23:00" };
+      if (setPrimeTime) {
+        setPrimeTime(dbPrimeTime);
+      }
 
       const parsedEvents = Object.values(eventsData)
         .filter(
@@ -102,7 +120,8 @@ function App() {
               category,
               owner: owner || null,
               icon: getEmojiIcon(type),
-              isOutPrime: category && checkIsOutPrime(category, ts),
+              isOutPrime:
+                category && checkIsOutPrime(category, ts, dbPrimeTime),
             };
           },
         )
@@ -112,7 +131,7 @@ function App() {
     });
 
     return () => unsubscribe();
-  }, [setEvents]);
+  }, [setEvents, setPrimeTime]);
 
   return (
     <BrowserRouter>
