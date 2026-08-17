@@ -21,11 +21,10 @@ const CrossTableGrid = ({
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <h3 className="text-sm font-bold text-white flex items-center gap-2">
-          <span>🗓️</span>{" "}
-          {t.tournament?.crossTableTitle || "Сітка результатів (Крос-таблиця)"}
+          <span>🗓️</span> {t.tournament?.crossTableTitle}
         </h3>
         <span className="text-[11px] text-slate-400">
-          W - Перемога / L - Поразка / D - Нічия
+          {t.tournament?.crossTableLegend}
         </span>
       </div>
 

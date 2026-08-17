@@ -545,6 +545,8 @@ export default {
       quarterFinalRound: "Чвертьфінал",
       singleBracketTitle: "Сітка (Single Elimination)",
       screenshotError: "Не вдалося згенерувати скріншот.",
+      crossTableTitle: "Сітка результатів (Крос-таблиця)",
+      crossTableLegend: "W - Перемога / L - Поразка / D - Нічия",
     },
   },
   [LANGUAGES.EN]: {
@@ -1081,6 +1083,8 @@ export default {
       quarterFinalRound: "Quarter-Finals",
       singleBracketTitle: "Single Elimination Bracket",
       screenshotError: "Failed to generate screenshot.",
+      crossTableTitle: "Results Grid (Cross-Table)",
+      crossTableLegend: "W - Win / L - Loss / D - Draw",
     },
   },
 };
