@@ -63,7 +63,7 @@ const ADMIN_TABS = [
   {
     key: ADMIN_TAB_KEYS.CPS,
     labelKey: "tabCps",
-    icon: "🏰",
+    icon: "🤝",
     component: CpManagementModule,
     allowedRoles: [
       ROLES.ADMIN,
