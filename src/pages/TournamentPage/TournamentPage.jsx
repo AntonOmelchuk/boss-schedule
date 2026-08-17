@@ -76,7 +76,7 @@ const TournamentPage = () => {
 
     const payload = {
       id: `tourn_${Date.now()}`,
-      title: tournamentTitle.trim() || t.tournament?.defaultTitle,
+      title: tournamentTitle.trim() || t.tournament.defaultTitle,
       type: tournamentType,
       status: "IN_PROGRESS",
       created_at: Date.now(),

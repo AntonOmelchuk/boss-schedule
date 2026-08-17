@@ -229,6 +229,7 @@ export default {
       tabSystem: "Статус Системи",
       tabTimers: "Таймери / Респаун",
       tabPrimeTime: "Прайм Тайм",
+      tabHoldings: "Володіння",
       noAccess: "У вас немає доступу до адмін-панелі",
 
       users: {
@@ -263,6 +264,21 @@ export default {
         saving: "Збереження...",
         saveSuccess: "Успішно оновлено!",
         saveError: "Помилка при збереженні!",
+      },
+      holdings: {
+        title: "Керування замками та клан-холами",
+        description:
+          "Вкажіть поточного власника та дипломатичний статус для кожного об'єкта.",
+        ownerLabel: "Власник (Клан):",
+        ownerPlaceholder: "Назва клану / NPC",
+        relationLabel: "Статус (Relation):",
+        relationAlliance: "Alliance (Альянс)",
+        relationEnemy: "Enemy (Вороги)",
+        relationNeutral: "Neutral (Нейтрал / NPC)",
+        saveButton: "Зберегти",
+        saving: "Збереження...",
+        saveSuccess: "Оновлено",
+        saveError: "Помилка",
       },
     },
 
@@ -529,6 +545,8 @@ export default {
       quarterFinalRound: "Чвертьфінал",
       singleBracketTitle: "Сітка (Single Elimination)",
       screenshotError: "Не вдалося згенерувати скріншот.",
+      crossTableTitle: "Сітка результатів (Крос-таблиця)",
+      crossTableLegend: "W - Перемога / L - Поразка / D - Нічия",
     },
   },
   [LANGUAGES.EN]: {
@@ -751,6 +769,7 @@ export default {
       tabSystem: "System Status",
       tabTimers: "Timers / Respawn",
       tabPrimeTime: "Prime Time",
+      tabHoldings: "Holdings",
       noAccess: "You do not have access to the admin panel",
       users: {
         searchPlaceholder: "Search by character, CP, Discord user or ID...",
@@ -784,6 +803,21 @@ export default {
         saving: "Saving...",
         saveSuccess: "Successfully updated!",
         saveError: "Failed to save settings!",
+      },
+      holdings: {
+        title: "Castle & Clan Hall Management",
+        description:
+          "Set current owners and diplomatic status for each property.",
+        ownerLabel: "Owner (Clan):",
+        ownerPlaceholder: "Clan Name / NPC",
+        relationLabel: "Status (Relation):",
+        relationAlliance: "Alliance",
+        relationEnemy: "Enemy",
+        relationNeutral: "Neutral / NPC",
+        saveButton: "Save",
+        saving: "Saving...",
+        saveSuccess: "Updated",
+        saveError: "Error",
       },
     },
 
@@ -1049,6 +1083,8 @@ export default {
       quarterFinalRound: "Quarter-Finals",
       singleBracketTitle: "Single Elimination Bracket",
       screenshotError: "Failed to generate screenshot.",
+      crossTableTitle: "Results Grid (Cross-Table)",
+      crossTableLegend: "W - Win / L - Loss / D - Draw",
     },
   },
 };
