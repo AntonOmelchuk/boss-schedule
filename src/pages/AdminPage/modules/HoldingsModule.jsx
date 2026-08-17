@@ -2,7 +2,7 @@ import { onValue, ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-import Button from "../../../components/Button";
+import Button from "../../../components/UI/Button";
 import useTranslation from "../../../hooks/useTranslation";
 import { db } from "../../../services/firebase";
 
