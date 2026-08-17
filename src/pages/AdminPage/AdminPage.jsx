@@ -6,6 +6,7 @@ import useTranslation from "../../hooks/useTranslation";
 import useAuthStore from "../../store/useAuthStore";
 import TabButton from "./components/TabButton";
 import CpManagementModule from "./modules/CpManagementModule";
+import HoldingsModule from "./modules/HoldingsModule";
 import PrimeTimeModule from "./modules/PrimeTimeModule";
 import ProofCheckerModule from "./modules/ProofCheckerModule";
 import RespawnModule from "./modules/RespawnModule";
@@ -31,6 +32,13 @@ const ADMIN_TABS = [
     labelKey: "tabTimers",
     icon: "⏳",
     component: RespawnModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
+  },
+  {
+    key: "HOLDINGS",
+    labelKey: "tabHoldings",
+    icon: "🏰",
+    component: HoldingsModule,
     allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
   },
   {
@@ -135,7 +143,7 @@ const AdminPage = () => {
             active={activeTabKey === tab.key}
             onClick={() => setActiveTabKey(tab.key)}
             icon={tab.icon}
-            label={t.admin[tab.labelKey]}
+            label={t.admin[tab.labelKey] || "Holdings"}
           />
         ))}
       </div>
