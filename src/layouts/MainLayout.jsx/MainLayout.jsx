@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 
 import bgImg from "../../assets/bg3.png";
@@ -35,6 +36,7 @@ const MainLayout = ({ children }) => {
       <Header />
 
       {/* 2. Main content takes all available free space */}
+      <Toaster />
       <main className="flex-1 w-full mx-auto p-2.5 md:p-8">{children}</main>
 
       {/* 3. Footer automatically snaps to the bottom if space allows */}
