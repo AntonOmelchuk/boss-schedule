@@ -1,5 +1,6 @@
 import { onValue, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import useTranslation from "../../../hooks/useTranslation";
 import { db } from "../../../services/firebase";
@@ -130,7 +131,7 @@ const ProofCheckerModule = () => {
     secretCode,
   }) => {
     if (!eventName?.trim()) {
-      alert(t.afkCheck.enterEventAlert);
+      toast.error(t.afkCheck.enterEventAlert);
       return;
     }
 

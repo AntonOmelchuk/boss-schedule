@@ -1,5 +1,6 @@
 import { onValue, ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import useTranslation from "../../../hooks/useTranslation";
 import { db } from "../../../services/firebase";
@@ -79,7 +80,7 @@ const RespawnModule = () => {
       await update(ref(db, `regroups/events/${selectedKey}`), {
         respawnTimestamp: newTimestampSeconds,
       });
-      alert(t.respawnAdmin.successAlert);
+      toast.success(t.respawnAdmin.successAlert);
     } catch (err) {
       console.error("Error updating respawn timestamp:", err);
     } finally {
