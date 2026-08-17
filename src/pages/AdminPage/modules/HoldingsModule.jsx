@@ -1,10 +1,10 @@
-import { ref, update } from "firebase/database";
+import { onValue, ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import Button from "../../../components/UI/Button";
 import useTranslation from "../../../hooks/useTranslation";
 import { db } from "../../../services/firebase";
-import useAppStore from "../../../store/useAppStore";
 
 const RELATIONS = {
   ALLIANCE: "alliance",
@@ -14,155 +14,154 @@ const RELATIONS = {
 
 const HoldingsModule = () => {
   const { t } = useTranslation();
-  const events = useAppStore((state) => state.events);
+  const { holdings: tHoldings = {} } = t.admin || {};
 
-  const [holdings, setHoldings] = useState([]);
-  const [savingKey, setSavingKey] = useState(null);
-  const [saveStatus, setSaveStatus] = useState({});
+  const [eventsDb, setEventsDb] = useState({});
+  const [selectedKey, setSelectedKey] = useState("");
+  const [ownerInput, setOwnerInput] = useState("");
+  const [relationInput, setRelationInput] = useState(RELATIONS.NEUTRAL);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    if (!events) return;
-    const filtered = events.filter(
-      (e) => e.category === "siege" || e.category === "ch",
-    );
-    setHoldings(filtered);
-  }, [events]);
+    const eventsRef = ref(db, "regroups/events");
 
-  const handleFieldChange = (id, field, value) => {
-    setHoldings((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, [field]: value } : item)),
-    );
-  };
+    const unsubscribe = onValue(eventsRef, (snapshot) => {
+      const data = snapshot.val() || {};
+      setEventsDb(data);
 
-  const handleSave = async (holding) => {
-    setSavingKey(holding.id);
-    setSaveStatus((prev) => ({ ...prev, [holding.id]: null }));
-
-    try {
-      const eventRef = ref(db, `regroups/events/${holding.id}`);
-      await update(eventRef, {
-        owner: holding.owner || "NPC",
-        relation: holding.relation || RELATIONS.NEUTRAL,
+      const keys = Object.keys(data).filter((k) => {
+        const cat = data[k]?.category;
+        return cat === "ch" || cat === "siege";
       });
 
-      setSaveStatus((prev) => ({ ...prev, [holding.id]: "success" }));
-      setTimeout(() => {
-        setSaveStatus((prev) => ({ ...prev, [holding.id]: null }));
-      }, 3000);
+      if (keys.length > 0 && !selectedKey) {
+        setSelectedKey(keys[0]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (selectedKey && eventsDb[selectedKey]) {
+      const currentObj = eventsDb[selectedKey];
+      setOwnerInput(currentObj.owner || "NPC");
+      setRelationInput(currentObj.relation || RELATIONS.NEUTRAL);
+    }
+  }, [selectedKey, eventsDb]);
+
+  const holdingKeys = Object.keys(eventsDb).filter((key) => {
+    const cat = eventsDb[key]?.category;
+    return cat === "ch" || cat === "siege";
+  });
+
+  const handleSave = async () => {
+    if (!selectedKey) return;
+
+    setIsSaving(true);
+    try {
+      await update(ref(db, `regroups/events/${selectedKey}`), {
+        owner: ownerInput.trim() || "NPC",
+        relation: relationInput,
+      });
+
+      toast.success(tHoldings.saveSuccess);
     } catch (err) {
-      console.error("Failed to update holding owner:", err);
-      setSaveStatus((prev) => ({ ...prev, [holding.id]: "error" }));
+      console.error("Error updating holding owner:", err);
+      toast.error(tHoldings.saveError);
     } finally {
-      setSavingKey(null);
+      setIsSaving(false);
     }
   };
 
-  const {
-    admin: { holdings: tHoldings },
-  } = t;
+  const currentObj = eventsDb[selectedKey] || {};
 
   return (
-    <div className="space-y-6">
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-md">
-        <h2 className="text-lg font-semibold text-slate-100 flex items-center gap-2 mb-1">
-          🏰 {tHoldings.title}
-        </h2>
-        <p className="text-sm text-slate-400 mb-6">{tHoldings.description}</p>
+    <div className="p-4 md:p-6 max-w-4xl mx-auto flex flex-col gap-6">
+      <div className="border-b border-slate-800 pb-4">
+        <h1 className="text-2xl font-black text-white flex items-center gap-2">
+          <span>🏰</span> {tHoldings.title}
+        </h1>
+        <p className="text-xs text-slate-400 mt-0.5">{tHoldings.description}</p>
+      </div>
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {holdings.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-col justify-between gap-3 rounded-xl border border-slate-800
-              bg-slate-950/60 p-4 transition-all hover:border-slate-700"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-200 text-sm flex items-center gap-2">
-                  <span>
-                    {item.icon || (item.category === "siege" ? "🏰" : "🏠")}
-                  </span>
-                  {item.name}
-                </span>
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-mono uppercase border ${
-                    item.category === "siege"
-                      ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                      : "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
-                  }`}
-                >
-                  {item.category}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-400">
-                    {tHoldings.ownerLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={item.owner || ""}
-                    onChange={(e) =>
-                      handleFieldChange(item.id, "owner", e.target.value)
-                    }
-                    placeholder={tHoldings.ownerPlaceholder}
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs
-                    text-slate-100 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-400">
-                    {tHoldings.relationLabel}
-                  </label>
-                  <select
-                    value={item.relation || RELATIONS.NEUTRAL}
-                    onChange={(e) =>
-                      handleFieldChange(item.id, "relation", e.target.value)
-                    }
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs
-                    text-slate-100 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500
-                      cursor-pointer"
-                  >
-                    <option value={RELATIONS.ALLIANCE}>
-                      🛡️ {tHoldings.relationAlliance}
-                    </option>
-                    <option value={RELATIONS.ENEMY}>
-                      💀 {tHoldings.relationEnemy}
-                    </option>
-                    <option value={RELATIONS.NEUTRAL}>
-                      👑 {tHoldings.relationNeutral}
-                    </option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-1 border-t border-slate-800/60 mt-1">
-                <Button
-                  onClick={() => handleSave(item)}
-                  disabled={savingKey === item.id}
-                  className="bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20
-                    hover:text-amber-300 hover:border-amber-500/50 text-xs py-1 px-3"
-                >
-                  {savingKey === item.id
-                    ? tHoldings.saving
-                    : tHoldings.saveButton}
-                </Button>
-
-                {saveStatus[item.id] === "success" && (
-                  <span className="text-xs font-medium text-emerald-400">
-                    ✓ {tHoldings.saveSuccess}
-                  </span>
-                )}
-                {saveStatus[item.id] === "error" && (
-                  <span className="text-xs font-medium text-red-400">
-                    ❌ {tHoldings.saveError}
-                  </span>
-                )}
-              </div>
-            </div>
-          ))}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex flex-col gap-5">
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold text-slate-400 uppercase">
+            {tHoldings.selectLabel}
+          </label>
+          <select
+            value={selectedKey}
+            onChange={(e) => setSelectedKey(e.target.value)}
+            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm font-semibold
+              text-white focus:outline-none focus:border-amber-500 cursor-pointer"
+          >
+            {holdingKeys.map((dbKey) => (
+              <option key={dbKey} value={dbKey}>
+                {eventsDb[dbKey].event || dbKey} (
+                {eventsDb[dbKey].category?.toUpperCase()})
+              </option>
+            ))}
+          </select>
         </div>
+
+        {/* Поточний стан у базі */}
+        <div
+          className="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between
+          items-center text-xs"
+        >
+          <span className="text-slate-500 font-semibold">
+            {tHoldings.currentOwnerLabel}
+          </span>
+          <span className="text-amber-400 font-mono font-bold">
+            {currentObj.owner || "NPC"} ({currentObj.relation || "neutral"})
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold text-slate-400 uppercase">
+            {tHoldings.ownerLabel}
+          </label>
+          <input
+            type="text"
+            value={ownerInput}
+            onChange={(e) => setOwnerInput(e.target.value)}
+            placeholder={tHoldings.ownerPlaceholder}
+            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm font-semibold
+              text-white focus:outline-none focus:border-amber-500"
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold text-slate-400 uppercase">
+            {tHoldings.relationLabel}
+          </label>
+          <select
+            value={relationInput}
+            onChange={(e) => setRelationInput(e.target.value)}
+            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm font-semibold
+              text-white focus:outline-none focus:border-amber-500 cursor-pointer"
+          >
+            <option value={RELATIONS.ALLIANCE}>
+              🛡️ {tHoldings.relationAlliance}
+            </option>
+            <option value={RELATIONS.ENEMY}>
+              💀 {tHoldings.relationEnemy}
+            </option>
+            <option value={RELATIONS.NEUTRAL}>
+              👑 {tHoldings.relationNeutral}
+            </option>
+          </select>
+        </div>
+
+        <Button
+          onClick={handleSave}
+          disabled={isSaving || !selectedKey}
+          className="mt-2 bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20
+            hover:text-amber-300 hover:border-amber-500/50 justify-center py-3"
+        >
+          {isSaving ? tHoldings.saving : tHoldings.saveButton}
+        </Button>
       </div>
     </div>
   );

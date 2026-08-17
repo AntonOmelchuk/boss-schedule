@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 import useTranslation from "../../../hooks/useTranslation";
 import takeTournamentScreenshot from "../../../utils/tournamentScreenshot";
@@ -45,7 +46,9 @@ const MatchListWithPagination = ({
         `Matches_Round_${selectedRound}`,
       );
     } catch {
-      alert(t.tournament?.screenshotError || "Failed to generate screenshot.");
+      toast.error(
+        t.tournament?.screenshotError || "Failed to generate screenshot.",
+      );
     } finally {
       setIsCapturing(false);
     }

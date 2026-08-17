@@ -1,5 +1,6 @@
 import { off, onValue, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import PageBadgeTitle from "../../components/UI/PageBadgeTitle";
 import { ROLES } from "../../constants/roles";
@@ -67,7 +68,7 @@ const TournamentPage = () => {
 
   // Start new tournament
   const handleStartTournament = async () => {
-    if (selectedCps.length < 2) return alert(t.tournament?.minCpAlert);
+    if (selectedCps.length < 2) return toast.error(t.tournament?.minCpAlert);
 
     const generatedData =
       tournamentType === "SINGLE_ELIMINATION"
