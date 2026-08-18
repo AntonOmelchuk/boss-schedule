@@ -10,7 +10,6 @@ const AuthCallbackPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // Витягуємо isAuthenticating зі стору
   const { loginWithDiscord, isAuthenticating, authError } = useAuthStore();
   const hasTriggered = useRef(false);
 
