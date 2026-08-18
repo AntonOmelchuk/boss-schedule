@@ -1,4 +1,3 @@
-import { getAuth } from "firebase/auth";
 import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -29,12 +28,6 @@ import {
   getNextWeeklyEvent,
 } from "./utils/general";
 
-const checkFirebaseStatus = () => {
-  const currentUser = getAuth().currentUser;
-  console.log("🔍 [DEBUG SESSION] Current Firebase User:", currentUser);
-  console.log("🔍 [DEBUG SESSION] Current auth.uid:", currentUser?.uid);
-};
-
 function App() {
   useAuthSync();
 
@@ -43,10 +36,6 @@ function App() {
 
   // State for handling system maintenance mode
   const [maintenanceStatus, setMaintenanceStatus] = useState(false);
-
-  useEffect(() => {
-    checkFirebaseStatus();
-  }, []);
 
   // 1. Listen for maintenance status from Firebase Realtime DB
   useEffect(() => {

@@ -25,16 +25,7 @@ export const useAuthSync = () => {
       });
     }
 
-    const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
-        console.log(
-          "🔥 [AuthSync] Firebase active user uid:",
-          firebaseUser.uid,
-        );
-      } else {
-        console.log("🔥 [AuthSync] Firebase user is null");
-      }
-    });
+    const unsubscribeAuth = onAuthStateChanged(auth, () => {});
 
     return () => unsubscribeAuth();
   }, [token, logout]);
