@@ -81,8 +81,7 @@ function App() {
     const unsubscribe = onValue(regroupsRef, (snapshot) => {
       const data = snapshot.val() || {};
       const eventsData = data.events || {};
-      console.log("data: ", data.prime_time);
-      // Отримуємо prime_time з бази (якщо немає — фолбек на 07:00 - 23:00)
+
       const dbPrimeTime = data.prime_time || { from: "07:00", to: "23:00" };
       if (setPrimeTime) {
         setPrimeTime(dbPrimeTime);

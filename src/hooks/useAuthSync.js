@@ -1,3 +1,8 @@
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithCustomToken,
+} from "firebase/auth";
 import { onValue, ref } from "firebase/database";
 import { useEffect } from "react";
 
@@ -5,25 +10,47 @@ import { db } from "../services/firebase";
 import useAuthStore from "../store/useAuthStore";
 
 export const useAuthSync = () => {
-  const { user, updateProfile } = useAuthStore();
+  const { user, token, updateProfile, logout } = useAuthStore();
 
   useEffect(() => {
-    // if user not auth or no discord_id — skip
+    const auth = getAuth();
+
+    if (token && !auth.currentUser) {
+      signInWithCustomToken(auth, token).catch((err) => {
+        console.error(
+          "❌ [AuthSync] Failed to sign in with custom token:",
+          err,
+        );
+        logout();
+      });
+    }
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        console.log(
+          "🔥 [AuthSync] Firebase active user uid:",
+          firebaseUser.uid,
+        );
+      } else {
+        console.log("🔥 [AuthSync] Firebase user is null");
+      }
+    });
+
+    return () => unsubscribeAuth();
+  }, [token, logout]);
+
+  useEffect(() => {
     if (!user?.discord_id) return;
 
-    // Create link to current user
     const userRef = ref(db, `users/${user.discord_id}`);
 
-    // Subscribe on changes in real time
-    const unsubscribe = onValue(userRef, (snapshot) => {
+    const unsubscribeDb = onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        // Update Zustand with real data from DB
         updateProfile(data);
       }
     });
 
-    // Unsubscribe when component unmount or user changed
-    return () => unsubscribe();
+    return () => unsubscribeDb();
   }, [user?.discord_id, updateProfile]);
 };
