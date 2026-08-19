@@ -1,8 +1,4 @@
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithCustomToken,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { onValue, ref } from "firebase/database";
 import { useEffect } from "react";
 
@@ -10,25 +6,19 @@ import { db } from "../services/firebase";
 import useAuthStore from "../store/useAuthStore";
 
 export const useAuthSync = () => {
-  const { user, token, updateProfile, logout } = useAuthStore();
+  const { user, updateProfile, logout } = useAuthStore();
 
   useEffect(() => {
     const auth = getAuth();
 
-    if (token && !auth.currentUser) {
-      signInWithCustomToken(auth, token).catch((err) => {
-        console.error(
-          "❌ [AuthSync] Failed to sign in with custom token:",
-          err,
-        );
+    const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
+      if (!firebaseUser) {
         logout();
-      });
-    }
-
-    const unsubscribeAuth = onAuthStateChanged(auth, () => {});
+      }
+    });
 
     return () => unsubscribeAuth();
-  }, [token, logout]);
+  }, [logout]);
 
   useEffect(() => {
     if (!user?.discord_id) return;
