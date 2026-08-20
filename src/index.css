@@ -122,3 +122,28 @@ code {
 .animate-progress {
   animation: progress 1.5s infinite ease-in-out;
 }
+
+@layer utilities {
+  .animate-fire-flow {
+    background-size: 200% 200%;
+    animation: fire-shift 4s ease infinite alternate;
+  }
+
+  @keyframes fire-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+.animate-border-beam {
+  animation: border-beam calc(var(--duration) * 1s) infinite linear;
+}

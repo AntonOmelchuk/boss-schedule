@@ -7,13 +7,13 @@ import { EVENT_TYPES } from "./constants/general";
 // import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 // import MaintenanceGuard from "./guards/MaintenanceGuard";
 import { useAuthSync } from "./hooks/useAuthSync";
+import IntroSequence from "./pages/IronGates/IntroSequence";
 // import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 // import AdminPage from "./pages/AdminPage/AdminPage";
 // import AfkProofPage from "./pages/AfkProofPage/AfkProofPage";
 // import AuthCallbackPage from "./pages/AuthCallbackPage";
 // import CpManagementPage from "./pages/CpManagement/CpManagementPage";
-import Dashboard from "./pages/IronGates/Dashboard";
-import IntroSequence from "./pages/IronGates/IntroSequence";
+import IronGatesPage from "./pages/IronGates/IronGatesPage";
 // import MemberProfilePage from "./pages/IronGates/MemberProfilePage";
 // import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 // import MainPage from "./pages/MainPage/MainPage";
@@ -130,6 +130,8 @@ function App() {
     setShowDashboard(true);
   };
 
+  // return <IronGatesPage />;
+
   return (
     <div className="App relative">
       {/* Показуємо інтро, якщо дашборд ще не завантажений */}
@@ -139,7 +141,7 @@ function App() {
       <div
         className={`transition-all duration-500 ${!showDashboard ? "blur-sm" : "blur-none"}`}
       >
-        {showDashboard && <Dashboard />}
+        {showDashboard && <IronGatesPage />}
       </div>
     </div>
   );

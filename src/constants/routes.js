@@ -1,3 +1,12 @@
+import {
+  Activity,
+  History,
+  LayoutDashboard,
+  Swords,
+  Target,
+  Users,
+} from "lucide-react";
+
 // Main Navigation
 export const NAV_ITEMS = {
   RESPAWN: "respawn",
@@ -162,3 +171,70 @@ export const ADMIN_TAB_KEYS = {
   TIMERS: "timers",
   SYSTEM: "system",
 };
+
+// Iron Gates Dashboard
+export const DASHBOARD_TABS = {
+  SUMMARY: "summary",
+  MEMBERS: "members",
+  ACTIVITY: "activity",
+  EPIC_PRIORITY: "epic_priority",
+  EPIC_HISTORY: "epic_history",
+  GVG_SETUP: "gvg_setup",
+};
+
+export const DASHBOARD_NAV_CONFIG = [
+  {
+    id: DASHBOARD_TABS.SUMMARY,
+    titleKey: "dashboardSummary",
+    icon: LayoutDashboard,
+    // Золотий стиль (як Epic/Bosses)
+    activeClass:
+      "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.3)]",
+    iconColor: "text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]",
+  },
+  {
+    id: DASHBOARD_TABS.MEMBERS,
+    titleKey: "dashboardMembers",
+    icon: Users,
+    // Фіолетовий стиль (як підтримка/магія)
+    activeClass:
+      "bg-purple-500/20 text-purple-300 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.3)]",
+    iconColor: "text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]",
+  },
+  {
+    id: DASHBOARD_TABS.ACTIVITY,
+    titleKey: "dashboardActivity",
+    icon: Activity,
+    // Небесно-блакитний стиль
+    activeClass:
+      "bg-sky-500/20 text-sky-300 border-sky-500/50 shadow-[0_0_20px_rgba(14,165,233,0.3)]",
+    iconColor: "text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]",
+  },
+  {
+    id: DASHBOARD_TABS.EPIC_PRIORITY,
+    titleKey: "dashboardEpicPriority",
+    icon: Target,
+    // Вогняно-рожевий/червоний (епічний)
+    activeClass:
+      "bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.3)]",
+    iconColor: "text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]",
+  },
+  {
+    id: DASHBOARD_TABS.EPIC_HISTORY,
+    titleKey: "dashboardEpicHistory",
+    icon: History,
+    // Смарагдово-зелений стиль
+    activeClass:
+      "bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]",
+    iconColor: "text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]",
+  },
+  {
+    id: DASHBOARD_TABS.GVG_SETUP,
+    titleKey: "dashboardGvgSetup",
+    icon: Swords,
+    // Індіго / королівський синій стиль
+    activeClass:
+      "bg-indigo-500/20 text-indigo-300 border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.3)]",
+    iconColor: "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]",
+  },
+];
