@@ -225,10 +225,8 @@ const MemberModule = () => {
       className="min-h-[calc(100vh-100px)] w-full flex flex-col lg:flex-row items-center justify-center
         p-8 lg:p-12 gap-10 overflow-hidden relative bg-slate-950 select-none"
     >
-      {/* <MagicSparks /> */}
       <SkyStars />
 
-      {/* 🌍 ЗЛІВА: 3D Сфера на повну висоту */}
       <div className="relative z-20 flex-1 w-full flex items-center justify-center">
         <div className="h-full flex items-center justify-center p-4">
           <SphereImageGrid

@@ -1,3 +1,5 @@
+import ParallaxAvatar from "./ParallaxAvatar";
+
 const MemberCard = ({
   x,
   y,
@@ -13,35 +15,13 @@ const MemberCard = ({
     <div className="relative z-20 flex-1 flex items-center justify-center">
       <div
         style={{
-          transform: `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`,
-          transition: "transform 0.1s ease-out",
+          transform: `perspective(1500px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`,
+          transition: "transform 0.2s ease-out",
         }}
         className="bg-slate-950/85 border border-amber-500/30 rounded-3xl p-6 lg:p-8
           shadow-[0_0_60px_rgba(245,158,11,0.15)] backdrop-blur-2xl grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
       >
-        <div className="md:col-span-5 relative flex justify-center items-center group py-4">
-          {/* Two animated rings around avatar */}
-          <div
-            className="absolute z-50 inset-0 m-auto w-full h-full rounded-full border-2 border-dashed
-            border-amber-500/40 animate-[spin_25s_linear_infinite] pointer-events-none"
-          />
-          <div
-            className="absolute z-50 inset-0 m-auto w-full h-full rounded-full border-2 border-dotted
-            border-purple-500/40 animate-[spin_20s_linear_infinite_reverse] pointer-events-none"
-          />
-
-          <div
-            className="relative rounded-2xl overflow-hidden border-2 border-amber-400/60
-            shadow-[0_0_35px_rgba(251,191,36,0.3)] bg-slate-900/80 flex items-center justify-center
-            p-2 group-hover:scale-102 transition duration-500 z-10"
-          >
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-contain filter contrast-110 drop-shadow-[0_10px_15px_rgba(0,0,0,0.8)]"
-            />
-          </div>
-        </div>
+        <ParallaxAvatar image={image} />
 
         {/* Інформація про героя */}
         <div className="md:col-span-7 space-y-4">
