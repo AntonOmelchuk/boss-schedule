@@ -208,3 +208,5 @@ export const EPIC_PRICES_GB = {
   Antharas: 110,
   Valakas: 200,
 };
+
+export const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;

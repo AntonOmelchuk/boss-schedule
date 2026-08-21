@@ -1,15 +1,6 @@
 import { useState } from "react";
 
-import fergiImage from "../../../assets/ig-avatars/fergi.png";
-import lapestoImage from "../../../assets/ig-avatars/Lapesto.png";
-import manolImage from "../../../assets/ig-avatars/Manol.png";
-import shrekImage from "../../../assets/ig-avatars/shrek.png";
-import spektraImage from "../../../assets/ig-avatars/spektra.png";
-import tobeImage from "../../../assets/ig-avatars/tobe.png";
-import tomImage from "../../../assets/ig-avatars/Tom.png";
-import vryoImage from "../../../assets/ig-avatars/Vryo.png";
-import winsonImage from "../../../assets/ig-avatars/Winson.png";
-import zukkaImage from "../../../assets/ig-avatars/Zukka.png";
+import { STORAGE_URL } from "../../../constants/general";
 import useWindowSize from "../../../hooks/useWindowSize";
 import MemberCard from "../components/Members/MemberCard";
 import SkyStars from "../components/SkyStars";
@@ -18,14 +9,14 @@ import SphereImageGrid from "../components/SphereImageGrid";
 const MEMBERS_DATA = [
   {
     id: "tobe",
-    char_name: "TOBE",
+    char_name: "toBe",
     role: "ADMIN",
     cp_name: "IronGates CP",
     mainClass: "Bishop (Бішоп)",
     subClasses: ["Necromancer", "Treasure Hunter", "Shillien Knight"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: tobeImage,
+    image: `${STORAGE_URL}/avatars/tobe.png`,
     gear: [
       { name: "DC Robe Set +6", type: "Armor", icon: "🛡️" },
       { name: "TT Set +5", type: "Jewels", icon: "💍" },
@@ -42,13 +33,30 @@ const MEMBERS_DATA = [
     subClasses: ["Elemental Summoner", "Prophet"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: fergiImage,
+    image: `${STORAGE_URL}/avatars/fergi.png`,
     gear: [
       { name: "DC Robe Set +6", type: "Armor", icon: "🛡️" },
       { name: "TT Set +4", type: "Jewels", icon: "💍" },
       { name: "Baium Ring +3", type: "Epic Jewel", icon: "💍" },
     ],
     stats: { pvp: "920", pk: "3" },
+  },
+  {
+    id: "ansol",
+    char_name: "Ansol",
+    role: "MEMBER",
+    cp_name: "IronGates CP",
+    mainClass: "Fortune Seaker",
+    subClasses: ["Cardinal", "Prophet"],
+    server: "Reborn x10",
+    status: "ONLINE",
+    image: `${STORAGE_URL}/avatars/Ansol.png`,
+    gear: [
+      { name: "DC Robe Set +6", type: "Armor", icon: "🛡️" },
+      { name: "TT Set +4", type: "Jewels", icon: "💍" },
+      { name: "Baium Ring +3", type: "Epic Jewel", icon: "💍" },
+    ],
+    stats: { pvp: "220", pk: "3" },
   },
   {
     id: "lapesto",
@@ -59,7 +67,7 @@ const MEMBERS_DATA = [
     subClasses: ["Dreadnought", "Duelist"],
     server: "Reborn x10",
     status: "AFK",
-    image: lapestoImage,
+    image: `${STORAGE_URL}/avatars/Lapesto.png`,
     gear: [
       { name: "Draconic Leather +6", type: "Armor", icon: "🛡️" },
       { name: "TT Set +6", type: "Jewels", icon: "💍" },
@@ -76,7 +84,7 @@ const MEMBERS_DATA = [
     subClasses: ["Abyss Walker", "Plain Walker"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: manolImage,
+    image: `${STORAGE_URL}/avatars/Manol.png`,
     gear: [
       { name: "Majestic Leather +6", type: "Armor", icon: "🛡️" },
       { name: "TT Set +5", type: "Jewels", icon: "💍" },
@@ -93,7 +101,7 @@ const MEMBERS_DATA = [
     subClasses: ["Destroyer", "Grand Khavatari"],
     server: "Reborn x10",
     status: "OFFLINE",
-    image: shrekImage,
+    image: `${STORAGE_URL}/avatars/shrek.png`,
     gear: [
       { name: "Tallum Heavy +6", type: "Armor", icon: "🛡️" },
       { name: "Boss Set +5", type: "Jewels", icon: "💍" },
@@ -110,7 +118,7 @@ const MEMBERS_DATA = [
     subClasses: ["Spellhowler", "Overlord"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: spektraImage,
+    image: `${STORAGE_URL}/avatars/spektra.png`,
     gear: [
       { name: "Dark Crystal Robe", type: "Armor", icon: "🛡️" },
       { name: "Majestic Set", type: "Jewels", icon: "💍" },
@@ -127,7 +135,7 @@ const MEMBERS_DATA = [
     subClasses: ["Treasure Hunter", "Hawkeye"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: tomImage,
+    image: `${STORAGE_URL}/avatars/Tom.png`,
     gear: [
       { name: "Draconic Leather", type: "Armor", icon: "🛡️" },
       { name: "TT Set", type: "Jewels", icon: "💍" },
@@ -144,7 +152,7 @@ const MEMBERS_DATA = [
     subClasses: ["Hierophant", "Evas Saint"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: vryoImage,
+    image: `${STORAGE_URL}/avatars/Vryo.png`,
     gear: [
       { name: "Major Arcana Robe", type: "Armor", icon: "🛡️" },
       { name: "TT Set", type: "Jewels", icon: "💍" },
@@ -161,7 +169,7 @@ const MEMBERS_DATA = [
     subClasses: ["Trickster", "Judicator"],
     server: "Reborn x10",
     status: "OFFLINE",
-    image: winsonImage,
+    image: `${STORAGE_URL}/avatars/Winson.png`,
     gear: [
       { name: "Moirai Heavy", type: "Armor", icon: "🛡️" },
       { name: "Vorpal Set", type: "Jewels", icon: "💍" },
@@ -178,7 +186,7 @@ const MEMBERS_DATA = [
     subClasses: ["Blade Dancer", "Warsmith"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: zukkaImage,
+    image: `${STORAGE_URL}/avatars/Zukka.png`,
     gear: [
       { name: "Dark Crystal Robe", type: "Armor", icon: "🛡️" },
       { name: "TT Set", type: "Jewels", icon: "💍" },

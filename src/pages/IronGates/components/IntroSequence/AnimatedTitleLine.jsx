@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 
-const AnimatedTitleLine = ({ text, stage, delayChildren, gradientClass }) => {
+const AnimatedTitleLine = ({
+  text,
+  isAnimate,
+  delayChildren,
+  gradientClass,
+}) => {
   const letterVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.3, filter: "blur(12px)" },
     visible: {
@@ -17,14 +22,7 @@ const AnimatedTitleLine = ({ text, stage, delayChildren, gradientClass }) => {
       className="text-6xl sm:text-7xl lg:text-[210px] font-black tracking-wider uppercase font-serif flex
         justify-center mb-1 drop-shadow-[0_5px_5px_rgba(0,0,0,0.9)]"
       initial="hidden"
-      animate={
-        stage === "text_anim" ||
-        stage === "presenting_members" ||
-        stage === "showing_squad" ||
-        stage === "fading_out"
-          ? "visible"
-          : "hidden"
-      }
+      animate={isAnimate ? "visible" : "hidden"}
       variants={{
         visible: {
           transition: { staggerChildren: 0.12, delayChildren },

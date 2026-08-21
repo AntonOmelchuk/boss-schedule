@@ -7,19 +7,9 @@ import {
   Zap,
 } from "lucide-react";
 
-import fergiImage from "../../../assets/ig-avatars/fergi.png";
-// import lapestoImage from "../../assets/ig-avatars/Lapesto.png";
-// import manolImage from "../../assets/ig-avatars/Manol.png";
-import shrekImage from "../../../assets/ig-avatars/shrek.png";
-import spektraImage from "../../../assets/ig-avatars/spektra.png";
-// import tobeImage from "../../assets/ig-avatars/tobe.png";
-// import tomImage from "../../assets/ig-avatars/Tom.png";
-import vryoImage from "../../../assets/ig-avatars/Vryo.png";
-import winsonImage from "../../../assets/ig-avatars/Winson.png";
-import zukkaImage from "../../../assets/ig-avatars/Zukka.png";
+import { STORAGE_URL } from "../../../constants/general";
 import StatCard from "../components/Dashboard/StatCard";
 
-// Повні мокові дані з усіма показниками згідно з ТЗ
 const CP_STATS = {
   totalMembers: 10,
   totalEvents: 42,
@@ -47,7 +37,7 @@ const TOP_PRIORITY_LIST = [
     role: "1st DoD / DD",
     points: 73.7,
     tier: "HIGH",
-    avatar: shrekImage,
+    avatar: `${STORAGE_URL}/avatars/shrek.png`,
   },
   {
     rank: 2,
@@ -56,7 +46,7 @@ const TOP_PRIORITY_LIST = [
     role: "Bishop / Main Heal",
     points: 57.7,
     tier: "HIGH",
-    avatar: zukkaImage,
+    avatar: `${STORAGE_URL}/avatars/Zukka.png`,
   },
   {
     rank: 3,
@@ -65,7 +55,7 @@ const TOP_PRIORITY_LIST = [
     role: "Mage / AoE",
     points: 56.3,
     tier: "MID",
-    avatar: winsonImage,
+    avatar: `${STORAGE_URL}/avatars/Winson.png`,
   },
   {
     rank: 4,
@@ -74,7 +64,7 @@ const TOP_PRIORITY_LIST = [
     role: "Priority Heal",
     points: 49.3,
     tier: "MID",
-    avatar: fergiImage,
+    avatar: `${STORAGE_URL}/avatars/fergi.png`,
   },
 ];
 
@@ -85,7 +75,7 @@ const RECENT_MEMBERS = [
     class: "Mystic Muse",
     points: 114.8,
     balance: -185.2,
-    avatar: vryoImage,
+    avatar: `${STORAGE_URL}/avatars/Vryo.png`,
   },
   {
     name: "Fergi",
@@ -93,7 +83,7 @@ const RECENT_MEMBERS = [
     class: "Cardinal",
     points: 98.2,
     balance: +45.0,
-    avatar: fergiImage,
+    avatar: `${STORAGE_URL}/avatars/fergi.png`,
   },
   {
     name: "Spektra",
@@ -101,7 +91,7 @@ const RECENT_MEMBERS = [
     class: "Cardinal",
     points: 95.0,
     balance: +30.5,
-    avatar: spektraImage,
+    avatar: `${STORAGE_URL}/avatars/spektra.png`,
   },
   {
     name: "ManiacShrek",
@@ -109,7 +99,7 @@ const RECENT_MEMBERS = [
     class: "Necromancer",
     points: 92.4,
     balance: -120.0,
-    avatar: shrekImage,
+    avatar: `${STORAGE_URL}/avatars/shrek.png`,
   },
 ];
 
@@ -155,8 +145,8 @@ const DashboardModule = () => {
           icon={Zap}
           colorClass="amber"
           highlight
-          footerLabel={`Топ: ${CP_STATS.currentPriority.leader}`}
-          footerValue={`${CP_STATS.currentPriority.points} pts`}
+          footerLabel={`Час: 20:00`}
+          footerValue={`Дата: 23.08.2026`}
           footerHighlight
         />
       </section>

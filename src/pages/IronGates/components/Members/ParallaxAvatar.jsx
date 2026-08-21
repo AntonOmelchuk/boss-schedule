@@ -9,7 +9,6 @@ const ParallaxAvatar = ({ image }) => {
         border-2 border-amber-400/60 shadow-[0_0_40px_rgba(251,191,36,0.5)] p-2 z-10 cursor-pointer"
     >
       <Tilt
-        className=""
         tiltMaxAngleX={25}
         tiltMaxAngleY={25}
         perspective={1000}

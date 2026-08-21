@@ -23,7 +23,6 @@ const MemberCard = ({
       >
         <ParallaxAvatar image={image} />
 
-        {/* Інформація про героя */}
         <div className="md:col-span-7 space-y-4">
           <div>
             <div className="flex items-center space-x-2">

@@ -5,13 +5,13 @@ import { DASHBOARD_TABS } from "../../constants/routes";
 import Header from "./components/Dashboard/Header";
 import MagicSparks from "./components/MagicSparks";
 import DashboardModule from "./modules/DashboardModule";
+import GvGModule from "./modules/GvGModule";
 import MemberModule from "./modules/MembersModule";
 import DashboardNav from "./tabs/DashboardTabs";
 
 const IronGatesPage = () => {
   const [activeTab, setActiveTab] = useState(DASHBOARD_TABS.SUMMARY);
 
-  // Функція рендеру відповідного блоку ТЗ
   const renderTabContent = () => {
     switch (activeTab) {
       case DASHBOARD_TABS.SUMMARY:
@@ -35,7 +35,7 @@ const IronGatesPage = () => {
           <div className="text-slate-300">📜 Історія отриманих епіків</div>
         );
       case DASHBOARD_TABS.GVG_SETUP:
-        return <div className="text-slate-300">⚔️ Сетап GVG паті</div>;
+        return <GvGModule />;
       default:
         return null;
     }
@@ -47,7 +47,6 @@ const IronGatesPage = () => {
       {activeTab === DASHBOARD_TABS.SUMMARY && <Header />}
       <DashboardNav activeTab={activeTab} onTabChange={setActiveTab} />
 
-      {/* Динамічний контейнер контенту вибраного розділу */}
       <div className="transition-all duration-300">{renderTabContent()}</div>
     </div>
   );

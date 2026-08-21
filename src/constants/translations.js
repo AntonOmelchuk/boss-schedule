@@ -554,6 +554,25 @@ export default {
     dashboardEpicPriority: "Пріоритет на епік",
     dashboardEpicHistory: "Історія епіків",
     dashboardGvgSetup: "Сетап GVG",
+
+    gvgPage: {
+      title: "Тактична дошка GvG",
+      subtitle: "Розстановка та пріоритети цілей на мас-пвх",
+      saveButton: "Зберегти схему",
+      savedSuccess: "Збережено успішно!",
+      addEnemy: "+ Додати ціль",
+      targetDefault: "Таргет",
+      roles: {
+        healer: "Сапорт",
+        dd: "Дамагер",
+        dominator: "Овер/Домінатор",
+      },
+      inputs: {
+        dod: "DoD слот",
+        ma: "Main Assist",
+        assist2: "2nd Assist",
+      },
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -1098,5 +1117,24 @@ export default {
     dashboardEpicPriority: "Epic Priority",
     dashboardEpicHistory: "Epic History",
     dashboardGvgSetup: "GVG Setup",
+
+    gvgPage: {
+      title: "GvG Tactical Board",
+      subtitle: "Party layout and target priorities for mass PvP",
+      saveButton: "Save Layout",
+      savedSuccess: "Saved successfully!",
+      addEnemy: "+ Add Target",
+      targetDefault: "Target",
+      roles: {
+        healer: "Support",
+        dd: "Damage Dealer",
+        dominator: "Overlord",
+      },
+      inputs: {
+        dod: "DoD Slot",
+        ma: "Main Assist",
+        assist2: "2nd Assist",
+      },
+    },
   },
 };

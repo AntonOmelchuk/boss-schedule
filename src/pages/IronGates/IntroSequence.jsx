@@ -1,26 +1,16 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-// Avatars
-import fergiImage from "../../assets/ig-avatars/fergi.png";
-import lapestoImage from "../../assets/ig-avatars/Lapesto.png";
-import manolImage from "../../assets/ig-avatars/Manol.png";
-import mwImage from "../../assets/ig-avatars/mw.png";
-import shrekImage from "../../assets/ig-avatars/shrek.png";
-import spektraImage from "../../assets/ig-avatars/spektra.png";
-import tobeImage from "../../assets/ig-avatars/tobe.png";
-import tomImage from "../../assets/ig-avatars/Tom.png";
-import vryoImage from "../../assets/ig-avatars/Vryo.png";
-import winsonImage from "../../assets/ig-avatars/Winson.png";
-import zukkaImage from "../../assets/ig-avatars/Zukka.png";
 // Another resources
-import logoImage from "../../assets/logo-wide.jpg";
-import introSound from "../../assets/sounds/dion.mp3";
-import videoBG from "../../assets/video/fire.mp4";
 import Galaxy from "../../components/Backgrounds/GalaxyBackground";
+import useFullScreen from "../../hooks/useFullScreen";
+import usePreventScroll from "../../hooks/usePreventScroll";
 import AnimatedTitleLine from "./components/IntroSequence/AnimatedTitleLine";
+import BackgroundLogo from "./components/IntroSequence/BackgroundLogo";
 import IntroAdenCard from "./components/IntroSequence/IntroAdenCard";
 import IntroPlayerCard from "./components/IntroSequence/IntroPlayerCard";
+
+const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;
 
 // Users Mock data Lineage 2
 const partyMembers = [
@@ -30,7 +20,7 @@ const partyMembers = [
     role: "Healer",
     side: "left",
     desc: "Divine protection & leads the path",
-    img: tobeImage,
+    img: `${STORAGE_URL}/avatars/tobe.png`,
     class: "Cardinal",
   },
   {
@@ -39,7 +29,7 @@ const partyMembers = [
     role: "Dominator",
     side: "right",
     desc: "Crushing force & unstoppable rage",
-    img: shrekImage,
+    img: `${STORAGE_URL}/avatars/shrek.png`,
     class: "Overlord",
   },
   {
@@ -48,7 +38,7 @@ const partyMembers = [
     role: "DD",
     side: "left",
     desc: "Silent death from the shadows",
-    img: lapestoImage,
+    img: `${STORAGE_URL}/avatars/Lapesto.png`,
     class: "Archmage",
   },
   {
@@ -57,7 +47,7 @@ const partyMembers = [
     role: "DD / CPL",
     side: "right",
     desc: "DoD & target calling",
-    img: vryoImage,
+    img: `${STORAGE_URL}/avatars/Vryo.png`,
     class: "Mystic Muse",
   },
   {
@@ -66,7 +56,7 @@ const partyMembers = [
     role: "Mage / Healer",
     side: "left",
     desc: "Elemental control & heavy burst",
-    img: fergiImage,
+    img: `${STORAGE_URL}/avatars/fergi.png`,
     class: "Necromancer",
   },
   {
@@ -75,17 +65,17 @@ const partyMembers = [
     role: "Mage",
     side: "right",
     desc: "Storm caller & area dominance",
-    img: spektraImage,
+    img: `${STORAGE_URL}/avatars/spektra.png`,
     class: "Necromancer",
   },
   {
-    id: 7,
-    name: "Manol",
-    role: "Dominator",
+    id: 12,
+    name: "Ansol",
+    role: "Headler",
     side: "left",
-    desc: "Dance of fury & battlefield rhythm",
-    img: manolImage,
-    class: "Overlord",
+    desc: "Soul breaker & crowd suppression",
+    img: `${STORAGE_URL}/avatars/Ansol.png`,
+    class: "Cardinal",
   },
   {
     id: 8,
@@ -93,7 +83,7 @@ const partyMembers = [
     role: "DD",
     side: "right",
     desc: "Song of wind & impenetrable shield",
-    img: zukkaImage,
+    img: `${STORAGE_URL}/avatars/Zukka.png`,
     class: "MM",
   },
   {
@@ -102,7 +92,7 @@ const partyMembers = [
     role: "DD",
     side: "left",
     desc: "Swift blade & tactical intelligence",
-    img: tomImage,
+    img: `${STORAGE_URL}/avatars/Tom.png`,
     class: "MM",
   },
   {
@@ -111,8 +101,17 @@ const partyMembers = [
     role: "Healer",
     side: "right",
     desc: "Soul breaker & crowd suppression",
-    img: winsonImage,
+    img: `${STORAGE_URL}/avatars/Winson.png`,
     class: "Cardinal",
+  },
+  {
+    id: 7,
+    name: "Manol",
+    role: "Dominator",
+    side: "left",
+    desc: "Dance of fury & battlefield rhythm",
+    img: `${STORAGE_URL}/avatars/Manol.png`,
+    class: "Overlord",
   },
   {
     id: 11,
@@ -120,19 +119,43 @@ const partyMembers = [
     role: "DD",
     side: "left",
     desc: "Soul breaker & crowd suppression",
-    img: mwImage,
+    img: `${STORAGE_URL}/avatars/mw.png`,
     class: "Necromancer",
   },
 ];
 
+// ==========================================
+// ⏱️ ТАЙМІНГИ ІНТРО (в мілісекундах)
+// ==========================================
+const INTRO_TIMINGS = {
+  START_LOGO_ASSEMBLY: 4000, // Затримка на початку: скільки дивимось чорний екран перед появою лого
+  SHOW_TEXT_ANIMATION: 13500, // Коли з'являється головний текст "Iron Gates"
+  START_PRESENTING_MEMBERS: 20000, // Пауза перед тим, як починається скрол списку учасників
+  MEMBER_SCROLL_DELAY: 3500, // Час показника кожного учасника перед скролом до наступного
+  FINAL_SQUAD_VIEW_TIME: 5000, // Скільки часу дивимось загальну фінальну картку перед затуханням
+  FADE_OUT_DURATION: 3000, // Тривалість фінального затухання звуку та екрану
+};
+
+const STAGES = {
+  START: "start",
+  PRESENTING_MEMBERS: "presenting_members",
+  SHOWING_SQUAD: "showing_squad",
+  FADING_OUT: "fading_out",
+  ASSEMBLING: "assembling",
+  TEXT_ANIMATION: "text_animation",
+};
+
 const IntroSequence = ({ onFinish }) => {
+  const { enterFullscreen, exitFullscreen } = useFullScreen();
+
   const [started, setStarted] = useState(false);
-  // start -> assembling -> text_anim -> presenting_members -> showing_squad -> fading_out
-  const [stage, setStage] = useState("start");
+  const [stage, setStage] = useState(STAGES.START);
   const audioRef = useRef(null);
   const containerRef = useRef(null);
   const memberRefs = useRef([]);
-  const squadRef = useRef(null); // Final image
+  const squadRef = useRef(null);
+
+  usePreventScroll(containerRef);
 
   // Audio Fade out
   const fadeOutAudio = () => {
@@ -150,7 +173,7 @@ const IntroSequence = ({ onFinish }) => {
   };
 
   useEffect(() => {
-    if (stage === "presenting_members") {
+    if (stage === STAGES.PRESENTING_MEMBERS) {
       const N = partyMembers.length;
       let current = 0;
 
@@ -162,9 +185,8 @@ const IntroSequence = ({ onFinish }) => {
           });
           current++;
           if (current < N) {
-            setTimeout(scrollToNext, 3500);
+            setTimeout(scrollToNext, INTRO_TIMINGS.MEMBER_SCROLL_DELAY);
           } else {
-            // When all members are shown - show final image from Aden
             setTimeout(() => {
               if (squadRef.current) {
                 squadRef.current.scrollIntoView({
@@ -172,22 +194,23 @@ const IntroSequence = ({ onFinish }) => {
                   block: "center",
                 });
               }
-              setStage("showing_squad");
-            }, 3500);
+              setStage(STAGES.SHOWING_SQUAD);
+            }, INTRO_TIMINGS.MEMBER_SCROLL_DELAY);
           }
         }
       };
 
       setTimeout(scrollToNext, 800);
-    } else if (stage === "showing_squad") {
-      // Give 5 sec to watch final image and start fade-out
+    } else if (stage === STAGES.SHOWING_SQUAD) {
       const timer = setTimeout(() => {
         fadeOutAudio();
-        setStage("fading_out");
+        setStage(STAGES.FADING_OUT);
         setTimeout(() => {
+          exitFullscreen();
+
           if (onFinish) onFinish();
-        }, 1500);
-      }, 5000);
+        }, INTRO_TIMINGS.FADE_OUT_DURATION);
+      }, INTRO_TIMINGS.FINAL_SQUAD_VIEW_TIME);
 
       return () => clearTimeout(timer);
     }
@@ -195,38 +218,47 @@ const IntroSequence = ({ onFinish }) => {
 
   const handleStart = () => {
     setStarted(true);
+
+    enterFullscreen();
+
     if (audioRef.current) {
       audioRef.current.volume = 0.6;
       audioRef.current.play().catch((e) => console.log("Audio play error:", e));
     }
 
-    setTimeout(() => setStage("assembling"), 2500);
-    setTimeout(() => setStage("text_anim"), 12000);
+    setTimeout(
+      () => setStage(STAGES.ASSEMBLING),
+      INTRO_TIMINGS.START_LOGO_ASSEMBLY,
+    );
+    setTimeout(
+      () => setStage(STAGES.TEXT_ANIMATION),
+      INTRO_TIMINGS.SHOW_TEXT_ANIMATION,
+    );
     setTimeout(() => {
-      setStage("presenting_members");
-    }, 25000);
+      setStage(STAGES.PRESENTING_MEMBERS);
+    }, INTRO_TIMINGS.START_PRESENTING_MEMBERS);
   };
-
-  const rows = 8;
-  const cols = 12;
-  const totalPieces = rows * cols;
-
-  const pieces = Array.from({ length: totalPieces }, (_, index) => {
-    const randomDelay = ((Math.sin(index * 12.9898) * 43758.5453) % 1) * 8500;
-    return { id: index, delay: Math.abs(randomDelay) };
-  });
 
   const line1 = "IRON";
   const line2 = "GATES";
 
   const isScrollingStage =
-    stage === "presenting_members" || stage === "showing_squad";
+    stage === STAGES.PRESENTING_MEMBERS || stage === STAGES.SHOWING_SQUAD;
+
+  const isAnimate =
+    stage === STAGES.TEXT_ANIMATION ||
+    stage === STAGES.PRESENTING_MEMBERS ||
+    stage === STAGES.SHOWING_SQUAD ||
+    stage === STAGES.FADING_OUT;
+
+  const videoSrc = `${STORAGE_URL}/fire.mp4`;
+  const audioSrc = `${STORAGE_URL}/audio/dion.mp3`;
 
   return (
     <div
       ref={containerRef}
-      className="relative bg-black text-white overflow-x-hidden h-screen overflow-y-auto snap-y
-        snap-mandatory scroll-smooth"
+      className="relative bg-black text-white overflow-x-hidden h-screen overflow-y-hidden snap-y
+        snap-mandatory scroll-smooth overflow-hidden"
     >
       <div
         className={`fixed inset-0 pointer-events-none z-35 transition-opacity duration-1000 ${
@@ -249,13 +281,14 @@ const IntroSequence = ({ onFinish }) => {
         />
       </div>
       {/* Skip Button */}
-      {started && stage !== "fading_out" && (
+      {started && stage !== STAGES.FADING_OUT && (
         <button
           onClick={() => {
-            setStage("fading_out");
+            setStage(STAGES.FADING_OUT);
+            exitFullscreen();
             setTimeout(() => {
               if (onFinish) onFinish();
-            }, 1500);
+            }, 900);
           }}
           className="fixed top-6 right-6 z-50 px-4 py-2 bg-black/40 hover:bg-amber-500/20 border
             border-amber-500/30 rounded-lg text-amber-300/85 hover:text-amber-300 text-xs tracking-widest
@@ -269,9 +302,10 @@ const IntroSequence = ({ onFinish }) => {
       <div
         className={`relative h-screen w-full flex flex-col items-center justify-center bg-black
           overflow-hidden transition-opacity duration-1500 ease-in-out snap-start
-          ${stage === "fading_out" ? "opacity-0" : "opacity-100"}`}
+          ${stage === STAGES.FADING_OUT ? "opacity-0" : "opacity-100"}`}
       >
-        {(stage === "presenting_members" || stage === "showing_squad") && (
+        {(stage === STAGES.PRESENTING_MEMBERS ||
+          stage === STAGES.SHOWING_SQUAD) && (
           <div className="absolute inset-0 bg-black/90 z-20 transition-opacity duration-1000" />
         )}
 
@@ -295,7 +329,7 @@ const IntroSequence = ({ onFinish }) => {
           </div>
         )}
 
-        <audio ref={audioRef} src={introSound} preload="auto" />
+        <audio ref={audioRef} src={audioSrc} preload="auto" />
 
         {/* Background video */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -306,41 +340,13 @@ const IntroSequence = ({ onFinish }) => {
             playsInline
             className="absolute inset-0 w-full h-full object-cover filter contrast-125"
           >
-            <source src={videoBG} type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
         </div>
 
         {/* Background logo */}
-        <div
-          className="absolute inset-0 grid pointer-events-none z-10"
-          style={{
-            gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-            gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
-          }}
-        >
-          {pieces.map((piece) => {
-            const x = (piece.id % cols) * (100 / (cols - 1));
-            const y = Math.floor(piece.id / cols) * (100 / (rows - 1));
-
-            return (
-              <div
-                key={piece.id}
-                className={`w-full h-full bg-cover transition-all duration-1500 ease-out transform ${
-                  stage === "start"
-                    ? "opacity-0 scale-50 filter blur-md"
-                    : "opacity-90 scale-100 filter blur-0"
-                }`}
-                style={{
-                  backgroundImage: `url(${logoImage})`,
-                  backgroundSize: `${cols * 100}% ${rows * 100}%`,
-                  backgroundPosition: `${x}% ${y}%`,
-                  transitionDelay: `${piece.delay}ms`,
-                }}
-              />
-            );
-          })}
-        </div>
+        <BackgroundLogo isStart={stage === STAGES.START} />
 
         {/* Title Iron Gates */}
         <div
@@ -349,30 +355,23 @@ const IntroSequence = ({ onFinish }) => {
         >
           <AnimatedTitleLine
             text={line1}
-            stage={stage}
             delayChildren={0.2}
+            isAnimate={isAnimate}
             gradientClass="from-white via-slate-200 to-amber-200"
           />
 
           <AnimatedTitleLine
             text={line2}
-            stage={stage}
             delayChildren={0.6}
+            isAnimate={isAnimate}
             gradientClass="from-white via-slate-200 to-amber-300"
           />
 
           <motion.p
             className="mt-6 text-sm sm:text-base lg:text-3xl text-amber-200/90 tracking-[0.5em] uppercase font-light
-                drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
+              drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
             initial={{ opacity: 0, y: 20 }}
-            animate={
-              stage === "text_anim" ||
-              stage === "presenting_members" ||
-              stage === "showing_squad" ||
-              stage === "fading_out"
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 20 }
-            }
+            animate={isAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 1.2, delay: 1.2 }}
           >
             Brotherhood established

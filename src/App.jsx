@@ -1,3 +1,5 @@
+import "@xyflow/react/dist/style.css";
+
 import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 
@@ -134,10 +136,8 @@ function App() {
 
   return (
     <div className="App relative">
-      {/* Показуємо інтро, якщо дашборд ще не завантажений */}
       {!showDashboard && <IntroSequence onFinish={handleIntroFinish} />}
 
-      {/* Основний контент сайту. Можна додати клас blur для фону під час інтро */}
       <div
         className={`transition-all duration-500 ${!showDashboard ? "blur-sm" : "blur-none"}`}
       >
