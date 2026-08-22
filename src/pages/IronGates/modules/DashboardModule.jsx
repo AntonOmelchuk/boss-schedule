@@ -1,7 +1,9 @@
 import {
   Award,
   Calendar,
+  ChevronDown,
   ChevronRight,
+  ChevronUp,
   TrendingUp,
   Users,
   Zap,
@@ -103,9 +105,27 @@ const RECENT_MEMBERS = [
   },
 ];
 
-const DashboardModule = () => {
+const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   return (
-    <div className="p-8">
+    <div className="px-8 relative pt-2">
+      <div className="flex justify-center mb-4">
+        <button
+          onClick={() => setIsHeaderVisible(!isHeaderVisible)}
+          className="px-3.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-slate-700/80
+          text-slate-300 hover:text-amber-400 hover:border-amber-500/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]
+            transition-all duration-300 flex items-center gap-1.5 text-xs font-semibold cursor-pointer z-30"
+        >
+          <span>
+            {isHeaderVisible ? "Hide Header & Nav" : "Show Header & Nav"}
+          </span>
+          {isHeaderVisible ? (
+            <ChevronUp size={14} />
+          ) : (
+            <ChevronDown size={14} />
+          )}
+        </button>
+      </div>
+
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         <StatCard
           title="Склад CP"
@@ -209,8 +229,8 @@ const DashboardModule = () => {
 
           <button
             className="w-full mt-6 py-2.5 bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60
-            rounded-xl text-xs font-semibold text-slate-300 transition-all flex items-center justify-center gap-2
-            group"
+              rounded-xl text-xs font-semibold text-slate-300 transition-all flex items-center justify-center gap-2
+              group cursor-pointer"
           >
             <span>Відкрити повний Epic Priority</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -237,11 +257,11 @@ const DashboardModule = () => {
                 <div
                   key={idx}
                   className="flex items-center gap-4 p-3.5 rounded-xl bg-slate-950/50 border border-slate-800/60
-                    hover:border-purple-500/40 transition-all group cursor-pointer"
+                  hover:border-purple-500/40 transition-all group cursor-pointer"
                 >
                   <div
                     className="relative w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 to-purple-600
-                    shrink-0"
+                      shrink-0"
                   >
                     <img
                       src={member.avatar}
@@ -253,7 +273,7 @@ const DashboardModule = () => {
                     <div className="flex items-center justify-between">
                       <h4
                         className="text-sm font-bold text-white truncate group-hover:text-amber-400
-                        transition-colors"
+                          transition-colors"
                       >
                         {member.name}
                       </h4>
@@ -284,7 +304,8 @@ const DashboardModule = () => {
 
           <button
             className="w-full mt-6 py-2.5 bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-xs
-              rounded-xl font-semibold text-slate-300 transition-all flex items-center justify-center gap-2 group"
+              rounded-xl font-semibold text-slate-300 transition-all flex items-center justify-center gap-2 group
+              cursor-pointer"
           >
             <span>Переглянути всіх членів пачки та профілі</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
