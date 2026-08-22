@@ -1,9 +1,11 @@
 /* eslint-disable indent */
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 import { DASHBOARD_TABS } from "../../constants/routes";
 import Header from "./components/Dashboard/Header";
 import MagicSparks from "./components/MagicSparks";
+import SkyStars from "./components/SkyStars";
 import DashboardModule from "./modules/DashboardModule";
 import GvGModule from "./modules/GvGModule";
 import MemberModule from "./modules/MembersModule";
@@ -42,7 +44,9 @@ const IronGatesPage = () => {
   };
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans relative overflow-hidden">
+      <Toaster />
       <MagicSparks />
+      <SkyStars />
       {/* 1. Large Header according to Tech Task */}
       {activeTab === DASHBOARD_TABS.SUMMARY && <Header />}
       <DashboardNav activeTab={activeTab} onTabChange={setActiveTab} />

@@ -57,7 +57,7 @@ const partyMembers = [
     side: "left",
     desc: "Elemental control & heavy burst",
     img: `${STORAGE_URL}/avatars/fergi.png`,
-    class: "Necromancer",
+    class: "Cardinal",
   },
   {
     id: 6,
@@ -66,12 +66,12 @@ const partyMembers = [
     side: "right",
     desc: "Storm caller & area dominance",
     img: `${STORAGE_URL}/avatars/spektra.png`,
-    class: "Necromancer",
+    class: "Soultaker",
   },
   {
     id: 12,
     name: "Ansol",
-    role: "Headler",
+    role: "Healer",
     side: "left",
     desc: "Soul breaker & crowd suppression",
     img: `${STORAGE_URL}/avatars/Ansol.png`,
@@ -84,7 +84,7 @@ const partyMembers = [
     side: "right",
     desc: "Song of wind & impenetrable shield",
     img: `${STORAGE_URL}/avatars/Zukka.png`,
-    class: "MM",
+    class: "Mystic Muse",
   },
   {
     id: 9,
@@ -93,7 +93,7 @@ const partyMembers = [
     side: "left",
     desc: "Swift blade & tactical intelligence",
     img: `${STORAGE_URL}/avatars/Tom.png`,
-    class: "MM",
+    class: "Mystic Muse",
   },
   {
     id: 10,
@@ -120,7 +120,7 @@ const partyMembers = [
     side: "left",
     desc: "Soul breaker & crowd suppression",
     img: `${STORAGE_URL}/avatars/mw.png`,
-    class: "Necromancer",
+    class: "Soultaker",
   },
 ];
 

@@ -217,7 +217,6 @@ const DashboardModule = () => {
           </button>
         </div>
 
-        {/* Права колонка (2/3): Швидкий перегляд учасників з ролями та локальними аватарами */}
         <div
           className="lg:col-span-2 bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-md
           flex flex-col justify-between"

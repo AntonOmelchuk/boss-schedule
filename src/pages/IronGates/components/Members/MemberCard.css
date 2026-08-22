@@ -11,3 +11,34 @@
     margin-left: 25%;
   }
 }
+
+@keyframes tiktokWaveFloat {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(0.4);
+    opacity: 0;
+  }
+  20% {
+    opacity: var(--item-opacity, 1);
+    /* Використовуємо --wave-dir, щоб половина летіла вправо, а половина вліво */
+    transform: translateY(-45px) translateX(calc(var(--wave-dir, 1) * 30px))
+      scale(1.1);
+  }
+  50% {
+    transform: translateY(-110px) translateX(calc(var(--wave-dir, 1) * -35px))
+      scale(1);
+  }
+  80% {
+    opacity: var(--item-opacity, 1);
+    transform: translateY(-170px) translateX(calc(var(--wave-dir, 1) * 25px))
+      scale(0.9);
+  }
+  100% {
+    transform: translateY(-220px) translateX(calc(var(--wave-dir, 1) * -15px))
+      scale(0.7);
+    opacity: 0;
+  }
+}
+
+.animate-tiktok-wave {
+  animation: tiktokWaveFloat 3s cubic-bezier(0.37, 0, 0.63, 1) forwards;
+}

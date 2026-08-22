@@ -1,7 +1,7 @@
 import "@xyflow/react/dist/style.css";
 
 import { onValue, ref } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { EVENT_TYPES } from "./constants/general";
@@ -9,7 +9,7 @@ import { EVENT_TYPES } from "./constants/general";
 // import DesktopOnlyGuard from "./guards/DesktopOnlyGuard";
 // import MaintenanceGuard from "./guards/MaintenanceGuard";
 import { useAuthSync } from "./hooks/useAuthSync";
-import IntroSequence from "./pages/IronGates/IntroSequence";
+// import IntroSequence from "./pages/IronGates/IntroSequence";
 // import MainLayout from "./layouts/MainLayout.jsx/MainLayout";
 // import AdminPage from "./pages/AdminPage/AdminPage";
 // import AfkProofPage from "./pages/AfkProofPage/AfkProofPage";
@@ -126,25 +126,25 @@ function App() {
     return () => unsubscribe();
   }, [setEvents, setPrimeTime]);
 
-  const [showDashboard, setShowDashboard] = useState(false);
+  // const [showDashboard, setShowDashboard] = useState(false);
 
-  const handleIntroFinish = () => {
-    setShowDashboard(true);
-  };
+  // const handleIntroFinish = () => {
+  //   setShowDashboard(true);
+  // };
 
-  // return <IronGatesPage />;
+  return <IronGatesPage />;
 
-  return (
-    <div className="App relative">
-      {!showDashboard && <IntroSequence onFinish={handleIntroFinish} />}
+  // return (
+  //   <div className="App relative">
+  //     {!showDashboard && <IntroSequence onFinish={handleIntroFinish} />}
 
-      <div
-        className={`transition-all duration-500 ${!showDashboard ? "blur-sm" : "blur-none"}`}
-      >
-        {showDashboard && <IronGatesPage />}
-      </div>
-    </div>
-  );
+  //     <div
+  //       className={`transition-all duration-500 ${!showDashboard ? "blur-sm" : "blur-none"}`}
+  //     >
+  //       {showDashboard && <IronGatesPage />}
+  //     </div>
+  //   </div>
+  // );
 
   //   return (
   //     <BrowserRouter>

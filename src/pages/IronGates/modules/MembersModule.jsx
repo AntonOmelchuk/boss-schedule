@@ -3,7 +3,6 @@ import { useState } from "react";
 import { STORAGE_URL } from "../../../constants/general";
 import useWindowSize from "../../../hooks/useWindowSize";
 import MemberCard from "../components/Members/MemberCard";
-import SkyStars from "../components/SkyStars";
 import SphereImageGrid from "../components/SphereImageGrid";
 
 const MEMBERS_DATA = [
@@ -12,6 +11,7 @@ const MEMBERS_DATA = [
     char_name: "toBe",
     role: "ADMIN",
     cp_name: "IronGates CP",
+    playClass: "Bishop",
     mainClass: "Bishop (Бішоп)",
     subClasses: ["Necromancer", "Treasure Hunter", "Shillien Knight"],
     server: "Reborn x10",
@@ -29,6 +29,7 @@ const MEMBERS_DATA = [
     char_name: "Fergi",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Bishop",
     mainClass: "Spellsinger",
     subClasses: ["Elemental Summoner", "Prophet"],
     server: "Reborn x10",
@@ -46,6 +47,7 @@ const MEMBERS_DATA = [
     char_name: "Ansol",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Bishop",
     mainClass: "Fortune Seaker",
     subClasses: ["Cardinal", "Prophet"],
     server: "Reborn x10",
@@ -63,6 +65,7 @@ const MEMBERS_DATA = [
     char_name: "Lapesto",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Archmage",
     mainClass: "Ghost Hunter",
     subClasses: ["Dreadnought", "Duelist"],
     server: "Reborn x10",
@@ -80,6 +83,7 @@ const MEMBERS_DATA = [
     char_name: "Manol",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Dominator",
     mainClass: "Spectral Dancer",
     subClasses: ["Abyss Walker", "Plain Walker"],
     server: "Reborn x10",
@@ -97,6 +101,7 @@ const MEMBERS_DATA = [
     char_name: "Shrek",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Dominator",
     mainClass: "Titan",
     subClasses: ["Destroyer", "Grand Khavatari"],
     server: "Reborn x10",
@@ -114,6 +119,7 @@ const MEMBERS_DATA = [
     char_name: "Spektra",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Soultaker",
     mainClass: "Storm Screamer",
     subClasses: ["Spellhowler", "Overlord"],
     server: "Reborn x10",
@@ -131,6 +137,7 @@ const MEMBERS_DATA = [
     char_name: "Tom",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Mystic Muse",
     mainClass: "Adventurer",
     subClasses: ["Treasure Hunter", "Hawkeye"],
     server: "Reborn x10",
@@ -148,6 +155,7 @@ const MEMBERS_DATA = [
     char_name: "Vryo",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Mystic Muse",
     mainClass: "Cardinal",
     subClasses: ["Hierophant", "Evas Saint"],
     server: "Reborn x10",
@@ -165,6 +173,7 @@ const MEMBERS_DATA = [
     char_name: "Winson",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Bishop",
     mainClass: "Doombringer",
     subClasses: ["Trickster", "Judicator"],
     server: "Reborn x10",
@@ -182,6 +191,25 @@ const MEMBERS_DATA = [
     char_name: "Zukka",
     role: "MEMBER",
     cp_name: "IronGates CP",
+    playClass: "Mystic Muse",
+    mainClass: "Shillien Elder",
+    subClasses: ["Blade Dancer", "Warsmith"],
+    server: "Reborn x10",
+    status: "ONLINE",
+    image: `${STORAGE_URL}/avatars/Zukka.png`,
+    gear: [
+      { name: "Dark Crystal Robe", type: "Armor", icon: "🛡️" },
+      { name: "TT Set", type: "Jewels", icon: "💍" },
+      { name: "Blessed Ring", type: "Epic Jewel", icon: "💎" },
+    ],
+    stats: { pvp: "670", pk: "4" },
+  },
+  {
+    id: "mw",
+    char_name: "MWQueen",
+    role: "MEMBER",
+    cp_name: "IronGates CP",
+    playClass: "Soultaker",
     mainClass: "Shillien Elder",
     subClasses: ["Blade Dancer", "Warsmith"],
     server: "Reborn x10",
@@ -220,6 +248,7 @@ const MemberModule = () => {
     image,
     char_name,
     status,
+    playClass,
     mainClass,
     subClasses,
     gear,
@@ -233,8 +262,6 @@ const MemberModule = () => {
       className="min-h-[calc(100vh-100px)] w-full flex flex-col lg:flex-row items-center justify-center
         p-8 lg:p-12 gap-10 overflow-hidden relative bg-slate-950 select-none"
     >
-      <SkyStars />
-
       <div className="relative z-20 flex-1 w-full flex items-center justify-center">
         <div className="h-full flex items-center justify-center p-4">
           <SphereImageGrid
@@ -257,6 +284,7 @@ const MemberModule = () => {
         image={image}
         name={char_name}
         status={status}
+        playClass={playClass}
         mainClass={mainClass}
         subClasses={subClasses}
         gear={gear}

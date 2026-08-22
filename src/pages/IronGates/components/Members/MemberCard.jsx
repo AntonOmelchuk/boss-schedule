@@ -6,6 +6,7 @@ const MemberCard = ({
   image,
   name,
   status,
+  playClass,
   mainClass,
   subClasses,
   gear,
@@ -21,7 +22,7 @@ const MemberCard = ({
         className="bg-slate-950/85 border border-amber-500/30 rounded-3xl p-6 lg:p-8
           shadow-[0_0_60px_rgba(245,158,11,0.15)] backdrop-blur-2xl grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
       >
-        <ParallaxAvatar image={image} />
+        <ParallaxAvatar image={image} playClass={playClass} />
 
         <div className="md:col-span-7 space-y-4">
           <div>
@@ -86,14 +87,14 @@ const MemberCard = ({
             </div>
           </div>
 
-          <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+          <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xl text-slate-400">
             <span>
-              PvP: <strong className="text-white">{pvp}</strong>
+              PvP: <strong className="text-white text-xl">{pvp}</strong>
             </span>
             <button
               className="px-3.5 py-2 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500
-            hover:to-yellow-500 text-slate-950 font-black text-[11px] uppercase tracking-wider rounded-xl
-              shadow-[0_0_20px_rgba(245,158,11,0.3)] transition cursor-pointer active:scale-95"
+              hover:to-yellow-500 text-slate-950 font-black text-[11px] uppercase tracking-wider rounded-xl
+                shadow-[0_0_20px_rgba(245,158,11,0.3)] transition cursor-pointer active:scale-95"
             >
               Зброя / Стати
             </button>
