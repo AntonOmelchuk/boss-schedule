@@ -123,26 +123,56 @@ const MemberCardNode = ({ data, id }) => {
         </select>
       </div>
 
-      {/* Handles on all 4 sides */}
       <Handle
         type="target"
         position={Position.Top}
-        className="w-3 h-3 bg-amber-400!"
+        id="top-target"
+        className="w-4! h-4! bg-amber-400!"
+      />
+      <Handle
+        type="source"
+        position={Position.Top}
+        id="top-source"
+        className="w-4! h-4! bg-emerald-400!"
+      />
+
+      <Handle
+        type="target"
+        position={Position.Right}
+        id="right-target"
+        className="w-4! h-4! bg-amber-400!"
       />
       <Handle
         type="source"
         position={Position.Right}
-        className="w-3 h-3 bg-emerald-400!"
+        id="right-source"
+        className="w-4! h-4! bg-emerald-400!"
       />
+
       <Handle
         type="target"
         position={Position.Bottom}
-        className="w-3 h-3 bg-amber-400!"
+        id="bottom-target"
+        className="w-4! h-4! bg-amber-400!"
       />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="bottom-source"
+        className="w-4! h-4! bg-emerald-400!"
+      />
+
       <Handle
         type="target"
         position={Position.Left}
-        className="w-3 h-3 bg-amber-400!"
+        id="left-target"
+        className="w-4! h-4! bg-amber-400!"
+      />
+      <Handle
+        type="source"
+        position={Position.Left}
+        id="left-source"
+        className="w-4! h-4! bg-emerald-400!"
       />
     </div>
   );

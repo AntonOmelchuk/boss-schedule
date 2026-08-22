@@ -9,7 +9,12 @@ const Header = () => {
   const { t } = useTranslation();
   const { gvgPage } = t;
 
-  const { addEnemyTarget } = useGvGStore();
+  const { addEnemyTarget, resetPlanner } = useGvGStore();
+
+  const handleReset = () => {
+    resetPlanner();
+    toast.error("Planner reset to default!");
+  };
 
   return (
     <>
@@ -22,6 +27,12 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          <Button
+            onClick={handleReset}
+            className="bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-slate-300"
+          >
+            Reset
+          </Button>
           <Button
             onClick={addEnemyTarget}
             className="bg-red-500/20 hover:bg-red-500/30 border-red-500/40 text-red-300"

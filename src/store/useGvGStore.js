@@ -179,6 +179,9 @@ const useGvGStore = create(
           edges: get().edges.filter((e) => e.source !== id && e.target !== id),
         });
       },
+      resetPlanner: () => {
+        set({ nodes: initialNodes, edges: initialEdges });
+      },
     }),
     {
       name: "gvg-planner-storage",

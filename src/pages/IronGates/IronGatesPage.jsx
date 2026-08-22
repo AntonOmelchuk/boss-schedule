@@ -43,13 +43,13 @@ const IronGatesPage = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans relative overflow-hidden">
+    <div className="min-h-screen py-4 bg-slate-950 text-slate-100 font-sans relative overflow-hidden">
       <Toaster />
       <MagicSparks />
       <SkyStars />
+      <DashboardNav activeTab={activeTab} onTabChange={setActiveTab} />
       {/* 1. Large Header according to Tech Task */}
       {activeTab === DASHBOARD_TABS.SUMMARY && <Header />}
-      <DashboardNav activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="transition-all duration-300">{renderTabContent()}</div>
     </div>
