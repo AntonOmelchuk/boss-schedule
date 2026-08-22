@@ -32,14 +32,14 @@ const MainBlock = () => {
       >
         <div className="flex items-center gap-4">
           <div
-            className={`w-12 h-12 md:w-16 md:h-16 text-3xl rounded-2xl border flex items-center justify-center
+            className={`w-12 h-12 md:w-20 md:h-20 text-3xl rounded-2xl border flex items-center justify-center
               shrink-0 shadow-inner ${badgeClass}`}
           >
             {icon ? (
               icon.length <= 3 ? (
                 icon
               ) : (
-                <img src={icon} width={63} className="rounded-xl" />
+                <img src={icon} className="rounded-xl h-full" />
               )
             ) : (
               "⏳"

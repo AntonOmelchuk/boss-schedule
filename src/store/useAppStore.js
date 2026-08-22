@@ -25,6 +25,7 @@ const useAppStore = create(
       statsData: { pareto: [], summary: {} },
       timelineData: { current_snapshot: [], timeline: [] },
       isLoading: false,
+      isRespawnLoading: false,
       error: null,
       // Summary Cards
       summaryData: null,
@@ -38,7 +39,8 @@ const useAppStore = create(
       // Actions
       setPrimeTime: (primeTime) => set({ primeTime }),
       setLanguage: (lang) => set({ language: lang }),
-      setEvents: (events) => set({ events }),
+      setIsRespawnLoading: (value) => set({ isRespawnLoading: value }),
+      setEvents: (events) => set({ events, isRespawnLoading: false }),
       setTimeFilter: (timeFilter) => set({ timeFilter }),
       setSelectedCPs: (selectedCPs) => set({ selectedCPs }),
 
