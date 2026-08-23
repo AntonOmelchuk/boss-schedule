@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import { DASHBOARD_TABS } from "../../constants/routes";
+import Footer from "../../layouts/Footer/Footer";
 import Header from "./components/Dashboard/Header";
 import MagicSparks from "./components/MagicSparks";
 import SkyStars from "./components/SkyStars";
@@ -13,7 +14,7 @@ import DashboardNav from "./tabs/DashboardTabs";
 
 const IronGatesPage = () => {
   const [activeTab, setActiveTab] = useState(DASHBOARD_TABS.SUMMARY);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true); // Загальний стан для хедера та навбару
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -59,6 +60,8 @@ const IronGatesPage = () => {
       <div className="grow transition-all duration-300 flex flex-col">
         {renderTabContent()}
       </div>
+
+      <Footer />
     </div>
   );
 };

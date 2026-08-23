@@ -210,3 +210,20 @@ export const EPIC_PRICES_GB = {
 };
 
 export const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;
+
+// Mappint members with their avatars and roles
+export const MEMBERS_MAP = {
+  toBe: { name: "toBe", image: `${STORAGE_URL}/avatars/tobe.png` },
+  Fergi: { name: "Fergi", image: `${STORAGE_URL}/avatars/fergi.png` },
+  Ansol: { name: "Ansol", image: `${STORAGE_URL}/avatars/Ansol.png` },
+  MWQueen: { name: "MWQueen", image: `${STORAGE_URL}/avatars/mw.png` },
+  ManiacShrek: {
+    name: "ManiacShrek",
+    image: `${STORAGE_URL}/avatars/shrek.png`,
+  },
+  Spektra: { name: "Spektra", image: `${STORAGE_URL}/avatars/spektra.png` },
+  ManiacTom: { name: "ManiacTom", image: `${STORAGE_URL}/avatars/Tom.png` },
+  Vryo: { name: "Vryo", image: `${STORAGE_URL}/avatars/Vryo.png` },
+  Winson: { name: "Winson", image: `${STORAGE_URL}/avatars/Winson.png` },
+  ZukaDaddy: { name: "ZukaDaddy", image: `${STORAGE_URL}/avatars/Zukka.png` },
+};

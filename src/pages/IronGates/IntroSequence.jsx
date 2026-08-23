@@ -1,139 +1,28 @@
+import { get, ref } from "firebase/database";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-// Another resources
 import Galaxy from "../../components/Backgrounds/GalaxyBackground";
+import { STORAGE_URL } from "../../constants/general";
 import useFullScreen from "../../hooks/useFullScreen";
 import usePreventScroll from "../../hooks/usePreventScroll";
+import { db } from "../../services/firebase";
+import { shuffleArray } from "../../utils/general";
 import AnimatedTitleLine from "./components/IntroSequence/AnimatedTitleLine";
 import BackgroundLogo from "./components/IntroSequence/BackgroundLogo";
 import IntroAdenCard from "./components/IntroSequence/IntroAdenCard";
 import IntroPlayerCard from "./components/IntroSequence/IntroPlayerCard";
 
-const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;
-
-// Users Mock data Lineage 2
-const partyMembers = [
-  {
-    id: 1,
-    name: "toBe",
-    role: "Healer",
-    side: "left",
-    desc: "Divine protection & leads the path",
-    img: `${STORAGE_URL}/avatars/tobe.png`,
-    class: "Cardinal",
-  },
-  {
-    id: 2,
-    name: "ManiacShrek",
-    role: "Dominator",
-    side: "right",
-    desc: "Crushing force & unstoppable rage",
-    img: `${STORAGE_URL}/avatars/shrek.png`,
-    class: "Overlord",
-  },
-  {
-    id: 3,
-    name: "LapestoPasto",
-    role: "DD",
-    side: "left",
-    desc: "Silent death from the shadows",
-    img: `${STORAGE_URL}/avatars/Lapesto.png`,
-    class: "Archmage",
-  },
-  {
-    id: 4,
-    name: "Vryo",
-    role: "DD / CPL",
-    side: "right",
-    desc: "DoD & target calling",
-    img: `${STORAGE_URL}/avatars/Vryo.png`,
-    class: "Mystic Muse",
-  },
-  {
-    id: 5,
-    name: "Fergi",
-    role: "Mage / Healer",
-    side: "left",
-    desc: "Elemental control & heavy burst",
-    img: `${STORAGE_URL}/avatars/fergi.png`,
-    class: "Cardinal",
-  },
-  {
-    id: 6,
-    name: "Spektra",
-    role: "Mage",
-    side: "right",
-    desc: "Storm caller & area dominance",
-    img: `${STORAGE_URL}/avatars/spektra.png`,
-    class: "Soultaker",
-  },
-  {
-    id: 12,
-    name: "Ansol",
-    role: "Healer",
-    side: "left",
-    desc: "Soul breaker & crowd suppression",
-    img: `${STORAGE_URL}/avatars/Ansol.png`,
-    class: "Cardinal",
-  },
-  {
-    id: 8,
-    name: "ZukaDaddy",
-    role: "DD",
-    side: "right",
-    desc: "Song of wind & impenetrable shield",
-    img: `${STORAGE_URL}/avatars/Zukka.png`,
-    class: "Mystic Muse",
-  },
-  {
-    id: 9,
-    name: "ManiacTom",
-    role: "DD",
-    side: "left",
-    desc: "Swift blade & tactical intelligence",
-    img: `${STORAGE_URL}/avatars/Tom.png`,
-    class: "Mystic Muse",
-  },
-  {
-    id: 10,
-    name: "Winson",
-    role: "Healer",
-    side: "right",
-    desc: "Soul breaker & crowd suppression",
-    img: `${STORAGE_URL}/avatars/Winson.png`,
-    class: "Cardinal",
-  },
-  {
-    id: 7,
-    name: "Manol",
-    role: "Dominator",
-    side: "left",
-    desc: "Dance of fury & battlefield rhythm",
-    img: `${STORAGE_URL}/avatars/Manol.png`,
-    class: "Overlord",
-  },
-  {
-    id: 11,
-    name: "MWQueen",
-    role: "DD",
-    side: "left",
-    desc: "Soul breaker & crowd suppression",
-    img: `${STORAGE_URL}/avatars/mw.png`,
-    class: "Soultaker",
-  },
-];
-
 // ==========================================
-// ⏱️ ТАЙМІНГИ ІНТРО (в мілісекундах)
+// ⏱️ TIME DELAY SETTIGNS IN MS
 // ==========================================
 const INTRO_TIMINGS = {
-  START_LOGO_ASSEMBLY: 4000, // Затримка на початку: скільки дивимось чорний екран перед появою лого
-  SHOW_TEXT_ANIMATION: 13500, // Коли з'являється головний текст "Iron Gates"
-  START_PRESENTING_MEMBERS: 20000, // Пауза перед тим, як починається скрол списку учасників
-  MEMBER_SCROLL_DELAY: 3500, // Час показника кожного учасника перед скролом до наступного
-  FINAL_SQUAD_VIEW_TIME: 5000, // Скільки часу дивимось загальну фінальну картку перед затуханням
-  FADE_OUT_DURATION: 3000, // Тривалість фінального затухання звуку та екрану
+  START_LOGO_ASSEMBLY: 4000, // Dealy before start showing logo
+  SHOW_TEXT_ANIMATION: 13500, // When main title appear
+  START_PRESENTING_MEMBERS: 20000, // Delay before auto scroll
+  MEMBER_SCROLL_DELAY: 3500, // Time for showing each member card
+  FINAL_SQUAD_VIEW_TIME: 5000, // Delay before fade out
+  FADE_OUT_DURATION: 3000, // Fade out time
 };
 
 const STAGES = {
@@ -150,12 +39,37 @@ const IntroSequence = ({ onFinish }) => {
 
   const [started, setStarted] = useState(false);
   const [stage, setStage] = useState(STAGES.START);
+  const [partyMembers, setPartyMembers] = useState([]);
+
   const audioRef = useRef(null);
   const containerRef = useRef(null);
   const memberRefs = useRef([]);
   const squadRef = useRef(null);
 
   usePreventScroll(containerRef);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const membersRef = ref(db, "iron_gates_members");
+        const snapshot = await get(membersRef);
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          // Конвертуємо об'єкт з Firebase у масив
+          const membersArray = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }));
+
+          setPartyMembers(shuffleArray(membersArray));
+        }
+      } catch (error) {
+        console.error("Error fetching iron_gates_members:", error);
+      }
+    };
+
+    fetchMembers();
+  }, []);
 
   // Audio Fade out
   const fadeOutAudio = () => {
@@ -207,18 +121,16 @@ const IntroSequence = ({ onFinish }) => {
         setStage(STAGES.FADING_OUT);
         setTimeout(() => {
           exitFullscreen();
-
           if (onFinish) onFinish();
         }, INTRO_TIMINGS.FADE_OUT_DURATION);
       }, INTRO_TIMINGS.FINAL_SQUAD_VIEW_TIME);
 
       return () => clearTimeout(timer);
     }
-  }, [stage, onFinish]);
+  }, [stage, onFinish, partyMembers.length]);
 
   const handleStart = () => {
     setStarted(true);
-
     enterFullscreen();
 
     if (audioRef.current) {
@@ -280,6 +192,7 @@ const IntroSequence = ({ onFinish }) => {
           speed={1}
         />
       </div>
+
       {/* Skip Button */}
       {started && stage !== STAGES.FADING_OUT && (
         <button
@@ -382,25 +295,38 @@ const IntroSequence = ({ onFinish }) => {
       {/* Section with members */}
       <div className="z-35">
         {partyMembers.map((member, index) => {
-          const { id, img, name, class: gameClass, role, desc } = member;
-          const isLeft = member.side === "left";
+          const {
+            img,
+            pvp,
+            name,
+            in_clan,
+            main_class,
+            role,
+            sub_classes,
+            cp_number,
+          } = member;
+
+          const isLeft = index % 2 === 0;
 
           return (
             <IntroPlayerCard
-              key={id}
+              pvp={pvp}
+              key={name}
               img={img}
+              clan={in_clan}
               name={name}
               role={role}
-              desc={desc}
               index={index}
               isLeft={isLeft}
-              gameClass={gameClass}
+              cp_number={cp_number}
+              main_class={main_class}
               memberRefs={memberRefs}
+              sub_classes={sub_classes}
             />
           );
         })}
 
-        {/* Section with full Squad (Aden)) */}
+        {/* Section with full Squad (Aden) */}
         <IntroAdenCard squadRef={squadRef} />
       </div>
     </div>

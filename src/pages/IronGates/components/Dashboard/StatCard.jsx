@@ -29,34 +29,31 @@ const StatCard = ({
           : "border-slate-800/80 hover:border-amber-500/40",
       )}
     >
-      {/* Шапка картки */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs text-slate-400 uppercase font-semibold">
+          <p className="text-xl text-slate-400 uppercase font-semibold">
             {title}
           </p>
           <h3 className="text-2xl font-bold text-white mt-1">
             {value}{" "}
-            <span className="text-xs text-slate-400 font-normal">{unit}</span>
+            <span className="text-xl text-slate-400 font-normal">{unit}</span>
           </h3>
         </div>
         <div
           className={cn(
-            "w-10 h-10 rounded-xl border flex items-center justify-center",
+            "w-15 h-15 rounded-xl border flex items-center justify-center",
             colors[colorClass] || colors.purple,
           )}
         >
-          <Icon className="w-5 h-5" />
+          <Icon className="w-10 h-10" />
         </div>
       </div>
 
       {/* Футер картки */}
       {(footerLabel || footerValue) && (
-        <div className="mt-3 text-xs text-slate-400 flex items-center justify-between">
+        <div className="mt-3 text-xl text-slate-400 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
-            {FooterIcon && (
-              <FooterIcon className="w-3.5 h-3.5 text-amber-400" />
-            )}
+            {FooterIcon && <FooterIcon className="w-9 h-9 text-amber-400" />}
             <span>{footerLabel}</span>
           </div>
           {footerValue && (
