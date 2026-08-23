@@ -6,6 +6,7 @@ import useAuthStore from "../store/useAuthStore";
 const ADMIN_ROLES = [
   ROLES.ADMIN,
   ROLES.CO_ADMIN,
+  ROLES.ASSISTANT,
   ROLES.ALLY_HEAD,
   ROLES.ALLY_GENERAL,
   ROLES.RAID_CALLER,

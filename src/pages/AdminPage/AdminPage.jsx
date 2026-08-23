@@ -32,7 +32,7 @@ const ADMIN_TABS = [
     labelKey: "tabTimers",
     icon: "⏳",
     component: RespawnModule,
-    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ASSISTANT],
   },
   {
     key: "HOLDINGS",
