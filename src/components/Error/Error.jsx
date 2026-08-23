@@ -1,4 +1,8 @@
+import useTranslation from "../../hooks/useTranslation";
+
 const Error = ({ title, onClickHandler }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col justify-center items-center text-red-400">
       <p className="text-xl font-bold mb-2">⚠️ Failed to load data</p>
@@ -7,7 +11,7 @@ const Error = ({ title, onClickHandler }) => {
         onClick={onClickHandler}
         className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition"
       >
-        Retry
+        {t.retry}
       </button>
     </div>
   );

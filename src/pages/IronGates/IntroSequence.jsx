@@ -6,6 +6,7 @@ import Galaxy from "../../components/Backgrounds/GalaxyBackground";
 import { STORAGE_URL } from "../../constants/general";
 import useFullScreen from "../../hooks/useFullScreen";
 import usePreventScroll from "../../hooks/usePreventScroll";
+import useTranslation from "../../hooks/useTranslation";
 import { db } from "../../services/firebase";
 import { shuffleArray } from "../../utils/general";
 import AnimatedTitleLine from "./components/IntroSequence/AnimatedTitleLine";
@@ -36,6 +37,8 @@ const STAGES = {
 
 const IntroSequence = ({ onFinish }) => {
   const { enterFullscreen, exitFullscreen } = useFullScreen();
+
+  const { t } = useTranslation();
 
   const [started, setStarted] = useState(false);
   const [stage, setStage] = useState(STAGES.START);
@@ -207,7 +210,7 @@ const IntroSequence = ({ onFinish }) => {
             border-amber-500/30 rounded-lg text-amber-300/85 hover:text-amber-300 text-xs tracking-widest
             uppercase transition-all backdrop-blur-sm"
         >
-          Skip Intro ⏭
+          {t.intro.skip}
         </button>
       )}
 
@@ -236,7 +239,7 @@ const IntroSequence = ({ onFinish }) => {
                 Iron Gates CP
               </h2>
               <p className="text-sm text-slate-300 tracking-wider">
-                Клікніть, щоб увійти в світ
+                {t.intro.clickToEnter}
               </p>
             </div>
           </div>
@@ -287,7 +290,7 @@ const IntroSequence = ({ onFinish }) => {
             animate={isAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 1.2, delay: 1.2 }}
           >
-            Brotherhood established
+            {t.intro.brotherhood}
           </motion.p>
         </div>
       </div>

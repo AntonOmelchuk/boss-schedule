@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+import useTranslation from "../../../../hooks/useTranslation";
 import InfoPlayerCardInfoItem from "./InfoPlayerCardInfoItem";
 
 const IntroPlayerCard = ({
@@ -14,6 +15,12 @@ const IntroPlayerCard = ({
   clan,
   pvp,
 }) => {
+  const { t } = useTranslation();
+
+  const {
+    dashboard: { stats },
+  } = t;
+
   return (
     <div
       ref={(el) => (memberRefs.current[index] = el)}
@@ -68,7 +75,7 @@ const IntroPlayerCard = ({
           {/* Main class */}
           <div className="mt-3">
             <span className="text-xs uppercase tracking-[0.3em] text-slate-400 block mb-1">
-              Main Class
+              {stats.mainClass}
             </span>
             <span className="text-2xl sm:text-3xl font-extrabold text-amber-400 tracking-wide drop-shadow-md">
               {main_class}
@@ -79,7 +86,7 @@ const IntroPlayerCard = ({
           {sub_classes.length > 0 && (
             <div className="mt-5">
               <span className="text-xs uppercase tracking-[0.3em] text-slate-400 block mb-1.5">
-                Sub-classes
+                {stats.subClasses}
               </span>
               <div className="flex flex-wrap justify-center md:justify-start gap-2">
                 {sub_classes.map((sub, idx) => (
@@ -98,10 +105,10 @@ const IntroPlayerCard = ({
           {/* Additional Info */}
           <div
             className="mt-6 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center
-            md:justify-start gap-6 text-slate-300"
+              md:justify-start gap-6 text-slate-300"
           >
-            <InfoPlayerCardInfoItem title="CP:" value={cp_number} />
-            <InfoPlayerCardInfoItem title="Clan:" value={clan} />
+            <InfoPlayerCardInfoItem title={stats.cp} value={cp_number} />
+            <InfoPlayerCardInfoItem title={stats.clan} value={clan} />
           </div>
         </div>
       </motion.div>

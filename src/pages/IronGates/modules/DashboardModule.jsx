@@ -10,6 +10,7 @@ import {
 import { useEffect } from "react";
 
 import Error from "../../../components/Error/Error";
+import useTranslation from "../../../hooks/useTranslation";
 import { useDashboardStore } from "../../../store/useDashboardStore";
 import ActivityChart from "../components/Dashboard/ActivityChart";
 import EventsTicker from "../components/Dashboard/EventsTicker";
@@ -18,6 +19,10 @@ import DashboardSkeleton from "../skeletons/DashboardSkeleton";
 
 const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   const { data, error, isLoading, fetchDashboardData } = useDashboardStore();
+
+  const { t } = useTranslation();
+
+  const { dashboard, errors } = t;
 
   useEffect(() => {
     fetchDashboardData();
@@ -31,11 +36,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
     return (
       <div className="px-8 py-20 flex justify-center items-center">
         <Error
-          title={
-            typeof error === "string"
-              ? error
-              : "Не вдалося завантажити дані дашборду"
-          }
+          title={typeof error === "string" ? error : errors.failedToLoad}
           onClickHandler={fetchDashboardData}
         />
       </div>
@@ -55,8 +56,8 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
     },
   };
 
-  const topActivePlayers = data?.top_players_last_15 || [];
-
+  const topActivePlayers = data?.top_players_last_30 || [];
+  console.log("dash: ", dashboard);
   return (
     <div className="px-8 relative pt-2">
       <div className="flex justify-center mb-4">
@@ -67,7 +68,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
             transition-all duration-300 flex items-center gap-1.5 text-xs font-semibold cursor-pointer z-30"
         >
           <span>
-            {isHeaderVisible ? "Hide Header & Nav" : "Show Header & Nav"}
+            {isHeaderVisible ? dashboard.hideHeader : dashboard.showHeader}
           </span>
           {isHeaderVisible ? (
             <ChevronUp size={14} />
@@ -79,44 +80,44 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
 
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         <StatCard
-          title="Склад CP"
+          title={dashboard.stats.membersTitle}
           value={cpStats.totalMembers}
-          unit="fighters"
+          unit={dashboard.stats.membersUnit}
           icon={Users}
           footerIcon={Calendar}
-          footerLabel="Всього подій:"
+          footerLabel={dashboard.stats.eventsLabel}
           footerValue={cpStats.totalEvents}
         />
 
         <StatCard
-          title="Сумарні очки CP"
+          title={dashboard.stats.pointsTitle}
           value={cpStats.totalPoints}
-          unit="pts"
+          unit={dashboard.stats.pointsUnit}
           icon={TrendingUp}
           colorClass="amber"
-          footerLabel="Відвідуваність (сер.):"
+          footerLabel={dashboard.stats.attendanceLabel}
           footerValue={cpStats.avgAttendance}
           footerHighlight
         />
 
         <StatCard
-          title="Отримано Епіків"
+          title={dashboard.stats.epicsTitle}
           value={cpStats.acquiredEpics}
-          unit="items"
+          unit={dashboard.stats.epicsUnit}
           icon={Award}
           colorClass="indigo"
-          footerLabel={`Останній: ${cpStats.lastEvent.name}`}
+          footerLabel={`${dashboard.stats.lastEpicLabel} ${cpStats.lastEvent.name}`}
           footerValue={cpStats.lastEvent.date}
         />
 
         <StatCard
-          title="Останній івент"
+          title={dashboard.stats.lastEventTitle}
           value={cpStats.lastEvent.name}
           unit=""
           icon={Zap}
           colorClass="amber"
           highlight
-          footerLabel={`Балів за івент: +${cpStats.lastEvent.points}`}
+          footerLabel={`${dashboard.stats.pointsPerEventLabel} +${cpStats.lastEvent.points}`}
           footerValue={cpStats.lastEvent.date}
           footerHighlight
         />

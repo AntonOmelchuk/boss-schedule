@@ -19,7 +19,7 @@ const EventsTicker = memo(({ events = [] }) => {
           <div
             key={index}
             className="flex items-center gap-3 px-6 text-xs text-slate-300 whitespace-nowrap
-              bg-slate-950/40 border border-slate-800/60 rounded-full mx-2 py-1 shadow-sm"
+            bg-slate-950/40 border border-slate-800/60 rounded-full mx-2 py-1 shadow-sm"
           >
             <span className="font-bold text-white">{event.name}</span>
             <span className="text-slate-500">•</span>

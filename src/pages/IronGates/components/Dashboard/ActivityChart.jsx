@@ -9,17 +9,32 @@ import {
 } from "recharts";
 
 import { MEMBERS_MAP } from "../../../../constants/general";
+import { STORAGE_URL } from "../../../../constants/general";
+import useTranslation from "../../../../hooks/useTranslation";
 import useWindowSize from "../../../../hooks/useWindowSize";
+
+const firstPlace = `${STORAGE_URL}/badges/gold_badge.png`;
+const secondPlace = `${STORAGE_URL}/badges/silver_badge.png`;
+const thirdPlace = `${STORAGE_URL}/badges/bronze_badge.png`;
 
 const CustomizedBarWithAvatar = (props) => {
   const { x, y, width, height, payload } = props;
 
-  const member = MEMBERS_MAP[payload?.name];
+  const { name, rank } = payload;
+
+  const member = MEMBERS_MAP[name];
   const avatarUrl = member ? member.image : null;
-  const avatarSize = 90;
+  const avatarSize = 100;
   const cx = x + width / 2;
 
   const cy = y - avatarSize - 10;
+
+  let badgeUrl = null;
+  if (rank === 1) badgeUrl = firstPlace;
+  else if (rank === 2) badgeUrl = secondPlace;
+  else if (rank === 3) badgeUrl = thirdPlace;
+
+  const badgeSize = avatarSize * 1.5;
 
   return (
     <g>
@@ -34,6 +49,17 @@ const CustomizedBarWithAvatar = (props) => {
         fill="#334155"
       />
 
+      {badgeUrl && (
+        <image
+          x={cx - badgeSize / 2}
+          y={(cy > 0 ? cy : 0) - (badgeSize - avatarSize) / 2}
+          width={badgeSize}
+          height={badgeSize}
+          href={badgeUrl}
+          style={{ pointerEvents: "none", zIndex: 1 }}
+        />
+      )}
+
       {avatarUrl && (
         <image
           x={cx - avatarSize / 2}
@@ -42,7 +68,7 @@ const CustomizedBarWithAvatar = (props) => {
           height={avatarSize}
           href={avatarUrl}
           clipPath="circle(50% at 50% 50%)"
-          className="object-cover"
+          className="object-cover z-10"
         />
       )}
     </g>
@@ -50,13 +76,19 @@ const CustomizedBarWithAvatar = (props) => {
 };
 
 const CustomTooltip = ({ active, payload, label }) => {
+  const { t } = useTranslation();
+
+  const {
+    dashboard: { chart },
+  } = t;
+
   if (active && payload && payload.length) {
     return (
       <div className="bg-slate-950/90 border border-slate-800 p-3 rounded-xl shadow-xl backdrop-blur-md">
         <p className="text-sm font-bold text-white mb-1">{label}</p>
         <p className="text-xs text-amber-400 font-semibold">
-          Відвідано івентів:{" "}
-          <span className="font-extrabold">{payload[0].value}</span> / 15
+          {chart.visitedEvents}{" "}
+          <span className="font-extrabold">{payload[0].value}</span> / 30
         </p>
       </div>
     );
@@ -67,20 +99,26 @@ const CustomTooltip = ({ active, payload, label }) => {
 const ActivityChart = ({ data }) => {
   const [windowWidth, windowHeight] = useWindowSize();
 
+  const { t } = useTranslation();
+
+  const {
+    dashboard: { chart },
+  } = t;
+
   return (
     <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-md mb-8">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-bold text-white flex items-center gap-2">
-          Рейтинг активності гравців (Останні 15 подій)
+          {chart.title}
         </h2>
-        <span className="text-xs text-slate-400">Графік відвідуваності</span>
+        <span className="text-xs text-slate-400">{chart.subtitle}</span>
       </div>
 
-      <div className="w-full pt-4" style={{ height: windowHeight / 1.8 }}>
+      <div className="w-full" style={{ height: windowHeight / 1.8 }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
-            margin={{ top: 100, right: 10, left: -20, bottom: 25 }}
+            margin={{ top: 125, right: 10, left: -20, bottom: 25 }}
           >
             <CartesianGrid
               strokeDasharray="3 3"

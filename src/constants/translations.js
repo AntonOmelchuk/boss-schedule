@@ -548,12 +548,52 @@ export default {
       crossTableTitle: "Сітка результатів (Крос-таблиця)",
       crossTableLegend: "W - Перемога / L - Поразка / D - Нічия",
     },
+    // ===================
+    // IRON GATES
+    // ===================
     dashboardSummary: "Головна зведення",
     dashboardMembers: "Учасники",
     dashboardActivity: "Активність",
     dashboardEpicPriority: "Пріоритет на епік",
     dashboardEpicHistory: "Історія епіків",
     dashboardGvgSetup: "Сетап GVG",
+    intro: {
+      skip: "Пропустити інтро ⏭",
+      clickToEnter: "Клікніть, щоб увійти в світ",
+      brotherhood: "Brotherhood established",
+    },
+    dashboard: {
+      hideHeader: "Приховати хедер та навігацію",
+      showHeader: "Показати хедер та навігацію",
+      stats: {
+        membersTitle: "Склад CP",
+        membersUnit: "учасників",
+        eventsLabel: "Всього подій:",
+        pointsTitle: "Сумарні очки CP",
+        pointsUnit: "балів",
+        attendanceLabel: "Відвідуваність (сер.):",
+        epicsTitle: "Отримано Епіків",
+        epicsUnit: "епіків",
+        lastEpicLabel: "Останній:",
+        lastEventTitle: "Останній івент",
+        pointsPerEventLabel: "Балів за івент:",
+        pvp: "PvP:",
+        mainClass: "Головний Клас",
+        subClasses: "Саб-класи",
+        cp: "КП:",
+        clan: "Клан:",
+      },
+      chart: {
+        title: "Рейтинг активності гравців (Останні 30 подій)",
+        subtitle: "Графік відвідуваності",
+        visitedEvents: "Відвідано івентів:",
+      },
+    },
+    errors: {
+      failedToLoad: "⚠️ Не вдалося завантажити дані",
+      defaultTitle: "Не вдалося завантажити дані дашборду",
+      retry: "Повторити",
+    },
 
     gvgPage: {
       title: "Тактична дошка GvG",
@@ -1111,12 +1151,53 @@ export default {
       crossTableTitle: "Results Grid (Cross-Table)",
       crossTableLegend: "W - Win / L - Loss / D - Draw",
     },
+    // ===================
+    // IRON GATES
+    // ===================
     dashboardSummary: "Dashboard Summary",
     dashboardMembers: "Members",
     dashboardActivity: "Activity",
     dashboardEpicPriority: "Epic Priority",
     dashboardEpicHistory: "Epic History",
     dashboardGvgSetup: "GVG Setup",
+
+    intro: {
+      skip: "Skip Intro ⏭",
+      clickToEnter: "Click to enter the world",
+      brotherhood: "Brotherhood established",
+    },
+    dashboard: {
+      hideHeader: "Hide Header & Nav",
+      showHeader: "Show Header & Nav",
+      stats: {
+        membersTitle: "CP Members",
+        membersUnit: "fighters",
+        eventsLabel: "Total events:",
+        pointsTitle: "Total CP Points",
+        pointsUnit: "pts",
+        attendanceLabel: "Attendance (avg.):",
+        epicsTitle: "Acquired Epics",
+        epicsUnit: "items",
+        lastEpicLabel: "Last:",
+        lastEventTitle: "Last Event",
+        pointsPerEventLabel: "Points for event:",
+        pvp: "PvP:",
+        mainClass: "Main Class",
+        subClasses: "Sub-classes",
+        cp: "CP:",
+        clan: "Clan:",
+      },
+      chart: {
+        title: "Player Activity Rating (Last 30 Events)",
+        subtitle: "Attendance chart",
+        visitedEvents: "Attended events:",
+      },
+    },
+    errors: {
+      failedToLoad: "⚠️ Failed to load data",
+      defaultTitle: "Failed to load dashboard data",
+      retry: "Retry",
+    },
 
     gvgPage: {
       title: "GvG Tactical Board",

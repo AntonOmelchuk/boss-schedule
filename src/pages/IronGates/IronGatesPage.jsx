@@ -27,7 +27,6 @@ const IronGatesPage = () => {
         );
       case DASHBOARD_TABS.MEMBERS:
         return <MemberModule />;
-      // ... інші таби
       case DASHBOARD_TABS.GVG_SETUP:
         return (
           <GvGModule
