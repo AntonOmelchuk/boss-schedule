@@ -1,6 +1,7 @@
 export const ROLES = {
   ADMIN: "ADMIN",
   CO_ADMIN: "CO_ADMIN",
+  ASSISTANT: "ASSISTANT",
   ALLY_HEAD: "ALLY_HEAD",
   ALLY_GENERAL: "ALLY_GENERAL",
   RAID_CALLER: "RAID_CALLER",
@@ -22,6 +23,12 @@ export const ROLE_BADGE_CONFIG = {
     icon: "🤝",
     className:
       "bg-purple-500/20 text-purple-400 border-purple-500/40 shadow-purple-500/10",
+  },
+  [ROLES.ASSISTANT]: {
+    label: "ASSISTANT",
+    icon: "🤝",
+    className:
+      "bg-blue-500/20 text-blue-400 border-blue-500/40 shadow-blue-500/10",
   },
   [ROLES.ALLY_HEAD]: {
     label: "ALLY HEAD",

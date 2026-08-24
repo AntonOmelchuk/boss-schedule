@@ -37,6 +37,7 @@ function App() {
 
   const setEvents = useAppStore((state) => state.setEvents);
   const setPrimeTime = useAppStore((state) => state.setPrimeTime);
+  const setIsRespawnLoading = useAppStore((state) => state.setIsRespawnLoading);
 
   // State for handling system maintenance mode
   const [maintenanceStatus, setMaintenanceStatus] = useState(false);
@@ -69,6 +70,8 @@ function App() {
 
   // 2. Listen for regroups / event timers
   useEffect(() => {
+    setIsRespawnLoading(true);
+
     const regroupsRef = ref(db, "regroups");
 
     const unsubscribe = onValue(regroupsRef, (snapshot) => {

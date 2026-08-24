@@ -93,18 +93,18 @@ const AllEventsItem = ({
       />
 
       <div
-        className="bg-slate-900/95 backdrop-blur-xl rounded-xl p-4 relative z-10 flex
+        className="bg-slate-900/95 backdrop-blur-xl rounded-xl p-2 relative z-10 flex
         items-center gap-4 w-full h-full text-left"
       >
         {/* Icon Container */}
         <div
-          className={`w-12 h-12 rounded-lg border flex items-center justify-center text-3xl shrink-0
+          className={`w-15 h-15 rounded-lg border flex items-center justify-center text-3xl shrink-0
             shadow-inner group-hover:scale-105 duration-300 transition-transform ${iconBorder}`}
         >
           {icon.length <= 3 ? (
             icon
           ) : (
-            <img src={icon} width={45} className="rounded-xl" alt={name} />
+            <img src={icon} className="h-full rounded-xl" alt={name} />
           )}
         </div>
 

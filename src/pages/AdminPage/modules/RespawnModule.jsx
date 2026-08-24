@@ -82,7 +82,9 @@ const RespawnModule = () => {
       });
       toast.success(t.respawnAdmin.successAlert);
     } catch (err) {
-      console.error("Error updating respawn timestamp:", err);
+      const errMsg =
+        typeof err === "string" ? err : "Error updating respawn timestamp";
+      toast.error(errMsg);
     } finally {
       setIsSaving(false);
     }
