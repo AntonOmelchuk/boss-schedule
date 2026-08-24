@@ -1,8 +1,10 @@
 import { addEdge, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
+import { get, ref, set } from "firebase/database";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { STORAGE_URL } from "../constants/general";
+import { db } from "../services/firebase";
 
 const MEMBERS_DATA = [
   {
@@ -54,12 +56,6 @@ const MEMBERS_DATA = [
     image: `${STORAGE_URL}/avatars/Vryo.png`,
   },
   {
-    id: "winson",
-    name: "Winson",
-    role: "Healer",
-    image: `${STORAGE_URL}/avatars/Winson.png`,
-  },
-  {
     id: "zukka",
     name: "ZukaDaddy",
     role: "Damager",
@@ -108,81 +104,123 @@ const createStyledEdge = (sourceNode, connectionData) => {
 
 const useGvGStore = create(
   persist(
-    (set, get) => ({
-      nodes: initialNodes,
-      edges: initialEdges,
+    (setStore, getStore) => {
+      if (typeof window !== "undefined") {
+        const gvgRef = ref(db, "gvg_setup");
+        get(gvgRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const data = snapshot.val();
+              if (data && data.nodes) {
+                setStore({
+                  nodes: data.nodes,
+                  edges: data.edges || initialEdges,
+                });
+              }
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to load GvG setup from Firebase:", error);
+          });
+      }
 
-      onNodesChange: (changes) => {
-        set({ nodes: applyNodeChanges(changes, get().nodes) });
-      },
+      return {
+        nodes: initialNodes,
+        edges: initialEdges,
 
-      onEdgesChange: (changes) => {
-        set({ edges: applyEdgeChanges(changes, get().edges) });
-      },
+        onNodesChange: (changes) => {
+          setStore({ nodes: applyNodeChanges(changes, getStore().nodes) });
+        },
 
-      onConnect: (connection) => {
-        const sourceNode = get().nodes.find((n) => n.id === connection.source);
-        const newEdge = createStyledEdge(sourceNode, connection);
-        set({ edges: addEdge(newEdge, get().edges) });
-      },
+        onEdgesChange: (changes) => {
+          setStore({ edges: applyEdgeChanges(changes, getStore().edges) });
+        },
 
-      connectNodesExplicitly: (sourceId, targetId) => {
-        const sourceNode = get().nodes.find((n) => n.id === sourceId);
+        onConnect: (connection) => {
+          const sourceNode = getStore().nodes.find(
+            (n) => n.id === connection.source,
+          );
+          const newEdge = createStyledEdge(sourceNode, connection);
+          setStore({ edges: addEdge(newEdge, getStore().edges) });
+        },
 
-        const connectionData = {
-          id: `edge-${sourceId}-${targetId}`,
-          source: sourceId,
-          target: targetId,
-        };
+        connectNodesExplicitly: (sourceId, targetId) => {
+          const sourceNode = getStore().nodes.find((n) => n.id === sourceId);
 
-        const newEdge = createStyledEdge(sourceNode, connectionData);
+          const connectionData = {
+            id: `edge-${sourceId}-${targetId}`,
+            source: sourceId,
+            target: targetId,
+          };
 
-        const exists = get().edges.some(
-          (e) => e.source === sourceId && e.target === targetId,
-        );
-        if (!exists) {
-          set({ edges: [...get().edges, newEdge] });
-        }
-      },
+          const newEdge = createStyledEdge(sourceNode, connectionData);
 
-      updateNodeData: (id, newData) => {
-        set({
-          nodes: get().nodes.map((node) =>
-            node.id === id
-              ? { ...node, data: { ...node.data, ...newData } }
-              : node,
-          ),
-        });
-      },
+          const exists = getStore().edges.some(
+            (e) => e.source === sourceId && e.target === targetId,
+          );
+          if (!exists) {
+            setStore({ edges: [...getStore().edges, newEdge] });
+          }
+        },
 
-      addEnemyTarget: () => {
-        const id = `enemy-${Date.now()}`;
-        const newEnemy = {
-          id,
-          type: "enemyCard",
-          position: {
-            x: 750,
-            y:
-              150 +
-              get().nodes.filter((n) => n.type === "enemyCard").length * 120,
-          },
-          data: {
-            label: `Target ${get().nodes.filter((n) => n.type === "enemyCard").length + 1}`,
-          },
-        };
-        set({ nodes: [...get().nodes, newEnemy] });
-      },
+        updateNodeData: (id, newData) => {
+          setStore({
+            nodes: getStore().nodes.map((node) =>
+              node.id === id
+                ? { ...node, data: { ...node.data, ...newData } }
+                : node,
+            ),
+          });
+        },
 
-      removeNode: (id) => {
-        set({
-          nodes: get().nodes.filter((n) => n.id !== id),
-          edges: get().edges.filter((e) => e.source !== id && e.target !== id),
-        });
-      },
-      resetPlanner: () => {
-        set({ nodes: initialNodes, edges: initialEdges });
-      },
-    }),
+        addEnemyTarget: () => {
+          const id = `enemy-${Date.now()}`;
+          const newEnemy = {
+            id,
+            type: "enemyCard",
+            position: {
+              x: 750,
+              y:
+                150 +
+                getStore().nodes.filter((n) => n.type === "enemyCard").length *
+                  120,
+            },
+            data: {
+              label: `Target ${getStore().nodes.filter((n) => n.type === "enemyCard").length + 1}`,
+            },
+          };
+          setStore({ nodes: [...getStore().nodes, newEnemy] });
+        },
+
+        removeNode: (id) => {
+          setStore({
+            nodes: getStore().nodes.filter((n) => n.id !== id),
+            edges: getStore().edges.filter(
+              (e) => e.source !== id && e.target !== id,
+            ),
+          });
+        },
+
+        resetPlanner: () => {
+          setStore({ nodes: initialNodes, edges: initialEdges });
+        },
+
+        savePlanner: async () => {
+          try {
+            const gvgRef = ref(db, "gvg_setup");
+            await set(gvgRef, {
+              nodes: getStore().nodes,
+              edges: getStore().edges,
+              updatedAt: Date.now(),
+            });
+            return true;
+          } catch (error) {
+            console.error("Failed to save GvG setup:", error);
+            throw error;
+          }
+        },
+      };
+    },
     {
       name: "gvg-planner-storage",
     },

@@ -9,11 +9,20 @@ const Header = () => {
   const { t } = useTranslation();
   const { gvgPage } = t;
 
-  const { addEnemyTarget, resetPlanner } = useGvGStore();
+  const { addEnemyTarget, resetPlanner, savePlanner } = useGvGStore();
 
   const handleReset = () => {
     resetPlanner();
     toast.error("Planner reset to default!");
+  };
+
+  const handleSave = async () => {
+    try {
+      await savePlanner();
+      toast.success("GvG setup saved successfully!");
+    } catch {
+      toast.error("Failed to save GvG setup.");
+    }
   };
 
   return (
@@ -41,7 +50,7 @@ const Header = () => {
           </Button>
 
           <Button
-            onClick={() => toast.success("Saved!")}
+            onClick={handleSave}
             className="bg-amber-500/20 hover:bg-amber-500/30 border-amber-500/40 text-amber-300"
           >
             {gvgPage.saveButton}

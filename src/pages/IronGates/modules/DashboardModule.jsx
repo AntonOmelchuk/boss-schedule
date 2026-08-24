@@ -28,7 +28,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
     fetchDashboardData();
   }, [fetchDashboardData]);
 
-  if (isLoading && !data) {
+  if (isLoading) {
     return <DashboardSkeleton />;
   }
 
@@ -57,7 +57,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   };
 
   const topActivePlayers = data?.top_players_last_30 || [];
-  console.log("dash: ", dashboard);
+
   return (
     <div className="px-8 relative pt-2">
       <div className="flex justify-center mb-4">

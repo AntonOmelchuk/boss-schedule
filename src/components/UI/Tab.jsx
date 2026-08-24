@@ -2,11 +2,12 @@ const Tab = ({
   onClickHandler,
   isActive,
   title,
-  icon,
+  Icon,
   className = "",
   activeClassName = "bg-indigo-600 text-white shadow",
   inactiveClassName = "text-slate-400 hover:text-slate-200",
 }) => {
+  console.log("icon: ", title, Icon);
   return (
     <button
       onClick={onClickHandler}
@@ -14,7 +15,7 @@ const Tab = ({
         isActive ? activeClassName : inactiveClassName
       } ${className}`}
     >
-      {icon && <span>{icon}</span>}
+      {Icon && <Icon />}
       {title && <span className="capitalize">{title}</span>}
     </button>
   );

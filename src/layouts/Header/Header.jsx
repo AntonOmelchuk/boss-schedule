@@ -69,7 +69,7 @@ const Header = () => {
 
               if (item.hasDropdown) {
                 const isDropdownOpen = hoveredDropdownId === item.id;
-
+                console.log("item", item);
                 return (
                   <div
                     key={item.id}
@@ -81,7 +81,7 @@ const Header = () => {
                       onClickHandler={() => navigate(item.path)}
                       isActive={isActive}
                       title={itemTitle}
-                      icon={item.icon}
+                      Icon={item.icon}
                       className="px-5 py-3 text-base font-bold rounded-xl cursor-pointer"
                       activeClassName={item.activeClass}
                       inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
@@ -114,7 +114,7 @@ const Header = () => {
                                 }}
                                 isActive={isSubActive}
                                 title={subTabTitle}
-                                icon={subTab.icon}
+                                Icon={subTab.icon}
                                 className="px-4 py-2.5 text-sm font-bold rounded-xl cursor-pointer justify-start"
                                 activeClassName={item.activeClass}
                                 inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
@@ -134,7 +134,7 @@ const Header = () => {
                   onClickHandler={() => navigate(item.path)}
                   isActive={isActive}
                   title={itemTitle}
-                  icon={item.icon}
+                  Icon={item.icon}
                   className="px-5 py-3 text-base font-bold rounded-xl"
                   activeClassName={item.activeClass}
                   inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"

@@ -214,7 +214,7 @@ const MEMBERS_DATA = [
     subClasses: ["Blade Dancer", "Warsmith"],
     server: "Reborn x10",
     status: "ONLINE",
-    image: `${STORAGE_URL}/avatars/Zukka.png`,
+    image: `${STORAGE_URL}/avatars/mw.png`,
     gear: [
       { name: "Dark Crystal Robe", type: "Armor", icon: "🛡️" },
       { name: "TT Set", type: "Jewels", icon: "💍" },

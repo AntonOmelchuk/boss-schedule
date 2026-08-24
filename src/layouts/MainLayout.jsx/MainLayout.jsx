@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import bgImg from "../../assets/bg3.png";
 import { BREAKPOINTS } from "../../constants/general";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import MagicSparks from "../../pages/IronGates/components/MagicSparks";
+import SkyStars from "../../pages/IronGates/components/SkyStars";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MobileTabs from "../MobileTabs/MobileTabs";
@@ -20,6 +22,20 @@ const MainLayout = ({ children }) => {
     "/alliance/proof",
   ];
   const shouldShowTabs = showMobileTabsOnRoutes.includes(pathname);
+
+  if (pathname.includes("iron-gates")) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100 font-sans relative overflow-hidden flex flex-col">
+        <Toaster />
+        <MagicSparks />
+        <SkyStars />
+
+        {children}
+
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div

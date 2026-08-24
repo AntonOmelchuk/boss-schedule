@@ -1,12 +1,8 @@
 /* eslint-disable indent */
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
 
 import { DASHBOARD_TABS } from "../../constants/routes";
-import Footer from "../../layouts/Footer/Footer";
 import Header from "./components/Dashboard/Header";
-import MagicSparks from "./components/MagicSparks";
-import SkyStars from "./components/SkyStars";
 import DashboardModule from "./modules/DashboardModule";
 import GvGModule from "./modules/GvGModule";
 import MemberModule from "./modules/MembersModule";
@@ -40,11 +36,7 @@ const IronGatesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans relative overflow-hidden flex flex-col">
-      <Toaster />
-      <MagicSparks />
-      <SkyStars />
-
+    <>
       <div
         className={`transition-all duration-300 overflow-hidden ${
           !isHeaderVisible
@@ -59,9 +51,7 @@ const IronGatesPage = () => {
       <div className="grow transition-all duration-300 flex flex-col">
         {renderTabContent()}
       </div>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
