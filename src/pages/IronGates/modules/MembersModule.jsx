@@ -75,7 +75,6 @@ const MemberModule = () => {
         y={mousePos.y}
         image={img}
         name={name}
-        status="ONLINE"
         role={role}
         mainClass={main_class}
         playClass={play_class}

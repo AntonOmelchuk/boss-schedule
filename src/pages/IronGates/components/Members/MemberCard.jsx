@@ -8,7 +8,6 @@ const MemberCard = ({
   name,
   role,
   image,
-  status,
   playClass,
   mainClass,
   subClasses = [],
@@ -31,22 +30,14 @@ const MemberCard = ({
         <ParallaxAvatar image={image} playClass={playClass} />
 
         <div className="md:col-span-7 space-y-4">
-          <div>
+          <div className="flex justify-between">
+            <h1
+              className="text-3xl lg:text-4xl font-black text-white tracking-wider mt-1
+              drop-shadow-[0_2px_15px_rgba(251,191,36,0.3)] flex items-center gap-2"
+            >
+              {name}
+            </h1>
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span
-                  className={`w-2 h-2 rounded-full ${
-                    status === "ONLINE"
-                      ? "bg-emerald-400"
-                      : status === "AFK"
-                        ? "bg-amber-400"
-                        : "bg-rose-500"
-                  } animate-ping`}
-                />
-                <span className="text-xs uppercase tracking-widest text-emerald-400 font-semibold">
-                  • {status}
-                </span>
-              </div>
               {inClan && (
                 <span
                   className="text-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 px-3 py-1.5
@@ -56,12 +47,6 @@ const MemberCard = ({
                 </span>
               )}
             </div>
-            <h1
-              className="text-3xl lg:text-4xl font-black text-white tracking-wider mt-1
-              drop-shadow-[0_2px_15px_rgba(251,191,36,0.3)] flex items-center gap-2"
-            >
-              {name}
-            </h1>
           </div>
 
           <div className="grid grid-cols-2 gap-2.5">
