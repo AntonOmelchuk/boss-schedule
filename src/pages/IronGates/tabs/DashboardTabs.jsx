@@ -27,18 +27,11 @@ const TAB_THEMES = {
     hover: "hover:bg-sky-500/10 hover:text-sky-200 hover:border-sky-500/30",
     icon: "text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]",
   },
-  [DASHBOARD_TABS.EPIC_PRIORITY]: {
+  [DASHBOARD_TABS.EPIC]: {
     active:
       "bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.3)]",
     hover: "hover:bg-rose-500/10 hover:text-rose-200 hover:border-rose-500/30",
     icon: "text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]",
-  },
-  [DASHBOARD_TABS.EPIC_HISTORY]: {
-    active:
-      "bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]",
-    hover:
-      "hover:bg-emerald-500/10 hover:text-emerald-200 hover:border-emerald-500/30",
-    icon: "text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]",
   },
   [DASHBOARD_TABS.GVG_SETUP]: {
     active:

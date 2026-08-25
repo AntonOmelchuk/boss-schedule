@@ -23,11 +23,11 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
 
   const { t, language } = useTranslation();
 
-  const { dashboard, errors } = t;
+  const { dashboard } = t;
 
   useEffect(() => {
     fetchDashboardData();
-  }, [fetchDashboardData]);
+  }, []);
 
   if (isLoading) {
     return <DashboardSkeleton />;
@@ -36,10 +36,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   if (error) {
     return (
       <div className="px-8 py-20 flex justify-center items-center">
-        <Error
-          title={typeof error === "string" ? error : errors.failedToLoad}
-          onClickHandler={fetchDashboardData}
-        />
+        <Error onClickHandler={fetchDashboardData} />
       </div>
     );
   }

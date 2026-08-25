@@ -1,3 +1,5 @@
+import useTranslation from "../../../../hooks/useTranslation";
+import { getMemberTheme } from "../../../../utils/general";
 import EpicInfo from "./EpicInfo";
 import InfoBlock from "./InfoBlock";
 import ParallaxAvatar from "./ParallaxAvatar";
@@ -17,23 +19,36 @@ const MemberCard = ({
   balance,
   allPoints,
 }) => {
+  const theme = getMemberTheme(name);
+  const { t } = useTranslation();
+
+  const { memberCard } = t;
+
   return (
     <div className="relative z-20 flex-1 flex items-center justify-center">
       <div
         style={{
           transform: `perspective(1500px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`,
           transition: "transform 0.2s ease-out",
+          borderColor: theme.startColor,
+          boxShadow: `0 0 50px ${theme.startColor}40`,
         }}
-        className="bg-slate-950/85 border border-amber-500/30 rounded-3xl p-6 lg:p-8
-          shadow-[0_0_60px_rgba(245,158,11,0.15)] backdrop-blur-2xl grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
+        className="bg-slate-950/85 border-2 rounded-3xl p-6 lg:p-8
+          backdrop-blur-2xl grid grid-cols-1 md:grid-cols-12 gap-6 items-start transition-all duration-500"
       >
-        <ParallaxAvatar image={image} playClass={playClass} />
+        <ParallaxAvatar image={image} playClass={playClass} name={name} />
 
         <div className="md:col-span-7 space-y-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <h1
               className="text-3xl lg:text-4xl font-black text-white tracking-wider mt-1
-              drop-shadow-[0_2px_15px_rgba(251,191,36,0.3)] flex items-center gap-2"
+                flex items-center gap-2 px-2 p-0.5 rounded-2xl"
+              style={{
+                textShadow: `0 2px 20px ${theme.startColor}66`,
+                backgroundColor: `${theme.startColor}26`,
+                borderColor: `${theme.startColor}80`,
+                color: theme.startColor,
+              }}
             >
               {name}
             </h1>
@@ -50,10 +65,13 @@ const MemberCard = ({
           </div>
 
           <div className="grid grid-cols-2 gap-2.5">
-            <InfoBlock label="Основний клас" value={mainClass} />
-            <InfoBlock label="GvG Class" value={playClass || "-"} />
-            <InfoBlock label="Role" value={role} />
-            <InfoBlock label="Sub-classes" value={subClasses.join(", ")} />
+            <InfoBlock label={memberCard.mainClass} value={mainClass} />
+            <InfoBlock label={memberCard.gvgClass} value={playClass || "-"} />
+            <InfoBlock label={memberCard.role} value={role} />
+            <InfoBlock
+              label={memberCard.subClasses}
+              value={subClasses.join(", ")}
+            />
           </div>
 
           <EpicInfo epic={epic} />
@@ -63,7 +81,7 @@ const MemberCard = ({
               PvP: <strong className="text-white text-lg">{pvp}</strong>
             </span>
             <span>
-              Баланс:{" "}
+              {memberCard.balance}:{" "}
               <strong
                 className={`text-lg ${balance < 0 ? "text-rose-400" : "text-emerald-400"}`}
               >
@@ -71,7 +89,7 @@ const MemberCard = ({
               </strong>
             </span>
             <span>
-              Всі поінти:{" "}
+              {memberCard.allPoints}:{" "}
               <strong className="text-amber-400 text-lg">{allPoints}</strong>
             </span>
           </div>

@@ -6,10 +6,8 @@ import {
   Compass,
   FileText,
   Film,
-  History,
   LayoutDashboard,
   Shield,
-  Swords,
   Target,
   Trophy,
   Users,
@@ -203,7 +201,7 @@ export const DASHBOARD_TABS = {
   SUMMARY: "summary",
   MEMBERS: "members",
   ACTIVITY: "activity",
-  EPIC_PRIORITY: "epic_priority",
+  EPIC: "epic",
   EPIC_HISTORY: "epic_history",
   GVG_SETUP: "gvg_setup",
 };
@@ -234,27 +232,19 @@ export const DASHBOARD_NAV_CONFIG = [
     iconColor: "text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]",
   },
   {
-    id: DASHBOARD_TABS.EPIC_PRIORITY,
+    id: DASHBOARD_TABS.EPIC,
     titleKey: "dashboardEpicPriority",
     icon: Target,
     activeClass:
       "bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.3)]",
     iconColor: "text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]",
   },
-  {
-    id: DASHBOARD_TABS.EPIC_HISTORY,
-    titleKey: "dashboardEpicHistory",
-    icon: History,
-    activeClass:
-      "bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]",
-    iconColor: "text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]",
-  },
-  {
-    id: DASHBOARD_TABS.GVG_SETUP,
-    titleKey: "dashboardGvgSetup",
-    icon: Swords,
-    activeClass:
-      "bg-indigo-500/20 text-indigo-300 border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.3)]",
-    iconColor: "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]",
-  },
+  // {
+  //   id: DASHBOARD_TABS.GVG_SETUP,
+  //   titleKey: "dashboardGvgSetup",
+  //   icon: Swords,
+  //   activeClass:
+  //     "bg-indigo-500/20 text-indigo-300 border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.3)]",
+  //   iconColor: "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]",
+  // },
 ];

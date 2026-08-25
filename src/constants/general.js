@@ -247,17 +247,18 @@ export const MEMBERS_MAP = {
 };
 
 export const MEMBER_COLORS = {
-  toBe: { start: "#881337", end: "#4c0519" }, // Багряна Відьма (Deep Rose / Crimson)
-  Fergi: { start: "#2563eb", end: "#1d4ed8" }, // Шторм (Electric Sky Blue)
-  Ansol: { start: "#334155", end: "#0f172a" }, // Валькірія (Royal Purple / Silver)
-  MWQueen: { start: "#eab308", end: "#ca8a04" }, // Міс Оса (Wasp Yellow / Gold)
-  ManiacFiona: { start: "#16a34a", end: "#15803d" }, // Жінка-Халк (Emerald Green)
-  ZukaDaddy: { start: "#7c3aed", end: "#1e1b4b" }, // Стар Лорд / Квіл (Space Orange)
-  ManiacJerry: { start: "#10b981", end: "#047857" }, // Локі (Asgardian Emerald / Gold)
-  ManiacShrek: { start: "#1e3a8a", end: "#0f172a" }, // Танос (Titan Deep Purple & Gold)
-  LapestoPasto: { start: "#27272a", end: "#09090b" }, // Чорна Вдова (Tactical Dark Charcoal)
-  Spektra: { start: "#065f46", end: "#022c22" }, // Хелла (Niflheim Dark Obsidian)
-  Manol: { start: "#22c55e", end: "#16a34a" }, // Халк (Gamma Bright Green)
-  ManiacTom: { start: "#f97316", end: "#b91c1c" }, // Доктор Стрендж (Mystic Cyan / Orange)
-  Vryo: { start: "#1d4ed8", end: "#b91c1c" }, // Капітан Америка (Captain America Blue to Red vibe)
+  toBe: { start: "#881337", end: "#4c0519" },
+  FERGI: { start: "#0ea5e9", end: "#1e1b4b" },
+  Fergi: { start: "#0ea5e9", end: "#1e1b4b" },
+  Ansol: { start: "#334155", end: "#0f172a" },
+  MWQueen: { start: "#eab308", end: "#ca8a04" },
+  ManiacFiona: { start: "#84cc16", end: "#14532d" },
+  ZukaDaddy: { start: "#7c3aed", end: "#1e1b4b" },
+  ManiacJerry: { start: "#10b981", end: "#047857" },
+  ManiacShrek: { start: "#1e3a8a", end: "#0f172a" },
+  LapestoPasto: { start: "#dc2626", end: "#18181b" },
+  Spektra: { start: "#065f46", end: "#022c22" },
+  Manol: { start: "#c084fc", end: "#1e1b4b" },
+  ManiacTom: { start: "#f97316", end: "#b91c1c" },
+  Vryo: { start: "#1d4ed8", end: "#b91c1c" },
 };

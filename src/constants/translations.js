@@ -555,7 +555,7 @@ export default {
     dashboardSummary: "Головна зведення",
     dashboardMembers: "Учасники",
     dashboardActivity: "Активність",
-    dashboardEpicPriority: "Пріоритет на епік",
+    dashboardEpicPriority: "Епік",
     dashboardEpicHistory: "Історія епіків",
     dashboardGvgSetup: "Сетап GVG",
     intro: {
@@ -589,6 +589,15 @@ export default {
         subtitle: "Графік відвідуваності",
         visitedEvents: "Відвідано івентів:",
       },
+    },
+    memberCard: {
+      mainClass: "Основний клас",
+      gvgClass: "GvG клас",
+      role: "Роль",
+      subClasses: "Саб-класи",
+      balance: "Баланс",
+      allPoints: "Всі поінти",
+      epic: "Епік",
     },
     errors: {
       failedToLoad: "⚠️ Не вдалося завантажити дані",
@@ -1159,7 +1168,7 @@ export default {
     dashboardSummary: "Dashboard Summary",
     dashboardMembers: "Members",
     dashboardActivity: "Activity",
-    dashboardEpicPriority: "Epic Priority",
+    dashboardEpicPriority: "Epic",
     dashboardEpicHistory: "Epic History",
     dashboardGvgSetup: "GVG Setup",
 
@@ -1194,6 +1203,15 @@ export default {
         subtitle: "Attendance chart",
         visitedEvents: "Attended events:",
       },
+    },
+    memberCard: {
+      mainClass: "Main class",
+      gvgClass: "GvG class",
+      role: "Role",
+      subClasses: "Sub-classes",
+      balance: "Balance",
+      allPoints: "All points",
+      epic: "Epic",
     },
     errors: {
       failedToLoad: "⚠️ Failed to load data",

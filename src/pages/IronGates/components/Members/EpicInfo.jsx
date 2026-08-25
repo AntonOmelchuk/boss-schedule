@@ -1,10 +1,14 @@
+import useTranslation from "../../../../hooks/useTranslation";
+
 const EpicInfo = ({ epic }) => {
+  const { t } = useTranslation();
+  const { memberCard } = t;
   return (
     <div className="space-y-1.5">
       <span className="text-lg text-slate-400 font-bold tracking-wider">
-        Epic:
+        {memberCard.epic}
       </span>
-      <div className="flex gap-1.5 overflow-x-scroll">
+      <div className="mt-1 flex justify-center gap-1.5 overflow-x-scroll">
         {epic?.all?.map((item, index) => {
           const isGot = epic?.got?.includes(item);
           return (
