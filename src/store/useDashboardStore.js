@@ -1,9 +1,11 @@
 import { create } from "zustand";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+// const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BASE_URL = "http://localhost:8000";
 
 export const useDashboardStore = create((set) => ({
   data: null,
+  members: [],
   isLoading: true,
   error: null,
   fetchDashboardData: async () => {
@@ -23,4 +25,5 @@ export const useDashboardStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+  setMembers: (data) => set({ members: data }),
 }));

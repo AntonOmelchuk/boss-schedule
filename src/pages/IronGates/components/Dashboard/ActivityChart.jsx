@@ -8,7 +8,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { MEMBERS_MAP } from "../../../../constants/general";
+import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/general";
 import { STORAGE_URL } from "../../../../constants/general";
 import useTranslation from "../../../../hooks/useTranslation";
 import useWindowSize from "../../../../hooks/useWindowSize";
@@ -36,8 +36,22 @@ const CustomizedBarWithAvatar = (props) => {
 
   const badgeSize = avatarSize * 1.5;
 
+  const gradientId = `colorGradient-${name}`;
+
   return (
     <g>
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+          <stop
+            offset="0%"
+            stopColor={MEMBER_COLORS[name]?.start || "#334155"}
+          />
+          <stop
+            offset="100%"
+            stopColor={MEMBER_COLORS[name]?.end || "#1e293b"}
+          />
+        </linearGradient>
+      </defs>
       <path
         d={`M ${x},${y + height}
             L ${x},${y + 6}
@@ -46,7 +60,7 @@ const CustomizedBarWithAvatar = (props) => {
             Q ${x + width},${y} ${x + width},${y + 6}
             L ${x + width},${y + height}
             Z`}
-        fill="#334155"
+        fill={`url(#${gradientId})`}
       />
 
       {badgeUrl && (

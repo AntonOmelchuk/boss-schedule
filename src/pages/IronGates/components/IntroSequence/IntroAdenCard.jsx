@@ -32,12 +32,6 @@ const IntroAdenCard = ({ squadRef }) => {
           />
 
           <div className="absolute bottom-6 left-0 right-0 px-6">
-            <span
-              className="px-4 py-1.5 rounded-full bg-amber-500/30 border border-amber-500/60 text-amber-300
-                text-xs sm:text-sm tracking-[0.3em] uppercase backdrop-blur-md"
-            >
-              Legendary Squad
-            </span>
             <h2
               className="text-4xl sm:text-6xl font-black text-white tracking-widest uppercase font-serif mt-3
                 drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]"

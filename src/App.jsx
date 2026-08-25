@@ -14,7 +14,6 @@ import AdminPage from "./pages/AdminPage/AdminPage";
 import AfkProofPage from "./pages/AfkProofPage/AfkProofPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import CpManagementPage from "./pages/CpManagement/CpManagementPage";
-// import IntroSequence from "./pages/IronGates/IntroSequence";
 import IronGatesPage from "./pages/IronGates/IronGatesPage";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
@@ -127,24 +126,6 @@ function App() {
 
     return () => unsubscribe();
   }, [setEvents, setPrimeTime]);
-
-  // const [showDashboard, setShowDashboard] = useState(false);
-
-  // const handleIntroFinish = () => {
-  //   setShowDashboard(true);
-  // };
-
-  // return (
-  //   <div className="App relative">
-  //     {!showDashboard && <IntroSequence onFinish={handleIntroFinish} />}
-
-  //     <div
-  //       className={`transition-all duration-500 ${!showDashboard ? "blur-sm" : "blur-none"}`}
-  //     >
-  //       {showDashboard && <IronGatesPage />}
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <BrowserRouter>

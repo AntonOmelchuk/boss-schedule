@@ -178,7 +178,7 @@ export default function SphereImageGrid({
                     style={{ width: size, height: size }}
                   >
                     <img
-                      src={item.image}
+                      src={item.img}
                       alt={item.alt || "avatar"}
                       className="w-full h-full object-cover rounded-full border border-slate-950 bg-slate-900
                         pointer-events-none"

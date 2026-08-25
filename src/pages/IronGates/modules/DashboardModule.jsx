@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import Error from "../../../components/Error/Error";
 import useTranslation from "../../../hooks/useTranslation";
 import { useDashboardStore } from "../../../store/useDashboardStore";
+import { formatCustomDate } from "../../../utils/general";
 import ActivityChart from "../components/Dashboard/ActivityChart";
 import EventsTicker from "../components/Dashboard/EventsTicker";
 import StatCard from "../components/Dashboard/StatCard";
@@ -20,7 +21,7 @@ import DashboardSkeleton from "../skeletons/DashboardSkeleton";
 const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   const { data, error, isLoading, fetchDashboardData } = useDashboardStore();
 
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const { dashboard, errors } = t;
 
@@ -49,6 +50,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
     totalPoints: data?.total_cp_ap || 0,
     avgAttendance: data?.avg_attendance ? `${data.avg_attendance}` : "0",
     acquiredEpics: data?.received_epics_count || 0,
+    lastEpic: data.last_epic || "",
     lastEvent: data?.last_played_event || {
       name: "N/A",
       date: "N/A",
@@ -106,8 +108,8 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
           unit={dashboard.stats.epicsUnit}
           icon={Award}
           colorClass="indigo"
-          footerLabel={`${dashboard.stats.lastEpicLabel} ${cpStats.lastEvent.name}`}
-          footerValue={cpStats.lastEvent.date}
+          footerLabel={`${dashboard.stats.lastEpicLabel} ${cpStats.lastEpic.epic_name}`}
+          footerValue={formatCustomDate(cpStats.lastEpic.date, language)}
         />
 
         <StatCard

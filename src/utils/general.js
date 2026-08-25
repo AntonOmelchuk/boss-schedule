@@ -326,3 +326,60 @@ export const formatTimeRemaining = (seconds) => {
   const secs = seconds % 60;
   return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 };
+
+/**
+ * Safe and universal date formatter that handles short strings (e.g. "4-Aug", "21/07/2026"),
+ * timestamps, or ISO strings, and localizes them based on the selected language.
+ *
+ * @param {string|number} dateInput - Raw date value from backend or storage.
+ * @param {string} lang - Language code ("ua" or "en").
+ * @returns {string} Formatted localized date string or fallback string.
+ */
+export const formatCustomDate = (dateInput, lang = LANGUAGES.UA) => {
+  if (!dateInput) return "";
+
+  try {
+    let timestamp = 0;
+
+    // 1. If it's already a number (timestamp)
+    if (typeof dateInput === "number") {
+      timestamp = dateInput;
+    }
+    // 2. If it's a string, try various parsing strategies safely
+    else if (typeof dateInput === "string") {
+      const trimmed = dateInput.trim();
+
+      // Check if it's a short format like "4-Aug" or "30-Jun" using existing logic
+      if (/^\d{1,2}-[a-zA-Z]{3}$/.test(trimmed)) {
+        timestamp = parseShortDate(trimmed);
+      }
+      // Check if it's in DD/MM/YYYY format (e.g., "21/07/2026")
+      else if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(trimmed)) {
+        const [d, m, y] = trimmed.split("/").map(Number);
+        timestamp = new Date(y, m - 1, d).getTime();
+      }
+      // Fallback to standard JS Date parser for ISO strings or standard date formats
+      else {
+        const parsed = new Date(trimmed);
+        if (!isNaN(parsed.getTime())) {
+          timestamp = parsed.getTime();
+        }
+      }
+    }
+
+    // If we failed to resolve a valid timestamp, return original string safely
+    if (!timestamp || isNaN(timestamp)) {
+      return String(dateInput);
+    }
+
+    // Format final date using Intl.DateTimeFormat according to selected language
+    const locale = lang === LANGUAGES.UA ? "uk-UA" : "en-US";
+    return new Intl.DateTimeFormat(locale, {
+      month: "short",
+      day: "numeric",
+    }).format(new Date(timestamp));
+  } catch (error) {
+    console.error("Error formatting custom date:", error);
+    return String(dateInput);
+  }
+};

@@ -69,7 +69,7 @@ const Header = () => {
 
               if (item.hasDropdown) {
                 const isDropdownOpen = hoveredDropdownId === item.id;
-                console.log("item", item);
+
                 return (
                   <div
                     key={item.id}

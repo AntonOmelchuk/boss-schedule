@@ -1,16 +1,22 @@
+import EpicInfo from "./EpicInfo";
+import InfoBlock from "./InfoBlock";
 import ParallaxAvatar from "./ParallaxAvatar";
 
 const MemberCard = ({
   x,
   y,
-  image,
   name,
+  role,
+  image,
   status,
   playClass,
   mainClass,
-  subClasses,
-  gear,
+  subClasses = [],
+  epic,
   pvp,
+  inClan,
+  balance,
+  allPoints,
 }) => {
   return (
     <div className="relative z-20 flex-1 flex items-center justify-center">
@@ -26,19 +32,29 @@ const MemberCard = ({
 
         <div className="md:col-span-7 space-y-4">
           <div>
-            <div className="flex items-center space-x-2">
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  status === "ONLINE"
-                    ? "bg-emerald-400"
-                    : status === "AFK"
-                      ? "bg-amber-400"
-                      : "bg-rose-500"
-                } animate-ping`}
-              />
-              <span className="text-xs uppercase tracking-widest text-emerald-400 font-semibold">
-                • {status}
-              </span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    status === "ONLINE"
+                      ? "bg-emerald-400"
+                      : status === "AFK"
+                        ? "bg-amber-400"
+                        : "bg-rose-500"
+                  } animate-ping`}
+                />
+                <span className="text-xs uppercase tracking-widest text-emerald-400 font-semibold">
+                  • {status}
+                </span>
+              </div>
+              {inClan && (
+                <span
+                  className="text-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 px-3 py-1.5
+                  rounded-full font-medium"
+                >
+                  {inClan}
+                </span>
+              )}
             </div>
             <h1
               className="text-3xl lg:text-4xl font-black text-white tracking-wider mt-1
@@ -49,55 +65,30 @@ const MemberCard = ({
           </div>
 
           <div className="grid grid-cols-2 gap-2.5">
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-              <span className="text-[10px] text-slate-500 uppercase tracking-wider">
-                Основний клас
-              </span>
-              <p className="text-amber-400 font-bold text-xs lg:text-sm mt-0.5">
-                {mainClass}
-              </p>
-            </div>
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-              <span className="text-[10px] text-slate-500 uppercase tracking-wider">
-                Сабкласи
-              </span>
-              <p className="text-slate-300 font-medium text-xs mt-0.5 truncate">
-                {subClasses.join(", ")}
-              </p>
-            </div>
+            <InfoBlock label="Основний клас" value={mainClass} />
+            <InfoBlock label="GvG Class" value={playClass || "-"} />
+            <InfoBlock label="Role" value={role} />
+            <InfoBlock label="Sub-classes" value={subClasses.join(", ")} />
           </div>
 
-          <div className="space-y-1.5">
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider">
-              Екіпірування (Gear)
-            </span>
-            <div className="grid grid-cols-3 gap-2">
-              {gear.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-2 text-center
-                    hover:border-amber-500/50 transition"
-                >
-                  <span className="text-base">{item.icon}</span>
-                  <p className="text-[10px] font-bold text-white mt-1 truncate">
-                    {item.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <EpicInfo epic={epic} />
 
-          <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xl text-slate-400">
+          <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-base text-slate-400">
             <span>
-              PvP: <strong className="text-white text-xl">{pvp}</strong>
+              PvP: <strong className="text-white text-lg">{pvp}</strong>
             </span>
-            <button
-              className="px-3.5 py-2 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500
-              hover:to-yellow-500 text-slate-950 font-black text-[11px] uppercase tracking-wider rounded-xl
-                shadow-[0_0_20px_rgba(245,158,11,0.3)] transition cursor-pointer active:scale-95"
-            >
-              Зброя / Стати
-            </button>
+            <span>
+              Баланс:{" "}
+              <strong
+                className={`text-lg ${balance < 0 ? "text-rose-400" : "text-emerald-400"}`}
+              >
+                {balance}
+              </strong>
+            </span>
+            <span>
+              Всі поінти:{" "}
+              <strong className="text-amber-400 text-lg">{allPoints}</strong>
+            </span>
           </div>
         </div>
       </div>

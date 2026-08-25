@@ -5,6 +5,7 @@ import Tilt from "react-parallax-tilt";
 import FloatingMagicalIcons from "./FloatingMagicalIcons";
 
 const ParallaxAvatar = ({ image, playClass = "" }) => {
+  console.log("playClass: ", playClass);
   const getSecondRingColor = () => {
     const cls = (playClass || "").toLowerCase();
     if (cls.includes("bishop") || cls.includes("cardinal"))

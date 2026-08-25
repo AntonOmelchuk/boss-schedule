@@ -213,17 +213,51 @@ export const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;
 
 // Mappint members with their avatars and roles
 export const MEMBERS_MAP = {
-  toBe: { name: "toBe", image: `${STORAGE_URL}/avatars/tobe.png` },
-  Fergi: { name: "Fergi", image: `${STORAGE_URL}/avatars/fergi.png` },
+  toBe: { name: "toBe", image: `${STORAGE_URL}/avatars/toBe.png` },
+  LapestoPasto: {
+    name: "LapestoPasto",
+    image: `${STORAGE_URL}/avatars/LapestoPasto.png`,
+  },
+  Fergi: { name: "Fergi", image: `${STORAGE_URL}/avatars/Fergi.png` },
   Ansol: { name: "Ansol", image: `${STORAGE_URL}/avatars/Ansol.png` },
-  MWQueen: { name: "MWQueen", image: `${STORAGE_URL}/avatars/mw.png` },
+  MWQueen: { name: "MWQueen", image: `${STORAGE_URL}/avatars/MWQueen.png` },
+  Manol: { name: "Manol", image: `${STORAGE_URL}/avatars/Manol.png` },
+  ManiacFiona: {
+    name: "ManiacFiona",
+    image: `${STORAGE_URL}/avatars/ManiacFiona.png`,
+  },
+  ManiacJerry: {
+    name: "ManiacJerry",
+    image: `${STORAGE_URL}/avatars/ManiacJerry.png`,
+  },
   ManiacShrek: {
     name: "ManiacShrek",
-    image: `${STORAGE_URL}/avatars/shrek.png`,
+    image: `${STORAGE_URL}/avatars/ManiacShrek.png`,
   },
-  Spektra: { name: "Spektra", image: `${STORAGE_URL}/avatars/spektra.png` },
-  ManiacTom: { name: "ManiacTom", image: `${STORAGE_URL}/avatars/Tom.png` },
+  Spektra: { name: "Spektra", image: `${STORAGE_URL}/avatars/Spektra.png` },
+  ManiacTom: {
+    name: "ManiacTom",
+    image: `${STORAGE_URL}/avatars/ManiacTom.png`,
+  },
   Vryo: { name: "Vryo", image: `${STORAGE_URL}/avatars/Vryo.png` },
-  Winson: { name: "Winson", image: `${STORAGE_URL}/avatars/Winson.png` },
-  ZukaDaddy: { name: "ZukaDaddy", image: `${STORAGE_URL}/avatars/Zukka.png` },
+  ZukaDaddy: {
+    name: "ZukaDaddy",
+    image: `${STORAGE_URL}/avatars/ZukaDaddy.png`,
+  },
+};
+
+export const MEMBER_COLORS = {
+  toBe: { start: "#881337", end: "#4c0519" }, // Багряна Відьма (Deep Rose / Crimson)
+  Fergi: { start: "#2563eb", end: "#1d4ed8" }, // Шторм (Electric Sky Blue)
+  Ansol: { start: "#334155", end: "#0f172a" }, // Валькірія (Royal Purple / Silver)
+  MWQueen: { start: "#eab308", end: "#ca8a04" }, // Міс Оса (Wasp Yellow / Gold)
+  ManiacFiona: { start: "#16a34a", end: "#15803d" }, // Жінка-Халк (Emerald Green)
+  ZukaDaddy: { start: "#7c3aed", end: "#1e1b4b" }, // Стар Лорд / Квіл (Space Orange)
+  ManiacJerry: { start: "#10b981", end: "#047857" }, // Локі (Asgardian Emerald / Gold)
+  ManiacShrek: { start: "#1e3a8a", end: "#0f172a" }, // Танос (Titan Deep Purple & Gold)
+  LapestoPasto: { start: "#27272a", end: "#09090b" }, // Чорна Вдова (Tactical Dark Charcoal)
+  Spektra: { start: "#065f46", end: "#022c22" }, // Хелла (Niflheim Dark Obsidian)
+  Manol: { start: "#22c55e", end: "#16a34a" }, // Халк (Gamma Bright Green)
+  ManiacTom: { start: "#f97316", end: "#b91c1c" }, // Доктор Стрендж (Mystic Cyan / Orange)
+  Vryo: { start: "#1d4ed8", end: "#b91c1c" }, // Капітан Америка (Captain America Blue to Red vibe)
 };

@@ -8,7 +8,7 @@ import useFullScreen from "../../hooks/useFullScreen";
 import usePreventScroll from "../../hooks/usePreventScroll";
 import useTranslation from "../../hooks/useTranslation";
 import { db } from "../../services/firebase";
-import { shuffleArray } from "../../utils/general";
+import { useDashboardStore } from "../../store/useDashboardStore";
 import AnimatedTitleLine from "./components/IntroSequence/AnimatedTitleLine";
 import BackgroundLogo from "./components/IntroSequence/BackgroundLogo";
 import IntroAdenCard from "./components/IntroSequence/IntroAdenCard";
@@ -36,13 +36,13 @@ const STAGES = {
 };
 
 const IntroSequence = ({ onFinish }) => {
+  const { members, setMembers } = useDashboardStore();
   const { enterFullscreen, exitFullscreen } = useFullScreen();
 
   const { t } = useTranslation();
 
   const [started, setStarted] = useState(false);
   const [stage, setStage] = useState(STAGES.START);
-  const [partyMembers, setPartyMembers] = useState([]);
 
   const audioRef = useRef(null);
   const containerRef = useRef(null);
@@ -58,13 +58,13 @@ const IntroSequence = ({ onFinish }) => {
         const snapshot = await get(membersRef);
         if (snapshot.exists()) {
           const data = snapshot.val();
-          // Конвертуємо об'єкт з Firebase у масив
+
           const membersArray = Object.keys(data).map((key) => ({
             id: key,
             ...data[key],
           }));
 
-          setPartyMembers(shuffleArray(membersArray));
+          setMembers(membersArray);
         }
       } catch (error) {
         console.error("Error fetching iron_gates_members:", error);
@@ -91,7 +91,7 @@ const IntroSequence = ({ onFinish }) => {
 
   useEffect(() => {
     if (stage === STAGES.PRESENTING_MEMBERS) {
-      const N = partyMembers.length;
+      const N = members.length;
       let current = 0;
 
       const scrollToNext = () => {
@@ -130,7 +130,7 @@ const IntroSequence = ({ onFinish }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [stage, onFinish, partyMembers.length]);
+  }, [stage, onFinish, members.length]);
 
   const handleStart = () => {
     setStarted(true);
@@ -297,7 +297,7 @@ const IntroSequence = ({ onFinish }) => {
 
       {/* Section with members */}
       <div className="z-35">
-        {partyMembers.map((member, index) => {
+        {members.map((member, index) => {
           const {
             img,
             pvp,
