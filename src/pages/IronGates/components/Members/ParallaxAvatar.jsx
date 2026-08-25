@@ -2,30 +2,14 @@ import "./MemberCard.css";
 
 import Tilt from "react-parallax-tilt";
 
-import { getMemberTheme } from "../../../../utils/general";
+import { getMemberTheme } from "../../../../utils/members";
+import { getCustomRingColors } from "../../../../utils/members";
 import FloatingMagicalIcons from "./FloatingMagicalIcons";
 
 const ParallaxAvatar = ({ image, playClass = "", name }) => {
   const theme = getMemberTheme(name);
 
-  // const getSecondRingStyle = () => {
-  //   const cls = (playClass || "").toLowerCase();
-
-  //   if (cls.includes("bishop") || cls.includes("cardinal"))
-  //     return { color: "#22c55e", shadow: "rgba(34,197,94,0.3)" };
-  //   if (cls.includes("archmage") || cls.includes("sorcerer"))
-  //     return { color: "#ef4444", shadow: "rgba(239,68,68,0.3)" };
-  //   if (cls.includes("mystic muse") || cls.includes("spellsinger"))
-  //     return { color: "#06b6d4", shadow: "rgba(6,182,212,0.3)" };
-  //   if (cls.includes("soultaker") || cls.includes("necromancer"))
-  //     return { color: "#a855f7", shadow: "rgba(168,85,247,0.3)" };
-  //   if (cls.includes("dominator") || cls.includes("overlord"))
-  //     return { color: "#eab308", shadow: "rgba(234,179,8,0.3)" };
-
-  //   return { color: "#a855f7", shadow: "rgba(168,85,247,0.3)" };
-  // };
-
-  // const classRing = getSecondRingStyle();
+  const ringColors = getCustomRingColors(name, theme);
 
   return (
     <div
@@ -49,8 +33,8 @@ const ParallaxAvatar = ({ image, playClass = "", name }) => {
             className="absolute z-50 inset-0 m-auto w-[108%] h-[108%] rounded-full border-2 border-dashed
             animate-[spin_45s_linear_infinite] pointer-events-none"
             style={{
-              borderColor: `${theme.startColor}88`,
-              boxShadow: `0 0 20px ${theme.startColor}4D`,
+              borderColor: ringColors.innerColor,
+              boxShadow: `0 0 20px ${ringColors.innerColor}10`,
             }}
           />
 
@@ -58,8 +42,8 @@ const ParallaxAvatar = ({ image, playClass = "", name }) => {
             className="absolute z-50 inset-0 m-auto w-[105%] h-[105%] rounded-full border-2 border-dashed
               animate-[spin_72s_linear_infinite_reverse] pointer-events-none"
             style={{
-              borderColor: `${theme.endColor}`,
-              boxShadow: `0 0 15px ${theme.endColor}`,
+              borderColor: ringColors.outerColor,
+              boxShadow: `0 0 15px ${ringColors.outerColor}80`,
             }}
           />
 

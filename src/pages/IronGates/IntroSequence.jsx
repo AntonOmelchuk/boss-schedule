@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import Galaxy from "../../components/Backgrounds/GalaxyBackground";
-import { STORAGE_URL } from "../../constants/general";
+import { STORAGE_URL } from "../../constants/members";
 import useFullScreen from "../../hooks/useFullScreen";
 import usePreventScroll from "../../hooks/usePreventScroll";
 import useTranslation from "../../hooks/useTranslation";
@@ -130,7 +130,7 @@ const IntroSequence = ({ onFinish }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [stage, onFinish, members.length]);
+  }, [stage, onFinish, members?.length]);
 
   const handleStart = () => {
     setStarted(true);
@@ -297,7 +297,7 @@ const IntroSequence = ({ onFinish }) => {
 
       {/* Section with members */}
       <div className="z-35">
-        {members.map((member, index) => {
+        {members?.map((member, index) => {
           const {
             img,
             pvp,

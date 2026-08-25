@@ -1,5 +1,5 @@
 import useTranslation from "../../../../hooks/useTranslation";
-import { getMemberTheme } from "../../../../utils/general";
+import { getMemberTheme } from "../../../../utils/members";
 import EpicInfo from "./EpicInfo";
 import InfoBlock from "./InfoBlock";
 import ParallaxAvatar from "./ParallaxAvatar";

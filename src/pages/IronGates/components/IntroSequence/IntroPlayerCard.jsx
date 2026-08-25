@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 import useTranslation from "../../../../hooks/useTranslation";
+import { getMemberTheme } from "../../../../utils/members";
 import InfoPlayerCardInfoItem from "./InfoPlayerCardInfoItem";
 
 const IntroPlayerCard = ({
@@ -16,10 +17,11 @@ const IntroPlayerCard = ({
   pvp,
 }) => {
   const { t } = useTranslation();
-
   const {
     dashboard: { stats },
   } = t;
+
+  const theme = getMemberTheme(name);
 
   return (
     <div
@@ -32,52 +34,73 @@ const IntroPlayerCard = ({
         whileInView={{ opacity: 1, x: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 1.0, ease: [0.2, 0.65, 0.3, 0.9] }}
-        className="relative max-w-6xl w-full p-10 sm:p-14 rounded-3xl border border-amber-500/40
-          bg-gradient-to-b from-amber-500/10 via-zinc-900/90 to-black z-40
-          shadow-[0_0_90px_rgba(245,158,11,0.25)] backdrop-blur-xl flex flex-col md:flex-row
-          items-center gap-10 group hover:border-amber-400 transition-all"
+        style={{
+          borderColor: `${theme.startColor}80`,
+          boxShadow: `0 0 90px ${theme.startColor}33`,
+        }}
+        className="relative max-w-6xl w-full p-10 sm:p-14 rounded-3xl border-2
+          bg-gradient-to-b from-slate-900/90 via-zinc-900/90 to-black z-40
+          backdrop-blur-xl flex flex-col md:flex-row items-center gap-10 group
+          hover:border-amber-400 transition-all"
       >
-        {/* Avatar */}
         <div
+          style={{
+            borderColor: `${theme.startColor}`,
+            boxShadow: `0 0 50px ${theme.startColor}4D`,
+          }}
           className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-black/60 border-2
-          border-amber-500/60 shrink-0 shadow-[0_0_50px_rgba(0,0,0,0.9)]
-            group-hover:scale-105 transition-transform z-50"
+            shrink-0 group-hover:scale-105 transition-transform"
         >
           <img
             src={img}
             alt={name}
-            className="w-full h-full object-cover filter contrast-110"
+            className="w-full h-full object-cover filter contrast-110 rounded-3xl"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl" />
 
-          {/* PvP Badge above avatar */}
           <div
-            className="absolute -bottom-4 left-4 right-4 text-center py-1.5 px-3 bg-black/80 border
-            border-amber-500/40 rounded-xl backdrop-blur-md z-50"
+            style={{
+              borderColor: `${theme.startColor}66`,
+            }}
+            className="absolute -bottom-6 left-4 right-4 text-center py-1.5 px-3 bg-black/90 border
+            rounded-xl backdrop-blur-md shadow-lg"
           >
             <span className="text-xs text-slate-400 uppercase tracking-widest mr-2">
               PvP:
             </span>
-            <span className="text-lg font-black text-amber-400">{pvp}</span>
+            <span
+              className="text-lg font-black"
+              style={{ color: theme.startColor }}
+            >
+              {pvp}
+            </span>
           </div>
         </div>
 
         {/* Info */}
         <div className="text-center md:text-left flex-1 flex flex-col justify-center">
-          {/* Nickname */}
           <h2
-            className="text-6xl sm:text-7xl font-black text-white tracking-wider font-serif
-            drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+            className="text-5xl sm:text-7xl font-black tracking-wider font-serif
+              inline-block px-4 py-1 rounded-2xl border transition-all"
+            style={{
+              textShadow: `0 2px 20px ${theme.startColor}66`,
+              backgroundColor: `${theme.startColor}1A`,
+              borderColor: `${theme.startColor}66`,
+              color: theme.startColor,
+            }}
           >
             {name}
           </h2>
 
           {/* Main class */}
-          <div className="mt-3">
+          <div className="mt-5">
             <span className="text-xs uppercase tracking-[0.3em] text-slate-400 block mb-1">
               {stats.mainClass}
             </span>
-            <span className="text-2xl sm:text-3xl font-extrabold text-amber-400 tracking-wide drop-shadow-md">
+            <span
+              className="text-2xl sm:text-3xl font-extrabold tracking-wide drop-shadow-md"
+              style={{ color: theme.startColor }}
+            >
               {main_class}
             </span>
           </div>
@@ -92,8 +115,11 @@ const IntroPlayerCard = ({
                 {sub_classes.map((sub, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-xl
-                      text-amber-200/90 text-sm font-medium tracking-wide"
+                    style={{
+                      borderColor: `${theme.startColor}40`,
+                      backgroundColor: `${theme.startColor}15`,
+                    }}
+                    className="px-3 py-1 border rounded-xl text-slate-200 text-sm font-medium tracking-wide"
                   >
                     {sub}
                   </span>

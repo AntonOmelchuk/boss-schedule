@@ -3,7 +3,7 @@ import { get, ref, set } from "firebase/database";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { STORAGE_URL } from "../constants/general";
+import { STORAGE_URL } from "../constants/members";
 import { db } from "../services/firebase";
 
 const MEMBERS_DATA = [

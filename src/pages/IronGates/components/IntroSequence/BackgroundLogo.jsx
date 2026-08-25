@@ -1,4 +1,4 @@
-import { STORAGE_URL } from "../../../../constants/general";
+import { STORAGE_URL } from "../../../../constants/members";
 
 const BackgroundLogo = ({ isStart }) => {
   const rows = 8;

@@ -31,8 +31,6 @@ const MainLayout = ({ children }) => {
         <SkyStars />
 
         {children}
-
-        <Footer />
       </div>
     );
   }

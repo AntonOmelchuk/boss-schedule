@@ -6,7 +6,6 @@ import {
   EMOJI_MAP,
   EPIC_NAME_TO_EVENT_TYPE,
   LANGUAGES,
-  MEMBER_COLORS,
   RELATION,
 } from "../constants/general";
 
@@ -383,21 +382,4 @@ export const formatCustomDate = (dateInput, lang = LANGUAGES.UA) => {
     console.error("Error formatting custom date:", error);
     return String(dateInput);
   }
-};
-
-export const getMemberTheme = (name) => {
-  const theme = MEMBER_COLORS[name] || { start: "#f59e0b", end: "#d97706" };
-  return {
-    borderColor: `border-[${theme.start}]/50`,
-    shadowColor: `shadow-[0_0_50px_${theme.start}33]`,
-    glowStyle: {
-      borderColor: theme.start,
-      boxShadow: `0 0 30px ${theme.start}66`,
-    },
-    gradientStyle: {
-      background: `linear-gradient(135deg, ${theme.start}, ${theme.end})`,
-    },
-    startColor: theme.start,
-    endColor: theme.end,
-  };
 };

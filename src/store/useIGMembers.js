@@ -22,7 +22,7 @@ const useIGMembers = create((set, get) => ({
     try {
       const response = await fetch(`${BASE_URL}/api/irongates-members`);
       const data = await response.json();
-
+      console.log("data: ", data);
       if (data.status === "success") {
         set({ members: data.data, loading: false });
       } else {

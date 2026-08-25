@@ -8,8 +8,8 @@ import {
   YAxis,
 } from "recharts";
 
-import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/general";
-import { STORAGE_URL } from "../../../../constants/general";
+import { STORAGE_URL } from "../../../../constants/members";
+import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/members";
 import useTranslation from "../../../../hooks/useTranslation";
 import useWindowSize from "../../../../hooks/useWindowSize";
 
