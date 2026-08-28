@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { DASHBOARD_TABS } from "../../constants/routes";
 import Footer from "../../layouts/Footer/Footer";
@@ -12,9 +12,32 @@ import MemberModule from "./modules/MembersModule";
 import DashboardNav from "./tabs/DashboardTabs";
 
 const IronGatesPage = () => {
-  const [activeTab, setActiveTab] = useState(DASHBOARD_TABS.SUMMARY);
+  const [activeTab, setActiveTab] = useState(() => {
+    const hash = window.location.hash.replace("#", "");
+    const validTabs = Object.values(DASHBOARD_TABS);
+    return validTabs.includes(hash) ? hash : DASHBOARD_TABS.SUMMARY;
+  });
+
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   // const [showIntro, setShowIntro] = useState(true);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    window.location.hash = tab;
+  };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      const validTabs = Object.values(DASHBOARD_TABS);
+      if (validTabs.includes(hash)) {
+        setActiveTab(hash);
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -54,7 +77,8 @@ const IronGatesPage = () => {
             : "max-h-96 opacity-100"
         }`}
       >
-        <DashboardNav activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* Передаємо нашу функцію handleTabChange замість прямого setActiveTab */}
+        <DashboardNav activeTab={activeTab} onTabChange={handleTabChange} />
         {activeTab === DASHBOARD_TABS.SUMMARY && <Header />}
       </div>
 
