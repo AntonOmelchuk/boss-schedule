@@ -1,4 +1,4 @@
-import { Award, Calendar, Crown, Users } from "lucide-react";
+import { Award, Calendar, Crown, UserCheck } from "lucide-react";
 
 import useTranslation from "../../../../hooks/useTranslation";
 import StatCard from "../Dashboard/StatCard";
@@ -7,7 +7,7 @@ const IGSummaryCards = ({ data }) => {
   const { t } = useTranslation();
 
   if (!data) return null;
-
+  console.log("data: ", data);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       {/* Total Events Card */}
@@ -20,7 +20,7 @@ const IGSummaryCards = ({ data }) => {
 
       {/* Dominator Events Pct Card */}
       <StatCard
-        title={t.igAnalytics?.dominatorPctLabel || "Dominator Pct"}
+        title={t.igAnalytics.dominatorPctLabel}
         value={`${data.dominator_pct}%`}
         icon={Crown}
         colorClass="amber"
@@ -30,18 +30,18 @@ const IGSummaryCards = ({ data }) => {
 
       {/* Average Event Points Card */}
       <StatCard
-        title={t.igAnalytics?.avgPointsLabel || "Avg Event Points"}
+        title={t.igAnalytics.avgPointsLabel}
         value={data.average_event_points}
         unit="pts"
         icon={Award}
         colorClass="emerald"
       />
 
-      {/* Active Members Count Card */}
+      {/* Full-party streak */}
       <StatCard
-        title={t.igAnalytics?.activeMembersLabel || "Active Members"}
-        value={data.members?.length || 0}
-        icon={Users}
+        title={t.igAnalytics.fullPartyStreakLabel}
+        value={data.max_full_party_streak}
+        icon={UserCheck}
         colorClass="purple"
       />
     </div>

@@ -1,6 +1,6 @@
 import useWindowSize from "../../../hooks/useWindowSize";
 
-const DashboardSkeleton = () => {
+const DashboardSkeleton = ({ hideScrollLine }) => {
   const [windowWidth, windowHeight] = useWindowSize();
 
   return (
@@ -29,7 +29,9 @@ const DashboardSkeleton = () => {
       </section>
 
       {/* Skeleton events infinite scroll */}
-      <div className="w-full h-10 bg-slate-900/40 border border-slate-800/80 rounded-xl mb-8" />
+      {hideScrollLine || (
+        <div className="w-full h-10 bg-slate-900/40 border border-slate-800/80 rounded-xl mb-8" />
+      )}
 
       <div
         className="w-full bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 mb-8 flex flex-col justify-between"

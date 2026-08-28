@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import Error from "../../../components/Error/Error";
-import TimerProgressBar from "../../../components/TimerProgressBar/TimerProgressBar";
 import Button from "../../../components/UI/Button";
 import useTranslation from "../../../hooks/useTranslation";
 import { useIgAnalyticsStore } from "../../../store/useIgAnalyticsStore";
@@ -13,6 +12,7 @@ import IGMemberActivityChart from "../components/IGAnalytics/IGMemberActivityCha
 import IGProgressLineChart from "../components/IGAnalytics/IGProgressLineChart";
 import IGStreakMatrix from "../components/IGAnalytics/IGStreakMatrix";
 import IGSummaryCards from "../components/IGAnalytics/IGSummaryCards";
+import DashboardSkeleton from "../skeletons/DashboardSkeleton";
 
 const IGAnalyticsModule = () => {
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ const IGAnalyticsModule = () => {
   }, [fetchAnalytics]);
 
   if (isLoading && !analyticsData) {
-    return <TimerProgressBar label={t.loadingIGAnalytics} />;
+    return <DashboardSkeleton hideScrollLine />;
   }
 
   if (error && !isLoading) {

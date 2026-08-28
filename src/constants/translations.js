@@ -636,6 +636,7 @@ export default {
       dominatorPctLabel: "Відсоток Dominator",
       avgPointsLabel: "Сер. балів за івент",
       activeMembersLabel: "Склад учасників",
+      fullPartyStreakLabel: "Фул паті streak",
 
       // Основний графік активності та тултіпи
       activityChartTitle: "Відвідуваність та активність учасників КП",
@@ -654,7 +655,7 @@ export default {
       // Матриця серій (Streaks)
       streakTitle: "Максимальна серія відвідувань",
       streakSubtitle: "Найдовші безперервні серії відвідувань поспіль",
-      streakEventsUnit: "ію.", // або "іюнів" / "івентів поспіль"
+      streakEventsUnit: "streak", // або "іюнів" / "івентів поспіль"
 
       // Комбо-графік (Alliance Activity Combo Chart)
       comboChartTitle: "Актуальна активність КП та ковзне середнє",
@@ -1299,6 +1300,7 @@ export default {
       dominatorPctLabel: "Dominator Rate",
       avgPointsLabel: "Avg Event Points",
       activeMembersLabel: "Roster Members",
+      fullPartyStreakLabel: "Full-Party Streak",
 
       // Member activity chart & tooltips
       activityChartTitle: "CP Member Attendance & Activity",

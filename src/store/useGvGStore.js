@@ -3,82 +3,10 @@ import { get, ref, set } from "firebase/database";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { STORAGE_URL } from "../constants/members";
+import { MEMBERS_MAP } from "../constants/members";
 import { db } from "../services/firebase";
 
-const MEMBERS_DATA = [
-  {
-    id: "tobe",
-    name: "toBe",
-    role: "Healer",
-    image: `${STORAGE_URL}/avatars/tobe.png`,
-  },
-  {
-    id: "fergi",
-    name: "Fergi",
-    role: "Healer",
-    image: `${STORAGE_URL}/avatars/fergi.png`,
-  },
-  {
-    id: "ansol",
-    name: "Ansol",
-    role: "Healer",
-    image: `${STORAGE_URL}/avatars/Ansol.png`,
-  },
-  {
-    id: "mw",
-    name: "MWQueen",
-    role: "Damager",
-    image: `${STORAGE_URL}/avatars/mw.png`,
-  },
-  {
-    id: "shrek",
-    name: "ManiacShrek",
-    role: "Damager",
-    image: `${STORAGE_URL}/avatars/shrek.png`,
-  },
-  {
-    id: "spektra",
-    name: "Spektra",
-    role: "Damager",
-    image: `${STORAGE_URL}/avatars/spektra.png`,
-  },
-  {
-    id: "tom",
-    name: "ManiacTom",
-    role: "Damager",
-    image: `${STORAGE_URL}/avatars/Tom.png`,
-  },
-  {
-    id: "vryo",
-    name: "Vryo",
-    role: "Damager",
-    image: `${STORAGE_URL}/avatars/Vryo.png`,
-  },
-  {
-    id: "zukka",
-    name: "ZukaDaddy",
-    role: "Damager",
-    image: `${STORAGE_URL}/avatars/Zukka.png`,
-  },
-];
-
-const initialNodes = [
-  ...MEMBERS_DATA.map((member, index) => ({
-    id: member.id,
-    type: "memberCard",
-    position: { x: 0, y: index * 160 },
-    data: { ...member, assignments: "" },
-  })),
-  {
-    id: "enemy-1",
-    type: "enemyCard",
-    position: { x: 750, y: 50 },
-    data: { label: "Target 1" },
-  },
-];
-
-const initialEdges = [];
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const createStyledEdge = (sourceNode, connectionData) => {
   const isHealerSource = sourceNode?.data?.role === "Healer";
@@ -105,28 +33,114 @@ const createStyledEdge = (sourceNode, connectionData) => {
 const useGvGStore = create(
   persist(
     (setStore, getStore) => {
+      const fetchRosterAndInit = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/api/gvg-setup/roster`);
+          const result = await response.json();
+
+          if (result.status === "success" && result.roster) {
+            const rosterData = result.roster;
+            const newNodes = [];
+            const newEdges = [];
+
+            rosterData.forEach((member, index) => {
+              const matchedKey = Object.keys(MEMBERS_MAP).find(
+                (k) => k.toLowerCase() === member.name.toLowerCase(),
+              );
+              const avatarImage = matchedKey
+                ? MEMBERS_MAP[matchedKey].image
+                : "";
+
+              const isHealer =
+                member.class.toLowerCase().includes("cardinal") ||
+                member.class.toLowerCase().includes("bishop");
+              const role = isHealer ? "Healer" : "Damager";
+
+              const nodeId = `member-${index}-${member.name.toLowerCase()}`;
+
+              newNodes.push({
+                id: nodeId,
+                type: "memberCard",
+                position: { x: 0, y: index * 160 },
+                data: {
+                  id: nodeId,
+                  name: member.name,
+                  class: member.class,
+                  role: role,
+                  image: avatarImage,
+                  assignments: member.info,
+                  assigned_bishop: member.assigned_bishop,
+                },
+              });
+            });
+
+            newNodes.push({
+              id: "enemy-1",
+              type: "enemyCard",
+              position: { x: 750, y: 50 },
+              data: { label: "Target 1" },
+            });
+
+            newNodes.forEach((node) => {
+              if (node.type === "memberCard" && node.data.assigned_bishop) {
+                const bishopNode = newNodes.find(
+                  (n) =>
+                    n.type === "memberCard" &&
+                    n.data.name.toLowerCase() ===
+                      node.data.assigned_bishop.toLowerCase(),
+                );
+                if (bishopNode) {
+                  const connectionData = {
+                    id: `edge-${bishopNode.id}-${node.id}`,
+                    source: bishopNode.id,
+                    target: node.id,
+                  };
+                  const styledEdge = createStyledEdge(
+                    bishopNode,
+                    connectionData,
+                  );
+                  newEdges.push(styledEdge);
+                }
+              }
+            });
+
+            setStore({
+              nodes: newNodes,
+              edges: newEdges,
+            });
+          }
+        } catch (error) {
+          console.error("Failed to fetch GvG roster from backend:", error);
+        }
+      };
+
       if (typeof window !== "undefined") {
         const gvgRef = ref(db, "gvg_setup");
         get(gvgRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
               const data = snapshot.val();
-              if (data && data.nodes) {
+              if (data && data.nodes && data.nodes.length > 0) {
                 setStore({
                   nodes: data.nodes,
-                  edges: data.edges || initialEdges,
+                  edges: data.edges || [],
                 });
+              } else {
+                fetchRosterAndInit();
               }
+            } else {
+              fetchRosterAndInit();
             }
           })
           .catch((error) => {
             console.error("Failed to load GvG setup from Firebase:", error);
+            fetchRosterAndInit();
           });
       }
 
       return {
-        nodes: initialNodes,
-        edges: initialEdges,
+        nodes: [],
+        edges: [],
 
         onNodesChange: (changes) => {
           setStore({ nodes: applyNodeChanges(changes, getStore().nodes) });
@@ -202,7 +216,7 @@ const useGvGStore = create(
         },
 
         resetPlanner: () => {
-          setStore({ nodes: initialNodes, edges: initialEdges });
+          fetchRosterAndInit();
         },
 
         savePlanner: async () => {

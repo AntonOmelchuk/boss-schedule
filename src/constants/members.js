@@ -51,3 +51,11 @@ export const MEMBER_COLORS = {
   ManiacTom: { start: "#f97316", end: "#b91c1c" },
   Vryo: { start: "#1d4ed8", end: "#b91c1c" },
 };
+
+export const GVG_ROLES = [
+  "Healer",
+  "Dominator",
+  "Damager",
+  "Main Assis",
+  "Second Assist",
+];

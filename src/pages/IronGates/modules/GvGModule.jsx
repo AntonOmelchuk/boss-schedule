@@ -23,7 +23,7 @@ const GvGModule = ({ isGvGFullscreen, setIsGvGFullscreen }) => {
       ...node,
       data: {
         ...node.data,
-        onRemove: node.type === "enemyCard" ? removeNode : undefined,
+        onRemove: removeNode,
       },
     }));
   }, [nodes, removeNode]);

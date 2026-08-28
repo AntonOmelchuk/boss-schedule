@@ -1,6 +1,7 @@
 import { Handle, Position } from "@xyflow/react";
 import { memo } from "react";
 
+import { GVG_ROLES } from "../../../../constants/members";
 import useGvGStore from "../../../../store/useGvGStore";
 import { cn } from "../../../../utils/general";
 
@@ -55,6 +56,7 @@ const MemberCardNode = ({ data, id }) => {
               alt={data.name}
             />
           </div>
+
           <div>
             <span className="text-3xl font-bold text-amber-400">
               {data.name}
@@ -78,10 +80,9 @@ const MemberCardNode = ({ data, id }) => {
                 : "border-slate-700 text-amber-400 focus:border-amber-500",
             )}
           >
-            <option value="Healer">Healer</option>
-            <option value="Damager">Damager</option>
-            <option value="Main Assist">Main Assist</option>
-            <option value="Second Assist">Second Assist</option>
+            {GVG_ROLES.map((value) => (
+              <option value={value}>{value}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -127,52 +128,52 @@ const MemberCardNode = ({ data, id }) => {
         type="target"
         position={Position.Top}
         id="top-target"
-        className="w-4! h-4! bg-amber-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
       <Handle
         type="source"
         position={Position.Top}
         id="top-source"
-        className="w-4! h-4! bg-emerald-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
 
       <Handle
         type="target"
         position={Position.Right}
         id="right-target"
-        className="w-4! h-4! bg-amber-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
       <Handle
         type="source"
         position={Position.Right}
         id="right-source"
-        className="w-4! h-4! bg-emerald-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
 
       <Handle
         type="target"
         position={Position.Bottom}
         id="bottom-target"
-        className="w-4! h-4! bg-amber-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
       <Handle
         type="source"
         position={Position.Bottom}
         id="bottom-source"
-        className="w-4! h-4! bg-emerald-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
 
       <Handle
         type="target"
         position={Position.Left}
         id="left-target"
-        className="w-4! h-4! bg-amber-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
       <Handle
         type="source"
         position={Position.Left}
         id="left-source"
-        className="w-4! h-4! bg-emerald-400!"
+        className="w-6! h-6! bg-emerald-400!"
       />
     </div>
   );
