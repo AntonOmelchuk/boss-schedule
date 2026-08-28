@@ -50,3 +50,28 @@ export const getCustomRingColors = (memberName, theme) => {
     outerColor: theme.endColor,
   };
 };
+
+// Helper for top 3 rank item styles
+export const getRankStyles = (idx) => {
+  const topStyles = [
+    {
+      font: "text-lg md:text-xl font-bold",
+      color: "text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.2)]",
+    },
+    {
+      font: "text-lg md:text-xl font-bold",
+      color: "text-slate-300",
+    },
+    {
+      font: "text-base md:text-lg font-bold",
+      color: "text-amber-600/90",
+    },
+  ];
+
+  return (
+    topStyles[idx] || {
+      font: "text-xs md:text-base font-semibold",
+      color: "text-white group-hover:text-amber-400",
+    }
+  );
+};

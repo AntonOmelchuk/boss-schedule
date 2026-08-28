@@ -15,7 +15,6 @@ const MemberModule = () => {
     fetchMembers();
   }, [fetchMembers]);
 
-  // 1. Усі хуки (useState) винесено на самий верх, до будь-яких умовних return!
   const [selectedName, setSelectedName] = useState("toBe");
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [, height] = useWindowSize();

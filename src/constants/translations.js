@@ -135,6 +135,7 @@ export default {
 
     active: "Активний",
     loadingAllianceAnalytics: "Завантаження аналітики альянсу...",
+    loadingIGAnalytics: "Завантаження аналітики Iron Gates...",
 
     loot: {
       navLoot: "Лут",
@@ -623,6 +624,54 @@ export default {
         assist2: "2nd Assist",
       },
     },
+    // Додай цей об'єкт у свій файл перекладів для української мови (наприклад, uk.js)
+    igAnalytics: {
+      pageTitle: "Аналітика КП Iron Gates",
+      filter7Days: "Останні 7 днів",
+      filter30Days: "Останні 30 днів",
+      filterAll: "За весь час",
+
+      // Зведені картки (Summary Cards)
+      totalEventsLabel: "Всього івентів",
+      dominatorPctLabel: "Відсоток Dominator",
+      avgPointsLabel: "Сер. балів за івент",
+      activeMembersLabel: "Склад учасників",
+
+      // Основний графік активності та тултіпи
+      activityChartTitle: "Відвідуваність та активність учасників КП",
+      activityChartSubtitle: "Ефективність учасників",
+      attendedEvents: "Відвідав",
+      attendanceRate: "Відсоток відвідуваності",
+      maxStreak: "Макс. серія",
+
+      // Матриця відсотків відвідуваності
+      attendanceRateTitle: "Рейтинг за відсотком відвідуваності",
+      attendanceRateSubtitle:
+        "Ранжування учасників на основі відсотка відвіданих івентів",
+      eventOne: "івент",
+      eventsMany: "івентів",
+
+      // Матриця серій (Streaks)
+      streakTitle: "Максимальна серія відвідувань",
+      streakSubtitle: "Найдовші безперервні серії відвідувань поспіль",
+      streakEventsUnit: "ію.", // або "іюнів" / "івентів поспіль"
+
+      // Комбо-графік (Alliance Activity Combo Chart)
+      comboChartTitle: "Актуальна активність КП та ковзне середнє",
+      comboChartBadge: "Порівняльний бенчмарк",
+      comboChartSubtitle:
+        "Зелені стовпчики означають результати вище бенчмарку ковзного середнього за 5 івентів.",
+      barName: "Загальний бал",
+      lineName: "Ковзне середнє",
+
+      // Графік накопичення прогресу
+      progressChartTitle: "Накопичувальний прогрес з часом",
+      progressChartNote:
+        "Відстеження накопичення балів у динаміці за івентами.",
+      selectAll: "Вибрати всі",
+      deselectAll: "Зняти всі",
+      filterMembersLabel: "Фільтрація учасників складу",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -753,6 +802,7 @@ export default {
 
     active: "Active",
     loadingAllianceAnalytics: "Loading Alliance Analytics...",
+    loadingIGAnalytics: "Loading Iron Gates Analytics...",
 
     loot: {
       title: "Loot Randomizer",
@@ -1236,6 +1286,54 @@ export default {
         ma: "Main Assist",
         assist2: "2nd Assist",
       },
+    },
+    // Add inside your translation file (e.g., uk.js under translations object)
+    igAnalytics: {
+      pageTitle: "Iron Gates CP Analytics",
+      filter7Days: "Last 7 Days",
+      filter30Days: "Last 30 Days",
+      filterAll: "All Time",
+
+      // Summary cards
+      totalEventsLabel: "Total Events",
+      dominatorPctLabel: "Dominator Rate",
+      avgPointsLabel: "Avg Event Points",
+      activeMembersLabel: "Roster Members",
+
+      // Member activity chart & tooltips
+      activityChartTitle: "CP Member Attendance & Activity",
+      activityChartSubtitle: "Roster Performance",
+      attendedEvents: "Attended",
+      attendanceRate: "Attendance Rate",
+      maxStreak: "Max Streak",
+
+      // Attendance rate matrix
+      attendanceRateTitle: "Attendance Rate Ranking",
+      attendanceRateSubtitle:
+        "Ranking members based on total attended events percentage",
+      eventOne: "event",
+      eventsMany: "events",
+
+      // Streak matrix
+      streakTitle: "Maximum Attendance Streak",
+      streakSubtitle: "Longest consecutive attendance streaks per member",
+      streakEventsUnit: "streak",
+
+      // Combo chart
+      comboChartTitle: "CP Activity & Moving Average",
+      comboChartBadge: "Performance Benchmark",
+      comboChartSubtitle:
+        "Green bars indicate scores above the 5-event moving average benchmark.",
+      barName: "Total Score",
+      lineName: "Moving Average",
+
+      // Progress line chart
+      progressChartTitle: "Cumulative Progress Over Time",
+      progressChartNote:
+        "Tracking accumulated point progression across events.",
+      selectAll: "Select All",
+      deselectAll: "Deselect All",
+      filterMembersLabel: "Filter Roster Members",
     },
   },
 };

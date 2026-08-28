@@ -4,16 +4,17 @@ import { useState } from "react";
 import { DASHBOARD_TABS } from "../../constants/routes";
 import Footer from "../../layouts/Footer/Footer";
 import Header from "./components/Dashboard/Header";
-import IntroSequence from "./IntroSequence";
+// import IntroSequence from "./IntroSequence";
 import DashboardModule from "./modules/DashboardModule";
 import GvGModule from "./modules/GvGModule";
+import IGAnalyticsModule from "./modules/IGAnalyticsModule";
 import MemberModule from "./modules/MembersModule";
 import DashboardNav from "./tabs/DashboardTabs";
 
 const IronGatesPage = () => {
   const [activeTab, setActiveTab] = useState(DASHBOARD_TABS.SUMMARY);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [showIntro, setShowIntro] = useState(true);
+  // const [showIntro, setShowIntro] = useState(true);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -26,6 +27,8 @@ const IronGatesPage = () => {
         );
       case DASHBOARD_TABS.MEMBERS:
         return <MemberModule />;
+      case DASHBOARD_TABS.ACTIVITY:
+        return <IGAnalyticsModule />;
       case DASHBOARD_TABS.GVG_SETUP:
         return (
           <GvGModule
@@ -38,9 +41,9 @@ const IronGatesPage = () => {
     }
   };
 
-  if (showIntro) {
-    return <IntroSequence onFinish={() => setShowIntro(false)} />;
-  }
+  // if (showIntro) {
+  //   return <IntroSequence onFinish={() => setShowIntro(false)} />;
+  // }
 
   return (
     <>
