@@ -1,7 +1,9 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 import Button from "../../../../components/UI/Button";
 import GlowLine from "../../../../components/UI/GlowLine";
+import Input from "../../../../components/UI/Input";
 import useTranslation from "../../../../hooks/useTranslation";
 import useGvGStore from "../../../../store/useGvGStore";
 
@@ -9,17 +11,38 @@ const Header = () => {
   const { t } = useTranslation();
   const { gvgPage } = t;
 
-  const { addEnemyTarget, resetPlanner, savePlanner } = useGvGStore();
+  const {
+    resetPlanner,
+    savePlanner,
+    createNewSetup,
+    loadSetup,
+    savedSetups,
+    currentSetupName,
+  } = useGvGStore();
+
+  const [newSetupName, setNewSetupName] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+
+  const handleCreateNew = () => {
+    if (!newSetupName.trim()) {
+      toast.error("Please enter a setup name!");
+      return;
+    }
+    createNewSetup(newSetupName);
+    setNewSetupName("");
+    setIsCreating(false);
+    toast.success(`Created new setup: ${newSetupName}`);
+  };
 
   const handleReset = () => {
     resetPlanner();
-    toast.error("Planner reset to default!");
+    toast.error("Setup reset to default roster and links cleared!");
   };
 
   const handleSave = async () => {
     try {
       await savePlanner();
-      toast.success("GvG setup saved successfully!");
+      toast.success(`Setup "${currentSetupName}" saved successfully!`);
     } catch {
       toast.error("Failed to save GvG setup.");
     }
@@ -27,31 +50,82 @@ const Header = () => {
 
   return (
     <>
-      <header className="h-16 bg-slate-950/80 px-6 flex items-center justify-between z-10">
+      <header className="h-16 mt-16 bg-slate-950/80 px-6 flex items-center justify-between z-10 gap-4">
         <div>
           <h1 className="text-lg font-bold text-amber-400 tracking-wider uppercase">
-            {gvgPage.title}
+            {gvgPage.title} -{" "}
+            <span className="text-white underline">{currentSetupName}</span>
           </h1>
           <p className="text-xs text-slate-400">{gvgPage.subtitle}</p>
         </div>
 
-        <div className="flex items-center gap-4">
+        {/* Дропдаун вибору збережених сетапів */}
+        <div className="flex items-center gap-2">
+          <select
+            value={currentSetupName}
+            onChange={(e) => {
+              loadSetup(e.target.value);
+              toast.success(`Loaded setup: ${e.target.value}`);
+            }}
+            className="bg-black/60 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-amber-300 font-semibold
+              focus:outline-none cursor-pointer"
+          >
+            {Object.keys(savedSetups).length === 0 ? (
+              <option value={currentSetupName}>{currentSetupName}</option>
+            ) : (
+              Object.values(savedSetups).map((setup) => (
+                <option key={setup.name} value={setup.name}>
+                  {setup.name}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
+
+        {/* Інпут / кнопка створення нового сетапу */}
+        <div className="flex items-center gap-2">
+          {isCreating ? (
+            <div className="flex items-center gap-1">
+              <Input
+                value={newSetupName}
+                onChange={(e) => setNewSetupName(e.target.value)}
+                placeholder={gvgPage.setupNamePlaceholder}
+              />
+              <Button
+                onClick={handleCreateNew}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2 py-1"
+              >
+                OK
+              </Button>
+              <Button
+                onClick={() => setIsCreating(false)}
+                className="bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs px-2 py-1"
+              >
+                ✕
+              </Button>
+            </div>
+          ) : (
+            <Button
+              onClick={() => setIsCreating(true)}
+              className="bg-indigo-600/20 hover:bg-indigo-600/30 border-indigo-500/40 text-indigo-300 text-xs"
+            >
+              + New Setup
+            </Button>
+          )}
+        </div>
+
+        {/* Основні дії: Reset та Save */}
+        <div className="flex items-center gap-3">
           <Button
             onClick={handleReset}
-            className="bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-slate-300"
+            className="bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-slate-300 text-xs"
           >
             Reset
-          </Button>
-          <Button
-            onClick={addEnemyTarget}
-            className="bg-red-500/20 hover:bg-red-500/30 border-red-500/40 text-red-300"
-          >
-            {gvgPage.addEnemy}
           </Button>
 
           <Button
             onClick={handleSave}
-            className="bg-amber-500/20 hover:bg-amber-500/30 border-amber-500/40 text-amber-300"
+            className="bg-amber-500/20 hover:bg-amber-500/30 border-amber-500/40 text-amber-300 text-xs"
           >
             {gvgPage.saveButton}
           </Button>

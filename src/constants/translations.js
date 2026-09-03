@@ -609,7 +609,10 @@ export default {
     gvgPage: {
       title: "Тактична дошка GvG",
       subtitle: "Розстановка та пріоритети цілей на мас-пвх",
-      saveButton: "Зберегти схему",
+      saveButton: "Зберегти",
+      resetButton: "Скинути",
+      newButton: "Новий сетап",
+      setupNamePlaceholder: "Назва сетапу...",
       savedSuccess: "Збережено успішно!",
       addEnemy: "+ Додати ціль",
       targetDefault: "Таргет",
@@ -1273,7 +1276,10 @@ export default {
     gvgPage: {
       title: "GvG Tactical Board",
       subtitle: "Party layout and target priorities for mass PvP",
-      saveButton: "Save Layout",
+      saveButton: "Save",
+      resetButton: "Reset",
+      newButton: "New setup",
+      setupNamePlaceholder: "Setup name...",
       savedSuccess: "Saved successfully!",
       addEnemy: "+ Add Target",
       targetDefault: "Target",
