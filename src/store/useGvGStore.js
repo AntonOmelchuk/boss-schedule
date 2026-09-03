@@ -31,7 +31,6 @@ const createStyledEdge = (sourceNode, connectionData) => {
 };
 
 const useGvGStore = create((setStore, getStore) => {
-  // Завантаження початкових учасників з Firebase (iron_gates_members)
   const fetchRosterAndInit = async (setupName = "Default Setup") => {
     try {
       const membersRef = ref(db, "iron_gates_members");
@@ -39,25 +38,12 @@ const useGvGStore = create((setStore, getStore) => {
 
       if (snapshot.exists()) {
         const data = snapshot.val();
-        // Якщо у нас збережений об'єкт сетапів, беремо учасників з якогось дефолтного або першого ліпшого,
-        // Або якщо в iron_gates_members лежить просто масив/список учасників:
         let rosterData = [];
 
         if (Array.isArray(data)) {
           rosterData = data;
         } else if (typeof data === "object") {
-          // Шукаємо перший ліпший сетап або масив учасників всередині
-          const firstKey = Object.keys(data)[0];
-          if (data[firstKey]?.nodes) {
-            // Якщо там збережені ноди попереднього сетапу, беремо їх дані
-            rosterData = data[firstKey].nodes.map((n) => ({
-              name: n.data.name,
-              play_class: n.data.class,
-              info: n.data.assignments,
-            }));
-          } else {
-            rosterData = Object.values(data);
-          }
+          rosterData = Object.values(data);
         }
 
         const newNodes = [];
@@ -70,7 +56,6 @@ const useGvGStore = create((setStore, getStore) => {
           );
           const avatarImage = matchedKey ? MEMBERS_MAP[matchedKey].image : "";
 
-          // Беремо клас із поля play_class (або class як запасний варіант)
           const memberClass = member.play_class || member.class || "";
           const initialClass = GVG_ROLES.includes(memberClass)
             ? memberClass
@@ -81,7 +66,7 @@ const useGvGStore = create((setStore, getStore) => {
           newNodes.push({
             id: nodeId,
             type: "memberCard",
-            position: { x: 0, y: index * 160 },
+            position: { x: (index % 4) * 350, y: Math.floor(index / 4) * 200 },
             data: {
               id: nodeId,
               name: member.name,
@@ -92,9 +77,10 @@ const useGvGStore = create((setStore, getStore) => {
           });
         });
 
+        // ✅ Створюємо абсолютно новий масив для примусового ререндеру ReactFlow
         setStore({
-          nodes: newNodes,
-          edges: [], // Зв'язки завжди чисті при ініціалізації
+          nodes: [...newNodes],
+          edges: [],
           currentSetupName: setupName,
         });
       }
@@ -110,12 +96,28 @@ const useGvGStore = create((setStore, getStore) => {
     try {
       const gvgRef = ref(db, "gvg_setup");
       const snapshot = await get(gvgRef);
+
       if (snapshot.exists()) {
         const data = snapshot.val();
         setStore({ savedSetups: data || {} });
+
+        const firstKey = Object.keys(data)[0];
+        if (firstKey && data[firstKey]) {
+          const firstSetup = data[firstKey];
+
+          // ✅ Обов'язково клонуємо через [...] для нових посилань
+          setStore({
+            nodes: [...(firstSetup.nodes || [])],
+            edges: [...(firstSetup.edges || [])],
+            currentSetupName: firstSetup.name || firstKey,
+          });
+        }
+      } else {
+        await fetchRosterAndInit("Default Setup");
       }
     } catch (error) {
       console.error("Failed to fetch saved setups from Firebase:", error);
+      await fetchRosterAndInit("Default Setup");
     }
   };
 
@@ -188,16 +190,13 @@ const useGvGStore = create((setStore, getStore) => {
 
     loadSetup: (setupName) => {
       const setups = getStore().savedSetups;
-      if (setups[setupName]) {
+      const targetSetup = setups[setupName] || (setups.nodes ? setups : null);
+
+      if (targetSetup) {
+        // ✅ Створюємо нові посилання при завантаженні конкретного сетапу
         setStore({
-          nodes: setups[setupName].nodes || [],
-          edges: setups[setupName].edges || [],
-          currentSetupName: setupName,
-        });
-      } else if (setups.nodes) {
-        setStore({
-          nodes: setups.nodes || [],
-          edges: setups.edges || [],
+          nodes: [...(targetSetup.nodes || [])],
+          edges: [...(targetSetup.edges || [])],
           currentSetupName: setupName,
         });
       }

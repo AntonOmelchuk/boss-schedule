@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DASHBOARD_TABS } from "../../constants/routes";
 import Footer from "../../layouts/Footer/Footer";
 import Header from "./components/Dashboard/Header";
-// import IntroSequence from "./IntroSequence";
+import IntroSequence from "./IntroSequence";
 import DashboardModule from "./modules/DashboardModule";
 import GvGModule from "./modules/GvGModule";
 import IGAnalyticsModule from "./modules/IGAnalyticsModule";
@@ -19,7 +19,7 @@ const IronGatesPage = () => {
   });
 
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  // const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(true);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -64,9 +64,9 @@ const IronGatesPage = () => {
     }
   };
 
-  // if (showIntro) {
-  //   return <IntroSequence onFinish={() => setShowIntro(false)} />;
-  // }
+  if (showIntro) {
+    return <IntroSequence onFinish={() => setShowIntro(false)} />;
+  }
 
   return (
     <>
@@ -77,7 +77,6 @@ const IronGatesPage = () => {
             : "max-h-96 opacity-100"
         }`}
       >
-        {/* Передаємо нашу функцію handleTabChange замість прямого setActiveTab */}
         <DashboardNav activeTab={activeTab} onTabChange={handleTabChange} />
         {activeTab === DASHBOARD_TABS.SUMMARY && <Header />}
       </div>

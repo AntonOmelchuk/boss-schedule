@@ -19,7 +19,7 @@ const Header = () => {
     savedSetups,
     currentSetupName,
   } = useGvGStore();
-
+  console.log("header: ", currentSetupName);
   const [newSetupName, setNewSetupName] = useState("");
   const [isCreating, setIsCreating] = useState(false);
 
@@ -50,8 +50,8 @@ const Header = () => {
 
   return (
     <>
-      <header className="h-16 mt-16 bg-slate-950/80 px-6 flex items-center justify-between z-10 gap-4">
-        <div>
+      <header className="h-16 mt-16 bg-slate-950/80 px-6 flex items-center justify-end z-10 gap-4">
+        <div className="mr-auto">
           <h1 className="text-lg font-bold text-amber-400 tracking-wider uppercase">
             {gvgPage.title} -{" "}
             <span className="text-white underline">{currentSetupName}</span>
@@ -60,14 +60,14 @@ const Header = () => {
         </div>
 
         {/* Дропдаун вибору збережених сетапів */}
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2">
           <select
             value={currentSetupName}
             onChange={(e) => {
               loadSetup(e.target.value);
               toast.success(`Loaded setup: ${e.target.value}`);
             }}
-            className="bg-black/60 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-amber-300 font-semibold
+            className="bg-black/60 border border-slate-700 rounded-lg px-3 py-1.5 text-xl text-amber-300 font-semibold
               focus:outline-none cursor-pointer"
           >
             {Object.keys(savedSetups).length === 0 ? (
