@@ -53,9 +53,12 @@ export const MEMBER_COLORS = {
 };
 
 export const GVG_ROLES = [
-  "Healer",
+  "Duelist",
+  "Sagittarius",
+  "Adventurer",
+  "Archmage",
+  "Mystic Muse",
+  "Soultaker",
+  "Cardinal",
   "Dominator",
-  "Damager",
-  "Main Assis",
-  "Second Assist",
 ];
