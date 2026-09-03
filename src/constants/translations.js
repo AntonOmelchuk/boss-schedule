@@ -559,14 +559,14 @@ export default {
     dashboardEpicPriority: "Епік",
     dashboardEpicHistory: "Історія епіків",
     dashboardGvgSetup: "Сетап GVG",
+    hideHeader: "Повноекранний режим (сховати все)",
+    showHeader: "Показати хедер та навігацію",
     intro: {
       skip: "Пропустити інтро ⏭",
       clickToEnter: "Клікніть, щоб увійти в світ",
       brotherhood: "Brotherhood established",
     },
     dashboard: {
-      hideHeader: "Приховати хедер та навігацію",
-      showHeader: "Показати хедер та навігацію",
       stats: {
         membersTitle: "Склад CP",
         membersUnit: "учасників",
@@ -1225,6 +1225,8 @@ export default {
     dashboardEpicPriority: "Epic",
     dashboardEpicHistory: "Epic History",
     dashboardGvgSetup: "GVG Setup",
+    hideHeader: "Fullscreen Mode (Hide All)",
+    showHeader: "Show Header & Nav",
 
     intro: {
       skip: "Skip Intro ⏭",
@@ -1232,8 +1234,6 @@ export default {
       brotherhood: "Brotherhood established",
     },
     dashboard: {
-      hideHeader: "Hide Header & Nav",
-      showHeader: "Show Header & Nav",
       stats: {
         membersTitle: "CP Members",
         membersUnit: "fighters",

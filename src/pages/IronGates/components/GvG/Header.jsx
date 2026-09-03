@@ -19,7 +19,7 @@ const Header = () => {
     savedSetups,
     currentSetupName,
   } = useGvGStore();
-  console.log("header: ", currentSetupName);
+
   const [newSetupName, setNewSetupName] = useState("");
   const [isCreating, setIsCreating] = useState(false);
 
@@ -59,7 +59,7 @@ const Header = () => {
           <p className="text-xs text-slate-400">{gvgPage.subtitle}</p>
         </div>
 
-        {/* Дропдаун вибору збережених сетапів */}
+        {/* Setups Dropdown */}
         <div className="flex gap-2">
           <select
             value={currentSetupName}
@@ -82,7 +82,7 @@ const Header = () => {
           </select>
         </div>
 
-        {/* Інпут / кнопка створення нового сетапу */}
+        {/* Create a new setup */}
         <div className="flex items-center gap-2">
           {isCreating ? (
             <div className="flex items-center gap-1">
@@ -109,7 +109,7 @@ const Header = () => {
               onClick={() => setIsCreating(true)}
               className="bg-indigo-600/20 hover:bg-indigo-600/30 border-indigo-500/40 text-indigo-300 text-xs"
             >
-              + New Setup
+              + {gvgPage.newButton}
             </Button>
           )}
         </div>
@@ -120,7 +120,7 @@ const Header = () => {
             onClick={handleReset}
             className="bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-slate-300 text-xs"
           >
-            Reset
+            {gvgPage.resetButton}
           </Button>
 
           <Button

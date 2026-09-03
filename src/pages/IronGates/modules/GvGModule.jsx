@@ -4,15 +4,17 @@ import { Background, ReactFlow } from "@xyflow/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useMemo } from "react";
 
+import useTranslation from "../../../hooks/useTranslation";
 import useGvGStore from "../../../store/useGvGStore";
 import Header from "../components/GvG/Header";
 import MemberCardNode from "../components/GvG/MemberCardNode";
 
 const GvGModule = ({ isGvGFullscreen, setIsGvGFullscreen }) => {
+  const { t } = useTranslation();
+
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } =
     useGvGStore();
 
-  // Реєструємо тільки ноди учасників
   const nodeTypes = useMemo(
     () => ({
       memberCard: MemberCardNode,
@@ -29,11 +31,7 @@ const GvGModule = ({ isGvGFullscreen, setIsGvGFullscreen }) => {
           text-slate-300 hover:text-amber-400 hover:border-amber-500/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]
             transition-all duration-300 flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
         >
-          <span>
-            {isGvGFullscreen
-              ? "Fullscreen Mode (Hide All)"
-              : "Show Interface & Nav"}
-          </span>
+          <span>{isGvGFullscreen ? t.hideHeader : t.showHeader}</span>
           {isGvGFullscreen ? (
             <ChevronUp size={14} />
           ) : (
@@ -63,9 +61,10 @@ const GvGModule = ({ isGvGFullscreen, setIsGvGFullscreen }) => {
           fitView
           minZoom={0.2}
           maxZoom={2}
-          className="bg-slate-950"
+          snapToGrid={true}
+          snapGrid={[20, 20]}
         >
-          <Background color="#1e293b" gap={24} size={1} />
+          <Background color="#1e293b" gap={20} size={3} />
         </ReactFlow>
       </div>
     </div>

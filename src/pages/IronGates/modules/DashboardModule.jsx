@@ -66,9 +66,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
           text-slate-300 hover:text-amber-400 hover:border-amber-500/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]
             transition-all duration-300 flex items-center gap-1.5 text-xs font-semibold cursor-pointer z-30"
         >
-          <span>
-            {isHeaderVisible ? dashboard.hideHeader : dashboard.showHeader}
-          </span>
+          <span>{isHeaderVisible ? t.hideHeader : t.showHeader}</span>
           {isHeaderVisible ? (
             <ChevronUp size={14} />
           ) : (
