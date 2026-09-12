@@ -27,7 +27,7 @@ const IGAnalyticsModule = () => {
         fetchAnalytics: state.fetchAnalytics,
       })),
     );
-  console.log("analyticsData: ", analyticsData);
+
   useEffect(() => {
     fetchAnalytics(null); // Load all-time by default
   }, [fetchAnalytics]);

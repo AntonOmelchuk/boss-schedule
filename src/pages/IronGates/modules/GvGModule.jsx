@@ -21,7 +21,7 @@ const GvGModule = ({ isGvGFullscreen, setIsGvGFullscreen }) => {
     }),
     [],
   );
-  console.log("nodes: ", nodes);
+
   return (
     <div className="h-full w-full text-white flex flex-col grow relative">
       <div className="absolute top-2 left-1/2 -translate-x-1/2 z-50">

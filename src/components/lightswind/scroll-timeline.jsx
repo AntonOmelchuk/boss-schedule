@@ -143,8 +143,21 @@ export const ScrollTimeline = ({
           : index * 0.3;
 
     const initialStates = {
-      fade: { opacity: 0, y: 20 },
+      fade: { opacity: 0, y: 40 },
       slide: {
+        x:
+          cardAlignment === "left"
+            ? -120
+            : cardAlignment === "right"
+              ? 120
+              : index % 2 === 0
+                ? -120
+                : 120,
+        opacity: 0,
+      },
+      scale: { scale: 0.8, opacity: 0 },
+      flip: { rotateY: 90, opacity: 0 },
+      slideScale: {
         x:
           cardAlignment === "left"
             ? -100
@@ -154,9 +167,8 @@ export const ScrollTimeline = ({
                 ? -100
                 : 100,
         opacity: 0,
+        scale: 0.75,
       },
-      scale: { scale: 0.8, opacity: 0 },
-      flip: { rotateY: 90, opacity: 0 },
       none: { opacity: 1 },
     };
 
@@ -169,12 +181,12 @@ export const ScrollTimeline = ({
         scale: 1,
         rotateY: 0,
         transition: {
-          duration: 0.7,
+          duration: 0.45,
           delay: baseDelay,
-          ease: [0.25, 0.1, 0.25, 1.0],
+          ease: [0.16, 1, 0.3, 1],
         },
       },
-      viewport: { once: false, margin: "-100px" },
+      viewport: { once: false, margin: "-80px" },
     };
   };
 
@@ -198,6 +210,18 @@ export const ScrollTimeline = ({
         return cn(baseClasses, widthStyle);
     }
   };
+
+  const activeEvent =
+    activeIndex >= 0 && activeIndex < events.length
+      ? events[activeIndex]
+      : null;
+  const activeMemberColors = activeEvent
+    ? MEMBER_COLORS[activeEvent.subtitle]
+    : null;
+
+  const progressGradient = activeMemberColors
+    ? `linear-gradient(to bottom, ${activeMemberColors.start}, ${activeMemberColors.end})`
+    : `linear-gradient(to bottom, #f59e0b, #fbbf24, #d97706)`;
 
   return (
     <div
@@ -225,14 +249,14 @@ export const ScrollTimeline = ({
           {progressIndicator && (
             <>
               <motion.div
-                className="absolute top-0 z-10"
+                className="absolute top-0 z-10 transition-colors duration-500"
                 style={{
                   height: progressHeight,
                   width: progressLineWidth,
                   left: "50%",
                   transform: "translateX(-50%)",
                   borderRadius: progressLineCap === "round" ? "9999px" : "0px",
-                  background: `linear-gradient(to bottom, #f59e0b, #fbbf24, #d97706)`,
+                  background: progressGradient,
                   boxShadow: `
                     0 0 15px rgba(245, 158, 11, 0.6),
                     0 0 25px rgba(251, 191, 36, 0.4)
@@ -290,13 +314,16 @@ export const ScrollTimeline = ({
                     background: `linear-gradient(135deg, ${memberColors.end}dd, rgba(9, 9, 11, 0.85))`,
                     borderColor: memberColors.start,
                   }
-                : {};
+                : {
+                    background: `linear-gradient(135deg, rgba(217, 119, 6, 0.2), rgba(9, 9, 11, 0.85))`,
+                    borderColor: "#f59e0b",
+                  };
 
               const alignmentClassesDesktop =
                 cardAlignment === "alternating"
                   ? index % 2 === 0
-                    ? "lg:mr-[calc(50%+25px)]"
-                    : "lg:ml-[calc(50%+25px)]"
+                    ? "lg:mr-[calc(50%+90px)]"
+                    : "lg:ml-[calc(50%+90px)]"
                   : cardAlignment === "left"
                     ? "lg:mr-auto lg:ml-0"
                     : "lg:ml-auto lg:mr-0";
@@ -308,7 +335,7 @@ export const ScrollTimeline = ({
                     timelineRefs.current[index] = el;
                   }}
                   className={cn(
-                    "relative flex items-center mb-28 py-4",
+                    "relative flex items-center mb-28 py-4 -translate-y-4",
                     "flex-col lg:flex-row",
                     cardAlignment === "alternating"
                       ? index % 2 === 0
@@ -363,7 +390,7 @@ export const ScrollTimeline = ({
 
                   <motion.div
                     className={cn(
-                      "relative z-30 rounded-2xl transition-all duration-300 backdrop-blur-md border shadow-2xl text-zinc-100 w-full lg:w-[calc(50%-45px)] mt-12 lg:mt-0",
+                      "relative z-30 rounded-2xl transition-all duration-300 backdrop-blur-md border shadow-2xl text-zinc-100 w-full lg:w-[calc(50%-55px)] mt-12 lg:mt-0",
                       cardEffect === "glow" &&
                         "hover:shadow-[0_0_30px_rgba(245,158,11,0.25)]",
                       alignmentClassesDesktop,
@@ -384,9 +411,7 @@ export const ScrollTimeline = ({
                           <div className="flex items-center">
                             {dateFormat === "badge" ? (
                               <div className="flex items-center">
-                                {event.icon || (
-                                  <Calendar className="h-5 w-5 mr-2 text-amber-400" />
-                                )}
+                                <Calendar className="h-5 w-5 mr-2 text-amber-400" />
                                 <span
                                   className={cn(
                                     "text-sm font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40",

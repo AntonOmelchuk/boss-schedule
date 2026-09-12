@@ -24,7 +24,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   const { t, language } = useTranslation();
 
   const { dashboard } = t;
-
+  console.log("data: ", data);
   useEffect(() => {
     fetchDashboardData();
   }, []);

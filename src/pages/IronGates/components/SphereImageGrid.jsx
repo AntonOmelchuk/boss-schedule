@@ -18,13 +18,12 @@ export default function SphereImageGrid({
   const animationFrameId = useRef(null);
   const isHovered = useRef(false);
 
-  // Обчислення стабільних координат точок на сфері за допомогою розподілу Фібоначчі
   const items = useMemo(() => {
     const count = images.length;
-    const phi = (1 + Math.sqrt(5)) / 2; // Золотий перетин
+    const phi = (1 + Math.sqrt(5)) / 2;
 
     return images.map((img, i) => {
-      const y = 1 - (i / (count - 1 || 1)) * 2; // від 1 до -1
+      const y = 1 - (i / (count - 1 || 1)) * 2;
       const radiusAtY = Math.sqrt(1 - y * y);
       const theta = (2 * Math.PI * i) / phi;
 
@@ -40,7 +39,6 @@ export default function SphereImageGrid({
     });
   }, [images, sphereRadius]);
 
-  // Анімація обертання та інерції
   useEffect(() => {
     const animate = () => {
       setRotation((prev) => {
@@ -55,7 +53,6 @@ export default function SphereImageGrid({
           velocityRef.current.x *= 0.85;
           velocityRef.current.y *= 0.85;
 
-          // Автообертання
           if (
             autoRotate &&
             !isHovered.current &&
@@ -120,19 +117,15 @@ export default function SphereImageGrid({
         isHovered.current = true;
       }}
     >
-      {/* Магічне світіння на фоні */}
       <div
         className="absolute inset-0
         bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.15)_0%,rgba(245,158,11,0.06)_40%,transparent_70%)]
         pointer-events-none rounded-full blur-xl"
       />
-
-      {/* 3D Контейнер із перспективою */}
       <div
         className="absolute inset-0 flex items-center justify-center"
         style={{ perspective: `${perspective}px` }}
       >
-        {/* Головний блок сфери, що обертається цілком */}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{
@@ -143,14 +136,13 @@ export default function SphereImageGrid({
           {items.map((item) => {
             const size = containerSize * baseImageScale;
 
-            // Розрахунок прозорості та z-index на основі координати Z для ефекту глибини
             const normalizedZ = (item.z + sphereRadius) / (sphereRadius * 2);
             const opacity = Math.max(0.3, normalizedZ);
             const zIndex = Math.round(item.z + sphereRadius);
 
             return (
               <div
-                key={item.id}
+                key={item.title}
                 className="absolute group cursor-pointer"
                 style={{
                   transformStyle: "preserve-3d",
@@ -162,7 +154,6 @@ export default function SphereImageGrid({
                   if (onImageClick) onImageClick(item);
                 }}
               >
-                {/* Компенсація повороту, щоб аватарки завжди дивилися обличчям до користувача */}
                 <div
                   className="transition-transform duration-75"
                   style={{
@@ -172,7 +163,7 @@ export default function SphereImageGrid({
                   }}
                 >
                   <div
-                    className="relative rounded-full p-[2px] bg-gradient-to-tr from-amber-500 via-purple-500
+                    className="relative rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-purple-500
                       to-indigo-500 shadow-[0_0_15px_rgba(245,158,11,0.3)]
                       group-hover:shadow-[0_0_25px_rgba(245,158,11,0.8)] group-hover:scale-110 transition-all"
                     style={{ width: size, height: size }}
@@ -184,7 +175,6 @@ export default function SphereImageGrid({
                         pointer-events-none"
                     />
 
-                    {/* Tooltip гравця */}
                     <div
                       className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 hidden group-hover:flex flex-col
                       items-center pointer-events-none z-50"
