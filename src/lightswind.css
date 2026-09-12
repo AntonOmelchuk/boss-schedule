@@ -12,10 +12,58 @@
    1. CSS Variables for Theming
    ========================================================================== */
 
+/* Light (default) theme variables */
+:root {
+  --primarylw: #173eff;
+  --primarylw-2: #3758f9;
+  --darklw: #11131b;
+  --darklw-2: #1a1d25;
+
+  /* HSL values for theme colors */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 0%;
+
+  --primary: 230 100% 55%;
+  --primary-foreground: #fff;
+
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 0%;
+
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 0%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 0%;
+
+  --radius: 0.5rem;
+  /* For rounded corners */
+
+  /* Scrollbar colors */
+  --scrollbar-thumb: 0 0% 75%;
+  --scrollbar-track: 0 0% 95%;
+  --scrollbar-hover: 0 0% 65%;
+
+  /* Custom named colors */
+  --greedy: #07eae6ff;
+}
+
 /* Dark theme variables */
 .dark {
-  --primarylw: #0ea5e9;
-  --primarylw-2: #38bdf8;
+  --primarylw: #173eff;
+  --primarylw-2: #3758f9;
   --darklw: #11131b;
   --darklw-2: #1a1d25;
 
@@ -77,6 +125,7 @@
 }
 
 @keyframes neon-bounce {
+
   0%,
   100% {
     transform: translateY(0);
@@ -196,6 +245,7 @@
 }
 
 @keyframes AnimatedCartBtnbox {
+
   0%,
   40% {
     top: -20%;
@@ -225,6 +275,7 @@
 }
 
 @keyframes AnimatedCartBtntxt2 {
+
   0%,
   80% {
     opacity: 0;
@@ -460,14 +511,11 @@ body {
   --border-angle: 0turn;
   background:
     conic-gradient(from var(--border-angle), #000, #000) padding-box,
-    conic-gradient(
-        from var(--border-angle),
-        transparent 25%,
-        #08f,
-        rgb(1, 206, 46) 99%,
-        transparent
-      )
-      border-box;
+    conic-gradient(from var(--border-angle),
+      transparent 25%,
+      #08f,
+      rgb(1, 206, 46) 99%,
+      transparent) border-box;
   animation: bg-spin 3s linear infinite;
   border: 1px solid transparent;
   background-origin: border-box;
@@ -951,6 +999,7 @@ body {
   width: 100%;
   font-size: 0.875rem;
 }
+
 
 /* Sidebar Menu Indicator */
 .sidebar-menu-indicator {

@@ -1,17 +1,13 @@
-import { clsx, type ClassValue } from "clsx";
+import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 // Utility function to merge class names with Tailwind
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
 // Utility function to format a number with currency
-export function formatCurrency(
-  amount: number,
-  currency = "USD",
-  options?: Omit<Intl.NumberFormatOptions, "style" | "currency">,
-) {
+export function formatCurrency(amount, currency = "USD", options) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -25,13 +21,13 @@ export function generateUniqueId(prefix = "id") {
 }
 
 // Utility function to truncate text
-export function truncateText(text: string, maxLength: number) {
+export function truncateText(text, maxLength) {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + "...";
 }
 
 // Utility function to format date
-export function formatDate(date: Date, options?: Intl.DateTimeFormatOptions) {
+export function formatDate(date, options) {
   return new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "short",
@@ -41,12 +37,9 @@ export function formatDate(date: Date, options?: Intl.DateTimeFormatOptions) {
 }
 
 // Utility function to debounce function calls
-export function debounce<T extends (...args: any[]) => void>(
-  func: T,
-  wait: number,
-) {
-  let timeout: ReturnType<typeof setTimeout> | null = null;
-  return function (...args: Parameters<T>) {
+export function debounce(func, wait) {
+  let timeout = null;
+  return function (...args) {
     const later = () => {
       timeout = null;
       func(...args);
@@ -59,12 +52,9 @@ export function debounce<T extends (...args: any[]) => void>(
 }
 
 // Utility function to throttle function calls
-export function throttle<T extends (...args: any[]) => void>(
-  func: T,
-  limit: number,
-) {
+export function throttle(func, limit) {
   let inThrottle = false;
-  return function (...args: Parameters<T>) {
+  return function (...args) {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
