@@ -19,7 +19,7 @@ const IronGatesPage = () => {
   });
 
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);

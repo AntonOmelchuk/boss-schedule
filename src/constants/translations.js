@@ -28,6 +28,8 @@ export default {
     todaysEventsOption: "Події на сьогодні",
     retry: "Спробувати ще",
     loadingPartyList: "Завантаження списку КП",
+    epicShare: "Розподіл Епіку",
+    epicShareSubtitle: "Скрольте, щоб переглянути хронологію",
 
     // Media Hub Translations
     media: {
@@ -703,6 +705,8 @@ export default {
     todaysEventsOption: "Today's Events",
     retry: "Retry",
     loadingPartyList: "Loading party list",
+    epicShare: "Epic Share",
+    epicShareSubtitle: "Scroll to explore the timeline",
 
     // Media Hub Translations
     media: {

@@ -6,10 +6,10 @@ import Button from "../../../components/UI/Button";
 import useTranslation from "../../../hooks/useTranslation";
 import { useIgAnalyticsStore } from "../../../store/useIgAnalyticsStore";
 import { getErrorMessage } from "../../../utils/general";
+import EpicShareScrollTimeLine from "../components/IGAnalytics/EpicShareScrollTimeLine";
 import IGAllianceActivityComboChart from "../components/IGAnalytics/IGAllianceActivityComboChart";
 import IGAttendanceRateMatrix from "../components/IGAnalytics/IGAttendanceRateMatrix";
 import IGMemberActivityChart from "../components/IGAnalytics/IGMemberActivityChart";
-import IGProgressLineChart from "../components/IGAnalytics/IGProgressLineChart";
 import IGStreakMatrix from "../components/IGAnalytics/IGStreakMatrix";
 import IGSummaryCards from "../components/IGAnalytics/IGSummaryCards";
 import DashboardSkeleton from "../skeletons/DashboardSkeleton";
@@ -27,7 +27,7 @@ const IGAnalyticsModule = () => {
         fetchAnalytics: state.fetchAnalytics,
       })),
     );
-
+  console.log("analyticsData: ", analyticsData);
   useEffect(() => {
     fetchAnalytics(null); // Load all-time by default
   }, [fetchAnalytics]);
@@ -95,8 +95,7 @@ const IGAnalyticsModule = () => {
           {/* Combo Chart (Activity & Moving Average) */}
           <IGAllianceActivityComboChart />
 
-          {/* Cumulative Progress Line Chart */}
-          <IGProgressLineChart />
+          <EpicShareScrollTimeLine events={analyticsData.epic_history} />
         </div>
       )}
     </div>

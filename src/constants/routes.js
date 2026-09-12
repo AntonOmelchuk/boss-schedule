@@ -233,14 +233,6 @@ export const DASHBOARD_NAV_CONFIG = [
     iconColor: "text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]",
   },
   {
-    id: DASHBOARD_TABS.EPIC,
-    titleKey: "dashboardEpicPriority",
-    icon: Target,
-    activeClass:
-      "bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.3)]",
-    iconColor: "text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]",
-  },
-  {
     id: DASHBOARD_TABS.GVG_SETUP,
     titleKey: "dashboardGvgSetup",
     icon: Swords,

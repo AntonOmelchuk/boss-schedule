@@ -32,22 +32,10 @@ const useAuthStore = create(
 
           const data = await response.json();
 
-          console.log("👉 [DEBUG FRONTEND] Data from Backend:", data);
-
           if (data.token) {
             const auth = getAuth();
 
-            console.log("👉 [DEBUG FRONTEND] Trying signInWithCustomToken...");
-
-            const userCredential = await signInWithCustomToken(
-              auth,
-              data.token,
-            );
-
-            console.log(
-              "✅ [DEBUG FRONTEND] Firebase Success! Current auth.uid = ",
-              userCredential.user.uid,
-            );
+            await signInWithCustomToken(auth, data.token);
           } else {
             console.error("❌ [DEBUG FRONTEND] No token in response!");
           }

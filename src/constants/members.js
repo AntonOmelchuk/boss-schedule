@@ -1,6 +1,6 @@
 export const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;
 
-// Mappint members with their avatars and roles
+// Mapping members with their avatars
 export const MEMBERS_MAP = {
   toBe: { name: "toBe", image: `${STORAGE_URL}/avatars/toBe.png` },
   LapestoPasto: {
