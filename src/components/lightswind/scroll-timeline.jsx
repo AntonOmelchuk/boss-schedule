@@ -4,8 +4,6 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import { cn } from "@/lib/utils";
-
 import antharasIcon from "../../assets/epic/antharas.png";
 import baiumIcon from "../../assets/epic/baium.png";
 import coreIcon from "../../assets/epic/core.png";
@@ -15,6 +13,7 @@ import qaIcon from "../../assets/epic/qa.png";
 import valakasIcon from "../../assets/epic/valakas.png";
 import zakenIcon from "../../assets/epic/zaken.png";
 import logo from "../../assets/logo.png";
+import { cn } from "../../lib/utils";
 import { Card, CardContent } from "./card";
 
 export const STORAGE_URL = import.meta.env.VITE_CLOUDFLARE_STORAGE;
