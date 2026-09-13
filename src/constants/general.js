@@ -208,3 +208,14 @@ export const EPIC_PRICES_GB = {
   Antharas: 110,
   Valakas: 200,
 };
+
+export const BOSS_ICONS = {
+  Antharas: antharasIcon,
+  Baium: baiumIcon,
+  Core: coreIcon,
+  Frintezza: frintezzaIcon,
+  Orfen: orfenIcon,
+  "Queen Ant": qaIcon,
+  Valakas: valakasIcon,
+  Zaken: zakenIcon,
+};
