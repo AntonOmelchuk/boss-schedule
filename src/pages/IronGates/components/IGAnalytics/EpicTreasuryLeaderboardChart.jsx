@@ -66,7 +66,6 @@ const EpicTreasuryLeaderboardChart = ({
   const [viewMode, setViewMode] = useState("table"); // 'table' | 'chart'
   const [activeMetric, setActiveMetric] = useState("net_balance"); // 'all_points' | 'spent_on_epics' | 'net_balance'
 
-  // Сортування по спаданню обраної метрики (за замовчуванням NET)
   const processedData = useMemo(() => {
     if (!membersAnalytics || membersAnalytics.length === 0) return [];
     const sorted = [...membersAnalytics].sort((a, b) => {
@@ -92,7 +91,6 @@ const EpicTreasuryLeaderboardChart = ({
       className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-md mb-8
       text-white space-y-6"
     >
-      {/* Шапка з перемикачами режиму та метрик */}
       <div
         className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-b
         border-white/10 pb-4"
@@ -144,7 +142,6 @@ const EpicTreasuryLeaderboardChart = ({
         </div>
       </div>
 
-      {/* РЕЖИМ 1: ТАБЛИЦЯ / ЛІДЕРБОРД ПО СПАДАННЮ NET */}
       {viewMode === "table" && (
         <div className="space-y-2.5">
           {sortedByNetForTable.map((member, idx) => {
@@ -158,7 +155,6 @@ const EpicTreasuryLeaderboardChart = ({
               ) || member.name;
             const avatar = MEMBERS_MAP[key]?.image;
 
-            // Отримуємо кольори для учасника
             const colorKey =
               Object.keys(MEMBER_COLORS).find(
                 (k) => k.toLowerCase() === member.name?.toLowerCase(),
@@ -190,7 +186,7 @@ const EpicTreasuryLeaderboardChart = ({
                     <img
                       src={avatar}
                       alt={member.name}
-                      className="w-16 h-16 rounded-lg object-cover shadow-sm"
+                      className="w-20 h-20 rounded-lg object-cover shadow-sm"
                       style={{ border: `2px solid ${colors.start}` }}
                     />
                   )}

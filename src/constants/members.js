@@ -34,6 +34,9 @@ export const MEMBERS_MAP = {
     name: "ZukaDaddy",
     image: `${STORAGE_URL}/avatars/ZukaDaddy.png`,
   },
+  "Iron Gates 2": {
+    name: "Iron Gates 2",
+  },
 };
 
 export const MEMBER_COLORS = {
