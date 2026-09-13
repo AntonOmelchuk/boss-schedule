@@ -26,6 +26,7 @@ const IGSummaryCards = ({ data }) => {
         colorClass="amber"
         footerValue={`${data.dominator_events_count} events`}
         footerHighlight={true}
+        countUpDecimals={1}
       />
 
       {/* Average Event Points Card */}
@@ -35,6 +36,7 @@ const IGSummaryCards = ({ data }) => {
         unit="pts"
         icon={Award}
         colorClass="emerald"
+        countUpDecimals={1}
       />
 
       {/* Full-party streak */}

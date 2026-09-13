@@ -7,7 +7,7 @@ import useTranslation from "../../../hooks/useTranslation";
 import { useIgAnalyticsStore } from "../../../store/useIgAnalyticsStore";
 import { getErrorMessage } from "../../../utils/general";
 import EpicShareScrollTimeLine from "../components/IGAnalytics/EpicShareScrollTimeLine";
-import IGAllianceActivityComboChart from "../components/IGAnalytics/IGAllianceActivityComboChart";
+import EpicTreasuryLeaderboardChart from "../components/IGAnalytics/EpicTreasuryLeaderboardChart";
 import IGAttendanceRateMatrix from "../components/IGAnalytics/IGAttendanceRateMatrix";
 import IGMemberActivityChart from "../components/IGAnalytics/IGMemberActivityChart";
 import IGStreakMatrix from "../components/IGAnalytics/IGStreakMatrix";
@@ -92,8 +92,10 @@ const IGAnalyticsModule = () => {
             <IGStreakMatrix />
           </div>
 
+          <EpicTreasuryLeaderboardChart />
+
           {/* Combo Chart (Activity & Moving Average) */}
-          <IGAllianceActivityComboChart />
+          {/* <IGAllianceActivityComboChart /> */}
 
           <EpicShareScrollTimeLine events={analyticsData.epic_history} />
         </div>

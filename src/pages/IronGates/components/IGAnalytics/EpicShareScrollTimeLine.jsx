@@ -12,7 +12,7 @@ const EpicShareScrollTimeLine = ({ events }) => {
       title={t.epicShare}
       progressIndicator={true}
       subtitle={t.epicShareSubtitle}
-      revealAnimation="slideScale"
+      revealAnimation="scale"
     />
   );
 };

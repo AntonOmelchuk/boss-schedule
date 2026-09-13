@@ -24,7 +24,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
   const { t, language } = useTranslation();
 
   const { dashboard } = t;
-  console.log("data: ", data);
+
   useEffect(() => {
     fetchDashboardData();
   }, []);
@@ -84,6 +84,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
           footerIcon={Calendar}
           footerLabel={dashboard.stats.eventsLabel}
           footerValue={cpStats.totalEvents}
+          countUpDuration={1}
         />
 
         <StatCard
@@ -95,6 +96,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
           footerLabel={dashboard.stats.attendanceLabel}
           footerValue={cpStats.avgAttendance}
           footerHighlight
+          countUpDuration={3}
         />
 
         <StatCard
@@ -105,6 +107,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
           colorClass="indigo"
           footerLabel={`${dashboard.stats.lastEpicLabel} ${cpStats.lastEpic.epic_name}`}
           footerValue={formatCustomDate(cpStats.lastEpic.date, language)}
+          countUpDuration={1}
         />
 
         <StatCard

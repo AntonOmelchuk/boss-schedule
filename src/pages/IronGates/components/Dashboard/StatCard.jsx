@@ -1,3 +1,4 @@
+import CountUp from "../../../../components/lightswind/count-up";
 import { cn } from "../../../../utils/general";
 
 const StatCard = ({
@@ -11,6 +12,8 @@ const StatCard = ({
   footerValue,
   footerHighlight = false,
   highlight = false,
+  countUpDuration = 3,
+  countUpDecimals = 0,
 }) => {
   const colors = {
     purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
@@ -18,6 +21,12 @@ const StatCard = ({
     indigo: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
     emerald: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
   };
+
+  const numericValue =
+    typeof value === "string" ? parseFloat(value.replace(/,/g, "")) : value;
+
+  const isNumeric =
+    !isNaN(numericValue) && value !== null && value !== undefined;
 
   return (
     <div
@@ -34,9 +43,22 @@ const StatCard = ({
           <p className="text-xl text-slate-400 uppercase font-semibold">
             {title}
           </p>
-          <h3 className="text-2xl font-bold text-white mt-1">
-            {value}{" "}
-            <span className="text-xl text-slate-400 font-normal">{unit}</span>
+          <h3 className="text-2xl font-bold text-white mt-1 flex items-baseline gap-1.5">
+            {isNumeric ? (
+              <CountUp
+                value={numericValue}
+                duration={countUpDuration}
+                decimals={countUpDecimals}
+                className="text-2xl font-bold text-white"
+                numberClassName="text-2xl font-bold text-white"
+                triggerOnView={true}
+              />
+            ) : (
+              <span>{value}</span>
+            )}
+            {unit && (
+              <span className="text-xl text-slate-400 font-normal">{unit}</span>
+            )}
           </h3>
         </div>
         <div

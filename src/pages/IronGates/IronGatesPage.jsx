@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 
-import { STORAGE_URL } from "../../constants/members";
 import { DASHBOARD_TABS } from "../../constants/routes";
 import Footer from "../../layouts/Footer/Footer";
 import Header from "./components/Dashboard/Header";
@@ -29,19 +28,6 @@ const IronGatesPage = () => {
     setActiveTab(tab);
     window.location.hash = tab;
   };
-
-  useEffect(() => {
-    audioRef.current = new Audio(`${STORAGE_URL}/audio/intro.mp3`);
-    audioRef.current.loop = false;
-    audioRef.current.volume = 0.72;
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -89,7 +75,12 @@ const IronGatesPage = () => {
   };
 
   if (showIntro) {
-    return <IntroSequence onFinish={() => handleIntroFinish()} />;
+    return (
+      <IntroSequence
+        onFinish={() => handleIntroFinish()}
+        skip={() => setShowIntro(false)}
+      />
+    );
   }
 
   return (

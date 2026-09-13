@@ -18,11 +18,11 @@ import IntroPlayerCard from "./components/IntroSequence/IntroPlayerCard";
 // ⏱️ TIME DELAY SETTIGNS IN MS
 // ==========================================
 const INTRO_TIMINGS = {
-  START_LOGO_ASSEMBLY: 4000, // Dealy before start showing logo
-  SHOW_TEXT_ANIMATION: 13500, // When main title appear
-  START_PRESENTING_MEMBERS: 20000, // Delay before auto scroll
+  START_LOGO_ASSEMBLY: 2550, // Delay before start showing logo
+  SHOW_TEXT_ANIMATION: 11000, // When main title appear
+  START_PRESENTING_MEMBERS: 16000, // Delay before auto scroll
   MEMBER_SCROLL_DELAY: 3500, // Time for showing each member card
-  FINAL_SQUAD_VIEW_TIME: 5000, // Delay before fade out
+  FINAL_SQUAD_VIEW_TIME: 4000, // Delay before fade out
   FADE_OUT_DURATION: 3000, // Fade out time
 };
 
@@ -167,7 +167,16 @@ const IntroSequence = ({ onFinish }) => {
     stage === STAGES.FADING_OUT;
 
   const videoSrc = `${STORAGE_URL}/fire.mp4`;
-  const audioSrc = `${STORAGE_URL}/audio/dion.mp3`;
+  // const audioSrc = `${STORAGE_URL}/audio/dion.mp3`;
+  const audioSrc = `${STORAGE_URL}/audio/intro.mp3`;
+
+  const handleInstantSkip = () => {
+    setStage(STAGES.FADING_OUT);
+    exitFullscreen();
+    setTimeout(() => {
+      if (onFinish) onFinish();
+    }, 900);
+  };
 
   return (
     <div
@@ -242,6 +251,16 @@ const IntroSequence = ({ onFinish }) => {
                 {t.intro.clickToEnter}
               </p>
             </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleInstantSkip();
+              }}
+              className="text-base text-slate-400 hover:text-amber-300 underline underline-offset-4
+                tracking-wider transition-colors cursor-pointer mt-1"
+            >
+              {t.intro.skipLink}
+            </button>
           </div>
         )}
 

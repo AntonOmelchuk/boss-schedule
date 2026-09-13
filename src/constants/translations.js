@@ -567,6 +567,7 @@ export default {
       skip: "Пропустити інтро ⏭",
       clickToEnter: "Клікніть, щоб увійти в світ",
       brotherhood: "Brotherhood established",
+      skipLink: "Пропустити Інтро",
     },
     dashboard: {
       stats: {
@@ -1236,6 +1237,7 @@ export default {
       skip: "Skip Intro ⏭",
       clickToEnter: "Click to enter the world",
       brotherhood: "Brotherhood established",
+      skipLink: "Skip Intro",
     },
     dashboard: {
       stats: {

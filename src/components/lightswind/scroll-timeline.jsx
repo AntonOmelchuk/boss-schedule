@@ -87,8 +87,8 @@ export const MEMBER_COLORS = {
 
 export const ScrollTimeline = ({
   events = [],
-  title = "Chronicles of Power",
-  subtitle = "Scroll to explore the epic journey",
+  title,
+  subtitle,
   animationOrder = "sequential",
   cardAlignment = "alternating",
   lineColor = "bg-zinc-800",
@@ -159,14 +159,14 @@ export const ScrollTimeline = ({
       slideScale: {
         x:
           cardAlignment === "left"
-            ? -100
+            ? -70
             : cardAlignment === "right"
-              ? 100
+              ? 70
               : index % 2 === 0
-                ? -100
-                : 100,
+                ? -70
+                : 70,
         opacity: 0,
-        scale: 0.75,
+        scale: 0.8,
       },
       none: { opacity: 1 },
     };
