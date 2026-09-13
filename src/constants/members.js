@@ -8,6 +8,7 @@ export const MEMBERS_MAP = {
     image: `${STORAGE_URL}/avatars/LapestoPasto.png`,
   },
   Fergi: { name: "Fergi", image: `${STORAGE_URL}/avatars/Fergi.png` },
+  FERGI: { name: "Fergi", image: `${STORAGE_URL}/avatars/Fergi.png` },
   Ansol: { name: "Ansol", image: `${STORAGE_URL}/avatars/Ansol.png` },
   MWQueen: { name: "MWQueen", image: `${STORAGE_URL}/avatars/MWQueen.png` },
   Manol: { name: "Manol", image: `${STORAGE_URL}/avatars/Manol.png` },

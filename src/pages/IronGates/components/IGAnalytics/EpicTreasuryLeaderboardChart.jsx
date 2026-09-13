@@ -13,18 +13,11 @@ import {
 } from "recharts";
 
 import { EPIC_COLORS } from "../../../../constants/general";
-import {
-  MEMBER_COLORS,
-  MEMBERS_MAP,
-  STORAGE_URL,
-} from "../../../../constants/members";
+import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/members";
 import useWindowSize from "../../../../hooks/useWindowSize";
 import { getBossIcon } from "../../../../utils/general";
 import { mockEpicsBalanceData } from "./EpicTreasureAndQueue";
-
-const firstPlace = `${STORAGE_URL}/badges/gold_badge.png`;
-const secondPlace = `${STORAGE_URL}/badges/silver_badge.png`;
-const thirdPlace = `${STORAGE_URL}/badges/bronze_badge.png`;
+import { CustomizedBarWithAvatar } from "./IGMemberActivityChart";
 
 const metricOptions = [
   { key: "net_balance", label: "NET" },
@@ -36,82 +29,6 @@ const viewOptions = [
   { mode: "table", label: "Leaderboard", icon: List },
   { mode: "chart", label: "Chart", icon: BarChart3 },
 ];
-
-const CustomizedBarWithAvatar = (props) => {
-  const { x, y, width, height, payload } = props;
-  const { name, rank } = payload;
-
-  const member =
-    MEMBERS_MAP[name] ||
-    MEMBERS_MAP[
-      Object.keys(MEMBERS_MAP).find(
-        (k) => k.toLowerCase() === name?.toLowerCase(),
-      )
-    ];
-  const avatarUrl = member ? member.image : null;
-  const avatarSize = 56;
-  const cx = x + width / 2;
-  const cy = y - avatarSize - 10;
-
-  let badgeUrl = null;
-  if (rank === 1) badgeUrl = firstPlace;
-  else if (rank === 2) badgeUrl = secondPlace;
-  else if (rank === 3) badgeUrl = thirdPlace;
-
-  const badgeSize = avatarSize * 1.4;
-  const gradientId = `ig-epic-gradient-${name}`;
-
-  const colors = MEMBER_COLORS[name] ||
-    MEMBER_COLORS[
-      Object.keys(MEMBER_COLORS).find(
-        (k) => k.toLowerCase() === name?.toLowerCase(),
-      )
-    ] || { start: "#334155", end: "#1e293b" };
-
-  return (
-    <g>
-      <defs>
-        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={colors.start} />
-          <stop offset="100%" stopColor={colors.end} />
-        </linearGradient>
-      </defs>
-      <path
-        d={`M ${x},${Math.max(y, 10) + height}
-            L ${x},${Math.max(y, 10) + 6}
-            Q ${x},${Math.max(y, 10)} ${x + 6},${Math.max(y, 10)}
-            L ${x + width - 6},${Math.max(y, 10)}
-            Q ${x + width},${Math.max(y, 10)} ${x + width},${Math.max(y, 10) + 6}
-            L ${x + width},${Math.max(y, 10) + height}
-            Z`}
-        fill={`url(#${gradientId})`}
-      />
-
-      {badgeUrl && (
-        <image
-          x={cx - badgeSize / 2}
-          y={(cy > 0 ? cy : 5) - (badgeSize - avatarSize) / 2}
-          width={badgeSize}
-          height={badgeSize}
-          href={badgeUrl}
-          style={{ pointerEvents: "none", zIndex: 1 }}
-        />
-      )}
-
-      {avatarUrl && (
-        <image
-          x={cx - avatarSize / 2}
-          y={cy > 0 ? cy : 5}
-          width={avatarSize}
-          height={avatarSize}
-          href={avatarUrl}
-          clipPath="circle(50% at 50% 50%)"
-          className="object-cover z-10"
-        />
-      )}
-    </g>
-  );
-};
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -356,7 +273,6 @@ const EpicTreasuryLeaderboardChart = ({
         </div>
       )}
 
-      {/* РЕЖИМ 2: ГРАФІК З АВАТАРКАМИ (по аналогії з твоїм IGMemberActivityChart) */}
       {viewMode === "chart" && (
         <div
           className="w-full"
@@ -375,7 +291,7 @@ const EpicTreasuryLeaderboardChart = ({
               <XAxis
                 dataKey="name"
                 stroke="#fff"
-                fontSize={15}
+                fontSize={18}
                 fontWeight="700"
                 interval={0}
                 tickLine={false}
@@ -384,7 +300,7 @@ const EpicTreasuryLeaderboardChart = ({
               />
               <YAxis
                 stroke="#94a3b8"
-                fontSize={15}
+                fontSize={18}
                 domain={["auto", "dataMax + 20"]}
                 tickLine={false}
               />
@@ -394,7 +310,7 @@ const EpicTreasuryLeaderboardChart = ({
 
               <Bar
                 dataKey="score"
-                barSize={Math.max(windowWidth / 35, 24)}
+                barSize={windowWidth / 25}
                 shape={<CustomizedBarWithAvatar />}
               />
             </BarChart>

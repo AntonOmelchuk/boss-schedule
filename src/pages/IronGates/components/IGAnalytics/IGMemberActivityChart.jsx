@@ -23,7 +23,7 @@ const secondPlace = `${STORAGE_URL}/badges/silver_badge.png`;
 const thirdPlace = `${STORAGE_URL}/badges/bronze_badge.png`;
 
 // Reusable Customized Bar with Avatar & Badges
-const CustomizedBarWithAvatar = (props) => {
+export const CustomizedBarWithAvatar = (props) => {
   const { x, y, width, height, payload } = props;
   const { name, rank } = payload;
 
