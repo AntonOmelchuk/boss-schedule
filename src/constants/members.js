@@ -17,8 +17,12 @@ export const MEMBERS_MAP = {
     image: `${STORAGE_URL}/avatars/ManiacFiona.png`,
   },
   ManiacJerry: {
-    name: "ManiacJerry",
-    image: `${STORAGE_URL}/avatars/ManiacJerry.png`,
+    name: "ManiacConan",
+    image: `${STORAGE_URL}/avatars/ManiacConan.png`,
+  },
+  ManiacConan: {
+    name: "ManiacConan",
+    image: `${STORAGE_URL}/avatars/ManiacConan.png`,
   },
   ManiacShrek: {
     name: "ManiacShrek",
@@ -48,6 +52,7 @@ export const MEMBER_COLORS = {
   ManiacFiona: { start: "#84cc16", end: "#14532d" },
   ZukaDaddy: { start: "#7c3aed", end: "#1e1b4b" },
   ManiacJerry: { start: "#10b981", end: "#047857" },
+  ManiacConan: { start: "#10b981", end: "#eab308" },
   ManiacShrek: { start: "#1e3a8a", end: "#0f172a" },
   LapestoPasto: { start: "#dc2626", end: "#18181b" },
   Spektra: { start: "#065f46", end: "#022c22" },

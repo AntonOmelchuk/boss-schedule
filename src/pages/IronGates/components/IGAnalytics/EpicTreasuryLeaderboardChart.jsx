@@ -16,7 +16,6 @@ import { EPIC_COLORS } from "../../../../constants/general";
 import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/members";
 import useWindowSize from "../../../../hooks/useWindowSize";
 import { getBossIcon } from "../../../../utils/general";
-import { mockEpicsBalanceData } from "./EpicTreasureAndQueue";
 import { CustomizedBarWithAvatar } from "./IGMemberActivityChart";
 
 const metricOptions = [
@@ -59,9 +58,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const EpicTreasuryLeaderboardChart = ({
-  membersAnalytics = mockEpicsBalanceData,
-}) => {
+const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
   const [windowWidth, windowHeight] = useWindowSize();
   const [viewMode, setViewMode] = useState("table"); // 'table' | 'chart'
   const [activeMetric, setActiveMetric] = useState("net_balance"); // 'all_points' | 'spent_on_epics' | 'net_balance'

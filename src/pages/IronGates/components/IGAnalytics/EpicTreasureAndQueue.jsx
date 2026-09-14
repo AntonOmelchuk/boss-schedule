@@ -3,73 +3,7 @@ import { EPIC_COLORS } from "../../../../constants/general";
 import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/members";
 import { getBossIcon } from "../../../../utils/general";
 
-export const mockEpicsBalanceData = [
-  {
-    name: "FERGI",
-    net_balance: 60.9,
-    spent_on_epics: 65,
-    all_points: 125.9,
-    epics_received: [{ epic_name: "Orfen" }, { epic_name: "Zaken" }],
-  },
-  {
-    name: "ManiacJerry",
-    net_balance: 40.9,
-    spent_on_epics: 0,
-    all_points: 40.9,
-    epics_received: [],
-  },
-  {
-    name: "Spektra",
-    net_balance: 103.0,
-    spent_on_epics: 50,
-    all_points: 153.0,
-    epics_received: [{ epic_name: "Zaken" }],
-  },
-  {
-    name: "toBe",
-    net_balance: 99.4,
-    spent_on_epics: 50,
-    all_points: 149.4,
-    epics_received: [{ epic_name: "Zaken" }],
-  },
-  {
-    name: "Vryo",
-    net_balance: -148.4,
-    spent_on_epics: 300,
-    all_points: 151.6,
-    epics_received: [{ epic_name: "Valakas" }],
-  },
-  {
-    name: "ManiacShrek",
-    net_balance: 107.8,
-    spent_on_epics: 0,
-    all_points: 107.8,
-    epics_received: [],
-  },
-  {
-    name: "ZukaDaddy",
-    net_balance: 87.4,
-    spent_on_epics: 0,
-    all_points: 87.4,
-    epics_received: [],
-  },
-  {
-    name: "MWQueen",
-    net_balance: 49.4,
-    spent_on_epics: 0,
-    all_points: 49.4,
-    epics_received: [],
-  },
-  {
-    name: "ManiacFiona",
-    net_balance: 26.8,
-    spent_on_epics: 0,
-    all_points: 26.8,
-    epics_received: [],
-  },
-];
-
-const EpicTreasuryAndQueue = ({ membersData = mockEpicsBalanceData }) => {
+const EpicTreasuryAndQueue = ({ membersData }) => {
   const sortedByContribution = [...membersData].sort(
     (a, b) => b.all_points - a.all_points,
   );

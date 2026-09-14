@@ -27,7 +27,6 @@ const IGAnalyticsModule = () => {
         fetchAnalytics: state.fetchAnalytics,
       })),
     );
-
   useEffect(() => {
     fetchAnalytics(null); // Load all-time by default
   }, [fetchAnalytics]);
@@ -92,7 +91,9 @@ const IGAnalyticsModule = () => {
             <IGStreakMatrix />
           </div>
 
-          <EpicTreasuryLeaderboardChart />
+          <EpicTreasuryLeaderboardChart
+            membersAnalytics={analyticsData.epics_balance}
+          />
 
           {/* Combo Chart (Activity & Moving Average) */}
           {/* <IGAllianceActivityComboChart /> */}

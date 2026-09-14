@@ -223,6 +223,46 @@ export default {
     },
 
     // Admin Panel Translations
+    membersAdmin: {
+      title: "Управління учасниками",
+      subtitle:
+        "Додавання, редагування та видалення профільних даних членів клану.",
+      addBtn: "Додати учасника",
+      searchPlaceholder: "Пошук за ім'ям, класом або КП...",
+      total: "Всього",
+      table: {
+        member: "Учасник",
+        cpClan: "КП / Клан",
+        classes: "Класи (Main / Play)",
+        pvp: "PvP",
+        actions: "Дії",
+      },
+      modal: {
+        editTitle: "Редагувати учасника",
+        createTitle: "Додати нового учасника",
+        cancel: "Скасувати",
+        save: "Зберегти",
+      },
+      fields: {
+        name: "Ім'я (Нікнейм)",
+        cp: "Номер КП",
+        mainClass: "Основний клас",
+        playClass: "Ігровий клас",
+        clan: "Клан",
+        role: "Роль у клані / паті",
+        pvp: "PvP лічильник",
+        img: "Посилання на аватарку (img URL)",
+        subClasses: "Сабкласи (через кому)",
+        gvgClasses: "GVG класи (через кому)",
+        epicGot: "Епіки отримані (epic.got)",
+        epicAll: "Епіки всі (epic.all)",
+      },
+      noData: "Учасників не знайдено",
+      successSave: "Дані учасника оновлено!",
+      successCreate: "Успішно додано нового учасника!",
+      successDelete: "Учасника видалено.",
+      confirmDelete: "Ви впевнені, що хочете видалити учасника",
+    },
     admin: {
       title: "Адмін-панель Альянсу",
       subtitle:
@@ -234,6 +274,8 @@ export default {
       tabTimers: "Таймери / Респаун",
       tabPrimeTime: "Прайм Тайм",
       tabHoldings: "Володіння",
+      igMembers: "Iron Gates КП",
+      updatePvp: "Оновити PVP",
       noAccess: "У вас немає доступу до адмін-панелі",
 
       users: {
@@ -257,6 +299,27 @@ export default {
         noUsersFound: "Гравців за вашим запитом не знайдено",
         prevPage: "Назад",
         nextPage: "Вперед",
+      },
+      pvpBatchAdmin: {
+        title: "Швидке оновлення PvP",
+        subtitle:
+          "Змініть значення в інпутах поруч із потрібними гравцями та натисніть кнопку збереження.",
+        saveBtn: "Зберегти всі зміни",
+        saving: "Збереження...",
+        filterCp: "Фільтр КП:",
+        allCp: "Всі КП",
+        noChanges: "Немає змін для збереження",
+        success: "Показники PvP успішно оновлено для всіх!",
+        error: "Помилка при масовому оновленні PvP",
+        total: "Всього",
+        table: {
+          member: "Учасник",
+          cpClan: "КП / Клан",
+          mainClass: "Основний клас",
+          currentPvp: "Поточне PvP (База)",
+          newPvp: "Нове PvP (Ввести тут)",
+        },
+        noData: "Учасників не знайдено",
       },
       primeTime: {
         title: "Налаштування Prime Time",
@@ -895,6 +958,45 @@ export default {
     },
 
     // Admin Panel Translations
+    membersAdmin: {
+      title: "Members Management",
+      subtitle: "Add, edit, and delete clan member profile data.",
+      addBtn: "Add Member",
+      searchPlaceholder: "Search by name, class, or CP...",
+      total: "Total",
+      table: {
+        member: "Member",
+        cpClan: "CP / Clan",
+        classes: "Classes (Main / Play)",
+        pvp: "PvP",
+        actions: "Actions",
+      },
+      modal: {
+        editTitle: "Edit Member",
+        createTitle: "Add New Member",
+        cancel: "Cancel",
+        save: "Save",
+      },
+      fields: {
+        name: "Name (Nickname)",
+        cp: "CP Number",
+        mainClass: "Main Class",
+        playClass: "Play Class",
+        clan: "Clan",
+        role: "Role in Clan / Party",
+        pvp: "PvP Counter",
+        img: "Avatar Link (img URL)",
+        subClasses: "Subclasses (comma separated)",
+        gvgClasses: "GVG Classes (comma separated)",
+        epicGot: "Epics Got (epic.got)",
+        epicAll: "Epics All (epic.all)",
+      },
+      noData: "No members found",
+      successSave: "Member data updated!",
+      successCreate: "New member added successfully!",
+      successDelete: "Member deleted.",
+      confirmDelete: "Are you sure you want to delete member",
+    },
     admin: {
       title: "Alliance Admin Panel",
       subtitle: "Roster management, presence checks, and system settings",
@@ -905,6 +1007,8 @@ export default {
       tabTimers: "Timers / Respawn",
       tabPrimeTime: "Prime Time",
       tabHoldings: "Holdings",
+      igMembers: "Iron Gates CP",
+      updatePvp: "Update PVP",
       noAccess: "You do not have access to the admin panel",
       users: {
         searchPlaceholder: "Search by character, CP, Discord user or ID...",
@@ -927,6 +1031,27 @@ export default {
         noUsersFound: "No players found matching your query",
         prevPage: "Prev",
         nextPage: "Next",
+      },
+      pvpBatchAdmin: {
+        title: "Quick PvP Update",
+        subtitle:
+          "Change the values in the inputs next to the required players and click the save button.",
+        saveBtn: "Save All Changes",
+        saving: "Saving...",
+        filterCp: "CP Filter:",
+        allCp: "All CPs",
+        noChanges: "No changes to save",
+        success: "PvP stats successfully updated for everyone!",
+        error: "Error during mass PvP update",
+        total: "Total",
+        table: {
+          member: "Member",
+          cpClan: "CP / Clan",
+          mainClass: "Main Class",
+          currentPvp: "Current PvP (Base)",
+          newPvp: "New PvP (Enter here)",
+        },
+        noData: "No members found",
       },
       primeTime: {
         title: "Prime Time Settings",

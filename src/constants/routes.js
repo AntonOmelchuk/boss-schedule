@@ -194,6 +194,8 @@ export const ADMIN_TAB_KEYS = {
   USERS: "users",
   CPS: "cps",
   TIMERS: "timers",
+  IG_MEMBERS: "igmembers",
+  PVP: "pvp",
   SYSTEM: "system",
 };
 

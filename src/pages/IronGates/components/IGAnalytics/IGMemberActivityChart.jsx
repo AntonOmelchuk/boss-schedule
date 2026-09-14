@@ -153,7 +153,7 @@ const IGMemberActivityChart = ({ membersAnalytics }) => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={processedData}
-            margin={{ top: 125, right: 10, left: -20, bottom: 35 }}
+            margin={{ top: 125, right: 10, left: -20, bottom: 40 }}
           >
             <CartesianGrid
               strokeDasharray="3 3"
