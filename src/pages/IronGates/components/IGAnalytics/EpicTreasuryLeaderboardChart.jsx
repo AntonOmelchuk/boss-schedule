@@ -1,22 +1,11 @@
 /* eslint-disable max-len */
 import { BarChart3, List } from "lucide-react";
-import { useMemo } from "react";
-import { useState } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { useMemo, useState } from "react";
 
+import BaseBarChart from "../../../../components/IGBaseBarChart/BaseBarChart";
 import { EPIC_COLORS } from "../../../../constants/general";
 import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/members";
-import useWindowSize from "../../../../hooks/useWindowSize";
 import { getBossIcon } from "../../../../utils/general";
-import { CustomizedBarWithAvatar } from "./IGMemberActivityChart";
 
 const metricOptions = [
   { key: "net_balance", label: "NET" },
@@ -59,7 +48,6 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
-  const [windowWidth, windowHeight] = useWindowSize();
   const [viewMode, setViewMode] = useState("table"); // 'table' | 'chart'
   const [activeMetric, setActiveMetric] = useState("net_balance"); // 'all_points' | 'spent_on_epics' | 'net_balance'
 
@@ -267,48 +255,13 @@ const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
       )}
 
       {viewMode === "chart" && (
-        <div
-          className="w-full"
-          style={{ height: Math.max(windowHeight / 1.7, 400) }}
-        >
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={processedData}
-              margin={{ top: 100, right: 15, left: -10, bottom: 40 }}
-            >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="#1e293b"
-                vertical={false}
-              />
-              <XAxis
-                dataKey="name"
-                stroke="#fff"
-                fontSize={18}
-                fontWeight="700"
-                interval={0}
-                tickLine={false}
-                angle={-25}
-                textAnchor="end"
-              />
-              <YAxis
-                stroke="#94a3b8"
-                fontSize={18}
-                domain={["auto", "dataMax + 20"]}
-                tickLine={false}
-              />
-              <Tooltip
-                content={<CustomTooltip activeMetric={activeMetric} />}
-              />
-
-              <Bar
-                dataKey="score"
-                barSize={windowWidth / 25}
-                shape={<CustomizedBarWithAvatar />}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <BaseBarChart
+          data={processedData}
+          customTooltip={<CustomTooltip />}
+          yAxisDomain={["auto", "dataMax + 20"]}
+          margin={{ top: 100, right: 15, left: -10, bottom: 40 }}
+          hideWrapperBackground={true}
+        />
       )}
     </div>
   );
