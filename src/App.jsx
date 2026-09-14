@@ -152,7 +152,14 @@ function App() {
               }
             />
             <Route path="/statistics" element={<StatsDashboard />} />
-            <Route path="/iron-gates" element={<IronGatesPage />} />
+            <Route
+              path="/iron-gates"
+              element={
+                <DesktopOnlyGuard redirectTo="/">
+                  <IronGatesPage />
+                </DesktopOnlyGuard>
+              }
+            />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/alliance/proof" element={<AfkProofPage />} />
             <Route path="/alliance/loot" element={<LootRandomizerPage />} />
