@@ -29,28 +29,30 @@ const IGSummaryCards = ({ data }) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {/* Killing Machine Card */}
       <StatCard
         title={t.igAnalytics.killingMachineLabel}
         value={topPvpMember?.name ?? "—"}
         icon={Swords}
         colorClass="indigo"
-        footerValue={
-          topPvpMember
-            ? `${topPvpMember.pvp} ${t.igAnalytics.topPvpUnit}`
-            : undefined
-        }
+        footerValue={topPvpMember?.pvp}
+        footerUnit={topPvpMember ? t.igAnalytics.topPvpUnit : undefined}
         footerHighlight
       />
 
       {/* Dominator Events Pct Card */}
       <StatCard
         title={t.igAnalytics.dominatorPctLabel}
-        value={`${data.dominator_pct}%`}
+        value={data.dominator_pct}
+        unit="%"
+        unitClassName="text-2xl font-bold text-white"
         icon={Crown}
         colorClass="amber"
-        footerValue={`${data.dominator_events_count} events`}
+        footerValue={data.dominator_events_count}
+        footerUnit="events"
         footerHighlight={true}
         countUpDecimals={1}
+        footerCountUpDecimals={0}
       />
 
       {/* Average Event Points Card */}
@@ -67,6 +69,7 @@ const IGSummaryCards = ({ data }) => {
       <StatCard
         title={t.igAnalytics.fullPartyStreakLabel}
         value={data.max_full_party_streak}
+        unit="events"
         icon={UserCheck}
         colorClass="purple"
       />

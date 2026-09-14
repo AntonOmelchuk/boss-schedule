@@ -5,15 +5,18 @@ const StatCard = ({
   title,
   value,
   unit,
+  unitClassName,
   icon: Icon,
   colorClass = "purple",
   footerIcon: FooterIcon,
   footerLabel,
   footerValue,
+  footerUnit,
   footerHighlight = false,
   highlight = false,
   countUpDuration = 3,
   countUpDecimals = 0,
+  footerCountUpDecimals = 0,
 }) => {
   const colors = {
     purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
@@ -26,7 +29,27 @@ const StatCard = ({
     typeof value === "string" ? parseFloat(value.replace(/,/g, "")) : value;
 
   const isNumeric =
-    !isNaN(numericValue) && value !== null && value !== undefined;
+    typeof numericValue === "number" &&
+    !isNaN(numericValue) &&
+    value !== null &&
+    value !== undefined &&
+    typeof value !== "boolean";
+
+  const numericFooterValue =
+    typeof footerValue === "string"
+      ? parseFloat(footerValue.replace(/,/g, ""))
+      : footerValue;
+
+  const isFooterNumeric =
+    typeof numericFooterValue === "number" &&
+    !isNaN(numericFooterValue) &&
+    footerValue !== null &&
+    footerValue !== undefined &&
+    typeof footerValue !== "boolean";
+
+  const footerTextStyle = footerHighlight
+    ? "text-amber-400 font-bold"
+    : "text-slate-500";
 
   return (
     <div
@@ -57,7 +80,14 @@ const StatCard = ({
               <span>{value}</span>
             )}
             {unit && (
-              <span className="text-xl text-slate-400 font-normal">{unit}</span>
+              <span
+                className={cn(
+                  "text-xl text-slate-400 font-normal",
+                  unitClassName,
+                )}
+              >
+                {unit}
+              </span>
             )}
           </h3>
         </div>
@@ -71,22 +101,29 @@ const StatCard = ({
         </div>
       </div>
 
-      {/* Футер картки */}
-      {(footerLabel || footerValue) && (
+      {(footerLabel || footerValue !== undefined || footerUnit) && (
         <div className="mt-3 text-xl text-slate-400 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             {FooterIcon && <FooterIcon className="w-9 h-9 text-amber-400" />}
-            <span>{footerLabel}</span>
+            {footerLabel && <span>{footerLabel}</span>}
           </div>
-          {footerValue && (
-            <span
-              className={cn(
-                footerHighlight ? "text-amber-400 font-bold" : "text-slate-500",
+          {(footerValue !== undefined && footerValue !== null) || footerUnit ? (
+            <div className={cn("flex items-baseline gap-1", footerTextStyle)}>
+              {isFooterNumeric ? (
+                <CountUp
+                  value={numericFooterValue}
+                  duration={countUpDuration}
+                  decimals={footerCountUpDecimals}
+                  className={footerTextStyle}
+                  numberClassName={footerTextStyle}
+                  triggerOnView={true}
+                />
+              ) : (
+                <span>{footerValue}</span>
               )}
-            >
-              {footerValue}
-            </span>
-          )}
+              {footerUnit && <span>{footerUnit}</span>}
+            </div>
+          ) : null}
         </div>
       )}
     </div>
