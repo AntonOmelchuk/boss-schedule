@@ -26,7 +26,6 @@ const IntroPlayerCard = ({
   return (
     <div
       ref={(el) => (memberRefs.current[index] = el)}
-      // ДОДАНО: overflow-hidden - гарантує, що рух по X не ламає ширину сторінки і не викликає стрибків
       className="h-screen w-full flex items-center justify-center px-6 snap-start bg-gradient-to-b
         from-black via-zinc-950 to-black z-50 overflow-hidden"
     >

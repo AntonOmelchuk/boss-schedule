@@ -10,6 +10,7 @@ import EpicShareScrollTimeLine from "../components/IGAnalytics/EpicShareScrollTi
 import EpicTreasuryLeaderboardChart from "../components/IGAnalytics/EpicTreasuryLeaderboardChart";
 import IGAttendanceRateMatrix from "../components/IGAnalytics/IGAttendanceRateMatrix";
 import IGMemberActivityChart from "../components/IGAnalytics/IGMemberActivityChart";
+import IGMemberPvpChart from "../components/IGAnalytics/IGMemberPvpChart";
 import IGStreakMatrix from "../components/IGAnalytics/IGStreakMatrix";
 import IGSummaryCards from "../components/IGAnalytics/IGSummaryCards";
 import DashboardSkeleton from "../skeletons/DashboardSkeleton";
@@ -90,6 +91,8 @@ const IGAnalyticsModule = () => {
             <IGAttendanceRateMatrix />
             <IGStreakMatrix />
           </div>
+
+          <IGMemberPvpChart />
 
           <EpicTreasuryLeaderboardChart
             membersAnalytics={analyticsData.epics_balance}

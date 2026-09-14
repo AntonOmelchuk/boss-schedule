@@ -97,7 +97,7 @@ const BaseBarChart = ({
   yAxisDomain = [0, "dataMax + 2"],
   xAxisAngle = 0,
   containerHeight,
-  margin = { top: 125, right: 10, left: -20, bottom: 25 },
+  margin = { top: 125, right: 0, left: 0, bottom: 25 },
 }) => {
   const [windowWidth, windowHeight] = useWindowSize();
 

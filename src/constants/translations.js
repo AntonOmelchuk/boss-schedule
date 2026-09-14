@@ -704,6 +704,8 @@ export default {
 
       // Зведені картки (Summary Cards)
       totalEventsLabel: "Всього івентів",
+      killingMachineLabel: "Killing Machine",
+      topPvpUnit: "PvP",
       dominatorPctLabel: "Відсоток Dominator",
       avgPointsLabel: "Сер. балів за івент",
       activeMembersLabel: "Склад учасників",
@@ -712,6 +714,9 @@ export default {
       // Основний графік активності та тултіпи
       activityChartTitle: "Відвідуваність та активність учасників КП",
       activityChartSubtitle: "Ефективність учасників",
+      pvpChartTitle: "Рейтинг PvP",
+      pvpChartSubtitle: "Поточні лічильники PvP",
+      pvpChartTooltipLabel: "PvP",
       attendedEvents: "Відвідав",
       attendanceRate: "Відсоток відвідуваності",
       maxStreak: "Макс. серія",
@@ -1438,6 +1443,8 @@ export default {
 
       // Summary cards
       totalEventsLabel: "Total Events",
+      killingMachineLabel: "Killing Machine",
+      topPvpUnit: "PvP",
       dominatorPctLabel: "Dominator Rate",
       avgPointsLabel: "Avg Event Points",
       activeMembersLabel: "Roster Members",
@@ -1446,6 +1453,9 @@ export default {
       // Member activity chart & tooltips
       activityChartTitle: "CP Member Attendance & Activity",
       activityChartSubtitle: "Roster Performance",
+      pvpChartTitle: "PvP Leaderboard",
+      pvpChartSubtitle: "Current PvP counters",
+      pvpChartTooltipLabel: "PvP",
       attendedEvents: "Attended",
       attendanceRate: "Attendance Rate",
       maxStreak: "Max Streak",
