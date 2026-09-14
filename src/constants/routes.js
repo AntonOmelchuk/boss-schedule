@@ -204,7 +204,6 @@ export const DASHBOARD_TABS = {
   SUMMARY: "summary",
   MEMBERS: "members",
   ACTIVITY: "activity",
-  EPIC: "epic",
   EPIC_HISTORY: "epic_history",
   GVG_SETUP: "gvg_setup",
 };

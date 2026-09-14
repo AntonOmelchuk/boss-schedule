@@ -167,7 +167,6 @@ const IntroSequence = ({ onFinish }) => {
     stage === STAGES.FADING_OUT;
 
   const videoSrc = `${STORAGE_URL}/fire.mp4`;
-  // const audioSrc = `${STORAGE_URL}/audio/dion.mp3`;
   const audioSrc = `${STORAGE_URL}/audio/intro.mp3`;
 
   const handleInstantSkip = () => {

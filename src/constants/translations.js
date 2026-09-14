@@ -30,6 +30,8 @@ export default {
     loadingPartyList: "Завантаження списку КП",
     epicShare: "Розподіл Епіку",
     epicShareSubtitle: "Скрольте, щоб переглянути хронологію",
+    replayIntro: "Переглянути Iнтро",
+    backToMain: "Назад на головну",
 
     // Media Hub Translations
     media: {
@@ -618,7 +620,7 @@ export default {
     // ===================
     // IRON GATES
     // ===================
-    dashboardSummary: "Головна зведення",
+    dashboardSummary: "Головний дашборд",
     dashboardMembers: "Учасники",
     dashboardActivity: "Активність",
     dashboardEpicPriority: "Епік",
@@ -771,6 +773,8 @@ export default {
     loadingPartyList: "Loading party list",
     epicShare: "Epic Share",
     epicShareSubtitle: "Scroll to explore the timeline",
+    replayIntro: "Replay Intro",
+    backToMain: "Back to main",
 
     // Media Hub Translations
     media: {

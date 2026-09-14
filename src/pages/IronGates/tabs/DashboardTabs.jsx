@@ -1,8 +1,12 @@
 /* eslint-disable indent */
+import { Home, Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 import {
   DASHBOARD_NAV_CONFIG,
   DASHBOARD_TABS,
 } from "../../../constants/routes";
+import { useIntroShown } from "../../../hooks/useIntroShown";
 import useTranslation from "../../../hooks/useTranslation";
 import { cn } from "../../../utils/general";
 
@@ -44,9 +48,22 @@ const TAB_THEMES = {
 
 const DashboardNav = ({ activeTab, onTabChange }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { resetIntro } = useIntroShown();
 
   return (
     <div className="flex justify-center z-50 relative px-4">
+      <button
+        onClick={() => navigate("/")}
+        className={cn(
+          "group relative flex items-center justify-center p-2 rounded-xl text-slate-400",
+          "hover:text-amber-300 hover:bg-amber-500/10 border border-transparent hover:border-amber-500/30",
+          "transition-all duration-300 cursor-pointer",
+        )}
+        title={t.backToMain}
+      >
+        <Home className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+      </button>
       <nav
         className="flex items-center gap-1.5 p-2 rounded-2xl bg-slate-900/80 backdrop-blur-md border
         border-slate-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-slate-700"
@@ -102,6 +119,16 @@ const DashboardNav = ({ activeTab, onTabChange }) => {
           );
         })}
       </nav>
+
+      <button
+        onClick={resetIntro}
+        className="group relative flex items-center justify-center p-2 rounded-xl text-slate-400
+        hover:text-amber-300 hover:bg-amber-500/10 border border-transparent hover:border-amber-500/30
+          transition-all duration-300 cursor-pointer"
+        title={t.replayIntro}
+      >
+        <Play className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+      </button>
     </div>
   );
 };
