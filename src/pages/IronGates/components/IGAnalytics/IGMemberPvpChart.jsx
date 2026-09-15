@@ -32,14 +32,25 @@ const IGMemberPvpChart = () => {
   const processedData = useMemo(() => {
     if (!members?.length) return [];
 
-    return [...members]
-      .filter((member) => member.pvp > 100)
-      .map((member, index) => ({
-        name: member.name,
-        pvp: Number(member.pvp) || 0,
-        rank: index + 1,
-        score: Number(member.pvp) || 0,
-      }));
+    const filtered = members.filter((member) => Number(member.pvp) > 100);
+
+    const sorted = [...filtered].sort(
+      (a, b) => (Number(b.pvp) || 0) - (Number(a.pvp) || 0),
+    );
+
+    const rankMap = new Map();
+    sorted.forEach((member, index) => {
+      if (!rankMap.has(member.name)) {
+        rankMap.set(member.name, index + 1);
+      }
+    });
+
+    return filtered.map((member) => ({
+      name: member.name,
+      pvp: Number(member.pvp) || 0,
+      rank: rankMap.get(member.name) || 0,
+      score: Number(member.pvp) || 0,
+    }));
   }, [members]);
 
   if (processedData.length === 0) return null;
