@@ -7,7 +7,6 @@ const IntroPlayerCard = ({
   img,
   pvp,
   name,
-  clan,
   video,
   index,
   memberRefs,
@@ -28,26 +27,28 @@ const IntroPlayerCard = ({
   return (
     <div
       ref={(el) => (memberRefs.current[index] = el)}
-      className="h-screen w-full flex items-center justify-center px-4 sm:px-6 snap-start bg-gradient-to-b
-        from-black via-zinc-950 to-black z-50 overflow-hidden"
+      className="h-screen w-full flex items-center justify-center px-4 sm:px-6 snap-start
+        bg-transparent z-50 overflow-hidden"
     >
       <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         onViewportEnter={handleViewportEnter}
         viewport={{ once: false, amount: 0.4 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-xl w-full transform-gpu [backface-visibility:hidden]"
       >
-        <div
-          style={{
-            borderColor: `${theme.startColor}80`,
-            boxShadow: `0 0 100px ${theme.startColor}40`,
-          }}
-          className="relative w-full rounded-3xl border-2 bg-slate-950 overflow-hidden group shadow-2xl"
-        >
-          {/* Контейнер у форматі 1:1 (Квадрат) під пропорції відео */}
-          <div className="relative w-full aspect-square max-h-[75vh] bg-black">
+        <div className="relative w-full aspect-square max-h-[75vh] flex items-center justify-center">
+          {/* М'яке фонове сяйво кольором теми персонажа позаду відео */}
+          <div
+            style={{
+              background: `radial-gradient(circle, ${theme.startColor}30 0%, transparent 70%)`,
+            }}
+            className="absolute inset-0 scale-125 pointer-events-none blur-3xl opacity-70"
+          />
+
+          {/* Контейнер відео */}
+          <div className="relative w-full h-full overflow-hidden rounded-3xl">
             {video ? (
               <video
                 ref={videoRef}
@@ -67,43 +68,27 @@ const IntroPlayerCard = ({
               />
             )}
 
+            <div className="absolute inset-0 shadow-[inset_0_0_30px_5px_#000000] pointer-events-none" />
             <div
-              className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent
-              to-transparent pointer-events-none"
+              className="absolute inset-0 bg-gradient-to-t from-black/60
+              via-transparent to-black/30 pointer-events-none"
             />
-            <div
-              className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent
-              to-transparent pointer-events-none"
-            />
-
-            <div className="absolute top-5 left-5 right-5 flex items-center justify-between z-10">
+            <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10">
               <span
                 style={{
                   backgroundColor: `${theme.startColor}25`,
-                  borderColor: `${theme.startColor}80`,
                   color: theme.startColor,
                 }}
-                className="px-4 py-1.5 border rounded-full text-xs font-black uppercase
-                  tracking-widest backdrop-blur-md"
+                className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-md"
               >
                 PvP: {pvp}
               </span>
-
-              {clan && (
-                <span
-                  className="px-3 py-1 bg-black/60 border border-slate-700/80 rounded-full text-xs
-                text-slate-300 font-medium backdrop-blur-md"
-                >
-                  {clan}
-                </span>
-              )}
             </div>
 
-            {/* Нижня інформація: Класи та CP */}
-            <div className="absolute bottom-5 left-5 right-5 z-10 space-y-2">
+            <div className="absolute bottom-6 left-6 right-6 z-10 space-y-2">
               <div className="flex flex-wrap items-center gap-3">
                 <span
-                  className="text-xl sm:text-2xl font-extrabold tracking-wide drop-shadow-md"
+                  className="text-xl sm:text-2xl font-extrabold tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
                   style={{ color: theme.startColor }}
                 >
                   {main_class}
@@ -115,8 +100,7 @@ const IntroPlayerCard = ({
                   {sub_classes.map((sub, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-0.5 bg-black/50 border border-slate-700/60 rounded-md text-slate-300
-                        text-xs font-medium backdrop-blur-sm"
+                      className="px-2.5 py-1 bg-black/50 rounded-md text-slate-300 text-xs font-medium backdrop-blur-sm"
                     >
                       {sub}
                     </span>
