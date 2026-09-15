@@ -17,6 +17,7 @@ const StatCard = ({
   countUpDuration = 3,
   countUpDecimals = 0,
   footerCountUpDecimals = 0,
+  preventCountUp = false,
 }) => {
   const colors = {
     purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
@@ -109,7 +110,7 @@ const StatCard = ({
           </div>
           {(footerValue !== undefined && footerValue !== null) || footerUnit ? (
             <div className={cn("flex items-baseline gap-1", footerTextStyle)}>
-              {isFooterNumeric ? (
+              {isFooterNumeric && !preventCountUp ? (
                 <CountUp
                   value={numericFooterValue}
                   duration={countUpDuration}
