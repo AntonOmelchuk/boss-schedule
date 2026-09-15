@@ -45,6 +45,7 @@ const MemberModule = () => {
 
   const {
     img,
+    video,
     name,
     main_class,
     play_class,
@@ -91,6 +92,7 @@ const MemberModule = () => {
           x={mousePos.x}
           y={mousePos.y}
           image={img}
+          video={video}
           name={name}
           role={role}
           mainClass={main_class}

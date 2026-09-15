@@ -10,6 +10,7 @@ const MemberCard = ({
   name,
   role,
   image,
+  video, // 👈 Додали проп
   playClass,
   mainClass,
   subClasses = [],
@@ -21,7 +22,6 @@ const MemberCard = ({
 }) => {
   const theme = getMemberTheme(name);
   const { t } = useTranslation();
-
   const { memberCard } = t;
 
   return (
@@ -36,7 +36,12 @@ const MemberCard = ({
         className="bg-slate-950/85 border-2 rounded-3xl p-6 lg:p-8
           backdrop-blur-2xl grid grid-cols-1 md:grid-cols-12 gap-6 items-start transition-all duration-500"
       >
-        <ParallaxAvatar image={image} playClass={playClass} name={name} />
+        <ParallaxAvatar
+          image={image}
+          video={video} // 👈 Передаємо дальше
+          playClass={playClass}
+          name={name}
+        />
 
         <div className="md:col-span-7 space-y-4">
           <div className="flex justify-between items-center">
