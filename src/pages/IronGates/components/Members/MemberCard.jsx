@@ -10,7 +10,7 @@ const MemberCard = ({
   name,
   role,
   image,
-  video, // 👈 Додали проп
+  video,
   playClass,
   mainClass,
   subClasses = [],
