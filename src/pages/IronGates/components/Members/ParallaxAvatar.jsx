@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import "./MemberCard.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Tilt from "react-parallax-tilt";
 
 import { getCustomRingColors, getMemberTheme } from "../../../../utils/members";
@@ -12,28 +12,17 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
   const ringColors = getCustomRingColors(name, theme);
 
   const [isVideoLoading, setIsVideoLoading] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
-  const videoRef = useRef(null);
 
   useEffect(() => {
     if (video) {
       setIsVideoLoading(true);
-      setIsMuted(false);
     }
-  }, [video]);
-
-  const handleVideoEnded = () => {
-    if (videoRef.current) {
-      setIsMuted(true);
-      videoRef.current.muted = true;
-      videoRef.current.play();
-    }
-  };
+  }, [video, name]);
 
   return (
     <div
       className="md:col-span-5 relative flex justify-center items-center group py-4 rounded-2xl
-        border-2 p-2 z-10 cursor-pointer overflow-visible transition-all duration-500 min-h-[300px]"
+        border-2 p-2 z-10 cursor-pointer overflow-visible transition-all duration-500 min-h-75"
       style={{
         borderColor: `${theme.startColor}99`,
         boxShadow: `0 0 40px ${theme.startColor}4D`,
@@ -74,7 +63,7 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
             <>
               {isVideoLoading && (
                 <div
-                  className="absolute z-40 inset-0 m-auto w-12 h-12 flex items-center justify-center"
+                  className="absolute z-40 inset-0 m-auto w-full h-full flex items-center justify-center"
                   style={{ transform: "translateZ(30px)" }}
                 >
                   <div
@@ -88,13 +77,11 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
               )}
 
               <video
-                ref={videoRef}
                 key={video}
                 autoPlay
-                muted={isMuted}
+                muted
                 playsInline
-                onCanPlay={() => setIsVideoLoading(false)}
-                onEnded={handleVideoEnded}
+                onCanPlayThrough={() => setIsVideoLoading(false)}
                 className={`absoulute w-full h-full object-cover rounded-xl drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]
                   transition-opacity duration-300 ${
                     isVideoLoading ? "opacity-0" : "opacity-100"
