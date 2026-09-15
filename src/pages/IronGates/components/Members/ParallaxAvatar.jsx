@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import "./MemberCard.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Tilt from "react-parallax-tilt";
 
 import { getCustomRingColors, getMemberTheme } from "../../../../utils/members";
@@ -12,12 +12,23 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
   const ringColors = getCustomRingColors(name, theme);
 
   const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (video) {
       setIsVideoLoading(true);
+      setIsMuted(false);
     }
   }, [video]);
+
+  const handleVideoEnded = () => {
+    if (videoRef.current) {
+      setIsMuted(true);
+      videoRef.current.muted = true;
+      videoRef.current.play();
+    }
+  };
 
   return (
     <div
@@ -41,7 +52,7 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
             <>
               <div
                 className="absolute z-50 inset-0 m-auto w-[108%] h-[108%] rounded-full border-2 border-dashed
-            animate-[spin_45s_linear_infinite] pointer-events-none"
+                  animate-[spin_45s_linear_infinite] pointer-events-none"
                 style={{
                   borderColor: ringColors.innerColor,
                   boxShadow: `0 0 20px ${ringColors.innerColor}10`,
@@ -77,12 +88,13 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
               )}
 
               <video
+                ref={videoRef}
                 key={video}
                 autoPlay
-                loop
-                muted
+                muted={isMuted}
                 playsInline
                 onCanPlay={() => setIsVideoLoading(false)}
+                onEnded={handleVideoEnded} // 👈 Хендлер перезапуску без звуку
                 className={`w-full h-full object-cover rounded-xl drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]
                   transition-opacity duration-300 ${
                     isVideoLoading ? "opacity-0" : "opacity-100"
