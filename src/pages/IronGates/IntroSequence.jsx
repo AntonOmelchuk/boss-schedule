@@ -316,17 +316,8 @@ const IntroSequence = ({ onFinish }) => {
       {/* Section with members */}
       <div className="z-35">
         {members?.map((member, index) => {
-          const {
-            img,
-            pvp,
-            name,
-            video,
-            in_clan,
-            main_class,
-            role,
-            sub_classes,
-            cp_number,
-          } = member;
+          const { img, pvp, name, video, main_class, role, sub_classes } =
+            member;
 
           return (
             <IntroPlayerCard
@@ -337,8 +328,6 @@ const IntroSequence = ({ onFinish }) => {
               role={role}
               index={index}
               video={video}
-              clan={in_clan}
-              cp_number={cp_number}
               main_class={main_class}
               memberRefs={memberRefs}
               sub_classes={sub_classes}
