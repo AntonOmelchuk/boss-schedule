@@ -320,6 +320,7 @@ const IntroSequence = ({ onFinish }) => {
             img,
             pvp,
             name,
+            video,
             in_clan,
             main_class,
             role,
@@ -327,18 +328,16 @@ const IntroSequence = ({ onFinish }) => {
             cp_number,
           } = member;
 
-          const isLeft = index % 2 === 0;
-
           return (
             <IntroPlayerCard
               pvp={pvp}
-              key={name}
               img={img}
-              clan={in_clan}
+              key={name}
               name={name}
               role={role}
               index={index}
-              isLeft={isLeft}
+              video={video}
+              clan={in_clan}
               cp_number={cp_number}
               main_class={main_class}
               memberRefs={memberRefs}

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { DASHBOARD_TABS } from "../../constants/routes";
-import { useIntroShown } from "../../hooks/useIntroShown";
+// import { useIntroShown } from "../../hooks/useIntroShown";
 import Footer from "../../layouts/Footer/Footer";
 import Header from "./components/Dashboard/Header";
 import IntroSequence from "./IntroSequence";
@@ -13,9 +13,9 @@ import MemberModule from "./modules/MembersModule";
 import DashboardNav from "./tabs/DashboardTabs";
 
 const IronGatesPage = () => {
-  const { hasSeenIntro, markIntroAsSeen } = useIntroShown();
+  // const { hasSeenIntro, markIntroAsSeen } = useIntroShown();
 
-  const [showIntro, setShowIntro] = useState(!hasSeenIntro);
+  const [showIntro, setShowIntro] = useState(true);
 
   const [activeTab, setActiveTab] = useState(() => {
     const hash = window.location.hash.replace("#", "");
@@ -45,7 +45,7 @@ const IronGatesPage = () => {
   }, []);
 
   const handleFinish = () => {
-    markIntroAsSeen();
+    // markIntroAsSeen();
     setShowIntro(false);
     if (audioRef.current) {
       audioRef.current.play();
