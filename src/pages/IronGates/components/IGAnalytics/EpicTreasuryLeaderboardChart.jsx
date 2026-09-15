@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import BaseBarChart from "../../../../components/IGBaseBarChart/BaseBarChart";
 import { EPIC_COLORS } from "../../../../constants/general";
 import { MEMBER_COLORS, MEMBERS_MAP } from "../../../../constants/members";
+import useTranslation from "../../../../hooks/useTranslation";
 import { getBossIcon } from "../../../../utils/general";
 
 const metricOptions = [
@@ -48,6 +49,8 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
+  const { t } = useTranslation();
+
   const [viewMode, setViewMode] = useState("table"); // 'table' | 'chart'
   const [activeMetric, setActiveMetric] = useState("net_balance"); // 'all_points' | 'spent_on_epics' | 'net_balance'
 
@@ -85,7 +88,7 @@ const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
             Epic Treasury & Priority Rank
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">
-            Рейтинг учасників за поточним балансом
+            {t.rankByCurrentBalance}
           </p>
         </div>
 
@@ -193,7 +196,6 @@ const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
                   </div>
                 </div>
 
-                {/* Епіки бейджі */}
                 <div className="flex flex-wrap gap-1.5 w-full sm:w-1/3">
                   {member.epics_received && member.epics_received.length > 0 ? (
                     member.epics_received.map((epic, i) => {
@@ -257,6 +259,7 @@ const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
       {viewMode === "chart" && (
         <BaseBarChart
           data={processedData}
+          title="Epic Treasury & Priority Rank"
           customTooltip={<CustomTooltip />}
           yAxisDomain={["auto", "dataMax + 20"]}
           margin={{ top: 100, right: 15, left: -10, bottom: 40 }}

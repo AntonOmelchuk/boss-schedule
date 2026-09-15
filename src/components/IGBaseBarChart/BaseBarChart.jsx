@@ -110,7 +110,7 @@ const BaseBarChart = ({
       {(title || subtitle) && (
         <div className="flex items-center justify-between mb-6">
           {title && (
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+            <h2 className="text-xl font-black text-amber-400 tracking-[0.15em] uppercase">
               {title}
             </h2>
           )}
