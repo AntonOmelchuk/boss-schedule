@@ -15,7 +15,7 @@ import {
   Wrench,
 } from "lucide-react";
 
-import { cn } from "../utils/general";
+// import { cn } from "../utils/general";
 
 // Main Navigation
 export const NAV_ITEMS = {
@@ -173,20 +173,20 @@ export const NAV_CONFIG = [
     indicatorGradient: "from-emerald-500 via-teal-400 to-green-300",
     indicatorShadow: "shadow-[0_-2px_10px_rgba(16,185,129,0.7)]",
   },
-  {
-    id: NAV_ITEMS.IRON_GATES,
-    path: "/iron-gates",
-    titleKey: "navIronGates",
-    icon: Shield,
-    hideOnMobile: true,
-    activeClass: cn(
-      "bg-gradient-to-r from-amber-500/30 via-yellow-500/20 to-amber-600/30 text-amber-300 border-2",
-      "border-amber-400/80 shadow-[0_0_20px_rgba(245,158,11,0.5)] animate-pulse",
-    ),
-    mobileActiveClass: "text-amber-300 font-bold",
-    indicatorGradient: "from-amber-400 via-yellow-300 to-amber-500",
-    indicatorShadow: "shadow-[0_-2px_15px_rgba(245,158,11,0.9)]",
-  },
+  // {
+  //   id: NAV_ITEMS.IRON_GATES,
+  //   path: "/iron-gates",
+  //   titleKey: "navIronGates",
+  //   icon: Shield,
+  //   hideOnMobile: true,
+  //   activeClass: cn(
+  //     "bg-gradient-to-r from-amber-500/30 via-yellow-500/20 to-amber-600/30 text-amber-300 border-2",
+  //     "border-amber-400/80 shadow-[0_0_20px_rgba(245,158,11,0.5)] animate-pulse",
+  //   ),
+  //   mobileActiveClass: "text-amber-300 font-bold",
+  //   indicatorGradient: "from-amber-400 via-yellow-300 to-amber-500",
+  //   indicatorShadow: "shadow-[0_-2px_15px_rgba(245,158,11,0.9)]",
+  // },
 ];
 
 export const ADMIN_TAB_KEYS = {
