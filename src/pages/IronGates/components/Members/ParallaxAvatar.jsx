@@ -80,6 +80,7 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
                 key={video}
                 autoPlay
                 muted
+                loop
                 playsInline
                 onCanPlayThrough={() => setIsVideoLoading(false)}
                 className={`absoulute w-full h-full object-cover rounded-xl drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]
