@@ -1,3 +1,5 @@
+import "@xyflow/react/dist/style.css";
+
 import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -12,6 +14,7 @@ import AdminPage from "./pages/AdminPage/AdminPage";
 import AfkProofPage from "./pages/AfkProofPage/AfkProofPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import CpManagementPage from "./pages/CpManagement/CpManagementPage";
+import IronGatesPage from "./pages/IronGates/IronGatesPage";
 import LootRandomizerPage from "./pages/LootRandomizer/LootRandomizerPage";
 import MainPage from "./pages/MainPage/MainPage";
 import MediaPage from "./pages/Media/MediaPage";
@@ -149,6 +152,14 @@ function App() {
               }
             />
             <Route path="/statistics" element={<StatsDashboard />} />
+            <Route
+              path="/iron-gates"
+              element={
+                <DesktopOnlyGuard redirectTo="/">
+                  <IronGatesPage />
+                </DesktopOnlyGuard>
+              }
+            />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/alliance/proof" element={<AfkProofPage />} />
             <Route path="/alliance/loot" element={<LootRandomizerPage />} />

@@ -28,6 +28,10 @@ export default {
     todaysEventsOption: "Події на сьогодні",
     retry: "Спробувати ще",
     loadingPartyList: "Завантаження списку КП",
+    epicShare: "Розподіл Епіку",
+    epicShareSubtitle: "Скрольте, щоб переглянути хронологію",
+    replayIntro: "Переглянути Iнтро",
+    backToMain: "Назад на головну",
 
     // Media Hub Translations
     media: {
@@ -126,6 +130,7 @@ export default {
     navStatistics: "Статистика",
     navDkpPoints: "DKP Очки",
     navEpicStats: "Епік Стата",
+    navIronGates: "Iron Gates",
     navLoot: "Лут",
     navAlliance: "Аллі Утиліти",
     navLootRandomizer: "Рандомайзер луту",
@@ -134,6 +139,7 @@ export default {
 
     active: "Активний",
     loadingAllianceAnalytics: "Завантаження аналітики альянсу...",
+    loadingIGAnalytics: "Завантаження аналітики Iron Gates...",
 
     loot: {
       navLoot: "Лут",
@@ -219,6 +225,46 @@ export default {
     },
 
     // Admin Panel Translations
+    membersAdmin: {
+      title: "Управління учасниками",
+      subtitle:
+        "Додавання, редагування та видалення профільних даних членів клану.",
+      addBtn: "Додати учасника",
+      searchPlaceholder: "Пошук за ім'ям, класом або КП...",
+      total: "Всього",
+      table: {
+        member: "Учасник",
+        cpClan: "КП / Клан",
+        classes: "Класи (Main / Play)",
+        pvp: "PvP",
+        actions: "Дії",
+      },
+      modal: {
+        editTitle: "Редагувати учасника",
+        createTitle: "Додати нового учасника",
+        cancel: "Скасувати",
+        save: "Зберегти",
+      },
+      fields: {
+        name: "Ім'я (Нікнейм)",
+        cp: "Номер КП",
+        mainClass: "Основний клас",
+        playClass: "Ігровий клас",
+        clan: "Клан",
+        role: "Роль у клані / паті",
+        pvp: "PvP лічильник",
+        img: "Посилання на аватарку (img URL)",
+        subClasses: "Сабкласи (через кому)",
+        gvgClasses: "GVG класи (через кому)",
+        epicGot: "Епіки отримані (epic.got)",
+        epicAll: "Епіки всі (epic.all)",
+      },
+      noData: "Учасників не знайдено",
+      successSave: "Дані учасника оновлено!",
+      successCreate: "Успішно додано нового учасника!",
+      successDelete: "Учасника видалено.",
+      confirmDelete: "Ви впевнені, що хочете видалити учасника",
+    },
     admin: {
       title: "Адмін-панель Альянсу",
       subtitle:
@@ -230,6 +276,8 @@ export default {
       tabTimers: "Таймери / Респаун",
       tabPrimeTime: "Прайм Тайм",
       tabHoldings: "Володіння",
+      igMembers: "Iron Gates КП",
+      updatePvp: "Оновити PVP",
       noAccess: "У вас немає доступу до адмін-панелі",
 
       users: {
@@ -253,6 +301,27 @@ export default {
         noUsersFound: "Гравців за вашим запитом не знайдено",
         prevPage: "Назад",
         nextPage: "Вперед",
+      },
+      pvpBatchAdmin: {
+        title: "Швидке оновлення PvP",
+        subtitle:
+          "Змініть значення в інпутах поруч із потрібними гравцями та натисніть кнопку збереження.",
+        saveBtn: "Зберегти всі зміни",
+        saving: "Збереження...",
+        filterCp: "Фільтр КП:",
+        allCp: "Всі КП",
+        noChanges: "Немає змін для збереження",
+        success: "Показники PvP успішно оновлено для всіх!",
+        error: "Помилка при масовому оновленні PvP",
+        total: "Всього",
+        table: {
+          member: "Учасник",
+          cpClan: "КП / Клан",
+          mainClass: "Основний клас",
+          currentPvp: "Поточне PvP (База)",
+          newPvp: "Нове PvP (Ввести тут)",
+        },
+        noData: "Учасників не знайдено",
       },
       primeTime: {
         title: "Налаштування Prime Time",
@@ -548,6 +617,138 @@ export default {
       crossTableTitle: "Сітка результатів (Крос-таблиця)",
       crossTableLegend: "W - Перемога / L - Поразка / D - Нічия",
     },
+    // ===================
+    // IRON GATES
+    // ===================
+    dashboardSummary: "Головний дашборд",
+    dashboardMembers: "Учасники",
+    dashboardActivity: "Активність",
+    dashboardEpicPriority: "Епік",
+    dashboardEpicHistory: "Історія епіків",
+    dashboardGvgSetup: "Сетап GVG",
+    hideHeader: "Повноекранний режим (сховати все)",
+    showHeader: "Показати хедер та навігацію",
+    intro: {
+      skip: "Пропустити інтро ⏭",
+      clickToEnter: "Клікніть, щоб увійти в світ",
+      brotherhood: "Brotherhood established",
+      skipLink: "Пропустити Інтро",
+    },
+    dashboard: {
+      stats: {
+        membersTitle: "Склад CP",
+        membersUnit: "учасників",
+        eventsLabel: "Всього подій:",
+        pointsTitle: "Сумарні очки CP",
+        pointsUnit: "балів",
+        attendanceLabel: "Відвідуваність (сер.):",
+        epicsTitle: "Отримано Епіків",
+        epicsUnit: "епіків",
+        lastEpicLabel: "Останній:",
+        lastEventTitle: "Останній івент",
+        pointsPerEventLabel: "Балів за івент:",
+        pvp: "PvP:",
+        mainClass: "Головний Клас",
+        subClasses: "Саб-класи",
+        cp: "КП:",
+        clan: "Клан:",
+      },
+      chart: {
+        title: "Рейтинг активності гравців (Останні 30 подій)",
+        subtitle: "Графік відвідуваності",
+        visitedEvents: "Відвідано івентів:",
+      },
+    },
+    memberCard: {
+      mainClass: "Основний клас",
+      gvgClass: "GvG клас",
+      role: "Роль",
+      subClasses: "Саб-класи",
+      balance: "Баланс",
+      allPoints: "Всі поінти",
+      epic: "Епік",
+    },
+    errors: {
+      failedToLoad: "⚠️ Не вдалося завантажити дані",
+      defaultTitle: "Не вдалося завантажити дані дашборду",
+      retry: "Повторити",
+    },
+
+    gvgPage: {
+      title: "Тактична дошка GvG",
+      subtitle: "Розстановка та пріоритети цілей на мас-пвх",
+      saveButton: "Зберегти",
+      resetButton: "Скинути",
+      newButton: "Новий сетап",
+      setupNamePlaceholder: "Назва сетапу...",
+      savedSuccess: "Збережено успішно!",
+      addEnemy: "+ Додати ціль",
+      targetDefault: "Таргет",
+      roles: {
+        healer: "Сапорт",
+        dd: "Дамагер",
+        dominator: "Овер/Домінатор",
+      },
+      inputs: {
+        dod: "DoD слот",
+        ma: "Main Assist",
+        assist2: "2nd Assist",
+      },
+    },
+    // Додай цей об'єкт у свій файл перекладів для української мови (наприклад, uk.js)
+    igAnalytics: {
+      pageTitle: "Аналітика КП Iron Gates",
+      filter7Days: "Останні 7 днів",
+      filter30Days: "Останні 30 днів",
+      filterAll: "За весь час",
+
+      // Зведені картки (Summary Cards)
+      totalEventsLabel: "Всього івентів",
+      killingMachineLabel: "Killing Machine",
+      topPvpUnit: "PvP",
+      dominatorPctLabel: "Відсоток Dominator",
+      avgPointsLabel: "Сер. балів за івент",
+      activeMembersLabel: "Склад учасників",
+      fullPartyStreakLabel: "Фул паті streak",
+
+      // Основний графік активності та тултіпи
+      activityChartTitle: "Відвідуваність та активність учасників КП",
+      activityChartSubtitle: "Ефективність учасників",
+      pvpChartTitle: "Рейтинг PvP",
+      pvpChartSubtitle: "Поточні лічильники PvP",
+      pvpChartTooltipLabel: "PvP",
+      attendedEvents: "Відвідав",
+      attendanceRate: "Відсоток відвідуваності",
+      maxStreak: "Макс. серія",
+
+      // Матриця відсотків відвідуваності
+      attendanceRateTitle: "Рейтинг за відсотком відвідуваності",
+      attendanceRateSubtitle:
+        "Ранжування учасників на основі відсотка відвіданих івентів",
+      eventOne: "івент",
+      eventsMany: "івентів",
+
+      // Матриця серій (Streaks)
+      streakTitle: "Максимальна серія відвідувань",
+      streakSubtitle: "Найдовші безперервні серії відвідувань поспіль",
+      streakEventsUnit: "streak", // або "іюнів" / "івентів поспіль"
+
+      // Комбо-графік (Alliance Activity Combo Chart)
+      comboChartTitle: "Актуальна активність КП та ковзне середнє",
+      comboChartBadge: "Порівняльний бенчмарк",
+      comboChartSubtitle:
+        "Зелені стовпчики означають результати вище бенчмарку ковзного середнього за 5 івентів.",
+      barName: "Загальний бал",
+      lineName: "Ковзне середнє",
+
+      // Графік накопичення прогресу
+      progressChartTitle: "Накопичувальний прогрес з часом",
+      progressChartNote:
+        "Відстеження накопичення балів у динаміці за івентами.",
+      selectAll: "Вибрати всі",
+      deselectAll: "Зняти всі",
+      filterMembersLabel: "Фільтрація учасників складу",
+    },
   },
   [LANGUAGES.EN]: {
     title: "The 3rd Side",
@@ -575,6 +776,10 @@ export default {
     todaysEventsOption: "Today's Events",
     retry: "Retry",
     loadingPartyList: "Loading party list",
+    epicShare: "Epic Share",
+    epicShareSubtitle: "Scroll to explore the timeline",
+    replayIntro: "Replay Intro",
+    backToMain: "Back to main",
 
     // Media Hub Translations
     media: {
@@ -669,6 +874,7 @@ export default {
     navStatistics: "Statistics",
     navDkpPoints: "DKP Points",
     navEpicStats: "Epic Stats",
+    navIronGates: "Iron Gates",
     navLoot: "Loot",
     navAlliance: "Ally Tools",
     navLootRandomizer: "Loot Randomizer",
@@ -677,6 +883,7 @@ export default {
 
     active: "Active",
     loadingAllianceAnalytics: "Loading Alliance Analytics...",
+    loadingIGAnalytics: "Loading Iron Gates Analytics...",
 
     loot: {
       title: "Loot Randomizer",
@@ -760,6 +967,45 @@ export default {
     },
 
     // Admin Panel Translations
+    membersAdmin: {
+      title: "Members Management",
+      subtitle: "Add, edit, and delete clan member profile data.",
+      addBtn: "Add Member",
+      searchPlaceholder: "Search by name, class, or CP...",
+      total: "Total",
+      table: {
+        member: "Member",
+        cpClan: "CP / Clan",
+        classes: "Classes (Main / Play)",
+        pvp: "PvP",
+        actions: "Actions",
+      },
+      modal: {
+        editTitle: "Edit Member",
+        createTitle: "Add New Member",
+        cancel: "Cancel",
+        save: "Save",
+      },
+      fields: {
+        name: "Name (Nickname)",
+        cp: "CP Number",
+        mainClass: "Main Class",
+        playClass: "Play Class",
+        clan: "Clan",
+        role: "Role in Clan / Party",
+        pvp: "PvP Counter",
+        img: "Avatar Link (img URL)",
+        subClasses: "Subclasses (comma separated)",
+        gvgClasses: "GVG Classes (comma separated)",
+        epicGot: "Epics Got (epic.got)",
+        epicAll: "Epics All (epic.all)",
+      },
+      noData: "No members found",
+      successSave: "Member data updated!",
+      successCreate: "New member added successfully!",
+      successDelete: "Member deleted.",
+      confirmDelete: "Are you sure you want to delete member",
+    },
     admin: {
       title: "Alliance Admin Panel",
       subtitle: "Roster management, presence checks, and system settings",
@@ -770,6 +1016,8 @@ export default {
       tabTimers: "Timers / Respawn",
       tabPrimeTime: "Prime Time",
       tabHoldings: "Holdings",
+      igMembers: "Iron Gates CP",
+      updatePvp: "Update PVP",
       noAccess: "You do not have access to the admin panel",
       users: {
         searchPlaceholder: "Search by character, CP, Discord user or ID...",
@@ -792,6 +1040,27 @@ export default {
         noUsersFound: "No players found matching your query",
         prevPage: "Prev",
         nextPage: "Next",
+      },
+      pvpBatchAdmin: {
+        title: "Quick PvP Update",
+        subtitle:
+          "Change the values in the inputs next to the required players and click the save button.",
+        saveBtn: "Save All Changes",
+        saving: "Saving...",
+        filterCp: "CP Filter:",
+        allCp: "All CPs",
+        noChanges: "No changes to save",
+        success: "PvP stats successfully updated for everyone!",
+        error: "Error during mass PvP update",
+        total: "Total",
+        table: {
+          member: "Member",
+          cpClan: "CP / Clan",
+          mainClass: "Main Class",
+          currentPvp: "Current PvP (Base)",
+          newPvp: "New PvP (Enter here)",
+        },
+        noData: "No members found",
       },
       primeTime: {
         title: "Prime Time Settings",
@@ -1085,6 +1354,139 @@ export default {
       screenshotError: "Failed to generate screenshot.",
       crossTableTitle: "Results Grid (Cross-Table)",
       crossTableLegend: "W - Win / L - Loss / D - Draw",
+    },
+    // ===================
+    // IRON GATES
+    // ===================
+    dashboardSummary: "Dashboard Summary",
+    dashboardMembers: "Members",
+    dashboardActivity: "Activity",
+    dashboardEpicPriority: "Epic",
+    dashboardEpicHistory: "Epic History",
+    dashboardGvgSetup: "GVG Setup",
+    hideHeader: "Fullscreen Mode (Hide All)",
+    showHeader: "Show Header & Nav",
+
+    intro: {
+      skip: "Skip Intro ⏭",
+      clickToEnter: "Click to enter the world",
+      brotherhood: "Brotherhood established",
+      skipLink: "Skip Intro",
+    },
+    dashboard: {
+      stats: {
+        membersTitle: "CP Members",
+        membersUnit: "fighters",
+        eventsLabel: "Total events:",
+        pointsTitle: "Total CP Points",
+        pointsUnit: "pts",
+        attendanceLabel: "Attendance (avg.):",
+        epicsTitle: "Acquired Epics",
+        epicsUnit: "items",
+        lastEpicLabel: "Last:",
+        lastEventTitle: "Last Event",
+        pointsPerEventLabel: "Points for event:",
+        pvp: "PvP:",
+        mainClass: "Main Class",
+        subClasses: "Sub-classes",
+        cp: "CP:",
+        clan: "Clan:",
+      },
+      chart: {
+        title: "Player Activity Rating (Last 30 Events)",
+        subtitle: "Attendance chart",
+        visitedEvents: "Attended events:",
+      },
+    },
+    memberCard: {
+      mainClass: "Main class",
+      gvgClass: "GvG class",
+      role: "Role",
+      subClasses: "Sub-classes",
+      balance: "Balance",
+      allPoints: "All points",
+      epic: "Epic",
+    },
+    errors: {
+      failedToLoad: "⚠️ Failed to load data",
+      defaultTitle: "Failed to load dashboard data",
+      retry: "Retry",
+    },
+
+    gvgPage: {
+      title: "GvG Tactical Board",
+      subtitle: "Party layout and target priorities for mass PvP",
+      saveButton: "Save",
+      resetButton: "Reset",
+      newButton: "New setup",
+      setupNamePlaceholder: "Setup name...",
+      savedSuccess: "Saved successfully!",
+      addEnemy: "+ Add Target",
+      targetDefault: "Target",
+      roles: {
+        healer: "Support",
+        dd: "Damage Dealer",
+        dominator: "Overlord",
+      },
+      inputs: {
+        dod: "DoD Slot",
+        ma: "Main Assist",
+        assist2: "2nd Assist",
+      },
+    },
+    // Add inside your translation file (e.g., uk.js under translations object)
+    igAnalytics: {
+      pageTitle: "Iron Gates CP Analytics",
+      filter7Days: "Last 7 Days",
+      filter30Days: "Last 30 Days",
+      filterAll: "All Time",
+
+      // Summary cards
+      totalEventsLabel: "Total Events",
+      killingMachineLabel: "Killing Machine",
+      topPvpUnit: "PvP",
+      dominatorPctLabel: "Dominator Rate",
+      avgPointsLabel: "Avg Event Points",
+      activeMembersLabel: "Roster Members",
+      fullPartyStreakLabel: "Full-Party Streak",
+
+      // Member activity chart & tooltips
+      activityChartTitle: "CP Member Attendance & Activity",
+      activityChartSubtitle: "Roster Performance",
+      pvpChartTitle: "PvP Leaderboard",
+      pvpChartSubtitle: "Current PvP counters",
+      pvpChartTooltipLabel: "PvP",
+      attendedEvents: "Attended",
+      attendanceRate: "Attendance Rate",
+      maxStreak: "Max Streak",
+
+      // Attendance rate matrix
+      attendanceRateTitle: "Attendance Rate Ranking",
+      attendanceRateSubtitle:
+        "Ranking members based on total attended events percentage",
+      eventOne: "event",
+      eventsMany: "events",
+
+      // Streak matrix
+      streakTitle: "Maximum Attendance Streak",
+      streakSubtitle: "Longest consecutive attendance streaks per member",
+      streakEventsUnit: "streak",
+
+      // Combo chart
+      comboChartTitle: "CP Activity & Moving Average",
+      comboChartBadge: "Performance Benchmark",
+      comboChartSubtitle:
+        "Green bars indicate scores above the 5-event moving average benchmark.",
+      barName: "Total Score",
+      lineName: "Moving Average",
+
+      // Progress line chart
+      progressChartTitle: "Cumulative Progress Over Time",
+      progressChartNote:
+        "Tracking accumulated point progression across events.",
+      selectAll: "Select All",
+      deselectAll: "Deselect All",
+      filterMembersLabel: "Filter Roster Members",
     },
   },
 };

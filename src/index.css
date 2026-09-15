@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@plugin 'lightswind/plugin';
+@layer base {
+  @import "@xyflow/react/dist/style.css";
+}
 
 :root {
   --text: #6b6375;
@@ -121,4 +125,42 @@ code {
 
 .animate-progress {
   animation: progress 1.5s infinite ease-in-out;
+}
+
+@layer utilities {
+  .animate-fire-flow {
+    background-size: 200% 200%;
+    animation: fire-shift 4s ease infinite alternate;
+  }
+
+  @keyframes fire-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+.animate-border-beam {
+  animation: border-beam calc(var(--duration) * 1s) infinite linear;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 540s linear infinite;
 }

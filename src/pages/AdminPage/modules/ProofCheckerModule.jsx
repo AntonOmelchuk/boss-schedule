@@ -80,7 +80,7 @@ const ProofCheckerModule = () => {
 
     const unsubscribe = onValue(responsesRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("data: ", data);
+
       if (data) {
         setResponses(Object.values(data));
       } else {

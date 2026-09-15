@@ -7,8 +7,10 @@ import useAuthStore from "../../store/useAuthStore";
 import TabButton from "./components/TabButton";
 import CpManagementModule from "./modules/CpManagementModule";
 import HoldingsModule from "./modules/HoldingsModule";
+import MembersManagementModule from "./modules/MembersManagementModule";
 import PrimeTimeModule from "./modules/PrimeTimeModule";
 import ProofCheckerModule from "./modules/ProofCheckerModule";
+import PvpBatchUpdateModule from "./modules/PvpBatchUpdateModule";
 import RespawnModule from "./modules/RespawnModule";
 import SystemStatusModule from "./modules/SystemStatusModule";
 import UsersModule from "./modules/UsersModule";
@@ -47,6 +49,20 @@ const ADMIN_TABS = [
     icon: "⏰",
     component: PrimeTimeModule,
     allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN],
+  },
+  {
+    key: ADMIN_TAB_KEYS.IG_MEMBERS,
+    labelKey: "igMembers",
+    icon: "🛡️",
+    component: MembersManagementModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ASSISTANT],
+  },
+  {
+    key: ADMIN_TAB_KEYS.PVP,
+    labelKey: "updatePvp",
+    icon: "⚡",
+    component: PvpBatchUpdateModule,
+    allowedRoles: [ROLES.ADMIN, ROLES.CO_ADMIN, ROLES.ALLY_HEAD],
   },
   {
     key: ADMIN_TAB_KEYS.USERS,
@@ -143,7 +159,7 @@ const AdminPage = () => {
             active={activeTabKey === tab.key}
             onClick={() => setActiveTabKey(tab.key)}
             icon={tab.icon}
-            label={t.admin[tab.labelKey] || "Holdings"}
+            label={t.admin[tab.labelKey]}
           />
         ))}
       </div>
