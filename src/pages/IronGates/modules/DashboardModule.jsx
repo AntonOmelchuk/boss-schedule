@@ -119,6 +119,7 @@ const DashboardModule = ({ isHeaderVisible, setIsHeaderVisible }) => {
           highlight
           footerLabel={`${dashboard.stats.pointsPerEventLabel} +${cpStats.lastEvent.points}`}
           footerValue={cpStats.lastEvent.date}
+          preventCountUp
           footerHighlight
         />
       </section>

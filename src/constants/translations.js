@@ -32,6 +32,7 @@ export default {
     epicShareSubtitle: "Скрольте, щоб переглянути хронологію",
     replayIntro: "Переглянути Iнтро",
     backToMain: "Назад на головну",
+    rankByCurrentBalance: "Рейтинг учасників за поточним балансом",
 
     // Media Hub Translations
     media: {
@@ -780,6 +781,7 @@ export default {
     epicShareSubtitle: "Scroll to explore the timeline",
     replayIntro: "Replay Intro",
     backToMain: "Back to main",
+    rankByCurrentBalance: "Ranking by current balance",
 
     // Media Hub Translations
     media: {
