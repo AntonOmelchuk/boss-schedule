@@ -61,7 +61,7 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
 
               <div
                 className="absolute z-50 inset-0 m-auto w-[105%] h-[105%] rounded-full border-2 border-dashed
-              animate-[spin_72s_linear_infinite_reverse] pointer-events-none"
+                  animate-[spin_72s_linear_infinite_reverse] pointer-events-none"
                 style={{
                   borderColor: ringColors.outerColor,
                   boxShadow: `0 0 15px ${ringColors.outerColor}80`,
@@ -94,8 +94,8 @@ const ParallaxAvatar = ({ image, video, playClass = "", name }) => {
                 muted={isMuted}
                 playsInline
                 onCanPlay={() => setIsVideoLoading(false)}
-                onEnded={handleVideoEnded} // 👈 Хендлер перезапуску без звуку
-                className={`w-full h-full object-cover rounded-xl drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]
+                onEnded={handleVideoEnded}
+                className={`absoulute w-full h-full object-cover rounded-xl drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]
                   transition-opacity duration-300 ${
                     isVideoLoading ? "opacity-0" : "opacity-100"
                   }`}

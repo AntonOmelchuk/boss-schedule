@@ -38,7 +38,7 @@ const MemberCard = ({
       >
         <ParallaxAvatar
           image={image}
-          video={video} // 👈 Передаємо дальше
+          video={video}
           playClass={playClass}
           name={name}
         />
