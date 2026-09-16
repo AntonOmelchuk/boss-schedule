@@ -10,6 +10,43 @@ import { MEMBER_COLORS, MEMBERS_MAP } from "../../constants/members";
 import { cn } from "../../lib/utils";
 import { Card, CardContent } from "./card";
 
+const getReadableBossStyle = (bossColor) => {
+  if (!bossColor) return { color: "#f4f4f5" };
+
+  const hexToRgb = (hex) => {
+    const cleanHex = hex.replace("#", "");
+    const bigint = parseInt(
+      cleanHex.length === 3
+        ? cleanHex
+            .split("")
+            .map((c) => c + c)
+            .join("")
+        : cleanHex,
+      16,
+    );
+    return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+  };
+
+  const [r, g, b] = hexToRgb(bossColor);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+  if (brightness < 110) {
+    return {
+      color: "#f8fafc",
+      textShadow: `
+        0 0 12px ${bossColor},
+        0 0 24px ${bossColor},
+        0 2px 4px rgba(0,0,0,0.9)
+      `,
+    };
+  }
+
+  return {
+    color: bossColor,
+    textShadow: "0 2px 10px rgba(0, 0, 0, 0.9)",
+  };
+};
+
 export const ScrollTimeline = ({
   events = [],
   title,
@@ -357,20 +394,19 @@ export const ScrollTimeline = ({
                             </div>
 
                             {bossImg && (
-                              <div className="flex items-center bg-zinc-900/80 border border-amber-500/30 rounded-xl px-2.5 py-1.5 shadow-inner">
+                              <div className="flex items-center bg-zinc-900/80 border border-amber-500/30 rounded-2xl shadow-inner">
                                 <img
                                   src={bossImg}
                                   alt="Boss Icon"
-                                  className="w-12 h-12 object-contain drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]"
+                                  className="w-15 h-15 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)] rounded-2xl p-0.5"
                                 />
                               </div>
                             )}
                           </div>
 
                           <h3
-                            className="text-2xl font-bold mb-2 text-zinc-100 tracking-tight"
-                            // style={{ color: `${bossColor}` }}
-                            style={{ color: `${bossColor}` }}
+                            className="text-2xl font-black mb-2 tracking-wide"
+                            style={getReadableBossStyle(bossColor)}
                           >
                             {title}
                           </h3>
