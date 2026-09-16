@@ -5,10 +5,47 @@ import { Calendar } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import logo from "../../assets/logo.png";
-import { BOSS_ICONS } from "../../constants/general";
+import { BOSS_ICONS, EPIC_COLORS } from "../../constants/general";
 import { MEMBER_COLORS, MEMBERS_MAP } from "../../constants/members";
 import { cn } from "../../lib/utils";
 import { Card, CardContent } from "./card";
+
+const getReadableBossStyle = (bossColor) => {
+  if (!bossColor) return { color: "#f4f4f5" };
+
+  const hexToRgb = (hex) => {
+    const cleanHex = hex.replace("#", "");
+    const bigint = parseInt(
+      cleanHex.length === 3
+        ? cleanHex
+            .split("")
+            .map((c) => c + c)
+            .join("")
+        : cleanHex,
+      16,
+    );
+    return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+  };
+
+  const [r, g, b] = hexToRgb(bossColor);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+  if (brightness < 110) {
+    return {
+      color: "#f8fafc",
+      textShadow: `
+        0 0 12px ${bossColor},
+        0 0 24px ${bossColor},
+        0 2px 4px rgba(0,0,0,0.9)
+      `,
+    };
+  }
+
+  return {
+    color: bossColor,
+    textShadow: "0 2px 10px rgba(0, 0, 0, 0.9)",
+  };
+};
 
 export const ScrollTimeline = ({
   events = [],
@@ -221,173 +258,179 @@ export const ScrollTimeline = ({
           )}
 
           <div className="relative z-20">
-            {events.map((event, index) => {
-              const yOffset = useTransform(
-                smoothProgress,
-                [0, 1],
-                [parallaxIntensity * 100, -parallaxIntensity * 100],
-              );
+            {events.map(
+              ({ subtitle, title, id, year, color, description }, index) => {
+                const yOffset = useTransform(
+                  smoothProgress,
+                  [0, 1],
+                  [parallaxIntensity * 100, -parallaxIntensity * 100],
+                );
 
-              const memberConfig = MEMBERS_MAP[event.subtitle];
-              const memberColors = MEMBER_COLORS[event.subtitle];
+                const memberConfig = MEMBERS_MAP[subtitle];
+                const memberColors = MEMBER_COLORS[subtitle];
 
-              const bossImg = BOSS_ICONS[event.title];
+                const bossImg = BOSS_ICONS[title];
+                const bossColor = EPIC_COLORS[title] || "#64748b";
 
-              const cardStyle = memberColors
-                ? {
-                    background: `linear-gradient(135deg, ${memberColors.end}dd, rgba(9, 9, 11, 0.85))`,
-                    borderColor: memberColors.start,
-                  }
-                : {
-                    background: `linear-gradient(135deg, rgba(217, 119, 6, 0.2), rgba(9, 9, 11, 0.85))`,
-                    borderColor: "#f59e0b",
-                  };
+                const cardStyle = memberColors
+                  ? {
+                      background: `linear-gradient(135deg, ${memberColors.end}dd, rgba(9, 9, 11, 0.85))`,
+                      borderColor: memberColors.start,
+                    }
+                  : {
+                      background: `linear-gradient(135deg, rgba(217, 119, 6, 0.2), rgba(9, 9, 11, 0.85))`,
+                      borderColor: "#f59e0b",
+                    };
 
-              const alignmentClassesDesktop =
-                cardAlignment === "alternating"
-                  ? index % 2 === 0
-                    ? "lg:mr-[calc(50%+90px)]"
-                    : "lg:ml-[calc(50%+90px)]"
-                  : cardAlignment === "left"
-                    ? "lg:mr-auto lg:ml-0"
-                    : "lg:ml-auto lg:mr-0";
+                const alignmentClassesDesktop =
+                  cardAlignment === "alternating"
+                    ? index % 2 === 0
+                      ? "lg:mr-[calc(50%+90px)]"
+                      : "lg:ml-[calc(50%+90px)]"
+                    : cardAlignment === "left"
+                      ? "lg:mr-auto lg:ml-0"
+                      : "lg:ml-auto lg:mr-0";
 
-              return (
-                <div
-                  key={event.id || index}
-                  ref={(el) => {
-                    timelineRefs.current[index] = el;
-                  }}
-                  className={cn(
-                    "relative flex items-center mb-28 py-4 -translate-y-4",
-                    "flex-col lg:flex-row",
-                    cardAlignment === "alternating"
-                      ? index % 2 === 0
-                        ? "lg:justify-start"
-                        : "lg:flex-row-reverse lg:justify-start"
-                      : cardAlignment === "left"
-                        ? "lg:justify-start"
-                        : "lg:flex-row-reverse lg:justify-start",
-                  )}
-                >
+                return (
                   <div
+                    key={id || index}
+                    ref={(el) => {
+                      timelineRefs.current[index] = el;
+                    }}
                     className={cn(
-                      "absolute top-1/2 transform -translate-y-1/2 z-30",
-                      "left-1/2 -translate-x-1/2",
+                      "relative flex items-center mb-28 py-4 -translate-y-4",
+                      "flex-col lg:flex-row",
+                      cardAlignment === "alternating"
+                        ? index % 2 === 0
+                          ? "lg:justify-start"
+                          : "lg:flex-row-reverse lg:justify-start"
+                        : cardAlignment === "left"
+                          ? "lg:justify-start"
+                          : "lg:flex-row-reverse lg:justify-start",
                     )}
                   >
+                    <div
+                      className={cn(
+                        "absolute top-1/2 transform -translate-y-1/2 z-30",
+                        "left-1/2 -translate-x-1/2",
+                      )}
+                    >
+                      <motion.div
+                        className={cn(
+                          "w-20 h-20 rounded-full border-2 bg-zinc-950 flex items-center justify-center overflow-hidden transition-colors shadow-lg",
+                          index <= activeIndex
+                            ? "border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.8)]"
+                            : "border-zinc-800 bg-zinc-900",
+                        )}
+                        animate={
+                          index <= activeIndex
+                            ? {
+                                scale: [1, 1.15, 1],
+                              }
+                            : {}
+                        }
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        {memberConfig?.image ? (
+                          <img
+                            src={memberConfig.image}
+                            alt={memberConfig.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={logo}
+                            alt="Iron Gates"
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </motion.div>
+                    </div>
+
                     <motion.div
                       className={cn(
-                        "w-20 h-20 rounded-full border-2 bg-zinc-950 flex items-center justify-center overflow-hidden transition-colors shadow-lg",
-                        index <= activeIndex
-                          ? "border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.8)]"
-                          : "border-zinc-800 bg-zinc-900",
+                        "relative z-30 rounded-2xl transition-all duration-300 backdrop-blur-md border shadow-2xl text-zinc-100 w-full lg:w-[calc(50%-55px)] mt-12 lg:mt-0",
+                        cardEffect === "glow" &&
+                          "hover:shadow-[0_0_30px_rgba(245,158,11,0.25)]",
+                        alignmentClassesDesktop,
                       )}
-                      animate={
-                        index <= activeIndex
-                          ? {
-                              scale: [1, 1.15, 1],
-                            }
-                          : {}
-                      }
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
+                      variants={getCardVariants(index)}
+                      initial="initial"
+                      whileInView="whileInView"
+                      viewport={{ once: false, margin: "-100px" }}
+                      style={{
+                        ...(parallaxIntensity > 0 ? { y: yOffset } : {}),
+                        ...cardStyle,
+                        borderWidth: "1.5px",
                       }}
                     >
-                      {memberConfig?.image ? (
-                        <img
-                          src={memberConfig.image}
-                          alt={memberConfig.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img
-                          src={logo}
-                          alt="Iron Gates"
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                    </motion.div>
-                  </div>
+                      <Card className="bg-transparent border-0 shadow-none">
+                        <CardContent className="p-3">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              {dateFormat === "badge" ? (
+                                <div className="flex items-center">
+                                  <Calendar className="h-5 w-5 mr-2 text-amber-400" />
+                                  <span
+                                    className={cn(
+                                      "text-sm font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40",
+                                      color
+                                        ? `text-${color}`
+                                        : "text-amber-400",
+                                    )}
+                                  >
+                                    {year}
+                                  </span>
+                                </div>
+                              ) : (
+                                <p className="text-base font-extrabold text-amber-400 uppercase tracking-wide">
+                                  {year}
+                                </p>
+                              )}
+                            </div>
 
-                  <motion.div
-                    className={cn(
-                      "relative z-30 rounded-2xl transition-all duration-300 backdrop-blur-md border shadow-2xl text-zinc-100 w-full lg:w-[calc(50%-55px)] mt-12 lg:mt-0",
-                      cardEffect === "glow" &&
-                        "hover:shadow-[0_0_30px_rgba(245,158,11,0.25)]",
-                      alignmentClassesDesktop,
-                    )}
-                    variants={getCardVariants(index)}
-                    initial="initial"
-                    whileInView="whileInView"
-                    viewport={{ once: false, margin: "-100px" }}
-                    style={{
-                      ...(parallaxIntensity > 0 ? { y: yOffset } : {}),
-                      ...cardStyle,
-                      borderWidth: "1.5px",
-                    }}
-                  >
-                    <Card className="bg-transparent border-0 shadow-none">
-                      <CardContent className="p-3">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            {dateFormat === "badge" ? (
-                              <div className="flex items-center">
-                                <Calendar className="h-5 w-5 mr-2 text-amber-400" />
-                                <span
-                                  className={cn(
-                                    "text-sm font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40",
-                                    event.color
-                                      ? `text-${event.color}`
-                                      : "text-amber-400",
-                                  )}
-                                >
-                                  {event.year}
-                                </span>
+                            {bossImg && (
+                              <div className="flex items-center bg-zinc-900/80 border border-amber-500/30 rounded-2xl shadow-inner">
+                                <img
+                                  src={bossImg}
+                                  alt="Boss Icon"
+                                  className="w-15 h-15 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)] rounded-2xl p-0.5"
+                                />
                               </div>
-                            ) : (
-                              <p className="text-base font-extrabold text-amber-400 uppercase tracking-wide">
-                                {event.year}
-                              </p>
                             )}
                           </div>
 
-                          {bossImg && (
-                            <div className="flex items-center bg-zinc-900/80 border border-amber-500/30 rounded-xl px-2.5 py-1.5 shadow-inner">
-                              <img
-                                src={bossImg}
-                                alt="Boss Icon"
-                                className="w-12 h-12 object-contain drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]"
-                              />
+                          <h3
+                            className="text-2xl font-black mb-2 tracking-wide"
+                            style={getReadableBossStyle(bossColor)}
+                          >
+                            {title}
+                          </h3>
+
+                          {subtitle && (
+                            <div className="flex items-center space-x-3 mb-4">
+                              {memberConfig && (
+                                <span className="text-lg font-bold text-amber-300 bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-500/20">
+                                  {memberConfig.name}
+                                </span>
+                              )}
                             </div>
                           )}
-                        </div>
 
-                        <h3 className="text-2xl font-bold mb-2 text-zinc-100 tracking-tight">
-                          {event.title}
-                        </h3>
-
-                        {event.subtitle && (
-                          <div className="flex items-center space-x-3 mb-4">
-                            {memberConfig && (
-                              <span className="text-lg font-bold text-amber-300 bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-500/20">
-                                {memberConfig.name}
-                              </span>
-                            )}
-                          </div>
-                        )}
-
-                        <p className="text-base text-zinc-300 leading-relaxed font-normal">
-                          {event.description}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </div>
-              );
-            })}
+                          <p className="text-base text-zinc-300 leading-relaxed font-normal">
+                            {description}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </div>
+                );
+              },
+            )}
           </div>
         </div>
       </div>

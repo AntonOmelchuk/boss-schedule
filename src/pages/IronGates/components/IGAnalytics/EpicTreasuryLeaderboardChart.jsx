@@ -205,16 +205,16 @@ const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
                       return (
                         <span
                           key={i}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold
                             text-white shadow-sm bg-black/60"
                           style={{ border: `1px solid ${bossColor}` }}
                         >
                           <img
                             src={icon}
-                            className="w-5 h-5 object-contain"
+                            className="w-9 h-9 object-contain"
                             alt={epic.epic_name}
                           />
-                          <span className="text-base text-slate-200 font-semibold italic">
+                          <span className="text-lg text-slate-200 font-semibold italic capitalize">
                             {epic.epic_name}
                           </span>
                         </span>

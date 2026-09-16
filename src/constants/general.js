@@ -63,10 +63,13 @@ export const EVENT_TYPES = {
   DM: "DM",
   // Epic Bosses
   QA: "qa",
+  QueenAnt: "queen Ant",
+  AnQueen: "ant queen",
   Core: "core",
   Orfen: "orfen",
   Zaken: "zaken",
   Tezza: "tezza",
+  Frintezaa: "frintezza",
   Baium: "baium",
   Antharas: "antharas",
   Valakas: "valakas",
@@ -79,10 +82,13 @@ export const EVENT_TYPES = {
 export const EMOJI_MAP = {
   // Epic Bosses
   [EVENT_TYPES.QA]: qaIcon,
+  [EVENT_TYPES.QueenAnt]: qaIcon,
+  [EVENT_TYPES.AnQueen]: qaIcon,
   [EVENT_TYPES.Core]: coreIcon,
   [EVENT_TYPES.Orfen]: orfenIcon,
   [EVENT_TYPES.Zaken]: zakenIcon,
   [EVENT_TYPES.Tezza]: frintezzaIcon,
+  [EVENT_TYPES.Frintezaa]: frintezzaIcon,
   [EVENT_TYPES.Baium]: baiumIcon,
   [EVENT_TYPES.Antharas]: antharasIcon,
   [EVENT_TYPES.Valakas]: valakasIcon,
@@ -131,13 +137,26 @@ export const DASHBOARD_TABS = {
 
 export const EPIC_COLORS = {
   QueenAnt: "#C46100",
+  "Queen Ant": "#C46100",
+  "Ant Queen": "#C46100",
+  QA: "#C46100",
+  AQ: "#C46100",
   Orfen: "#06C",
+  orfen: "#06C",
   Core: "#4CB140",
+  core: "#4CB140",
   Zaken: "#005F60",
+  zaken: "#005F60",
   Baium: "#C58C00",
+  baium: "#C58C00",
   Frintezza: "#a14e9a",
+  frintezza: "#a14e9a",
+  Tezza: "#a14e9a",
+  tezza: "#a14e9a",
   Valakas: "#7D1007",
+  valakas: "#7D1007",
   Antharas: "#8A8D90",
+  antharas: "#8A8D90",
 };
 
 // 'all' | 'treasury' | 'shared'
@@ -214,6 +233,7 @@ export const BOSS_ICONS = {
   Baium: baiumIcon,
   Core: coreIcon,
   Frintezza: frintezzaIcon,
+  Tezza: frintezzaIcon,
   Orfen: orfenIcon,
   "Queen Ant": qaIcon,
   Valakas: valakasIcon,
