@@ -10,7 +10,6 @@ import SphereImageGridSkeleton from "../skeletons/SphereImageGridSkeleton";
 
 const MemberModule = () => {
   const { loading, error, members, fetchMembers } = useIGMembers();
-
   useEffect(() => {
     fetchMembers();
   }, [fetchMembers]);

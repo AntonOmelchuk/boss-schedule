@@ -41,6 +41,10 @@ export const MEMBERS_MAP = {
   "Iron Gates 2": {
     name: "Iron Gates 2",
   },
+  WINSON: {
+    name: "WINSON",
+    image: `${STORAGE_URL}/avatars/WINSON.png`,
+  },
 };
 
 export const MEMBER_COLORS = {
@@ -59,6 +63,8 @@ export const MEMBER_COLORS = {
   Manol: { start: "#c084fc", end: "#1e1b4b" },
   ManiacTom: { start: "#f97316", end: "#b91c1c" },
   Vryo: { start: "#1d4ed8", end: "#b91c1c" },
+  WINSON: { start: "#eab308", end: "#064e3b" },
+  Winson: { start: "#eab308", end: "#064e3b" },
 };
 
 export const GVG_ROLES = [
