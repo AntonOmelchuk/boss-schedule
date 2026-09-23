@@ -34,6 +34,7 @@ export const MEMBERS_MAP = {
     image: `${STORAGE_URL}/avatars/ManiacTom.png`,
   },
   Vryo: { name: "Vryo", image: `${STORAGE_URL}/avatars/Vryo.png` },
+  StevenD: { name: "StevenD", image: `${STORAGE_URL}/avatars/StevenD.png` },
   ZukaDaddy: {
     name: "ZukaDaddy",
     image: `${STORAGE_URL}/avatars/ZukaDaddy.png`,
@@ -65,6 +66,7 @@ export const MEMBER_COLORS = {
   Vryo: { start: "#1d4ed8", end: "#b91c1c" },
   WINSON: { start: "#eab308", end: "#064e3b" },
   Winson: { start: "#eab308", end: "#064e3b" },
+  StevenD: { start: "#38bdf8", end: "#7f1d1d" },
 };
 
 export const GVG_ROLES = [
