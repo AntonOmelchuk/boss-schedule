@@ -128,7 +128,7 @@ const AllEventsItem = ({
           {isOutPrime && <OutPrime />}
         </div>
 
-        <div className="text-xs font-mono font-bold text-slate-400 mt-1 flex items-center gap-1.5">
+        <div className="text-base font-mono font-bold text-slate-400 mt-1 flex items-center gap-1.5">
           <span
             className="inline-block w-2 h-2 rounded-full shrink-0"
             style={{ backgroundColor: bossColor }}
