@@ -141,8 +141,8 @@ export const EPIC_COLORS = {
   "Ant Queen": "#C46100",
   QA: "#C46100",
   AQ: "#C46100",
-  Orfen: "#06C",
-  orfen: "#06C",
+  Orfen: "#0066CC",
+  orfen: "#0066CC",
   Core: "#4CB140",
   core: "#4CB140",
   Zaken: "#005F60",
@@ -238,4 +238,9 @@ export const BOSS_ICONS = {
   "Queen Ant": qaIcon,
   Valakas: valakasIcon,
   Zaken: zakenIcon,
+};
+
+export const RESPAWN_DATA_VIEW = {
+  GRID: "GRID",
+  CALENDAR: "CALENDAR",
 };

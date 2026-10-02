@@ -1,7 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 
-import bgImg from "../../assets/bg3.png";
 import { BREAKPOINTS } from "../../constants/general";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import MagicSparks from "../../pages/IronGates/components/MagicSparks";
@@ -36,21 +35,13 @@ const MainLayout = ({ children }) => {
   }
 
   return (
-    <div
-      className="min-h-screen flex flex-col text-slate-200 font-sans"
-      style={{
-        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url(${bgImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-        width: "100%",
-      }}
-    >
+    <div className="min-h-screen bg-black flex flex-col text-slate-200 font-sans">
       {/* 1. Header inside min-h-screen container */}
       <Header />
 
       {/* 2. Main content takes all available free space */}
       <Toaster />
+      <SkyStars />
       <main className="flex-1 w-full mx-auto p-2.5 md:p-8">{children}</main>
 
       {/* 3. Footer automatically snaps to the bottom if space allows */}

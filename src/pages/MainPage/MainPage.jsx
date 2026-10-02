@@ -1,37 +1,71 @@
-import { useEffect } from "react";
+import { Calendar, LayoutGrid } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import AllEventsItemSkeleton from "../../components/skeletons/AllEventsItemSkeleton";
 import MainBlockSkeleton from "../../components/skeletons/MainBlockSkeleton";
+import Switch from "../../components/UI/Switch";
+import { RESPAWN_DATA_VIEW } from "../../constants/general";
+import useTranslation from "../../hooks/useTranslation";
 import useAppStore from "../../store/useAppStore";
 import AllEvents from "./components/AllEvents/AllEvents";
+import CalendarView from "./components/CalendarView/CalendarView";
 import MainBlock from "./components/MainBlock/MainBlock";
 
 const MainPage = () => {
+  const { t } = useTranslation();
   const eventsData = useAppStore((state) => state.events);
   const cleanExpiredAlerts = useAppStore((state) => state.cleanExpiredAlerts);
   const isRespawnLoading = useAppStore((state) => state.isRespawnLoading);
+
+  const [viewMode, setViewMode] = useState(RESPAWN_DATA_VIEW.GRID);
 
   useEffect(() => {
     if (eventsData?.length) {
       cleanExpiredAlerts(eventsData);
     }
-  }, [eventsData]);
+  }, [eventsData, cleanExpiredAlerts]);
+
+  const toggleViewMode = () => {
+    setViewMode((prev) =>
+      prev === RESPAWN_DATA_VIEW.GRID
+        ? RESPAWN_DATA_VIEW.CALENDAR
+        : RESPAWN_DATA_VIEW.GRID,
+    );
+  };
+
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="mx-auto px-2 sm:px-4 space-y-6">
+      {isRespawnLoading ? <MainBlockSkeleton /> : <MainBlock />}
+
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <Switch
+          isActive={viewMode === RESPAWN_DATA_VIEW.GRID}
+          onClick={toggleViewMode}
+          firstItem={
+            <>
+              <LayoutGrid className="w-4 h-4" />
+              <span className="uppercase">{t.grid}</span>
+            </>
+          }
+          secondItem={
+            <>
+              <Calendar className="w-4 h-4" />
+              <span className="uppercase">{t.calendar}</span>
+            </>
+          }
+        />
+      </div>
+
       {isRespawnLoading ? (
-        <>
-          <MainBlockSkeleton />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(6)].map((_, i) => (
-              <AllEventsItemSkeleton key={i} />
-            ))}
-          </div>
-        </>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <AllEventsItemSkeleton key={i} />
+          ))}
+        </div>
+      ) : viewMode === RESPAWN_DATA_VIEW.GRID ? (
+        <AllEvents />
       ) : (
-        <>
-          <MainBlock />
-          <AllEvents />
-        </>
+        <CalendarView />
       )}
     </div>
   );
