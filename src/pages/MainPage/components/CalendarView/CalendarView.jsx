@@ -42,6 +42,13 @@ const CalendarView = () => {
 
   const currentWeekDays = useMemo(() => {
     const now = new Date();
+
+    const todayStart = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+    );
+
     const currentDay = now.getDay();
     const distanceToMon = currentDay === 0 ? -6 : 1 - currentDay;
 
@@ -51,10 +58,18 @@ const CalendarView = () => {
     return daysOfWeek.map((dayObj, index) => {
       const dayDate = new Date(monday);
       dayDate.setDate(monday.getDate() + index);
+
+      const dayStart = new Date(
+        dayDate.getFullYear(),
+        dayDate.getMonth(),
+        dayDate.getDate(),
+      );
+
       return {
         ...dayObj,
         dateNumber: dayDate.getDate(),
-        isToday: dayDate.toDateString() === now.toDateString(),
+        isToday: dayStart.getTime() === todayStart.getTime(),
+        isPast: dayStart < todayStart,
       };
     });
   }, [daysOfWeek]);
@@ -62,16 +77,25 @@ const CalendarView = () => {
   return (
     <div className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-800">
       <div className="min-w-[1800px] grid grid-cols-7 gap-4">
-        {currentWeekDays.map(({ id, name, dateNumber, isToday }) => {
+        {currentWeekDays.map(({ id, name, dateNumber, isToday, isPast }) => {
           const dayEvents = eventsByDay[id] || [];
 
           return (
-            <div key={id} className="flex flex-col gap-3 min-w-65">
+            <div
+              key={id}
+              className={`flex flex-col gap-3 min-w-65 transition-all duration-300 ${
+                isPast
+                  ? "opacity-45 grayscale-[0.25] hover:opacity-90 hover:grayscale-0"
+                  : ""
+              }`}
+            >
               <div
                 className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl border ${
                   isToday
                     ? "bg-amber-500/10 border-amber-500/40 text-amber-300 shadow-sm"
-                    : "bg-slate-900/80 border-slate-800 text-slate-300"
+                    : isPast
+                      ? "bg-slate-950/40 border-slate-800/40 text-slate-500"
+                      : "bg-slate-900/80 border-slate-800 text-slate-300"
                 }`}
               >
                 <span className="font-black text-xs tracking-wider uppercase truncate">

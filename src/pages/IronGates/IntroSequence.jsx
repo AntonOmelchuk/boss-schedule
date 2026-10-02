@@ -11,7 +11,6 @@ import { db } from "../../services/firebase";
 import { useDashboardStore } from "../../store/useDashboardStore";
 import AnimatedTitleLine from "./components/IntroSequence/AnimatedTitleLine";
 import BackgroundLogo from "./components/IntroSequence/BackgroundLogo";
-import IntroAdenCard from "./components/IntroSequence/IntroAdenCard";
 import IntroPlayerCard from "./components/IntroSequence/IntroPlayerCard";
 
 // ==========================================
@@ -215,7 +214,7 @@ const IntroSequence = ({ onFinish }) => {
             }, 900);
           }}
           className="fixed top-6 right-6 z-50 px-4 py-2 bg-black/40 hover:bg-amber-500/20 border
-            border-amber-500/30 rounded-lg text-amber-300/85 hover:text-amber-300 text-xs tracking-widest
+          border-amber-500/30 rounded-lg text-amber-300/85 hover:text-amber-300 text-xs tracking-widest
             uppercase transition-all backdrop-blur-sm"
         >
           {t.intro.skip}
@@ -285,7 +284,7 @@ const IntroSequence = ({ onFinish }) => {
         {/* Title Iron Gates */}
         <div
           className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none
-          text-center"
+            text-center"
         >
           <AnimatedTitleLine
             text={line1}
@@ -334,9 +333,6 @@ const IntroSequence = ({ onFinish }) => {
             />
           );
         })}
-
-        {/* Section with full Squad (Aden) */}
-        <IntroAdenCard squadRef={squadRef} />
       </div>
     </div>
   );

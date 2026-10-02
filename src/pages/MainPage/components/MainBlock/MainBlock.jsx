@@ -1,11 +1,15 @@
 import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
+import EventIcon from "../../../../components/EventIcon/EventIcon";
 import OutPrime from "../../../../components/OutPrime/OutPrime";
 import { EPIC_COLORS } from "../../../../constants/general";
 import useFilterEvents from "../../../../hooks/useFilterEvents";
 import useTranslation from "../../../../hooks/useTranslation";
 import { formatRemaining, getDiplomacyConfig } from "../../../../utils/general";
 
-const getBossColor = (bossName) => {
+const getBossColor = (bossName, relation) => {
+  if (relation === "alliance") return "#10b981";
+  if (relation === "enemy") return "#ef4444";
+
   if (!bossName) return "#38bdf8";
   if (EPIC_COLORS[bossName]) return EPIC_COLORS[bossName];
   const key = Object.keys(EPIC_COLORS).find(
@@ -21,10 +25,11 @@ const MainBlock = () => {
   const nearestEvent = filteredEvents.length > 0 ? filteredEvents[0] : null;
 
   const { relation, name, owner, icon, isOutPrime } = nearestEvent || {};
+
   const config = getDiplomacyConfig(relation);
   const { timerClass, titleClass, badgeIcon } = config || {};
 
-  const bossColor = getBossColor(name);
+  const bossColor = getBossColor(name, relation);
 
   return (
     <div
@@ -39,30 +44,17 @@ const MainBlock = () => {
     >
       <div className="p-5 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-left">
         <div className="flex items-center gap-4 md:gap-5">
-          <div
-            className="w-14 h-14 md:w-20 md:h-20 text-3xl rounded-2xl border flex items-center
-              justify-center shrink-0 shadow-inner bg-black/50"
-            style={{ border: `2px solid ${bossColor}` }}
-          >
-            {icon ? (
-              icon.length <= 3 ? (
-                icon
-              ) : (
-                <img
-                  src={icon}
-                  className="rounded-xl h-full object-cover"
-                  alt={name || "event"}
-                />
-              )
-            ) : (
-              "⏳"
-            )}
-          </div>
+          <EventIcon
+            icon={icon}
+            name={name}
+            relation={relation}
+            bossColor={bossColor}
+          />
 
           <div>
             <span
-              className="text-[11px] uppercase font-black tracking-widest text-amber-400 px-2.5
-                py-1 rounded-md bg-amber-500/10 border border-amber-500/20"
+              className="text-[11px] uppercase font-black tracking-widest text-amber-400 px-2.5 py-1
+              rounded-md bg-amber-500/10 border border-amber-500/20"
             >
               {t.nearestEvent}
             </span>
@@ -84,7 +76,7 @@ const MainBlock = () => {
 
         <div
           className="w-full md:w-auto text-left md:text-right border-t border-slate-800/80
-            md:border-t-0 pt-4 md:pt-0"
+          md:border-t-0 pt-4 md:pt-0"
         >
           <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">
             {t.timeToStart}

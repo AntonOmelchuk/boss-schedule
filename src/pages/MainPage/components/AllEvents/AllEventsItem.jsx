@@ -1,4 +1,6 @@
+/* eslint-disable indent */
 import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
+import EventIcon from "../../../../components/EventIcon/EventIcon";
 import OutPrime from "../../../../components/OutPrime/OutPrime";
 import { EPIC_COLORS } from "../../../../constants/general";
 import { useIsPWA } from "../../../../hooks/useIsPWA";
@@ -10,9 +12,8 @@ import { subscribeUserToPush } from "../../../../utils/pushNotifications";
 import AlertButton from "./AlertButton";
 
 const getBossColor = (bossName, relation) => {
-  const rel = relation?.toLowerCase() || "";
-  if (rel === "defense" || rel === "our") return "#10b981";
-  if (rel === "attack" || rel === "enemy") return "#ef4444";
+  if (relation === "alliance") return "#10b981";
+  if (relation === "enemy") return "#ef4444";
 
   if (!bossName) return "#38bdf8";
   if (EPIC_COLORS[bossName]) return EPIC_COLORS[bossName];
@@ -49,6 +50,7 @@ const AllEventsItem = ({
 
   const now = Date.now();
   const timeToSpawnMs = ts - now;
+  const isPast = timeToSpawnMs < 0;
   const minutesToSpawn = Math.floor(timeToSpawnMs / (1000 * 60));
 
   const effectiveLeadTime = alertData?.leadTimeMinutes ?? defaultLeadTime;
@@ -85,8 +87,12 @@ const AllEventsItem = ({
 
   return (
     <div
-      className="relative rounded-xl p-3 bg-slate-950/80 hover:bg-slate-900/90 transition-all duration-300
-        shadow-md flex items-center justify-between gap-3.5 group min-w-65 w-full"
+      className={`relative rounded-xl p-3 bg-slate-950/80 transition-all duration-300
+        shadow-md flex items-center justify-between gap-3.5 group min-w-65 w-full ${
+          isPast
+            ? "opacity-40 grayscale-[0.3] hover:opacity-80 hover:grayscale-0"
+            : "hover:bg-slate-900/90"
+        }`}
       style={{
         borderLeft: `4px solid ${bossColor}`,
         borderRight: `1px solid ${bossColor}40`,
@@ -94,21 +100,13 @@ const AllEventsItem = ({
         borderBottom: `1px solid rgba(255, 255, 255, 0.08)`,
       }}
     >
-      <div
-        className="w-12 h-12 md:w-14 md:h-14 rounded-lg flex items-center justify-center text-2xl
-          shrink-0 shadow-inner bg-black/50 group-hover:scale-105 duration-300 transition-transform"
-        style={{ border: `2px solid ${bossColor}` }}
-      >
-        {icon && icon.length <= 3 ? (
-          icon
-        ) : (
-          <img
-            src={icon}
-            className="h-full rounded-md object-cover"
-            alt={name}
-          />
-        )}
-      </div>
+      <EventIcon
+        size={72}
+        icon={icon}
+        name={name}
+        relation={relation}
+        bossColor={bossColor}
+      />
 
       <div className="flex-1 overflow-hidden min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
