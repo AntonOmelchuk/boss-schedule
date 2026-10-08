@@ -37,7 +37,10 @@ const AllEvents = () => {
         </div>
 
         {/* Tactical Filter Modal Trigger Button */}
-        <Button onClick={() => setIsFilterModalOpen(true)}>
+        <Button
+          onClick={() => setIsFilterModalOpen(true)}
+          className="bg-slate-900/30"
+        >
           <FilterIcon />
           {t.filtersTitle}
         </Button>

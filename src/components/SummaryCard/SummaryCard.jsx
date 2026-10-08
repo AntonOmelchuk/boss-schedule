@@ -8,7 +8,7 @@ const SummaryCard = ({
 }) => {
   return (
     <div
-      className="bg-slate-900/30 backdrop-blur-md border border-slate-800
+      className="bg-slate-900/40 backdrop-blur-md border border-slate-800
       rounded-2xl p-5 shadow-xl flex flex-col justify-between"
     >
       <div className="flex justify-between items-start">

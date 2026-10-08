@@ -15,7 +15,7 @@ const MainTable = ({
   return (
     <div
       ref={tableRef}
-      className="bg-slate-900 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl"
+      className="bg-slate-900/50 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl"
     >
       <DynamicTitle events={processedEvents} />
       <div className="overflow-x-auto">

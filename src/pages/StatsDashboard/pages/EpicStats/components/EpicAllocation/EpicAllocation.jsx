@@ -79,10 +79,9 @@ const EpicAllocation = () => {
 
   return (
     <div
-      className="bg-slate-900/30 backdrop-blur-md border border-slate-800
+      className="bg-slate-900/40 backdrop-blur-md border border-slate-800
         rounded-2xl p-6 shadow-xl flex flex-col gap-4 relative"
     >
-      {/* Верхня панель */}
       <div className="flex flex-wrap items-center justify-between gap-4 z-20">
         <div className="flex items-center">
           <h3 className="text-xl font-bold text-slate-100 mr-4">

@@ -77,7 +77,6 @@ const useGvGStore = create((setStore, getStore) => {
           });
         });
 
-        // ✅ Створюємо абсолютно новий масив для примусового ререндеру ReactFlow
         setStore({
           nodes: [...newNodes],
           edges: [],
@@ -101,11 +100,21 @@ const useGvGStore = create((setStore, getStore) => {
         const data = snapshot.val();
         setStore({ savedSetups: data || {} });
 
+        const magesSetup = data["Mages Setup"];
+        if (magesSetup) {
+          setStore({
+            nodes: [...(magesSetup.nodes || [])],
+            edges: [...(magesSetup.edges || [])],
+            currentSetupName: magesSetup.name || "Mages Setup",
+          });
+
+          return;
+        }
+
         const firstKey = Object.keys(data)[0];
         if (firstKey && data[firstKey]) {
           const firstSetup = data[firstKey];
 
-          // ✅ Обов'язково клонуємо через [...] для нових посилань
           setStore({
             nodes: [...(firstSetup.nodes || [])],
             edges: [...(firstSetup.edges || [])],

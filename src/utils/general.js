@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 import {
   CATEGORIES,
   EMOJI_MAP,
+  EPIC_COLORS,
   EPIC_NAME_TO_EVENT_TYPE,
   LANGUAGES,
   RELATION,
@@ -382,4 +383,16 @@ export const formatCustomDate = (dateInput, lang = LANGUAGES.UA) => {
     console.error("Error formatting custom date:", error);
     return String(dateInput);
   }
+};
+
+export const getBossColor = (bossName, relation) => {
+  if (relation === "alliance") return "#10b981";
+  if (relation === "enemy") return "#ef4444";
+
+  if (!bossName) return "#38bdf8";
+  if (EPIC_COLORS[bossName]) return EPIC_COLORS[bossName];
+  const key = Object.keys(EPIC_COLORS).find(
+    (k) => k.toLowerCase() === bossName.toLowerCase(),
+  );
+  return key ? EPIC_COLORS[key] : "#38bdf8";
 };

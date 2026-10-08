@@ -2,26 +2,15 @@
 import BadgeOwner from "../../../../components/BadgeOwner/BadgeOwner";
 import EventIcon from "../../../../components/EventIcon/EventIcon";
 import OutPrime from "../../../../components/OutPrime/OutPrime";
-import { EPIC_COLORS } from "../../../../constants/general";
+import { BREAKPOINTS } from "../../../../constants/general";
 import { useIsPWA } from "../../../../hooks/useIsPWA";
+import useMediaQuery from "../../../../hooks/useMediaQuery";
 import useTranslation from "../../../../hooks/useTranslation";
 import useAppStore from "../../../../store/useAppStore";
 import useAuthStore from "../../../../store/useAuthStore";
-import { getDiplomacyConfig } from "../../../../utils/general";
+import { getBossColor, getDiplomacyConfig } from "../../../../utils/general";
 import { subscribeUserToPush } from "../../../../utils/pushNotifications";
 import AlertButton from "./AlertButton";
-
-const getBossColor = (bossName, relation) => {
-  if (relation === "alliance") return "#10b981";
-  if (relation === "enemy") return "#ef4444";
-
-  if (!bossName) return "#38bdf8";
-  if (EPIC_COLORS[bossName]) return EPIC_COLORS[bossName];
-  const key = Object.keys(EPIC_COLORS).find(
-    (k) => k.toLowerCase() === bossName.toLowerCase(),
-  );
-  return key ? EPIC_COLORS[key] : "#38bdf8";
-};
 
 const AllEventsItem = ({
   id,
@@ -35,6 +24,8 @@ const AllEventsItem = ({
 }) => {
   const config = getDiplomacyConfig(relation);
   const { titleClass, badgeClass, badgeIcon } = config || {};
+
+  const isMobile = useMediaQuery(BREAKPOINTS.IS_MOBILE);
 
   const { t, language } = useTranslation();
   const isPWA = useIsPWA();
@@ -87,7 +78,7 @@ const AllEventsItem = ({
 
   return (
     <div
-      className={`relative rounded-xl p-3 bg-slate-950/80 transition-all duration-300
+      className={`relative rounded-xl p-3 bg-slate-900/40 transition-all duration-300
         shadow-md flex items-center justify-between gap-3.5 group min-w-65 w-full ${
           isPast
             ? "opacity-40 grayscale-[0.3] hover:opacity-80 hover:grayscale-0"
@@ -101,7 +92,7 @@ const AllEventsItem = ({
       }}
     >
       <EventIcon
-        size={72}
+        size={isMobile ? 54 : 72}
         icon={icon}
         name={name}
         relation={relation}
@@ -128,7 +119,7 @@ const AllEventsItem = ({
           {isOutPrime && <OutPrime />}
         </div>
 
-        <div className="text-base font-mono font-bold text-slate-400 mt-1 flex items-center gap-1.5">
+        <div className="text-sm md:text-base font-mono font-bold text-slate-400 mt-1 flex items-center gap-1.5">
           <span
             className="inline-block w-2 h-2 rounded-full shrink-0"
             style={{ backgroundColor: bossColor }}

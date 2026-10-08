@@ -32,7 +32,7 @@ const CPList = ({ data, viewMode }) => {
           return (
             <div
               key={index}
-              className="flex justify-between items-center p-1 md:p-3 bg-slate-800/50 rounded-lg border
+              className="flex justify-between items-center p-1 md:p-3 bg-slate-900/30 rounded-lg border
               border-slate-700/40 hover:bg-slate-800 transition"
             >
               <div className="flex flexitems-center gap-3">

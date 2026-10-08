@@ -37,10 +37,12 @@ const MemberModule = () => {
     );
   }
 
+  const visibleMembers = members?.filter((m) => m.video) || [];
+
   const member =
-    members?.find(
+    visibleMembers.find(
       (m) => m.name?.toLowerCase() === selectedName.toLowerCase(),
-    ) || members?.[0];
+    ) || visibleMembers[0];
 
   const {
     img,
@@ -66,11 +68,11 @@ const MemberModule = () => {
     >
       <div className="relative z-20 flex-1 w-full flex items-center justify-center">
         <div className="h-full flex items-center justify-center p-4">
-          {loading || !members?.length ? (
+          {loading || !visibleMembers.length ? (
             <SphereImageGridSkeleton />
           ) : (
             <SphereImageGrid
-              images={members.map((m) => ({
+              images={visibleMembers.map((m) => ({
                 ...m,
                 title: m.name,
                 description: m.main_class,
@@ -84,7 +86,7 @@ const MemberModule = () => {
         </div>
       </div>
 
-      {loading || !members?.length ? (
+      {loading || !visibleMembers.length ? (
         <MemberCardSkeleton />
       ) : (
         <MemberCard

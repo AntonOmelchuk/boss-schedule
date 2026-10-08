@@ -52,7 +52,7 @@ const Header = () => {
 
           {/* 2. NAVIGATION LINKS */}
           <nav
-            className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border
+            className="hidden xl:flex items-center gap-1 bg-slate-900/30 p-1 border
             border-slate-800 rounded-2xl shrink-0"
           >
             {NAV_CONFIG.filter(

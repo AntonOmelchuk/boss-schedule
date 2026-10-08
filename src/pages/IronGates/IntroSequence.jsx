@@ -1,6 +1,6 @@
 import { get, ref } from "firebase/database";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import Galaxy from "../../components/Backgrounds/GalaxyBackground";
 import { STORAGE_URL } from "../../constants/members";
@@ -48,6 +48,11 @@ const IntroSequence = ({ onFinish }) => {
   const memberRefs = useRef([]);
   const squadRef = useRef(null);
 
+  const membersWithVideo = useMemo(
+    () => (members || []).filter((member) => member.video),
+    [members],
+  );
+
   usePreventScroll(containerRef);
 
   useEffect(() => {
@@ -90,7 +95,7 @@ const IntroSequence = ({ onFinish }) => {
 
   useEffect(() => {
     if (stage === STAGES.PRESENTING_MEMBERS) {
-      const N = members.length;
+      const N = membersWithVideo.length;
       let current = 0;
 
       const scrollToNext = () => {
@@ -129,7 +134,7 @@ const IntroSequence = ({ onFinish }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [stage, onFinish, members?.length]);
+  }, [stage, onFinish, membersWithVideo.length]);
 
   const handleStart = () => {
     setStarted(true);
@@ -314,7 +319,7 @@ const IntroSequence = ({ onFinish }) => {
 
       {/* Section with members */}
       <div className="z-35">
-        {members?.map((member, index) => {
+        {membersWithVideo.map((member, index) => {
           const { img, pvp, name, video, main_class, role, sub_classes } =
             member;
 

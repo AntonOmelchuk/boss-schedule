@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
-import useCpIgnoreList from "../../../hooks/useCPIgnoreList";
 import useTranslation from "../../../hooks/useTranslation";
 import { useLootStore } from "../../../store/useLootStore";
 
 const PartySelector = () => {
   const { t } = useTranslation();
-  const { ignoreList, loading } = useCpIgnoreList();
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -22,7 +20,7 @@ const PartySelector = () => {
     fetchParties();
   }, [fetchParties]);
 
-  if (isLoadingParties || loading) {
+  if (isLoadingParties) {
     return (
       <div className="flex justify-center">
         <div
@@ -55,14 +53,7 @@ const PartySelector = () => {
     );
   }
 
-  // Filter CPs based on ignore list
-  const ignoreNames = ignoreList.map((item) =>
-    typeof item === "string" ? item : item.name,
-  );
-  const filteredParties = parties.filter(
-    ({ name }) => !ignoreNames.includes(name),
-  );
-  const activeCount = filteredParties.filter((p) => p.active).length;
+  const activeCount = parties.filter((p) => p.active).length;
 
   return (
     <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3 transition-all">
@@ -75,7 +66,7 @@ const PartySelector = () => {
         >
           <span>👥</span>
           <span>
-            {t.loot.partiesTitle} ({activeCount}/{filteredParties.length})
+            {t.loot.partiesTitle} ({activeCount}/{activeCount.length})
           </span>
           <svg
             className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
@@ -115,7 +106,7 @@ const PartySelector = () => {
       {/* DROPDOWN CONTENT */}
       {isOpen && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-1 border-t border-slate-800/60">
-          {filteredParties.map(({ id, active, name }) => {
+          {activeCount.map(({ id, active, name }) => {
             const activeStyles = active
               ? "bg-amber-500/10 border-amber-500/40 text-amber-300"
               : "bg-slate-950/40 border-slate-800/80 text-slate-500 opacity-60 hover:opacity-100";

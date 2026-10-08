@@ -33,7 +33,7 @@ const MainBlock = () => {
 
   return (
     <div
-      className="relative my-4 md:mb-8 rounded-2xl overflow-hidden shadow-2xl bg-slate-950/80
+      className="relative my-4 md:mb-8 rounded-2xl overflow-hidden shadow-2xl bg-slate-900/40
         backdrop-blur-xl transition-all duration-300"
       style={{
         borderLeft: `5px solid ${bossColor}`,
@@ -42,7 +42,10 @@ const MainBlock = () => {
         borderBottom: `1px solid rgba(255, 255, 255, 0.08)`,
       }}
     >
-      <div className="p-5 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-left">
+      <div
+        className="p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center
+          gap-2 md:gap-6 text-left"
+      >
         <div className="flex items-center gap-4 md:gap-5">
           <EventIcon
             icon={icon}
@@ -53,7 +56,7 @@ const MainBlock = () => {
 
           <div>
             <span
-              className="text-[11px] uppercase font-black tracking-widest text-amber-400 px-2.5 py-1
+              className="text-xs md:text-base uppercase font-black tracking-widest text-amber-400 px-2.5 py-1
               rounded-md bg-amber-500/10 border border-amber-500/20"
             >
               {t.nearestEvent}
@@ -76,7 +79,7 @@ const MainBlock = () => {
 
         <div
           className="w-full md:w-auto text-left md:text-right border-t border-slate-800/80
-          md:border-t-0 pt-4 md:pt-0"
+            md:border-t-0"
         >
           <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">
             {t.timeToStart}
