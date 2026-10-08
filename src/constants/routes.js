@@ -38,7 +38,7 @@ export const NAV_CONFIG = [
     id: NAV_ITEMS.RESPAWN,
     path: "/",
     titleKey: "navRespawn",
-    icon: Clock, // 🕒 Змінено з блискавки на годинник (таймери респавну)
+    icon: Clock,
     activeClass:
       "bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.2)]",
     mobileActiveClass: "text-amber-400",

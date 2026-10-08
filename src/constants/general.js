@@ -1,10 +1,10 @@
 import antharasIcon from "../assets/epic/antharas.png";
 import baiumIcon from "../assets/epic/baium.png";
-import coreIcon from "../assets/epic/core.png";
-import frintezzaIcon from "../assets/epic/frintezza.png";
-import orfenIcon from "../assets/epic/orfen.png";
+import coreIcon from "../assets/epic/core-upd.png";
+import frintezzaIcon from "../assets/epic/frintezza-upd.png";
+import orfenIcon from "../assets/epic/orfen-upd.png";
 import qaIcon from "../assets/epic/qa.png";
-import valakasIcon from "../assets/epic/valakas.png";
+import valakasIcon from "../assets/epic/valakas-upd.png";
 import zakenIcon from "../assets/epic/zaken.png";
 
 /**
