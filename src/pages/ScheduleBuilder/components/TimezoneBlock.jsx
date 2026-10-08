@@ -19,7 +19,7 @@ export const TimezoneBlock = ({
   }, [t]);
 
   return (
-    <div className="bg-slate-900/60 border border-slate-800/80 p-5 rounded-2xl flex flex-col gap-4">
+    <div className="bg-slate-900/50 border border-slate-800/80 p-5 rounded-2xl flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-black tracking-widest text-slate-400 uppercase">
           {t.sbTzTitle}

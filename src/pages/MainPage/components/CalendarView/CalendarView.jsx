@@ -75,8 +75,8 @@ const CalendarView = () => {
   }, [daysOfWeek]);
 
   return (
-    <div className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-800">
-      <div className="min-w-[1800px] grid grid-cols-7 gap-4">
+    <div className="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-800 bg-slate-950/30">
+      <div className="min-w-[2100px] grid grid-cols-7 gap-4">
         {currentWeekDays.map(({ id, name, dateNumber, isToday, isPast }) => {
           const dayEvents = eventsByDay[id] || [];
 

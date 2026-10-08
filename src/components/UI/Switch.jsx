@@ -2,7 +2,7 @@
 const Switch = ({ onClick, isActive, firstItem, secondItem }) => {
   return (
     <div
-      className="bg-slate-900/90 backdrop-blur-md rounded-xl p-1 border border-slate-800 flex items-center
+      className="bg-slate-900/30 backdrop-blur-md rounded-xl p-1 border border-slate-800 flex items-center
         cursor-pointer shadow-inner select-none"
       onClick={onClick}
     >

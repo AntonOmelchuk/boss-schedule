@@ -68,7 +68,7 @@ const EpicFarmedTimeline = () => {
 
   return (
     <div
-      className="bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl p-1 md:p-6 shadow-xl flex
+      className="bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl p-1 md:p-6 shadow-xl flex
         flex-col gap-6 w-full"
     >
       {/* Header & Controls */}

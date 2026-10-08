@@ -29,7 +29,7 @@ const Header = ({ tableRef }) => {
       <div>
         <h1
           className="text-2xl md:text-3xl font-black tracking-widest
-          text-transparent [-webkit-text-stroke:1px_#94a3b8] uppercase"
+            text-transparent [-webkit-text-stroke:1px_#94a3b8] uppercase"
         >
           {t.sbTitle}
         </h1>

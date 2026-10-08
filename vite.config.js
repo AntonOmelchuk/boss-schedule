@@ -19,8 +19,8 @@ export default defineConfig({
         type: "module",
       },
       manifest: {
-        name: "Iron Gates",
-        short_name: "Iron Gates",
+        name: "The 3rd Side",
+        short_name: "The 3rd Side",
         description: "Alliance statistics and party attendance scanner",
         theme_color: "#0f172a",
         background_color: "#020617",

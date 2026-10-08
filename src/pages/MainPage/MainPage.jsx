@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import AllEventsItemSkeleton from "../../components/skeletons/AllEventsItemSkeleton";
 import MainBlockSkeleton from "../../components/skeletons/MainBlockSkeleton";
 import Switch from "../../components/UI/Switch";
-import { RESPAWN_DATA_VIEW } from "../../constants/general";
+import { BREAKPOINTS, RESPAWN_DATA_VIEW } from "../../constants/general";
+import useMediaQuery from "../../hooks/useMediaQuery";
 import useTranslation from "../../hooks/useTranslation";
 import useAppStore from "../../store/useAppStore";
 import AllEvents from "./components/AllEvents/AllEvents";
@@ -13,6 +14,8 @@ import MainBlock from "./components/MainBlock/MainBlock";
 
 const MainPage = () => {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery(BREAKPOINTS.IS_MOBILE);
+
   const eventsData = useAppStore((state) => state.events);
   const cleanExpiredAlerts = useAppStore((state) => state.cleanExpiredAlerts);
   const isRespawnLoading = useAppStore((state) => state.isRespawnLoading);
@@ -34,26 +37,28 @@ const MainPage = () => {
   };
 
   return (
-    <div className="mx-auto px-2 sm:px-4 space-y-6">
+    <div className="mx-auto px-2 sm:px-4 md:space-y-6">
       {isRespawnLoading ? <MainBlockSkeleton /> : <MainBlock />}
 
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-        <Switch
-          isActive={viewMode === RESPAWN_DATA_VIEW.GRID}
-          onClick={toggleViewMode}
-          firstItem={
-            <>
-              <LayoutGrid className="w-4 h-4" />
-              <span className="uppercase">{t.grid}</span>
-            </>
-          }
-          secondItem={
-            <>
-              <Calendar className="w-4 h-4" />
-              <span className="uppercase">{t.calendar}</span>
-            </>
-          }
-        />
+      <div className="flex flex-wrap items-center justify-between gap-3 md:pt-2">
+        {!isMobile && (
+          <Switch
+            isActive={viewMode === RESPAWN_DATA_VIEW.GRID}
+            onClick={toggleViewMode}
+            firstItem={
+              <>
+                <LayoutGrid className="w-4 h-4" />
+                <span className="uppercase">{t.grid}</span>
+              </>
+            }
+            secondItem={
+              <>
+                <Calendar className="w-4 h-4" />
+                <span className="uppercase">{t.calendar}</span>
+              </>
+            }
+          />
+        )}
       </div>
 
       {isRespawnLoading ? (

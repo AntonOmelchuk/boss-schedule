@@ -11,7 +11,7 @@ const DistributionHistory = () => {
 
   return (
     <div
-      className="bg-slate-900/30 backdrop-blur-md border border-slate-800
+      className="bg-slate-900/40 backdrop-blur-md border border-slate-800
         rounded-2xl p-6 shadow-xl flex flex-col gap-4"
     >
       <h3 className="text-sm md:text-xl font-bold text-slate-100">
@@ -20,7 +20,7 @@ const DistributionHistory = () => {
 
       <div className="overflow-x-auto overflow-y-auto max-h-200 custom-scrollbar rounded-xl border border-slate-800/60">
         <table className="w-full text-left text-xs text-slate-300">
-          <thead className="text-[11px] uppercase bg-slate-800/60 text-slate-400 border-b border-slate-800">
+          <thead className="text-[11px] uppercase bg-slate-900/30 text-slate-400 border-b border-slate-800">
             <tr>
               <TableHeaderItem title="CP Name" />
               <TableHeaderItem title="Total Epics" />

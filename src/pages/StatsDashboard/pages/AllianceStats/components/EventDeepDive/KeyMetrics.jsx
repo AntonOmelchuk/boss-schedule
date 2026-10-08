@@ -5,7 +5,7 @@ const KeyMetrics = ({ topCP, totalPlayers, currentEvent }) => {
 
   return (
     <div className="flex flex-col gap-3 xl:col-span-3">
-      <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+      <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
         <span className="text-xs text-slate-400 uppercase font-semibold">
           Total Event Attendance
         </span>
@@ -17,7 +17,7 @@ const KeyMetrics = ({ topCP, totalPlayers, currentEvent }) => {
 
       {topCP && <TopCP name={name} value={value} totalPlayers={totalPlayers} />}
 
-      <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+      <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
         <span className="text-xs text-slate-400 uppercase font-semibold">
           Event Category / Target
         </span>

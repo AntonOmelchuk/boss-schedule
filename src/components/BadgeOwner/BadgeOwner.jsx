@@ -9,8 +9,8 @@ const BadgeOwner = ({ badgeClass, badgeIcon, owner, withoutBorder }) => {
 
   return (
     <span
-      className={`inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider
-        animate-pulse transition-all
+      className={`inline-flex items-center gap-1 text-[10px] md:text-sm font-black uppercase tracking-wider
+        animate-pulse transition-all truncate
         ${withoutBorderClasses} ${cleanBadgeClass}`}
     >
       {badgeIcon || ""} {owner}

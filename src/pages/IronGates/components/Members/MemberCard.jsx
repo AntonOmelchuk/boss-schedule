@@ -82,9 +82,11 @@ const MemberCard = ({
           <EpicInfo epic={epic} />
 
           <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-base text-slate-400">
-            <span>
-              PvP: <strong className="text-white text-lg">{pvp}</strong>
-            </span>
+            {Number(pvp) > 0 && (
+              <span>
+                PvP: <strong className="text-white text-lg">{pvp}</strong>
+              </span>
+            )}
             <span>
               {memberCard.balance}:{" "}
               <strong

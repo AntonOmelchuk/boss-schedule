@@ -71,17 +71,19 @@ const IntroPlayerCard = ({
               className="absolute inset-0 bg-gradient-to-t from-black/60
                 via-transparent to-black/30 pointer-events-none"
             />
-            <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10">
-              <span
-                style={{
-                  backgroundColor: `${theme.startColor}25`,
-                  color: theme.startColor,
-                }}
-                className="px-4 py-1.5 rounded-full text-xl font-black uppercase tracking-widest backdrop-blur-md"
-              >
-                PvP: {pvp}
-              </span>
-            </div>
+            {Number(pvp) > 0 && (
+              <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10">
+                <span
+                  style={{
+                    backgroundColor: `${theme.startColor}25`,
+                    color: theme.startColor,
+                  }}
+                  className="px-4 py-1.5 rounded-full text-xl font-black uppercase tracking-widest backdrop-blur-md"
+                >
+                  PvP: {pvp}
+                </span>
+              </div>
+            )}
 
             <div className="absolute bottom-6 left-6 right-6 z-10 space-y-2">
               <div className="flex flex-wrap items-center gap-3">
