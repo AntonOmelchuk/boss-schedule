@@ -52,6 +52,7 @@ const EventIcon = ({
       className={className}
       style={{
         border: `2px solid ${bossColor}`,
+        backgroundColor: `${bossColor}22`,
         width: `${size}px`,
         height: `${size}px`,
       }}

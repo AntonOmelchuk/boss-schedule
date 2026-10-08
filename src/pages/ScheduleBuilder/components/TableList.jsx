@@ -33,9 +33,9 @@ const TableList = ({
               <td className="p-4 font-bold text-slate-200">
                 <div className="flex items-center justify-between group">
                   <div className="flex items-center">
-                    <span className="text-2xl mr-2.5">
+                    <span className="mr-2.5">
                       <EventIcon
-                        size={54}
+                        size={72}
                         icon={icon}
                         name={name}
                         relation={relation}

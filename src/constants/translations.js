@@ -898,7 +898,7 @@ export default {
     navEpicStats: "Epic Stats",
     navIronGates: "Iron Gates",
     navLoot: "Loot",
-    navAlliance: "Ally Tools",
+    navAlliance: "Tools",
     navLootRandomizer: "Loot Randomizer",
     navAllianceClans: "Clan Management",
     navAfkProof: "AFK Checker",

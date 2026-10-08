@@ -207,7 +207,10 @@ const EpicTreasuryLeaderboardChart = ({ membersAnalytics }) => {
                           key={i}
                           className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold
                             text-white shadow-sm bg-black/60"
-                          style={{ border: `1px solid ${bossColor}` }}
+                          style={{
+                            backgroundColor: `${bossColor}22`,
+                            border: `1px solid ${bossColor}`,
+                          }}
                         >
                           <img
                             src={icon}

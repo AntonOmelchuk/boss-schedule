@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 
+import PageBadgeTitle from "../../components/UI/PageBadgeTitle";
 import useFilterEvents from "../../hooks/useFilterEvents";
 import useTranslation from "../../hooks/useTranslation";
 import FilterBlock from "./components/FilterBlock";
@@ -65,8 +66,13 @@ export default function ScheduleBuilder() {
   }, [limit, filteredEvents, deletedEventIds]);
 
   return (
-    <div className="text-slate-100 p-4 md:p-8 flex flex-col justify-start select-none">
-      <div className="max-w-[2100px] mx-auto w-full">
+    <div className="py-4">
+      <PageBadgeTitle
+        badgeText={t.navSchedule}
+        title={t.sbTitle}
+        bgColor="bg-sky-600/30"
+      />
+      <div className="max-w-[2100px] mx-auto">
         <Header
           tableRef={tableRef}
           showLocalTime={showLocalTime}

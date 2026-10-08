@@ -15,7 +15,7 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
   const rawTimeline = useAppStore(
     (state) => state.timelineData?.timeline || [],
   );
-  console.log("rawTimeline: ", rawTimeline);
+
   const [activeLabel, setActiveLabel] = useState("");
   const isDesktop = useMediaQuery(BREAKPOINTS.IS_DESKTOP);
 
