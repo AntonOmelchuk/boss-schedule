@@ -25,7 +25,7 @@ const CPList = ({ cpBreakdown, totalPlayers }) => {
     <div className="flex flex-col gap-1.5 xl:col-span-2 max-h-80 overflow-y-auto pr-1 custom-scrollbar">
       <span
         className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1
-          sticky top-0 bg-slate-900/90 py-1 z-10"
+          sticky top-0 bg-slate-900/90 py-1 z-10 rounded-sm"
       >
         {t.eventDeepDive.partyBreakdownTitle} ({cpBreakdown.length}{" "}
         {t.eventDeepDive.cpsPresent}):
@@ -33,8 +33,8 @@ const CPList = ({ cpBreakdown, totalPlayers }) => {
       {cpBreakdown.map((cp, idx) => (
         <div
           key={cp.name}
-          className="flex items-center justify-between p-2 rounded-lg bg-slate-800/30 border
-         border-slate-800/60 text-xs"
+          className="flex items-center justify-between p-2 rounded-lg bg-slate-900/30 border
+          border-slate-800/60 text-xs"
         >
           <div className="flex items-center gap-2 truncate pr-2">
             <span

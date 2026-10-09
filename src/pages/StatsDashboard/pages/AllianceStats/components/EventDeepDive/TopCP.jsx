@@ -1,6 +1,6 @@
 const TopCP = ({ name, value, totalPlayers }) => {
   return (
-    <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+    <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
       <span className="text-xs text-slate-400 uppercase font-semibold">
         Top Contributor (MVP CP)
       </span>

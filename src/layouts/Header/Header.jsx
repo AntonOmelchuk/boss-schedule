@@ -53,7 +53,7 @@ const Header = () => {
 
           {/* 2. NAVIGATION LINKS */}
           <nav
-            className="hidden xl:flex items-center gap-1 bg-slate-900/60 p-1 border
+            className="hidden xl:flex items-center gap-1 bg-slate-900/30 p-1 border
             border-slate-800 rounded-2xl shrink-0"
           >
             {NAV_CONFIG.filter(
@@ -82,7 +82,7 @@ const Header = () => {
                       onClickHandler={() => navigate(item.path)}
                       isActive={isActive}
                       title={itemTitle}
-                      icon={item.icon}
+                      Icon={item.icon}
                       className="px-5 py-3 text-base font-bold rounded-xl cursor-pointer"
                       activeClassName={item.activeClass}
                       inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
@@ -115,7 +115,7 @@ const Header = () => {
                                 }}
                                 isActive={isSubActive}
                                 title={subTabTitle}
-                                icon={subTab.icon}
+                                Icon={subTab.icon}
                                 className="px-4 py-2.5 text-sm font-bold rounded-xl cursor-pointer justify-start"
                                 activeClassName={item.activeClass}
                                 inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
@@ -135,7 +135,7 @@ const Header = () => {
                   onClickHandler={() => navigate(item.path)}
                   isActive={isActive}
                   title={itemTitle}
-                  icon={item.icon}
+                  Icon={item.icon}
                   className="px-5 py-3 text-base font-bold rounded-xl"
                   activeClassName={item.activeClass}
                   inactiveClassName="text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"

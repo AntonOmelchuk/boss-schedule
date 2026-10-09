@@ -85,7 +85,10 @@ const MobileTabs = () => {
       )}
 
       {visibleNavItems.map(
-        ({ id, path, titleKey, icon, title, mobileActiveClass }, index) => {
+        (
+          { id, path, titleKey, icon: IconComponent, title, mobileActiveClass },
+          index,
+        ) => {
           const isActive = index === activeIndex;
 
           return (
@@ -97,11 +100,13 @@ const MobileTabs = () => {
                 pt-1 cursor-pointer transition-transform duration-200 active:scale-110"
             >
               <span
-                className={`text-lg leading-none transition-all duration-200 ${
-                  isActive ? "scale-110" : "text-slate-500 opacity-50"
+                className={`transition-all duration-200 ${
+                  isActive
+                    ? "scale-110 text-amber-400"
+                    : "text-slate-500 opacity-50"
                 }`}
               >
-                {icon}
+                {IconComponent && <IconComponent size={20} />}
               </span>
               <span
                 className={`text-[11px] font-bold tracking-tight whitespace-nowrap transition-colors duration-200

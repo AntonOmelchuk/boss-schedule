@@ -1,10 +1,12 @@
 import BadgeOwner from "../../../components/BadgeOwner/BadgeOwner";
+import EventIcon from "../../../components/EventIcon/EventIcon";
 import OutPrime from "../../../components/OutPrime/OutPrime";
 import { CATEGORIES_STYLE } from "../../../constants/general";
 import useTranslation from "../../../hooks/useTranslation";
 import {
   formatDateForZone,
   formatTimeForZone,
+  getBossColor,
   getDiplomacyConfig,
   getEventIsoTime,
 } from "../../../utils/general";
@@ -24,20 +26,23 @@ const TableList = ({
         ({ id, ts, name, icon, category, owner, relation, isOutPrime }) => {
           const isoTime = getEventIsoTime(ts);
           const { badgeClass } = getDiplomacyConfig(relation);
+          const bossColor = getBossColor(name, relation);
 
           return (
             <tr key={id} className="hover:bg-slate-800/30 transition-colors">
               <td className="p-4 font-bold text-slate-200">
                 <div className="flex items-center justify-between group">
                   <div className="flex items-center">
-                    <span className="text-xl mr-2.5">
-                      {icon.length <= 3 ? (
-                        icon
-                      ) : (
-                        <img src={icon} width={25} className="rounded-sm" />
-                      )}
+                    <span className="mr-2.5">
+                      <EventIcon
+                        size={72}
+                        icon={icon}
+                        name={name}
+                        relation={relation}
+                        bossColor={bossColor}
+                      />
                     </span>
-                    <span className="mr-4 min-w-52.5">{name}</span>
+                    <span className="text-xl mr-4 min-w-52.5">{name}</span>
                     {owner && (
                       <BadgeOwner badgeClass={badgeClass} owner={owner} />
                     )}

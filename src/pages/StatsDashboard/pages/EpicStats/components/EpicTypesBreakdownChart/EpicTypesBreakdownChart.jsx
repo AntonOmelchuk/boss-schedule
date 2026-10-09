@@ -32,7 +32,7 @@ const EpicTypesBreakdownChart = () => {
 
   return (
     <div
-      className="h-100 xl:h-125 bg-slate-900/30 backdrop-blur-md border border-slate-800 rounded-2xl p-6
+      className="h-100 xl:h-125 bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl p-6
         shadow-xl flex flex-col lg:flex-row gap-8 items-center w-full"
     >
       <CustomPieChart chartData={chartData} totalFarmed={totalFarmed} />

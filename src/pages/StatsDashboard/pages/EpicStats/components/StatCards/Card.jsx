@@ -1,6 +1,6 @@
 const Card = ({ title, value }) => {
   return (
-    <div className="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+    <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
       <span className="text-base text-slate-400 uppercase font-semibold">
         {title}
       </span>

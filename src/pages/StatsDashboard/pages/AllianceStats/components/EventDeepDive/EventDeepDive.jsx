@@ -57,7 +57,7 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
   return (
     <div
       className="w-full mt-16 bg-slate-900/30 backdrop-blur-md border border-slate-800
-      rounded-2xl p-3 md:p-6 shadow-xl flex flex-col gap-6"
+        rounded-2xl p-3 md:p-6 shadow-xl flex flex-col gap-6"
     >
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
@@ -74,12 +74,12 @@ const EventDeepDive = ({ selectedEventLabel, onSelectEvent }) => {
             setActiveLabel(e.target.value);
             if (onSelectEvent) onSelectEvent(e.target.value);
           }}
-          className="bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-2
+          className="bg-slate-900/40 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-2
             focus:outline-none focus:border-sky-500 transition cursor-pointer"
         >
           {rawTimeline.map((item) => (
             <option key={item.event_label} value={item.event_label}>
-              {item.event_label} ({item.action})
+              {item.event_label}
             </option>
           ))}
         </select>
