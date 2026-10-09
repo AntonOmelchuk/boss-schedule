@@ -114,6 +114,7 @@ export default {
         value: "America/Los_Angeles",
       },
       { name: "Сан-Паулу / Бразилія (BRT)", value: "America/Sao_Paulo" },
+      { name: "В'єтнам / Індокитай (ICT)", value: "Asia/Ho_Chi_Minh" },
     ],
 
     // Screenshot Tool
@@ -869,6 +870,7 @@ export default {
         value: "America/Los_Angeles",
       },
       { name: "Sao Paulo / Brazil (BRT)", value: "America/Sao_Paulo" },
+      { name: "Vietnam / Indochina (ICT)", value: "Asia/Ho_Chi_Minh" },
     ],
 
     // Screenshot Tool

@@ -3,7 +3,7 @@ import useTranslation from "../../hooks/useTranslation";
 import Switch from "../UI/Switch";
 
 const LanguageSwitcher = ({ withoutLabel }) => {
-  const { t, setLanguage, language } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
   return (
     <div className="flex items-center">
       {!withoutLabel && (
