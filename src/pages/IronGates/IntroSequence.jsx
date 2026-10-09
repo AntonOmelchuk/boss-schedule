@@ -19,7 +19,7 @@ import IntroPlayerCard from "./components/IntroSequence/IntroPlayerCard";
 const INTRO_TIMINGS = {
   START_LOGO_ASSEMBLY: 2550, // Delay before start showing logo
   SHOW_TEXT_ANIMATION: 11000, // When main title appear
-  START_PRESENTING_MEMBERS: 16000, // Delay before auto scroll
+  START_PRESENTING_MEMBERS: 13500, // Delay before auto scroll
   MEMBER_SCROLL_DELAY: 3500, // Time for showing each member card
   FINAL_SQUAD_VIEW_TIME: 3000, // Delay before fade out
   FADE_OUT_DURATION: 2100, // Fade out time
