@@ -8,7 +8,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import RoleBadge from "./RoleBadge";
 
 const SettingsModal = ({ isOpen, onClose }) => {
-  const { t, setLanguage } = useTranslation();
+  const { t } = useTranslation();
   const isPWA = useIsPWA();
   const { user, isAuthenticated, logout } = useAuthStore();
 
@@ -111,7 +111,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
         )}
 
         {/* Section 2: Language Switcher */}
-        <LanguageSwitcher setLanguage={setLanguage} />
+        <LanguageSwitcher />
 
         {/* Section 3: Default Push Notification Lead Time Slider */}
         {isPWA && <AlertsSlider />}
