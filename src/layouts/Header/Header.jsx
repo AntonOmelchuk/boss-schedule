@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import LanguageSwitcher from "../../components/SettingsModal/LanguageSwitcher";
 import SettingsModal from "../../components/SettingsModal/SettingsModal";
 import BackButton from "../../components/UI/BackButton";
 import Tab from "../../components/UI/Tab";
@@ -148,7 +149,10 @@ const Header = () => {
             {isAuthenticated ? (
               <UserIcon user={user} setIsSettingsOpen={setIsSettingsOpen} />
             ) : (
-              <DiscordAuthButton />
+              <div className="flex flex-col min-[1620px]:flex-row-reverse gap-1">
+                <DiscordAuthButton />
+                <LanguageSwitcher withoutLabel />
+              </div>
             )}
           </div>
         </div>
