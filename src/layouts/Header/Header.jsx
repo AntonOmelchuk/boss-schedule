@@ -7,17 +7,13 @@ import BackButton from "../../components/UI/BackButton";
 import Tab from "../../components/UI/Tab";
 import { NAV_CONFIG } from "../../constants/routes";
 import useTranslation from "../../hooks/useTranslation";
-import useAuthStore from "../../store/useAuthStore";
 import BrandLogo from "./BrandLogo";
-import DiscordAuthButton from "./DiscordAuthButton";
-import UserIcon from "./UserIcon";
 
 const Header = () => {
   const navigate = useNavigate();
   const { pathname, hash } = useLocation();
 
   const { t } = useTranslation();
-  const { user, isAuthenticated } = useAuthStore();
 
   const [hoveredDropdownId, setHoveredDropdownId] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -146,14 +142,7 @@ const Header = () => {
 
           {/* 3. SETTINGS BUTTON */}
           <div className="flex-1 flex items-center justify-end min-w-0">
-            {isAuthenticated ? (
-              <UserIcon user={user} setIsSettingsOpen={setIsSettingsOpen} />
-            ) : (
-              <div className="flex flex-col min-[1620px]:flex-row-reverse gap-1">
-                <DiscordAuthButton />
-                <LanguageSwitcher withoutLabel />
-              </div>
-            )}
+            <LanguageSwitcher withoutLabel />
           </div>
         </div>
       </header>
