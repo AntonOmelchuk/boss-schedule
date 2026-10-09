@@ -7,7 +7,7 @@ const Footer = () => {
       text-slate-500 flex flex-col md:flex-row justify-between items-center gap-3 mx-auto"
     >
       <span className="text-xs md:text-sm min-[1820px]:text-lg md:font-semibold">
-        © 2026 Iron Gates
+        © 2026 The 3rd Side
       </span>
 
       <div className="text-xs md:text-sm text-slate-400 font-medium flex items-center gap-1.5">
