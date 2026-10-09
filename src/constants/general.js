@@ -1,3 +1,4 @@
+// import { Flag, Skull, Swords, Trophy } from "lucide-react";
 import antharasIcon from "../assets/epic/antharas.png";
 import baiumIcon from "../assets/epic/baium.png";
 import coreIcon from "../assets/epic/core-upd.png";
@@ -61,6 +62,10 @@ export const EVENT_TYPES = {
   CTB: "ctb",
   EBC: "EBC",
   DM: "DM",
+  MTB_FULL: "Multi Team Battle",
+  CTB_FULL: "Capture The Base",
+  EBC_FULL: "Epic Boss Challenge",
+  DM_FULL: "Death Match",
   // Epic Bosses
   QA: "qa",
   QueenAnt: "queen Ant",
