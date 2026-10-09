@@ -1,5 +1,6 @@
 import "@xyflow/react/dist/style.css";
 
+import { Analytics } from "@vercel/analytics/react";
 import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -132,58 +133,61 @@ function App() {
       {/* Global Maintenance Guard Overlay (handles full or route-specific locking) */}
       <MaintenanceGuard maintenanceStatus={maintenanceStatus}>
         <MainLayout>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            {/* 🔒 Protected route: redirected to "/" if opened on mobile */}
-            <Route
-              path="/schedule"
-              element={
-                <DesktopOnlyGuard redirectTo="/">
-                  <ScheduleBuilder />
-                </DesktopOnlyGuard>
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                <AdminRouteGuard redirectTo="/">
-                  <AdminPage />
-                </AdminRouteGuard>
-              }
-            />
-            <Route path="/statistics" element={<StatsDashboard />} />
-            <Route
-              path="/iron-gates"
-              element={
-                <DesktopOnlyGuard redirectTo="/">
-                  <IronGatesPage />
-                </DesktopOnlyGuard>
-              }
-            />
-            <Route path="/media" element={<MediaPage />} />
-            <Route path="/alliance/proof" element={<AfkProofPage />} />
-            <Route path="/alliance/loot" element={<LootRandomizerPage />} />
-            <Route
-              path="alliance/clans"
-              element={
-                <DesktopOnlyGuard redirectTo="/">
-                  <CpManagementPage />
-                </DesktopOnlyGuard>
-              }
-            />
-            <Route
-              path="alliance/tournament"
-              element={
-                <DesktopOnlyGuard redirectTo="/">
-                  <TournamentPage />
-                </DesktopOnlyGuard>
-              }
-            />
-            <Route path="/auth/callback" element={<AuthCallbackPage />} />
-            <Route path="/onboarding" element={<OnboardingPage />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
-          </Routes>
+          <>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              {/* 🔒 Protected route: redirected to "/" if opened on mobile */}
+              <Route
+                path="/schedule"
+                element={
+                  <DesktopOnlyGuard redirectTo="/">
+                    <ScheduleBuilder />
+                  </DesktopOnlyGuard>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <AdminRouteGuard redirectTo="/">
+                    <AdminPage />
+                  </AdminRouteGuard>
+                }
+              />
+              <Route path="/statistics" element={<StatsDashboard />} />
+              <Route
+                path="/iron-gates"
+                element={
+                  <DesktopOnlyGuard redirectTo="/">
+                    <IronGatesPage />
+                  </DesktopOnlyGuard>
+                }
+              />
+              <Route path="/media" element={<MediaPage />} />
+              <Route path="/alliance/proof" element={<AfkProofPage />} />
+              <Route path="/alliance/loot" element={<LootRandomizerPage />} />
+              <Route
+                path="alliance/clans"
+                element={
+                  <DesktopOnlyGuard redirectTo="/">
+                    <CpManagementPage />
+                  </DesktopOnlyGuard>
+                }
+              />
+              <Route
+                path="alliance/tournament"
+                element={
+                  <DesktopOnlyGuard redirectTo="/">
+                    <TournamentPage />
+                  </DesktopOnlyGuard>
+                }
+              />
+              <Route path="/auth/callback" element={<AuthCallbackPage />} />
+              <Route path="/onboarding" element={<OnboardingPage />} />
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<Navigate to="/404" replace />} />
+            </Routes>
+            <Analytics />
+          </>
         </MainLayout>
       </MaintenanceGuard>
     </BrowserRouter>
