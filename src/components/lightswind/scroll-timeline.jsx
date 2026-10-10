@@ -8,6 +8,7 @@ import logo from "../../assets/logo.png";
 import { BOSS_ICONS, EPIC_COLORS } from "../../constants/general";
 import { MEMBER_COLORS, MEMBERS_MAP } from "../../constants/members";
 import { cn } from "../../lib/utils";
+import EventIcon from "../EventIcon/EventIcon";
 import { Card, CardContent } from "./card";
 
 const getReadableBossStyle = (bossColor) => {
@@ -394,11 +395,12 @@ export const ScrollTimeline = ({
                             </div>
 
                             {bossImg && (
-                              <div className="flex items-center bg-zinc-900/80 border border-amber-500/30 rounded-2xl shadow-inner">
-                                <img
-                                  src={bossImg}
-                                  alt="Boss Icon"
-                                  className="w-15 h-15 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)] rounded-2xl p-0.5"
+                              <div className="flex items-center bg-zinc-900/80 rounded-2xl shadow-inner">
+                                <EventIcon
+                                  size={72}
+                                  icon={bossImg}
+                                  name={name}
+                                  bossColor={bossColor}
                                 />
                               </div>
                             )}

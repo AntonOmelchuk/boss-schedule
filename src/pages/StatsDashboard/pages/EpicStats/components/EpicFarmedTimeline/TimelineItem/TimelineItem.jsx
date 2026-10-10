@@ -27,7 +27,7 @@ const TimelineItem = ({
         {/* Left Info: Boss & Farm Date */}
         <div className="flex items-center gap-3">
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm
+            className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center font-extrabold text-sm
               text-slate-100 shadow-inner shrink-0"
             style={{
               backgroundColor: `${bossColor}22`,
@@ -37,7 +37,7 @@ const TimelineItem = ({
             <img
               src={bossIcon}
               alt={name}
-              className="w-7 h-7 object-contain drop-shadow"
+              className="w-7 h-7 md:w-10 md:h-10 object-contain drop-shadow"
             />
           </div>
 

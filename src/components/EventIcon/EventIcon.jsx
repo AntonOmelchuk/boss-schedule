@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
-import { Shield, Swords } from "lucide-react";
+import { Shield, Sword } from "lucide-react";
+
+import { EVENT_TYPES } from "../../constants/general";
 
 const EventIcon = ({
   size,
@@ -11,6 +13,19 @@ const EventIcon = ({
 }) => {
   const isDefense = relation === "alliance";
   const isAttack = relation === "enemy";
+
+  const bgColor = () => {
+    if (
+      name === EVENT_TYPES.MTB_FULL ||
+      name === EVENT_TYPES.EBC_FULL ||
+      name === EVENT_TYPES.CTB_FULL ||
+      name === EVENT_TYPES.DM_FULL
+    ) {
+      return "";
+    }
+
+    return bossColor;
+  };
 
   const renderIconContent = () => {
     if (isDefense) {
@@ -25,7 +40,7 @@ const EventIcon = ({
 
     if (isAttack) {
       return (
-        <Swords
+        <Sword
           className="transition-transform duration-300 group-hover:scale-110"
           style={{ color: bossColor }}
           size="80%"
@@ -51,7 +66,8 @@ const EventIcon = ({
     <div
       className={className}
       style={{
-        border: `2px solid ${bossColor}`,
+        border: `2px solid ${bgColor()}`,
+        backgroundColor: `${bgColor()}22`,
         width: `${size}px`,
         height: `${size}px`,
       }}
