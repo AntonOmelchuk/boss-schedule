@@ -68,8 +68,8 @@ const MobileTabs = () => {
   return (
     <div
       ref={containerRef}
-      className="sticky bottom-0 z-50 w-full bg-slate-950/95 backdrop-blur-xl border-t border-slate-800
-        pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] flex items-center justify-around shadow-2xl"
+      className="sticky bottom-0 z-50 w-full bg-black/40 border-t border-slate-800
+        pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] flex items-center justify-around shadow-2xl backdrop-blur-md"
     >
       {/* Dynamic Sliding Bottom Border Indicator */}
       {activeIndex !== -1 && activeItem && (
@@ -102,7 +102,7 @@ const MobileTabs = () => {
               <span
                 className={`transition-all duration-200 ${
                   isActive
-                    ? "scale-110 text-amber-400"
+                    ? `scale-110 ${mobileActiveClass}`
                     : "text-slate-500 opacity-50"
                 }`}
               >

@@ -4,7 +4,7 @@ import {
   Calendar,
   Clock,
   Compass,
-  FileText,
+  // FileText,
   Film,
   LayoutDashboard,
   Shield,
@@ -89,12 +89,12 @@ export const NAV_CONFIG = [
         icon: Compass,
         hideOnMobile: true,
       },
-      {
-        id: "proof",
-        path: "/alliance/proof",
-        titleKey: "navAfkProof",
-        icon: FileText,
-      },
+      // {
+      //   id: "proof",
+      //   path: "/alliance/proof",
+      //   titleKey: "navAfkProof",
+      //   icon: FileText,
+      // },
       {
         id: "clans",
         path: "/alliance/clans",
@@ -111,19 +111,19 @@ export const NAV_CONFIG = [
     ],
   },
   // Mobile tab for Proof Checker
-  {
-    id: NAV_ITEMS.ALLIANCE_PROOF,
-    path: "/alliance/proof",
-    titleKey: "navAfkProof",
-    icon: FileText,
-    activeClass:
-      "bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]",
-    mobileActiveClass: "text-purple-400",
-    onlyMobile: true,
+  // {
+  //   id: NAV_ITEMS.ALLIANCE_PROOF,
+  //   path: "/alliance/proof",
+  //   titleKey: "navAfkProof",
+  //   icon: FileText,
+  //   activeClass:
+  //     "bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.2)]",
+  //   mobileActiveClass: "text-purple-400",
+  //   onlyMobile: true,
 
-    indicatorGradient: "from-purple-600 via-fuchsia-500 to-pink-400",
-    indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
-  },
+  //   indicatorGradient: "from-purple-600 via-fuchsia-500 to-pink-400",
+  //   indicatorShadow: "shadow-[0_-2px_10px_rgba(168,85,247,0.7)]",
+  // },
   // --- Dropdown: STATISTICS ---
   {
     id: NAV_ITEMS.STATISTICS,
