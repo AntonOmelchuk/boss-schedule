@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import LanguageSwitcher from "../../components/SettingsModal/LanguageSwitcher";
 import SettingsModal from "../../components/SettingsModal/SettingsModal";
 import BackButton from "../../components/UI/BackButton";
 import Tab from "../../components/UI/Tab";
@@ -92,7 +93,7 @@ const Header = () => {
                       <div className="absolute top-full left-0 pt-2 w-52 z-50">
                         <div
                           className="bg-slate-900/95 border border-slate-800 rounded-2xl p-1.5 shadow-2xl
-                          backdrop-blur-xl flex flex-col gap-1"
+                            backdrop-blur-xl flex flex-col gap-1"
                         >
                           {item.subTabs?.map((subTab) => {
                             const isSubActive = subTab.hash
@@ -148,7 +149,10 @@ const Header = () => {
             {isAuthenticated ? (
               <UserIcon user={user} setIsSettingsOpen={setIsSettingsOpen} />
             ) : (
-              <DiscordAuthButton />
+              <div className="flex flex-col min-[1620px]:flex-row-reverse gap-1">
+                <DiscordAuthButton />
+                <LanguageSwitcher withoutLabel />
+              </div>
             )}
           </div>
         </div>

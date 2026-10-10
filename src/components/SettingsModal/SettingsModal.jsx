@@ -24,7 +24,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
         animate-fadeIn"
     >
       <div
-        className="bg-slate-900 border border-slate-800 text-slate-200 rounded-2xl w-full max-w-md p-5
+        className=" bg-slate-900/40 border border-slate-800 text-slate-200 rounded-2xl w-full max-w-md p-5
           shadow-2xl relative space-y-5 max-h-[90vh] overflow-y-auto"
       >
         {/* Modal Header */}
