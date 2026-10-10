@@ -144,7 +144,7 @@ export default {
     navEpicStats: "Епік Стата",
     navIronGates: "Iron Gates",
     navLoot: "Лут",
-    navAlliance: "Аллі Утиліти",
+    navAlliance: "Утиліти",
     navLootRandomizer: "Рандомайзер луту",
     navAllianceClans: "Склад кланів",
     navAfkProof: "AFK Чекер",

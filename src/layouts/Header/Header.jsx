@@ -93,7 +93,7 @@ const Header = () => {
                       <div className="absolute top-full left-0 pt-2 w-52 z-50">
                         <div
                           className="bg-slate-900/95 border border-slate-800 rounded-2xl p-1.5 shadow-2xl
-                          backdrop-blur-xl flex flex-col gap-1"
+                            backdrop-blur-xl flex flex-col gap-1"
                         >
                           {item.subTabs?.map((subTab) => {
                             const isSubActive = subTab.hash
