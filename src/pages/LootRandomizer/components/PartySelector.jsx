@@ -66,7 +66,7 @@ const PartySelector = () => {
         >
           <span>👥</span>
           <span>
-            {t.loot.partiesTitle} ({activeCount}/{activeCount.length})
+            {t.loot.partiesTitle} ({activeCount}/{parties.length})
           </span>
           <svg
             className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
@@ -106,7 +106,7 @@ const PartySelector = () => {
       {/* DROPDOWN CONTENT */}
       {isOpen && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-1 border-t border-slate-800/60">
-          {activeCount.map(({ id, active, name }) => {
+          {parties.map(({ id, active, name }) => {
             const activeStyles = active
               ? "bg-amber-500/10 border-amber-500/40 text-amber-300"
               : "bg-slate-950/40 border-slate-800/80 text-slate-500 opacity-60 hover:opacity-100";
