@@ -21,7 +21,7 @@ const Leaderboard = () => {
 
       return b.points - a.points;
     })
-    .filter((item) => item.points > 150);
+    .filter((item) => item.points > (viewMode === "points" ? 0 : 150));
 
   return (
     <div className="h-full bg-slate-900/30 rounded-xl border border-slate-800 p-2 md:p-4">

@@ -44,7 +44,7 @@ const CPList = ({ data, viewMode }) => {
                 {viewMode === SORT.POINTS && (
                   <div
                     className={`flex self-wrap text-left px-1 md:px-1.5 md:py-0.5 text-[8px] md:text-[10px] font-bold
-                  rounded border mt-0.5 ${tier.color}`}
+                      rounded border mt-0.5 ${tier.color}`}
                   >
                     {tier.label}
                   </div>
