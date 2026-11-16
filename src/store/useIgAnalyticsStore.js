@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+import { BASE_URL } from "../constants/general";
 
 export const useIgAnalyticsStore = create((set, get) => ({
   analyticsData: null,

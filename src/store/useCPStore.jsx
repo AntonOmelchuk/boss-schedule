@@ -1,9 +1,8 @@
 import { onValue, ref, remove, update } from "firebase/database";
 import { create } from "zustand";
 
+import { BASE_URL } from "../constants/general";
 import { db } from "../services/firebase";
-
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const useCPStore = create((set) => ({
   cpList: [],
