@@ -6,7 +6,7 @@ import CPNameItem from "../CPNameItem/CPNameItem";
 import HeaderList from "../HeaderList/HeaderList";
 
 // Min visited events to be in top
-const MIN_EVENTS_THRESHOLD = 20;
+const MIN_EVENTS_THRESHOLD = 10;
 
 const CPAvgOnlineMatrix = () => {
   const { t } = useTranslation();
@@ -29,7 +29,7 @@ const CPAvgOnlineMatrix = () => {
     const cpNames = Object.keys(rawTimeline[0]).filter(
       (key) => !systemKeys.includes(key),
     );
-
+    console.log("cp names: ", cpNames);
     const list = cpNames.map((cp) => {
       let attendedEvents = 0;
       let totalPlayersSum = 0;
@@ -79,6 +79,7 @@ const CPAvgOnlineMatrix = () => {
   }, [rawTimeline]);
 
   if (!cpOnlineData.list.length) return null;
+  console.log("cpOnlineData: ", cpOnlineData);
 
   return (
     <div
